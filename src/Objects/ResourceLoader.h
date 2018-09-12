@@ -8,6 +8,9 @@
 
 #include <GL/glew.h>
 #include <SOIL/SOIL.h>
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 #include "Texture.h"
 #include "ObjModel.h"
@@ -29,8 +32,9 @@ namespace Objects
 
 	private:
 		void ProcessVertex(std::string v, std::string t, std::string n, std::vector<int> &indicies, std::vector<glm::vec2> &textures, std::vector<glm::vec3> &normals, std::vector<float> &textureArray, std::vector<float> &normalArray);
-		int LoadToVAO(std::vector<float> positions, std::vector<float> textureCoords, std::vector<float> normals, std::vector<int> indicies);
-		void AddDataToVAO(int attribList, int coordSize, std::vector<float> data);
+		int LoadToVAO(std::vector<glm::vec3> positions, std::vector<glm::vec2> textureCoords, std::vector<glm::vec3> normals, std::vector<int> indicies);
+		void AddDataToVAO(int attribList, int coordSize, std::vector<glm::vec2> data);
+		void AddDataToVAO(int attribList, int coordSize, std::vector<glm::vec3> data);
 		void AddIndiciesToVAO(std::vector<int> indicies);
 	};
 
