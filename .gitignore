@@ -1,0 +1,7 @@
+Debug/*
+Release/*
+deps/*
+*.vcxproj
+*.filters
+*.user
+*.lnk
