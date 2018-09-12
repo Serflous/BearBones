@@ -31,7 +31,6 @@ namespace Objects
 		Entity CreateEntity(ObjModel model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
 	private:
-		void ProcessVertex(std::string v, std::string t, std::string n, std::vector<int> &indicies, std::vector<glm::vec2> &textures, std::vector<glm::vec3> &normals, std::vector<float> &textureArray, std::vector<float> &normalArray);
 		int LoadToVAO(std::vector<glm::vec3> positions, std::vector<glm::vec2> textureCoords, std::vector<glm::vec3> normals, std::vector<int> indicies);
 		void AddDataToVAO(int attribList, int coordSize, std::vector<glm::vec2> data);
 		void AddDataToVAO(int attribList, int coordSize, std::vector<glm::vec3> data);

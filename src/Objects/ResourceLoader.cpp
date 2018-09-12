@@ -35,77 +35,6 @@ Objects::ObjModel Objects::ResourceLoader::LoadOBJModel(std::string filename, Te
 		throw new std::invalid_argument("File not found: " + filename);
 	}
 
-	/*std::vector<glm::vec3> verticies;
-	std::vector<glm::vec2> textures;
-	std::vector<glm::vec3> normals;
-	std::vector<int> indicies;
-	std::vector<float> verticesArray;
-	std::vector<float> normalArray;
-	std::vector<float> textureArray;
-	std::string line;
-
-	while (getline(in, line))
-	{
-		if (line.substr(0, 2) == "v ")
-		{
-			std::istringstream s(line.substr(2));
-			glm::vec3 v;
-			s >> v.x; s >> v.y; s >> v.z;
-			verticies.push_back(v);
-		}
-		else if (line.substr(0, 3) == "vn ")
-		{
-			std::istringstream s(line.substr(3));
-			glm::vec3 n;
-			s >> n.x; s >> n.y; s >> n.z;
-			normals.push_back(n);
-		}
-		else if (line.substr(0, 3) == "vt ")
-		{
-			std::istringstream s(line.substr(3));
-			glm::vec2 uv;
-			s >> uv.x; s >> uv.y;
-			textures.push_back(uv);
-		}
-		else if (line.substr(0, 2) == "f ")
-		{
-			std::istringstream s(line.substr(2));
-			std::string a, b, c;
-			std::string f1v, f1t, f1n, f2v, f2t, f2n, f3v, f3t, f3n;
-			s >> a; s >> b; s >> c;
-
-			std::stringstream ss(a);
-			getline(ss, f1v, '/');
-			getline(ss, f1t, '/');
-			getline(ss, f1n);
-
-			ss.clear();
-			ss.str(b);
-			getline(ss, f2v, '/');
-			getline(ss, f2t, '/');
-			getline(ss, f2n);
-
-			ss.clear();
-			ss.str(c);
-			getline(ss, f3v, '/');
-			getline(ss, f3t, '/');
-			getline(ss, f3n);
-
-			ProcessVertex(f1v, f1t, f1n, indicies, textures, normals, textureArray, normalArray);
-			ProcessVertex(f2v, f2t, f2n, indicies, textures, normals, textureArray, normalArray);
-			ProcessVertex(f3v, f3t, f3n, indicies, textures, normals, textureArray, normalArray);
-		}
-	}
-	std::vector<glm::vec3>::iterator vertIter;
-	for (vertIter = verticies.begin(); vertIter != verticies.end(); vertIter++)
-	{
-		verticesArray.push_back((*vertIter).x);
-		verticesArray.push_back((*vertIter).y);
-		verticesArray.push_back((*vertIter).z);
-	}
-
-	int vaoId = LoadToVAO(verticesArray, textureArray, normalArray, indicies);*/
-
 	Assimp::Importer importer;
 	const aiScene * scene = importer.ReadFile(filename, aiProcess_FlipUVs);
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
@@ -162,24 +91,6 @@ Objects::Entity Objects::ResourceLoader::CreateEntity(Objects::ObjModel model, g
 	entity.SetRotation(rotation);
 	entity.SetScale(scale);
 	return entity;
-}
-
-void Objects::ResourceLoader::ProcessVertex(std::string v, std::string t, std::string n, std::vector<int> &indicies, std::vector<glm::vec2> &textures, std::vector<glm::vec3> &normals, std::vector<float> &textureArray, std::vector<float> &normalArray)
-{
-	int currentVertexPointer = atoi(v.c_str()) - 1;
-	int texPointer = atoi(t.c_str()) - 1;
-	int normPointer = atoi(n.c_str()) - 1;
-
-	indicies.push_back(currentVertexPointer);
-
-	glm::vec2 currentTex = textures[texPointer];
-	textureArray.push_back(currentTex.x);
-	textureArray.push_back(1 - currentTex.y);
-
-	glm::vec3 currentNorm = normals[normPointer];
-	normalArray.push_back(currentNorm.x);
-	normalArray.push_back(currentNorm.y);
-	normalArray.push_back(currentNorm.z);
 }
 
 int Objects::ResourceLoader::LoadToVAO(std::vector<glm::vec3> positions, std::vector<glm::vec2> textureCoords, std::vector<glm::vec3> normals, std::vector<int> indicies)
