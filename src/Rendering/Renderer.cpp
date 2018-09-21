@@ -40,13 +40,13 @@ void Rendering::Renderer::RenderWorld(Objects::World world, Objects::Camera came
 	//std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
 	std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadViewMatrix(Util::MathUtil::GetViewMatrix(camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z, camera.GetPitch(), camera.GetYaw(), camera.GetRoll()));
 	m_staticShader->Stop();
-	std::vector<Objects::Entity> entities = world.GetEntities();
-	std::vector<Objects::Entity>::iterator entityIter;
-	for (entityIter = entities.begin(); entityIter != entities.end(); entityIter++)
+	std::vector<Objects::StaticEntity> staticEntities = world.GetStaticEntities();
+	std::vector<Objects::StaticEntity>::iterator staticEntityIter;
+	for (staticEntityIter = staticEntities.begin(); staticEntityIter != staticEntities.end(); staticEntityIter++)
 	{
 		m_staticShader->Start();
-		std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*entityIter).GetPosition(), (*entityIter).GetRotation(), (*entityIter).GetScale()));
-		RenderOBJModel((*entityIter).GetModel());
+		std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*staticEntityIter).GetPosition(), (*staticEntityIter).GetRotation(), (*staticEntityIter).GetScale()));
+		RenderOBJModel((*staticEntityIter).GetModel());
 		m_staticShader->Stop();
 	}
 

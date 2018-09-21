@@ -83,13 +83,14 @@ Objects::ObjModel Objects::ResourceLoader::LoadOBJModel(std::string filename, Te
 	return model;
 }
 
-Objects::Entity Objects::ResourceLoader::CreateEntity(Objects::ObjModel model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Objects::StaticEntity Objects::ResourceLoader::CreateStaticEntity(Objects::ObjModel model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
-	Objects::Entity entity;
+	Objects::StaticEntity entity;
 	entity.SetModel(model);
 	entity.SetPosition(position);
 	entity.SetRotation(rotation);
 	entity.SetScale(scale);
+	entity.CreateBoundingBox();
 	return entity;
 }
 

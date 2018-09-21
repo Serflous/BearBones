@@ -9,7 +9,7 @@ Objects::World::World(const World & other)
 {
 	m_textures = other.m_textures;
 	m_models = other.m_models;
-	m_entities = other.m_entities;
+	m_staticEntities = other.m_staticEntities;
 }
 
 Objects::World::~World()
@@ -27,9 +27,9 @@ void Objects::World::AddObjModel(Objects::ObjModel model)
 	m_models.push_back(model);
 }
 
-void Objects::World::AddEntity(Objects::Entity entity)
+void Objects::World::AddStaticEntity(Objects::StaticEntity entity)
 {
-	m_entities.push_back(entity);
+	m_staticEntities.push_back(entity);
 }
 
 std::vector<Objects::Texture> Objects::World::GetTextures()
@@ -42,7 +42,7 @@ std::vector<Objects::ObjModel> Objects::World::GetOBJModels()
 	return m_models;
 }
 
-std::vector<Objects::Entity> Objects::World::GetEntities()
+std::vector<Objects::StaticEntity> Objects::World::GetStaticEntities()
 {
-	return m_entities;
+	return m_staticEntities;
 }

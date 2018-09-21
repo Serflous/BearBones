@@ -15,6 +15,7 @@
 #include "Texture.h"
 #include "ObjModel.h"
 #include "Entity.h"
+#include "StaticEntity.h"
 
 namespace Objects
 {
@@ -28,7 +29,7 @@ namespace Objects
 
 		Texture LoadTexture(std::string filename, int x, int y);
 		ObjModel LoadOBJModel(std::string filename, Texture texture);
-		Entity CreateEntity(ObjModel model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+		StaticEntity CreateStaticEntity(ObjModel model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
 	private:
 		int LoadToVAO(std::vector<glm::vec3> positions, std::vector<glm::vec2> textureCoords, std::vector<glm::vec3> normals, std::vector<int> indicies);

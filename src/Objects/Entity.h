@@ -24,6 +24,8 @@ namespace Objects
 		glm::vec3 GetRotation();
 		glm::vec3 GetScale();
 
+		virtual void CreateBoundingBox() = 0;
+
 	private:
 		Objects::ObjModel m_model;
 		glm::vec3 m_position;

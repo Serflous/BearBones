@@ -5,6 +5,7 @@
 #include "Texture.h"
 #include "ObjModel.h"
 #include "Entity.h"
+#include "StaticEntity.h"
 
 namespace Objects
 {
@@ -18,16 +19,16 @@ namespace Objects
 
 		void AddTexture(Texture texture);
 		void AddObjModel(ObjModel model);
-		void AddEntity(Entity entity);
+		void AddStaticEntity(StaticEntity entity);
 
 		std::vector<Texture> GetTextures();
 		std::vector<ObjModel> GetOBJModels();
-		std::vector<Entity> GetEntities();
+		std::vector<StaticEntity> GetStaticEntities();
 
 	private:
 		std::vector<Texture> m_textures;
 		std::vector<ObjModel> m_models;
-		std::vector<Entity> m_entities;
+		std::vector<StaticEntity> m_staticEntities;
 	};
 
 }
