@@ -5,8 +5,8 @@ Objects::Camera::Camera()
 	m_pitch = 0;
 	m_yaw = 0;
 	m_roll = 0;
-	m_movementSpeed = 0.018f;
-	m_rotationalSpeed = 0.006f;
+	m_movementSpeed = 0.036f;
+	m_rotationalSpeed = 0.001f;
 	m_camHoverHeight = 2.0f;
 }
 
@@ -49,6 +49,18 @@ float Objects::Camera::GetRoll()
 float Objects::Camera::GetHoverHeight()
 {
 	return m_camHoverHeight;
+}
+
+void Objects::Camera::SetPosition(glm::vec3 position)
+{
+	m_position = position;
+}
+
+void Objects::Camera::SetPosition(float x, float y, float z)
+{
+	m_position.x = x;
+	m_position.y = y;
+	m_position.z = z;
 }
 
 void Objects::Camera::Walk(CameraDirection direction, int dx)

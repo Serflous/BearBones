@@ -27,6 +27,9 @@ namespace Objects
 		float GetRoll();
 		float GetHoverHeight();
 
+		void SetPosition(glm::vec3 position);
+		void SetPosition(float x, float y, float z);
+
 		void Walk(CameraDirection direction, int dx);
 		void Strafe(CameraDirection direction, int dx);
 		void Rotate(int dx, int dy, int dt);

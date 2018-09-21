@@ -59,6 +59,8 @@ Input::ButtonState Input::InputManager::GetButtonState(int button)
 void Input::InputManager::KeyCallback(int key, bool pressed)
 {
 	m_keys[key] = pressed ? KS_KEY_PRESSED : KS_KEY_RELEASED;
+	if (!pressed)
+		m_prevKeys[key] = KS_KEY_RELEASED;
 }
 
 void Input::InputManager::MouseCallback(int button, int state, int x, int y)
