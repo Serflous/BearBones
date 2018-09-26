@@ -20,7 +20,7 @@ Objects::Entity::~Entity()
 
 }
 
-void Objects::Entity::SetModel(Objects::ObjModel model)
+void Objects::Entity::SetModel(std::shared_ptr<Objects::ObjModel> model)
 {
 	m_model = model;
 }
@@ -40,7 +40,7 @@ void Objects::Entity::SetScale(glm::vec3 scale)
 	m_scale = scale;
 }
 
-Objects::ObjModel Objects::Entity::GetModel()
+std::shared_ptr<Objects::ObjModel> Objects::Entity::GetModel()
 {
 	return m_model;
 }

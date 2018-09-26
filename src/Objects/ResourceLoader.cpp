@@ -15,19 +15,19 @@ Objects::ResourceLoader::~ResourceLoader()
 
 }
 
-Objects::Texture Objects::ResourceLoader::LoadTexture(std::string filename, int x, int y)
+std::shared_ptr<Objects::Texture> Objects::ResourceLoader::LoadTexture(std::string filename)
 {
 	GLuint texId = SOIL_load_OGL_texture(filename.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS |  SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 
-	Texture tex;
-	tex.SetTextureID(texId);
+	std::shared_ptr<Texture> tex = std::make_shared<Texture>();
+	tex->SetTextureID(texId);
 
 	std::cout << "Texture loaded: " << filename << std::endl;
 
 	return tex;
 }
 
-Objects::ObjModel Objects::ResourceLoader::LoadOBJModel(std::string filename, Texture texture)
+std::shared_ptr<Objects::ObjModel> Objects::ResourceLoader::LoadOBJModel(std::string filename, std::shared_ptr<Texture> texture)
 {
 	std::ifstream in(filename);
 	if (!in)
@@ -70,27 +70,27 @@ Objects::ObjModel Objects::ResourceLoader::LoadOBJModel(std::string filename, Te
 
 	int vaoId = LoadToVAO(verticies, textures, normals, indicies);
 
-	Objects::ObjModel model;
-	model.SetVAOID(vaoId);
-	model.SetVertexCount(indicies.size());
-	model.SetTexture(texture);
-	model.SetVerticies(verticies);
-	model.SetUVs(textures);
-	model.SetNormals(normals);
+	std::shared_ptr<Objects::ObjModel> model = std::make_shared<Objects::ObjModel>();
+	model->SetVAOID(vaoId);
+	model->SetVertexCount(indicies.size());
+	model->SetTexture(texture);
+	model->SetVerticies(verticies);
+	model->SetUVs(textures);
+	model->SetNormals(normals);
 
 	std::cout << "Model loaded: " << filename << std::endl;
 
 	return model;
 }
 
-Objects::StaticEntity Objects::ResourceLoader::CreateStaticEntity(Objects::ObjModel model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+std::shared_ptr<Objects::StaticEntity> Objects::ResourceLoader::CreateStaticEntity(std::shared_ptr<Objects::ObjModel> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
-	Objects::StaticEntity entity;
-	entity.SetModel(model);
-	entity.SetPosition(position);
-	entity.SetRotation(rotation);
-	entity.SetScale(scale);
-	entity.CreateBoundingBox();
+	std::shared_ptr<Objects::StaticEntity> entity = std::make_shared<Objects::StaticEntity>();
+	entity->SetModel(model);
+	entity->SetPosition(position);
+	entity->SetRotation(rotation);
+	entity->SetScale(scale);
+	entity->CreateBoundingBox();
 	return entity;
 }
 

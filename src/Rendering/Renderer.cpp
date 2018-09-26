@@ -33,20 +33,20 @@ void Rendering::Renderer::SetDimensions(int x, int y)
 	m_y = y;
 }
 
-void Rendering::Renderer::RenderWorld(Objects::World world, Objects::Camera camera)
+void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std::shared_ptr<Objects::Camera> camera)
 {
 	PrepareRender();
 	m_staticShader->Start();
 	//std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
-	std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadViewMatrix(Util::MathUtil::GetViewMatrix(camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z, camera.GetPitch(), camera.GetYaw(), camera.GetRoll()));
+	std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadViewMatrix(Util::MathUtil::GetViewMatrix(camera->GetPosition().x, camera->GetPosition().y, camera->GetPosition().z, camera->GetPitch(), camera->GetYaw(), camera->GetRoll()));
 	m_staticShader->Stop();
-	std::vector<Objects::StaticEntity> staticEntities = world.GetStaticEntities();
-	std::vector<Objects::StaticEntity>::iterator staticEntityIter;
-	for (staticEntityIter = staticEntities.begin(); staticEntityIter != staticEntities.end(); staticEntityIter++)
+	std::shared_ptr<std::vector<std::shared_ptr<Objects::StaticEntity>>> staticEntities = world->GetStaticEntities();
+	std::vector<std::shared_ptr<Objects::StaticEntity>>::iterator staticEntityIter;
+	for (staticEntityIter = staticEntities->begin(); staticEntityIter != staticEntities->end(); staticEntityIter++)
 	{
 		m_staticShader->Start();
-		std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*staticEntityIter).GetPosition(), (*staticEntityIter).GetRotation(), (*staticEntityIter).GetScale()));
-		RenderOBJModel((*staticEntityIter).GetModel());
+		std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*staticEntityIter)->GetPosition(), (*staticEntityIter)->GetRotation(), (*staticEntityIter)->GetScale()));
+		RenderOBJModel((*staticEntityIter)->GetModel());
 		m_staticShader->Stop();
 	}
 
@@ -59,16 +59,16 @@ void Rendering::Renderer::PrepareRender()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Rendering::Renderer::RenderOBJModel(Objects::ObjModel model)
+void Rendering::Renderer::RenderOBJModel(std::shared_ptr<Objects::ObjModel> model)
 {
-	glBindVertexArray(model.GetVAOID());
+	glBindVertexArray(model->GetVAOID());
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
 
 	glActiveTexture(GL_TEXTURE0);
-	model.GetTexture().Bind();
-	glDrawElements(GL_TRIANGLES, model.GetVertexCount(), GL_UNSIGNED_INT, 0);
+	model->GetTexture()->Bind();
+	glDrawElements(GL_TRIANGLES, model->GetVertexCount(), GL_UNSIGNED_INT, 0);
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);

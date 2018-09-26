@@ -26,7 +26,7 @@ void Objects::StaticEntity::CreateBoundingBox()
 	minX = minY = minZ = std::numeric_limits<float>::max();
 	maxX = maxY = maxZ = std::numeric_limits<float>::min();
 	std::vector<glm::vec3>::iterator iter;
-	std::vector<glm::vec3> verts = GetModel().GetVerticies();
+	std::vector<glm::vec3> verts = GetModel()->GetVerticies();
 	for (iter = verts.begin(); iter != verts.end(); iter++)
 	{
 		glm::vec3 vert = (*iter);

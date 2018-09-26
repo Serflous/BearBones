@@ -6,6 +6,11 @@
 namespace Objects
 {
 
+		/**
+		 * A static entity is an entity that won't move or be moved by other entities.
+		 * @author Mathew Causby
+		 * @version 0.1
+		 */
 	class StaticEntity : public Entity
 	{
 	public:
@@ -13,6 +18,9 @@ namespace Objects
 		StaticEntity(const StaticEntity & other);
 		StaticEntity(const Entity & other);
 		~StaticEntity();
+			/**
+			 * Creates a bounding box for the StaticEntity. Static entities use AABB.
+			 */
 		void CreateBoundingBox();
 
 	private:

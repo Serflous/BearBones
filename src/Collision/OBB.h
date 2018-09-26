@@ -6,6 +6,11 @@
 namespace Collision
 {
 
+		/**
+		 * An Oriented Bounding Box.
+		 * @author Mathew Causby
+		 * @version 0.1
+		 */
 	class OBB
 	{
 	public:

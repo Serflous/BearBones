@@ -63,31 +63,31 @@ void Objects::Camera::SetPosition(float x, float y, float z)
 	m_position.z = z;
 }
 
-void Objects::Camera::Walk(CameraDirection direction, int dx)
+void Objects::Camera::Walk(CameraDirection direction, int dt)
 {
 	if (direction == FORWARD)
 	{
-		m_position.x += (float)(sin(glm::radians(m_yaw))) * m_movementSpeed * dx;
-		m_position.z -= (float)(cos(glm::radians(m_yaw))) * m_movementSpeed * dx;
+		m_position.x += (float)(sin(glm::radians(m_yaw))) * m_movementSpeed * dt;
+		m_position.z -= (float)(cos(glm::radians(m_yaw))) * m_movementSpeed * dt;
 	}
 	else if (direction == BACKWARD)
 	{
-		m_position.x -= (float)(sin(glm::radians(m_yaw))) * m_movementSpeed * dx;
-		m_position.z += (float)(cos(glm::radians(m_yaw))) * m_movementSpeed * dx;
+		m_position.x -= (float)(sin(glm::radians(m_yaw))) * m_movementSpeed * dt;
+		m_position.z += (float)(cos(glm::radians(m_yaw))) * m_movementSpeed * dt;
 	}
 }
 
-void Objects::Camera::Strafe(CameraDirection direction, int dx)
+void Objects::Camera::Strafe(CameraDirection direction, int dt)
 {
 	if (direction == LEFT)
 	{
-		m_position.x -= (float)(cos(glm::radians(m_yaw))) * m_movementSpeed * dx;
-		m_position.z -= (float)(sin(glm::radians(m_yaw))) * m_movementSpeed * dx;
+		m_position.x -= (float)(cos(glm::radians(m_yaw))) * m_movementSpeed * dt;
+		m_position.z -= (float)(sin(glm::radians(m_yaw))) * m_movementSpeed * dt;
 	}
 	else if (direction == RIGHT)
 	{
-		m_position.x += (float)(cos(glm::radians(m_yaw))) * m_movementSpeed * dx;
-		m_position.z += (float)(sin(glm::radians(m_yaw))) * m_movementSpeed * dx;
+		m_position.x += (float)(cos(glm::radians(m_yaw))) * m_movementSpeed * dt;
+		m_position.z += (float)(sin(glm::radians(m_yaw))) * m_movementSpeed * dt;
 	}
 }
 

@@ -38,7 +38,7 @@ void Objects::ObjModel::SetModelHeight(double height)
 	m_modelHeight = height;
 }
 
-void Objects::ObjModel::SetTexture(Texture tex)
+void Objects::ObjModel::SetTexture(std::shared_ptr<Texture> tex)
 {
 	m_texture = tex;
 }
@@ -88,7 +88,7 @@ std::vector<glm::vec3> Objects::ObjModel::GetNormals()
 	return m_normals;
 }
 
-Objects::Texture Objects::ObjModel::GetTexture()
+std::shared_ptr<Objects::Texture> Objects::ObjModel::GetTexture()
 {
 	return m_texture;
 }

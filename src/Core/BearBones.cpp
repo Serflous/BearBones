@@ -35,7 +35,7 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 	m_winY = winY;
 	glutInitWindowPosition(-1, -1);
 	glutInitWindowSize(winX, winY);
-	glutCreateWindow("Bare Bones");
+	glutCreateWindow("Bear Bones");
 	glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
 
 	glewExperimental = true;
@@ -80,7 +80,7 @@ void Core::BearBones::BeginMainGameLoop()
 
 void Core::BearBones::DrawCallback()
 {
-	m_renderer->RenderWorld(*m_world, *m_camera);
+	m_renderer->RenderWorld(m_world, m_camera);
 	glutSwapBuffers();
 }
 
