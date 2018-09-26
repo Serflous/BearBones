@@ -1,0 +1,368 @@
+\hypertarget{class_shaders_1_1_shader_base}{}\section{Shaders\+:\+:Shader\+Base Class Reference}
+\label{class_shaders_1_1_shader_base}\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+
+
+{\ttfamily \#include $<$Shader\+Base.\+h$>$}
+
+
+
+Inheritance diagram for Shaders\+:\+:Shader\+Base\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{class_shaders_1_1_shader_base__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_a7cc6a08ac2589b24f7667f27b29622df}\label{class_shaders_1_1_shader_base_a7cc6a08ac2589b24f7667f27b29622df}} 
+{\bfseries Shader\+Base} (const \hyperlink{class_shaders_1_1_shader_base}{Shader\+Base} \&other)
+\item 
+void \hyperlink{class_shaders_1_1_shader_base_a70efd0722655ec3dd0c2de014a04fd17}{Start} ()
+\item 
+void \hyperlink{class_shaders_1_1_shader_base_a1d5f73624ff4f59633b159fd0772e84c}{Stop} ()
+\item 
+virtual void \hyperlink{class_shaders_1_1_shader_base_a8230f19d72ac58be9db263bbf8436967}{Bind\+Attributes} ()=0
+\item 
+virtual void \hyperlink{class_shaders_1_1_shader_base_ade949aa1626fbddd264a51b1dbb9a7cc}{Get\+All\+Uniforms} ()=0
+\item 
+void \hyperlink{class_shaders_1_1_shader_base_a25f6a1f85f7f3094f6019971239ad2ce}{Set\+Program\+ID} (int id)
+\item 
+void \hyperlink{class_shaders_1_1_shader_base_afb186a683a560e325c3e5fe6f60d6c59}{Set\+Vertex\+Shader\+ID} (int id)
+\item 
+void \hyperlink{class_shaders_1_1_shader_base_a984b4efce8e3dbb75302017c4f92bb3c}{Set\+Fragment\+Shader\+ID} (int id)
+\item 
+int \hyperlink{class_shaders_1_1_shader_base_a77870f40caecabf2acbae1eafd38f4c5}{Get\+Program\+ID} ()
+\item 
+int \hyperlink{class_shaders_1_1_shader_base_afb5d93c464cf2f726557bd4ff43d90ef}{Get\+Vertex\+Shader\+ID} ()
+\item 
+int \hyperlink{class_shaders_1_1_shader_base_a4cc693649848978b8496359eec993a31}{Get\+Fragment\+Shader\+ID} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_shaders_1_1_shader_base_a532cb2422edc5f80c899d702c9f04944}{Bind\+Attrib} (int attrib, const char $\ast$name)
+\item 
+G\+Luint \hyperlink{class_shaders_1_1_shader_base_ae3fa1c430786dccf85b86e0337fa7f02}{Get\+Uniform} (const char $\ast$name)
+\item 
+void \hyperlink{class_shaders_1_1_shader_base_ad174cf85ef001561a70461b7e1717129}{Load\+Float} (G\+Luint location, float value)
+\item 
+void \hyperlink{class_shaders_1_1_shader_base_a039773797967696a8407df9240420464}{Load\+Int} (G\+Luint location, int value)
+\item 
+void \hyperlink{class_shaders_1_1_shader_base_aaf6da8cee165856e1c34fe04f415fa01}{Load\+U\+Int} (G\+Luint location, unsigned int value)
+\item 
+void \hyperlink{class_shaders_1_1_shader_base_a2a490771534b22d25458ce05faf275d3}{Load\+Vec3} (G\+Luint location, glm\+::vec3 value)
+\item 
+void \hyperlink{class_shaders_1_1_shader_base_a0f3ec02c991021e8da69c1ab885624b9}{Load\+Boolean} (G\+Luint location, bool value)
+\item 
+void \hyperlink{class_shaders_1_1_shader_base_ab6899eacc696db251435d3159851bbd7}{Load\+Matrix4} (G\+Luint location, glm\+::mat4x4 value)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract class that is the base of all shaders. \begin{DoxyAuthor}{Author}
+Mathew Causby 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+
+
+Definition at line 18 of file Shader\+Base.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_a532cb2422edc5f80c899d702c9f04944}\label{class_shaders_1_1_shader_base_a532cb2422edc5f80c899d702c9f04944}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Bind\+Attrib@{Bind\+Attrib}}
+\index{Bind\+Attrib@{Bind\+Attrib}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Bind\+Attrib()}{BindAttrib()}}
+{\footnotesize\ttfamily void Shaders\+::\+Shader\+Base\+::\+Bind\+Attrib (\begin{DoxyParamCaption}\item[{int}]{attrib,  }\item[{const char $\ast$}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Binds an atribute list to a label/name. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em attrib} & The number of the attribute list. \\
+\hline
+\mbox{\tt in}  & {\em The} & name to bind it to. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 58 of file Shader\+Base.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{class_shaders_1_1_shader_base_a532cb2422edc5f80c899d702c9f04944_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_a8230f19d72ac58be9db263bbf8436967}\label{class_shaders_1_1_shader_base_a8230f19d72ac58be9db263bbf8436967}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Bind\+Attributes@{Bind\+Attributes}}
+\index{Bind\+Attributes@{Bind\+Attributes}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Bind\+Attributes()}{BindAttributes()}}
+{\footnotesize\ttfamily virtual void Shaders\+::\+Shader\+Base\+::\+Bind\+Attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Pure virtual function for binding all of the attributes in the shader. 
+
+Implemented in \hyperlink{class_shaders_1_1_static_shader_a4ba0a1e7a4d2b58668f97cb9e3892f57}{Shaders\+::\+Static\+Shader}.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_ade949aa1626fbddd264a51b1dbb9a7cc}\label{class_shaders_1_1_shader_base_ade949aa1626fbddd264a51b1dbb9a7cc}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Get\+All\+Uniforms@{Get\+All\+Uniforms}}
+\index{Get\+All\+Uniforms@{Get\+All\+Uniforms}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Get\+All\+Uniforms()}{GetAllUniforms()}}
+{\footnotesize\ttfamily virtual void Shaders\+::\+Shader\+Base\+::\+Get\+All\+Uniforms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Pure virtual function for getting all of the uniform locations in the shader. 
+
+Implemented in \hyperlink{class_shaders_1_1_static_shader_a2417ca33a617fe8a8cb30ec3b5e866fa}{Shaders\+::\+Static\+Shader}.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_a4cc693649848978b8496359eec993a31}\label{class_shaders_1_1_shader_base_a4cc693649848978b8496359eec993a31}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Get\+Fragment\+Shader\+ID@{Get\+Fragment\+Shader\+ID}}
+\index{Get\+Fragment\+Shader\+ID@{Get\+Fragment\+Shader\+ID}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Get\+Fragment\+Shader\+I\+D()}{GetFragmentShaderID()}}
+{\footnotesize\ttfamily int Shaders\+::\+Shader\+Base\+::\+Get\+Fragment\+Shader\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the ID of the fragment shader. \begin{DoxyReturn}{Returns}
+The ID of the shader. 
+\end{DoxyReturn}
+
+
+Definition at line 53 of file Shader\+Base.\+cpp.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_a77870f40caecabf2acbae1eafd38f4c5}\label{class_shaders_1_1_shader_base_a77870f40caecabf2acbae1eafd38f4c5}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Get\+Program\+ID@{Get\+Program\+ID}}
+\index{Get\+Program\+ID@{Get\+Program\+ID}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Get\+Program\+I\+D()}{GetProgramID()}}
+{\footnotesize\ttfamily int Shaders\+::\+Shader\+Base\+::\+Get\+Program\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the ID of the entire shader program \begin{DoxyReturn}{Returns}
+The ID of the shader. 
+\end{DoxyReturn}
+
+
+Definition at line 43 of file Shader\+Base.\+cpp.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_ae3fa1c430786dccf85b86e0337fa7f02}\label{class_shaders_1_1_shader_base_ae3fa1c430786dccf85b86e0337fa7f02}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Get\+Uniform@{Get\+Uniform}}
+\index{Get\+Uniform@{Get\+Uniform}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Get\+Uniform()}{GetUniform()}}
+{\footnotesize\ttfamily G\+Luint Shaders\+::\+Shader\+Base\+::\+Get\+Uniform (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Gets the location of the uniform with a particular name. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em name} & The name to get the location of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The location of the uniform. 
+\end{DoxyReturn}
+
+
+Definition at line 63 of file Shader\+Base.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{class_shaders_1_1_shader_base_ae3fa1c430786dccf85b86e0337fa7f02_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_afb5d93c464cf2f726557bd4ff43d90ef}\label{class_shaders_1_1_shader_base_afb5d93c464cf2f726557bd4ff43d90ef}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Get\+Vertex\+Shader\+ID@{Get\+Vertex\+Shader\+ID}}
+\index{Get\+Vertex\+Shader\+ID@{Get\+Vertex\+Shader\+ID}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Get\+Vertex\+Shader\+I\+D()}{GetVertexShaderID()}}
+{\footnotesize\ttfamily int Shaders\+::\+Shader\+Base\+::\+Get\+Vertex\+Shader\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the ID of the vertex shader. \begin{DoxyReturn}{Returns}
+The ID of the shader. 
+\end{DoxyReturn}
+
+
+Definition at line 48 of file Shader\+Base.\+cpp.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_a0f3ec02c991021e8da69c1ab885624b9}\label{class_shaders_1_1_shader_base_a0f3ec02c991021e8da69c1ab885624b9}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Load\+Boolean@{Load\+Boolean}}
+\index{Load\+Boolean@{Load\+Boolean}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Load\+Boolean()}{LoadBoolean()}}
+{\footnotesize\ttfamily void Shaders\+::\+Shader\+Base\+::\+Load\+Boolean (\begin{DoxyParamCaption}\item[{G\+Luint}]{location,  }\item[{bool}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Loads a boolean to the shader. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em location} & The location to upload the value to. \\
+\hline
+\mbox{\tt in}  & {\em value} & The value to upload. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 88 of file Shader\+Base.\+cpp.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_ad174cf85ef001561a70461b7e1717129}\label{class_shaders_1_1_shader_base_ad174cf85ef001561a70461b7e1717129}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Load\+Float@{Load\+Float}}
+\index{Load\+Float@{Load\+Float}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Load\+Float()}{LoadFloat()}}
+{\footnotesize\ttfamily void Shaders\+::\+Shader\+Base\+::\+Load\+Float (\begin{DoxyParamCaption}\item[{G\+Luint}]{location,  }\item[{float}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Loads a float to the shader. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em location} & The location to upload the value to. \\
+\hline
+\mbox{\tt in}  & {\em value} & The value to upload. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 68 of file Shader\+Base.\+cpp.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_a039773797967696a8407df9240420464}\label{class_shaders_1_1_shader_base_a039773797967696a8407df9240420464}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Load\+Int@{Load\+Int}}
+\index{Load\+Int@{Load\+Int}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Load\+Int()}{LoadInt()}}
+{\footnotesize\ttfamily void Shaders\+::\+Shader\+Base\+::\+Load\+Int (\begin{DoxyParamCaption}\item[{G\+Luint}]{location,  }\item[{int}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Loads an int to the shader. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em location} & The location to upload the value to. \\
+\hline
+\mbox{\tt in}  & {\em value} & The value to upload. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 73 of file Shader\+Base.\+cpp.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_ab6899eacc696db251435d3159851bbd7}\label{class_shaders_1_1_shader_base_ab6899eacc696db251435d3159851bbd7}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Load\+Matrix4@{Load\+Matrix4}}
+\index{Load\+Matrix4@{Load\+Matrix4}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Load\+Matrix4()}{LoadMatrix4()}}
+{\footnotesize\ttfamily void Shaders\+::\+Shader\+Base\+::\+Load\+Matrix4 (\begin{DoxyParamCaption}\item[{G\+Luint}]{location,  }\item[{glm\+::mat4x4}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Loads a mat4x4 to the shader. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em location} & The location to upload the value to. \\
+\hline
+\mbox{\tt in}  & {\em value} & The value to upload. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 93 of file Shader\+Base.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_shaders_1_1_shader_base_ab6899eacc696db251435d3159851bbd7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_aaf6da8cee165856e1c34fe04f415fa01}\label{class_shaders_1_1_shader_base_aaf6da8cee165856e1c34fe04f415fa01}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Load\+U\+Int@{Load\+U\+Int}}
+\index{Load\+U\+Int@{Load\+U\+Int}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Load\+U\+Int()}{LoadUInt()}}
+{\footnotesize\ttfamily void Shaders\+::\+Shader\+Base\+::\+Load\+U\+Int (\begin{DoxyParamCaption}\item[{G\+Luint}]{location,  }\item[{unsigned int}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Loads an unsigned int to the shader. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em location} & The location to upload the value to. \\
+\hline
+\mbox{\tt in}  & {\em value} & The value to upload. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 78 of file Shader\+Base.\+cpp.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_a2a490771534b22d25458ce05faf275d3}\label{class_shaders_1_1_shader_base_a2a490771534b22d25458ce05faf275d3}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Load\+Vec3@{Load\+Vec3}}
+\index{Load\+Vec3@{Load\+Vec3}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Load\+Vec3()}{LoadVec3()}}
+{\footnotesize\ttfamily void Shaders\+::\+Shader\+Base\+::\+Load\+Vec3 (\begin{DoxyParamCaption}\item[{G\+Luint}]{location,  }\item[{glm\+::vec3}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Loads a vec3 to the shader. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em location} & The location to upload the value to. \\
+\hline
+\mbox{\tt in}  & {\em value} & The value to upload. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 83 of file Shader\+Base.\+cpp.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_a984b4efce8e3dbb75302017c4f92bb3c}\label{class_shaders_1_1_shader_base_a984b4efce8e3dbb75302017c4f92bb3c}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Set\+Fragment\+Shader\+ID@{Set\+Fragment\+Shader\+ID}}
+\index{Set\+Fragment\+Shader\+ID@{Set\+Fragment\+Shader\+ID}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Set\+Fragment\+Shader\+I\+D()}{SetFragmentShaderID()}}
+{\footnotesize\ttfamily void Shaders\+::\+Shader\+Base\+::\+Set\+Fragment\+Shader\+ID (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+Sets the ID of the fragment shader. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em id} & The ID of the shader. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 38 of file Shader\+Base.\+cpp.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_a25f6a1f85f7f3094f6019971239ad2ce}\label{class_shaders_1_1_shader_base_a25f6a1f85f7f3094f6019971239ad2ce}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Set\+Program\+ID@{Set\+Program\+ID}}
+\index{Set\+Program\+ID@{Set\+Program\+ID}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Set\+Program\+I\+D()}{SetProgramID()}}
+{\footnotesize\ttfamily void Shaders\+::\+Shader\+Base\+::\+Set\+Program\+ID (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+Sets the ID of the entire shader program 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em id} & The ID of the shader. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 28 of file Shader\+Base.\+cpp.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_afb186a683a560e325c3e5fe6f60d6c59}\label{class_shaders_1_1_shader_base_afb186a683a560e325c3e5fe6f60d6c59}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Set\+Vertex\+Shader\+ID@{Set\+Vertex\+Shader\+ID}}
+\index{Set\+Vertex\+Shader\+ID@{Set\+Vertex\+Shader\+ID}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Set\+Vertex\+Shader\+I\+D()}{SetVertexShaderID()}}
+{\footnotesize\ttfamily void Shaders\+::\+Shader\+Base\+::\+Set\+Vertex\+Shader\+ID (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+Sets the ID of the vertex shader. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em id} & The ID of the shader. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 33 of file Shader\+Base.\+cpp.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_a70efd0722655ec3dd0c2de014a04fd17}\label{class_shaders_1_1_shader_base_a70efd0722655ec3dd0c2de014a04fd17}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Start@{Start}}
+\index{Start@{Start}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily void Shaders\+::\+Shader\+Base\+::\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Starts the shader. 
+
+Definition at line 18 of file Shader\+Base.\+cpp.
+
+\mbox{\Hypertarget{class_shaders_1_1_shader_base_a1d5f73624ff4f59633b159fd0772e84c}\label{class_shaders_1_1_shader_base_a1d5f73624ff4f59633b159fd0772e84c}} 
+\index{Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}!Stop@{Stop}}
+\index{Stop@{Stop}!Shaders\+::\+Shader\+Base@{Shaders\+::\+Shader\+Base}}
+\subsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily void Shaders\+::\+Shader\+Base\+::\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Stops the shader. 
+
+Definition at line 23 of file Shader\+Base.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Bear\+Bones-\/master/\+Bear\+Bones/src/\+Shaders/Shader\+Base.\+h\item 
+Bear\+Bones-\/master/\+Bear\+Bones/src/\+Shaders/Shader\+Base.\+cpp\end{DoxyCompactItemize}

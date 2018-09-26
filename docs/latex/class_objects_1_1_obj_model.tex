@@ -1,0 +1,260 @@
+\hypertarget{class_objects_1_1_obj_model}{}\section{Objects\+:\+:Obj\+Model Class Reference}
+\label{class_objects_1_1_obj_model}\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+
+
+{\ttfamily \#include $<$Obj\+Model.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_objects_1_1_obj_model_aa2d303c5c56929ba6a4ad241626f6c2f}\label{class_objects_1_1_obj_model_aa2d303c5c56929ba6a4ad241626f6c2f}} 
+{\bfseries Obj\+Model} (const \hyperlink{class_objects_1_1_obj_model}{Obj\+Model} \&other)
+\item 
+void \hyperlink{class_objects_1_1_obj_model_a7a6747283cab7ded9bb454046bae15d7}{Set\+V\+A\+O\+ID} (int vao\+Id)
+\item 
+void \hyperlink{class_objects_1_1_obj_model_a863d5f8618de5bf3cc52de85181f178b}{Set\+Vertex\+Count} (int count)
+\item 
+void \hyperlink{class_objects_1_1_obj_model_a8dbe139248efa6ed1d9921e141262ee9}{Set\+Model\+Height} (double height)
+\item 
+void \hyperlink{class_objects_1_1_obj_model_a72ef59adfa1dd88840178aa76479e471}{Set\+Texture} (std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_texture}{Texture} $>$ tex)
+\item 
+void \hyperlink{class_objects_1_1_obj_model_aea0369b1cff1d80289d6378e8b98bc57}{Set\+Verticies} (std\+::vector$<$ glm\+::vec3 $>$ verts)
+\item 
+void \hyperlink{class_objects_1_1_obj_model_a33b342b503c772b35d8d8c557ec874b4}{Set\+U\+Vs} (std\+::vector$<$ glm\+::vec2 $>$ uvs)
+\item 
+void \hyperlink{class_objects_1_1_obj_model_aaa85b89c8fd001ad528a733483e1e7c9}{Set\+Normals} (std\+::vector$<$ glm\+::vec3 $>$ norms)
+\item 
+int \hyperlink{class_objects_1_1_obj_model_a197b62526db5e58e16e455bd6faf5da0}{Get\+V\+A\+O\+ID} ()
+\item 
+int \hyperlink{class_objects_1_1_obj_model_a816f3249aa96a8ac4ec39fcfb89e68e5}{Get\+Vertex\+Count} ()
+\item 
+double \hyperlink{class_objects_1_1_obj_model_a860648f8d6fb7ef982e55541a95e2439}{Get\+Model\+Height} ()
+\item 
+std\+::vector$<$ glm\+::vec3 $>$ \hyperlink{class_objects_1_1_obj_model_a6d17114bb249c782890410c47b568a61}{Get\+Verticies} ()
+\item 
+std\+::vector$<$ glm\+::vec2 $>$ \hyperlink{class_objects_1_1_obj_model_a609d85c35d37c8495c91f43ab7047c68}{Get\+U\+Vs} ()
+\item 
+std\+::vector$<$ glm\+::vec3 $>$ \hyperlink{class_objects_1_1_obj_model_a850d4f9b45247cc410b9d394973895ee}{Get\+Normals} ()
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_texture}{Texture} $>$ \hyperlink{class_objects_1_1_obj_model_a29c30b353f9089312caa7667fcdebc6c}{Get\+Texture} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains information about an wavefront object file. \begin{DoxyAuthor}{Author}
+Mathew Causby 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000004}{Todo}]Rename all vertex counts to element counts \end{DoxyRefDesc}
+
+
+Definition at line 20 of file Obj\+Model.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_objects_1_1_obj_model_a860648f8d6fb7ef982e55541a95e2439}\label{class_objects_1_1_obj_model_a860648f8d6fb7ef982e55541a95e2439}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Get\+Model\+Height@{Get\+Model\+Height}}
+\index{Get\+Model\+Height@{Get\+Model\+Height}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Get\+Model\+Height()}{GetModelHeight()}}
+{\footnotesize\ttfamily double Objects\+::\+Obj\+Model\+::\+Get\+Model\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the height of the model. \begin{DoxyReturn}{Returns}
+The height of the model. 
+\end{DoxyReturn}
+
+
+Definition at line 71 of file Obj\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_obj_model_a850d4f9b45247cc410b9d394973895ee}\label{class_objects_1_1_obj_model_a850d4f9b45247cc410b9d394973895ee}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Get\+Normals@{Get\+Normals}}
+\index{Get\+Normals@{Get\+Normals}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Get\+Normals()}{GetNormals()}}
+{\footnotesize\ttfamily std\+::vector$<$ glm\+::vec3 $>$ Objects\+::\+Obj\+Model\+::\+Get\+Normals (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the normals of the model. \begin{DoxyReturn}{Returns}
+A vector containing all of the normals of the model. 
+\end{DoxyReturn}
+
+
+Definition at line 86 of file Obj\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_obj_model_a29c30b353f9089312caa7667fcdebc6c}\label{class_objects_1_1_obj_model_a29c30b353f9089312caa7667fcdebc6c}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Get\+Texture@{Get\+Texture}}
+\index{Get\+Texture@{Get\+Texture}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Get\+Texture()}{GetTexture()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_texture}{Objects\+::\+Texture} $>$ Objects\+::\+Obj\+Model\+::\+Get\+Texture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the texture to draw onto the model. \begin{DoxyReturn}{Returns}
+A pointer to the texture. 
+\end{DoxyReturn}
+
+
+Definition at line 91 of file Obj\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_obj_model_a609d85c35d37c8495c91f43ab7047c68}\label{class_objects_1_1_obj_model_a609d85c35d37c8495c91f43ab7047c68}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Get\+U\+Vs@{Get\+U\+Vs}}
+\index{Get\+U\+Vs@{Get\+U\+Vs}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Get\+U\+Vs()}{GetUVs()}}
+{\footnotesize\ttfamily std\+::vector$<$ glm\+::vec2 $>$ Objects\+::\+Obj\+Model\+::\+Get\+U\+Vs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the U\+Vs of the model. \begin{DoxyReturn}{Returns}
+A vector containing all of the UV mappings of the model 
+\end{DoxyReturn}
+
+
+Definition at line 81 of file Obj\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_obj_model_a197b62526db5e58e16e455bd6faf5da0}\label{class_objects_1_1_obj_model_a197b62526db5e58e16e455bd6faf5da0}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Get\+V\+A\+O\+ID@{Get\+V\+A\+O\+ID}}
+\index{Get\+V\+A\+O\+ID@{Get\+V\+A\+O\+ID}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Get\+V\+A\+O\+I\+D()}{GetVAOID()}}
+{\footnotesize\ttfamily int Objects\+::\+Obj\+Model\+::\+Get\+V\+A\+O\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the V\+AO Id of the model. \begin{DoxyReturn}{Returns}
+The V\+AO Id. 
+\end{DoxyReturn}
+
+
+Definition at line 61 of file Obj\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_obj_model_a816f3249aa96a8ac4ec39fcfb89e68e5}\label{class_objects_1_1_obj_model_a816f3249aa96a8ac4ec39fcfb89e68e5}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Get\+Vertex\+Count@{Get\+Vertex\+Count}}
+\index{Get\+Vertex\+Count@{Get\+Vertex\+Count}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Get\+Vertex\+Count()}{GetVertexCount()}}
+{\footnotesize\ttfamily int Objects\+::\+Obj\+Model\+::\+Get\+Vertex\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the number of elements in the model. \begin{DoxyReturn}{Returns}
+The number of elements in the model 
+\end{DoxyReturn}
+
+
+Definition at line 66 of file Obj\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_obj_model_a6d17114bb249c782890410c47b568a61}\label{class_objects_1_1_obj_model_a6d17114bb249c782890410c47b568a61}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Get\+Verticies@{Get\+Verticies}}
+\index{Get\+Verticies@{Get\+Verticies}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Get\+Verticies()}{GetVerticies()}}
+{\footnotesize\ttfamily std\+::vector$<$ glm\+::vec3 $>$ Objects\+::\+Obj\+Model\+::\+Get\+Verticies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the verticies of the model. \begin{DoxyReturn}{Returns}
+A vector containing all the verticies in the model 
+\end{DoxyReturn}
+
+
+Definition at line 76 of file Obj\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_obj_model_a8dbe139248efa6ed1d9921e141262ee9}\label{class_objects_1_1_obj_model_a8dbe139248efa6ed1d9921e141262ee9}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Set\+Model\+Height@{Set\+Model\+Height}}
+\index{Set\+Model\+Height@{Set\+Model\+Height}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Set\+Model\+Height()}{SetModelHeight()}}
+{\footnotesize\ttfamily void Objects\+::\+Obj\+Model\+::\+Set\+Model\+Height (\begin{DoxyParamCaption}\item[{double}]{height }\end{DoxyParamCaption})}
+
+Sets the height of the model. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em height} & The height of the model \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 36 of file Obj\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_obj_model_aaa85b89c8fd001ad528a733483e1e7c9}\label{class_objects_1_1_obj_model_aaa85b89c8fd001ad528a733483e1e7c9}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Set\+Normals@{Set\+Normals}}
+\index{Set\+Normals@{Set\+Normals}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Set\+Normals()}{SetNormals()}}
+{\footnotesize\ttfamily void Objects\+::\+Obj\+Model\+::\+Set\+Normals (\begin{DoxyParamCaption}\item[{std\+::vector$<$ glm\+::vec3 $>$}]{norms }\end{DoxyParamCaption})}
+
+Sets the normals of the model. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em norms} & A vector containing every normal of the model. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 56 of file Obj\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_obj_model_a72ef59adfa1dd88840178aa76479e471}\label{class_objects_1_1_obj_model_a72ef59adfa1dd88840178aa76479e471}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Set\+Texture@{Set\+Texture}}
+\index{Set\+Texture@{Set\+Texture}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Set\+Texture()}{SetTexture()}}
+{\footnotesize\ttfamily void Objects\+::\+Obj\+Model\+::\+Set\+Texture (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_texture}{Texture} $>$}]{tex }\end{DoxyParamCaption})}
+
+Sets the texture to draw onto the model. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em tex} & A pointer to the texture to use. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 41 of file Obj\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_obj_model_a33b342b503c772b35d8d8c557ec874b4}\label{class_objects_1_1_obj_model_a33b342b503c772b35d8d8c557ec874b4}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Set\+U\+Vs@{Set\+U\+Vs}}
+\index{Set\+U\+Vs@{Set\+U\+Vs}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Set\+U\+Vs()}{SetUVs()}}
+{\footnotesize\ttfamily void Objects\+::\+Obj\+Model\+::\+Set\+U\+Vs (\begin{DoxyParamCaption}\item[{std\+::vector$<$ glm\+::vec2 $>$}]{uvs }\end{DoxyParamCaption})}
+
+Sets the U\+Vs of the model. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em uvs} & A vector containing every uv map in the model. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 51 of file Obj\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_obj_model_a7a6747283cab7ded9bb454046bae15d7}\label{class_objects_1_1_obj_model_a7a6747283cab7ded9bb454046bae15d7}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Set\+V\+A\+O\+ID@{Set\+V\+A\+O\+ID}}
+\index{Set\+V\+A\+O\+ID@{Set\+V\+A\+O\+ID}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Set\+V\+A\+O\+I\+D()}{SetVAOID()}}
+{\footnotesize\ttfamily void Objects\+::\+Obj\+Model\+::\+Set\+V\+A\+O\+ID (\begin{DoxyParamCaption}\item[{int}]{vao\+Id }\end{DoxyParamCaption})}
+
+Sets the V\+AO id. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em vao\+Id} & The V\+AO ID. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 26 of file Obj\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_obj_model_a863d5f8618de5bf3cc52de85181f178b}\label{class_objects_1_1_obj_model_a863d5f8618de5bf3cc52de85181f178b}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Set\+Vertex\+Count@{Set\+Vertex\+Count}}
+\index{Set\+Vertex\+Count@{Set\+Vertex\+Count}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Set\+Vertex\+Count()}{SetVertexCount()}}
+{\footnotesize\ttfamily void Objects\+::\+Obj\+Model\+::\+Set\+Vertex\+Count (\begin{DoxyParamCaption}\item[{int}]{count }\end{DoxyParamCaption})}
+
+Sets the number of elements. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em count} & The number of elements \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 31 of file Obj\+Model.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_obj_model_aea0369b1cff1d80289d6378e8b98bc57}\label{class_objects_1_1_obj_model_aea0369b1cff1d80289d6378e8b98bc57}} 
+\index{Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}!Set\+Verticies@{Set\+Verticies}}
+\index{Set\+Verticies@{Set\+Verticies}!Objects\+::\+Obj\+Model@{Objects\+::\+Obj\+Model}}
+\subsubsection{\texorpdfstring{Set\+Verticies()}{SetVerticies()}}
+{\footnotesize\ttfamily void Objects\+::\+Obj\+Model\+::\+Set\+Verticies (\begin{DoxyParamCaption}\item[{std\+::vector$<$ glm\+::vec3 $>$}]{verts }\end{DoxyParamCaption})}
+
+Sets the verticies of the model. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em verts} & A vector containing every vertex in the model. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 46 of file Obj\+Model.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Bear\+Bones-\/master/\+Bear\+Bones/src/\+Objects/Obj\+Model.\+h\item 
+Bear\+Bones-\/master/\+Bear\+Bones/src/\+Objects/Obj\+Model.\+cpp\end{DoxyCompactItemize}

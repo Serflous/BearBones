@@ -1,0 +1,9 @@
+<map id="Core::BearBones::GetCamera" name="Core::BearBones::GetCamera">
+<area shape="rect" id="node2" href="$class_core_1_1_bear_bones.html#aae597be3992d3095612317decd91a55d" title="Core::BearBones::DrawCallback" alt="" coords="248,5,456,32"/>
+<area shape="rect" id="node3" href="$class_core_1_1_bear_bones.html#ad8ec7ea2b2e127f30fee7646359208e8" title="Core::BearBones::Reshape\lCallback" alt="" coords="262,57,442,98"/>
+<area shape="rect" id="node4" href="$class_input_1_1_input_manager.html#ac4df9b50e7cfc4e59f061a08ed7f4925" title="Input::InputManager\l::GetInstance" alt="" coords="284,122,420,163"/>
+<area shape="rect" id="node5" href="$class_input_1_1_input_manager.html#a81353902fe615c99f742cd280335e72f" title="Input::InputManager\l::KeyCallback" alt="" coords="284,187,420,229"/>
+<area shape="rect" id="node6" href="$class_input_1_1_input_manager.html#a9ec4f960256ab6a8b50297b9e3bf0307" title="Input::InputManager\l::MouseCallback" alt="" coords="284,253,420,294"/>
+<area shape="rect" id="node7" href="$class_input_1_1_input_manager.html#ab241c84c47dd69505ea51e93a33f2113" title="Input::InputManager\l::MouseMotionCallback" alt="" coords="273,318,431,359"/>
+<area shape="rect" id="node8" href="$class_core_1_1_bear_bones.html#a5d424aa025bfbefd266e7777c657ebd9" title="Core::BearBones::Update" alt="" coords="267,384,437,411"/>
+</map>

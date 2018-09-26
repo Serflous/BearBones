@@ -1,0 +1,139 @@
+\hypertarget{class_objects_1_1_world}{}\section{Objects\+:\+:World Class Reference}
+\label{class_objects_1_1_world}\index{Objects\+::\+World@{Objects\+::\+World}}
+
+
+{\ttfamily \#include $<$World.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_objects_1_1_world_ae94afd14baa2b242fe12612a6a0a229b}\label{class_objects_1_1_world_ae94afd14baa2b242fe12612a6a0a229b}} 
+{\bfseries World} (const \hyperlink{class_objects_1_1_world}{World} \&other)
+\item 
+void \hyperlink{class_objects_1_1_world_af564fbdf334909ccc2e625be04d05b65}{Add\+Texture} (std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_texture}{Texture} $>$ texture)
+\item 
+void \hyperlink{class_objects_1_1_world_ad84eb295fb787e7217237e27560f1e41}{Add\+Obj\+Model} (std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_obj_model}{Obj\+Model} $>$ model)
+\item 
+void \hyperlink{class_objects_1_1_world_a8512010f2e623aafdeb68b86fc8a5efa}{Add\+Static\+Entity} (std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_static_entity}{Static\+Entity} $>$ entity)
+\item 
+std\+::shared\+\_\+ptr$<$ std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_texture}{Texture} $>$ $>$ $>$ \hyperlink{class_objects_1_1_world_a64f1de04ba2b729474135a8af6ac3163}{Get\+Textures} ()
+\item 
+std\+::shared\+\_\+ptr$<$ std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_obj_model}{Obj\+Model} $>$ $>$ $>$ \hyperlink{class_objects_1_1_world_a09762556086e4534f26af0e6092d794a}{Get\+O\+B\+J\+Models} ()
+\item 
+std\+::shared\+\_\+ptr$<$ std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_static_entity}{Static\+Entity} $>$ $>$ $>$ \hyperlink{class_objects_1_1_world_a8f430397fa8f3c30d2105f8d7e5268e3}{Get\+Static\+Entities} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The world object contains all the resources used in the game. \begin{DoxyAuthor}{Author}
+Mathew Causby. 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+
+
+Definition at line 19 of file World.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_objects_1_1_world_ad84eb295fb787e7217237e27560f1e41}\label{class_objects_1_1_world_ad84eb295fb787e7217237e27560f1e41}} 
+\index{Objects\+::\+World@{Objects\+::\+World}!Add\+Obj\+Model@{Add\+Obj\+Model}}
+\index{Add\+Obj\+Model@{Add\+Obj\+Model}!Objects\+::\+World@{Objects\+::\+World}}
+\subsubsection{\texorpdfstring{Add\+Obj\+Model()}{AddObjModel()}}
+{\footnotesize\ttfamily void Objects\+::\+World\+::\+Add\+Obj\+Model (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_obj_model}{Obj\+Model} $>$}]{model }\end{DoxyParamCaption})}
+
+Adds an \hyperlink{class_objects_1_1_obj_model}{Obj\+Model} to the world 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em A} & pointer to the \hyperlink{class_objects_1_1_obj_model}{Obj\+Model} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_objects_1_1_obj_model}{Objects\+::\+Obj\+Model} 
+\end{DoxySeeAlso}
+
+
+Definition at line 27 of file World.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_world_a8512010f2e623aafdeb68b86fc8a5efa}\label{class_objects_1_1_world_a8512010f2e623aafdeb68b86fc8a5efa}} 
+\index{Objects\+::\+World@{Objects\+::\+World}!Add\+Static\+Entity@{Add\+Static\+Entity}}
+\index{Add\+Static\+Entity@{Add\+Static\+Entity}!Objects\+::\+World@{Objects\+::\+World}}
+\subsubsection{\texorpdfstring{Add\+Static\+Entity()}{AddStaticEntity()}}
+{\footnotesize\ttfamily void Objects\+::\+World\+::\+Add\+Static\+Entity (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_static_entity}{Static\+Entity} $>$}]{entity }\end{DoxyParamCaption})}
+
+Adds a static entity to the world 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em A} & pointer to the static entity. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_objects_1_1_static_entity}{Objects\+::\+Static\+Entity} 
+\end{DoxySeeAlso}
+
+
+Definition at line 32 of file World.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_world_af564fbdf334909ccc2e625be04d05b65}\label{class_objects_1_1_world_af564fbdf334909ccc2e625be04d05b65}} 
+\index{Objects\+::\+World@{Objects\+::\+World}!Add\+Texture@{Add\+Texture}}
+\index{Add\+Texture@{Add\+Texture}!Objects\+::\+World@{Objects\+::\+World}}
+\subsubsection{\texorpdfstring{Add\+Texture()}{AddTexture()}}
+{\footnotesize\ttfamily void Objects\+::\+World\+::\+Add\+Texture (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_texture}{Texture} $>$}]{texture }\end{DoxyParamCaption})}
+
+Adds a texture to the world. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em A} & pointer to the texture. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_objects_1_1_texture}{Objects\+::\+Texture} 
+\end{DoxySeeAlso}
+
+
+Definition at line 22 of file World.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_world_a09762556086e4534f26af0e6092d794a}\label{class_objects_1_1_world_a09762556086e4534f26af0e6092d794a}} 
+\index{Objects\+::\+World@{Objects\+::\+World}!Get\+O\+B\+J\+Models@{Get\+O\+B\+J\+Models}}
+\index{Get\+O\+B\+J\+Models@{Get\+O\+B\+J\+Models}!Objects\+::\+World@{Objects\+::\+World}}
+\subsubsection{\texorpdfstring{Get\+O\+B\+J\+Models()}{GetOBJModels()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_obj_model}{Objects\+::\+Obj\+Model} $>$ $>$ $>$ Objects\+::\+World\+::\+Get\+O\+B\+J\+Models (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the obj models currently loaded. \begin{DoxyReturn}{Returns}
+A vector of pointers to models currently in the world. 
+\end{DoxyReturn}
+
+
+Definition at line 42 of file World.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_world_a8f430397fa8f3c30d2105f8d7e5268e3}\label{class_objects_1_1_world_a8f430397fa8f3c30d2105f8d7e5268e3}} 
+\index{Objects\+::\+World@{Objects\+::\+World}!Get\+Static\+Entities@{Get\+Static\+Entities}}
+\index{Get\+Static\+Entities@{Get\+Static\+Entities}!Objects\+::\+World@{Objects\+::\+World}}
+\subsubsection{\texorpdfstring{Get\+Static\+Entities()}{GetStaticEntities()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_static_entity}{Objects\+::\+Static\+Entity} $>$ $>$ $>$ Objects\+::\+World\+::\+Get\+Static\+Entities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the static entities currently loaded. \begin{DoxyReturn}{Returns}
+A vector of pointers to static entities currently in the world. 
+\end{DoxyReturn}
+
+
+Definition at line 47 of file World.\+cpp.
+
+\mbox{\Hypertarget{class_objects_1_1_world_a64f1de04ba2b729474135a8af6ac3163}\label{class_objects_1_1_world_a64f1de04ba2b729474135a8af6ac3163}} 
+\index{Objects\+::\+World@{Objects\+::\+World}!Get\+Textures@{Get\+Textures}}
+\index{Get\+Textures@{Get\+Textures}!Objects\+::\+World@{Objects\+::\+World}}
+\subsubsection{\texorpdfstring{Get\+Textures()}{GetTextures()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{class_objects_1_1_texture}{Objects\+::\+Texture} $>$ $>$ $>$ Objects\+::\+World\+::\+Get\+Textures (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gets the textures currently loaded. \begin{DoxyReturn}{Returns}
+A vector of pointers to textures currently in the world 
+\end{DoxyReturn}
+
+
+Definition at line 37 of file World.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Bear\+Bones-\/master/\+Bear\+Bones/src/\+Objects/World.\+h\item 
+Bear\+Bones-\/master/\+Bear\+Bones/src/\+Objects/World.\+cpp\end{DoxyCompactItemize}

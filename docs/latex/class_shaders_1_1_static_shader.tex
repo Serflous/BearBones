@@ -1,0 +1,178 @@
+\hypertarget{class_shaders_1_1_static_shader}{}\section{Shaders\+:\+:Static\+Shader Class Reference}
+\label{class_shaders_1_1_static_shader}\index{Shaders\+::\+Static\+Shader@{Shaders\+::\+Static\+Shader}}
+
+
+{\ttfamily \#include $<$Static\+Shader.\+h$>$}
+
+
+
+Inheritance diagram for Shaders\+:\+:Static\+Shader\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{class_shaders_1_1_static_shader__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Shaders\+:\+:Static\+Shader\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{class_shaders_1_1_static_shader__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_shaders_1_1_static_shader_a133b2935aef11a9e51bf2589a1400f4b}\label{class_shaders_1_1_static_shader_a133b2935aef11a9e51bf2589a1400f4b}} 
+{\bfseries Static\+Shader} (const \hyperlink{class_shaders_1_1_static_shader}{Static\+Shader} \&other)
+\item 
+void \hyperlink{class_shaders_1_1_static_shader_a4ba0a1e7a4d2b58668f97cb9e3892f57}{Bind\+Attributes} ()
+\item 
+void \hyperlink{class_shaders_1_1_static_shader_a2417ca33a617fe8a8cb30ec3b5e866fa}{Get\+All\+Uniforms} ()
+\item 
+void \hyperlink{class_shaders_1_1_static_shader_a7133b5436145e2769cb940835e59a5f7}{Load\+Projection\+Matrix} (glm\+::mat4x4 projection\+Matrix)
+\item 
+void \hyperlink{class_shaders_1_1_static_shader_ab0241a6caf6b7a9fe48b35da63a1cefb}{Load\+Transformation\+Matrix} (glm\+::mat4x4 transformation\+Matrix)
+\item 
+void \hyperlink{class_shaders_1_1_static_shader_aacb252f60950b03d3aa0dc0abc92d768}{Load\+View\+Matrix} (glm\+::mat4x4 view\+Matrix)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Implementation of \hyperlink{class_shaders_1_1_shader_base}{Shader\+Base} defining a shader for static objects. That is objects without animation. Also uploads the projection, transformation, and view matricies to the shader to create the M\+VP transformation. \begin{DoxyAuthor}{Author}
+Mathew Causby 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+
+
+Definition at line 15 of file Static\+Shader.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_shaders_1_1_static_shader_a4ba0a1e7a4d2b58668f97cb9e3892f57}\label{class_shaders_1_1_static_shader_a4ba0a1e7a4d2b58668f97cb9e3892f57}} 
+\index{Shaders\+::\+Static\+Shader@{Shaders\+::\+Static\+Shader}!Bind\+Attributes@{Bind\+Attributes}}
+\index{Bind\+Attributes@{Bind\+Attributes}!Shaders\+::\+Static\+Shader@{Shaders\+::\+Static\+Shader}}
+\subsubsection{\texorpdfstring{Bind\+Attributes()}{BindAttributes()}}
+{\footnotesize\ttfamily void Shaders\+::\+Static\+Shader\+::\+Bind\+Attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Binds all the attributes to the shader. 
+
+Implements \hyperlink{class_shaders_1_1_shader_base_a8230f19d72ac58be9db263bbf8436967}{Shaders\+::\+Shader\+Base}.
+
+
+
+Definition at line 18 of file Static\+Shader.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{class_shaders_1_1_static_shader_a4ba0a1e7a4d2b58668f97cb9e3892f57_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_shaders_1_1_static_shader_a2417ca33a617fe8a8cb30ec3b5e866fa}\label{class_shaders_1_1_static_shader_a2417ca33a617fe8a8cb30ec3b5e866fa}} 
+\index{Shaders\+::\+Static\+Shader@{Shaders\+::\+Static\+Shader}!Get\+All\+Uniforms@{Get\+All\+Uniforms}}
+\index{Get\+All\+Uniforms@{Get\+All\+Uniforms}!Shaders\+::\+Static\+Shader@{Shaders\+::\+Static\+Shader}}
+\subsubsection{\texorpdfstring{Get\+All\+Uniforms()}{GetAllUniforms()}}
+{\footnotesize\ttfamily void Shaders\+::\+Static\+Shader\+::\+Get\+All\+Uniforms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Gets the location of all the unfiforms in the shader. 
+
+Implements \hyperlink{class_shaders_1_1_shader_base_ade949aa1626fbddd264a51b1dbb9a7cc}{Shaders\+::\+Shader\+Base}.
+
+
+
+Definition at line 25 of file Static\+Shader.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{class_shaders_1_1_static_shader_a2417ca33a617fe8a8cb30ec3b5e866fa_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_shaders_1_1_static_shader_a7133b5436145e2769cb940835e59a5f7}\label{class_shaders_1_1_static_shader_a7133b5436145e2769cb940835e59a5f7}} 
+\index{Shaders\+::\+Static\+Shader@{Shaders\+::\+Static\+Shader}!Load\+Projection\+Matrix@{Load\+Projection\+Matrix}}
+\index{Load\+Projection\+Matrix@{Load\+Projection\+Matrix}!Shaders\+::\+Static\+Shader@{Shaders\+::\+Static\+Shader}}
+\subsubsection{\texorpdfstring{Load\+Projection\+Matrix()}{LoadProjectionMatrix()}}
+{\footnotesize\ttfamily void Shaders\+::\+Static\+Shader\+::\+Load\+Projection\+Matrix (\begin{DoxyParamCaption}\item[{glm\+::mat4x4}]{projection\+Matrix }\end{DoxyParamCaption})}
+
+Loads the projection matrix to the shader. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em projection\+Matrix} & The projection matrix. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 32 of file Static\+Shader.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{class_shaders_1_1_static_shader_a7133b5436145e2769cb940835e59a5f7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_shaders_1_1_static_shader_ab0241a6caf6b7a9fe48b35da63a1cefb}\label{class_shaders_1_1_static_shader_ab0241a6caf6b7a9fe48b35da63a1cefb}} 
+\index{Shaders\+::\+Static\+Shader@{Shaders\+::\+Static\+Shader}!Load\+Transformation\+Matrix@{Load\+Transformation\+Matrix}}
+\index{Load\+Transformation\+Matrix@{Load\+Transformation\+Matrix}!Shaders\+::\+Static\+Shader@{Shaders\+::\+Static\+Shader}}
+\subsubsection{\texorpdfstring{Load\+Transformation\+Matrix()}{LoadTransformationMatrix()}}
+{\footnotesize\ttfamily void Shaders\+::\+Static\+Shader\+::\+Load\+Transformation\+Matrix (\begin{DoxyParamCaption}\item[{glm\+::mat4x4}]{transformation\+Matrix }\end{DoxyParamCaption})}
+
+Loads the transformation matrix to the shader. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em transformation\+Matrix} & The transformation matrix. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 37 of file Static\+Shader.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_shaders_1_1_static_shader_ab0241a6caf6b7a9fe48b35da63a1cefb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_shaders_1_1_static_shader_aacb252f60950b03d3aa0dc0abc92d768}\label{class_shaders_1_1_static_shader_aacb252f60950b03d3aa0dc0abc92d768}} 
+\index{Shaders\+::\+Static\+Shader@{Shaders\+::\+Static\+Shader}!Load\+View\+Matrix@{Load\+View\+Matrix}}
+\index{Load\+View\+Matrix@{Load\+View\+Matrix}!Shaders\+::\+Static\+Shader@{Shaders\+::\+Static\+Shader}}
+\subsubsection{\texorpdfstring{Load\+View\+Matrix()}{LoadViewMatrix()}}
+{\footnotesize\ttfamily void Shaders\+::\+Static\+Shader\+::\+Load\+View\+Matrix (\begin{DoxyParamCaption}\item[{glm\+::mat4x4}]{view\+Matrix }\end{DoxyParamCaption})}
+
+Loads the view matrix to the shader. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em view\+Matrix} & The view matrix. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 42 of file Static\+Shader.\+cpp.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{class_shaders_1_1_static_shader_aacb252f60950b03d3aa0dc0abc92d768_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Bear\+Bones-\/master/\+Bear\+Bones/src/\+Shaders/Static\+Shader.\+h\item 
+Bear\+Bones-\/master/\+Bear\+Bones/src/\+Shaders/Static\+Shader.\+cpp\end{DoxyCompactItemize}
