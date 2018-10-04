@@ -1,12 +1,26 @@
 #include <Core/BearBones.h>
 
+void CalculateFrameRate()
+{
+	static float framesPerSecond = 0.0f;       // This will store our fps
+	static float lastTime = 0.0f;       // This will hold the time from the last frame
+	float currentTime = GetTickCount() * 0.001f;
+	++framesPerSecond;
+	if (currentTime - lastTime > 1.0f)
+	{
+		lastTime = currentTime;
+		if (true) fprintf(stderr, "\nCurrent Frames Per Second: %d\n\n", (int)framesPerSecond);
+		framesPerSecond = 0;
+	}
+}
+
 void updateCallback(int dx)
 {
 	int currentMouseX = 0;
 	int currentMouseY = 0;
 	int winX = 0;
 	int winY = 0;
-
+	CalculateFrameRate();
 	// Get the managers.
 	Core::BearBones * bb = Core::BearBones::GetInstance();
 	Input::InputManager * im = Input::InputManager::GetInstance();
