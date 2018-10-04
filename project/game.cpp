@@ -88,7 +88,12 @@ int main(int argc, char ** argv)
 	camera->SetPosition(-132.0f, 0.0f, 167.0f);
 
 	// Add resources here
-
+	std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/ECL_Texture.png");
+	std::shared_ptr<Objects::ObjModel> model = loader->LoadOBJModel("res/ECL_baked.obj", tex);
+	std::shared_ptr<Objects::StaticEntity> entity = loader->CreateStaticEntity(model, glm::vec3(0, -25, 0), glm::vec3(270, 0, 0), glm::vec3(10, 10, 10));
+	world->AddTexture(tex);
+	world->AddObjModel(model);
+	world->AddStaticEntity(entity);
 	// Set the update callback and begin the main loop
 	bb->SetUpdateCallback(updateCallback);
 	bb->BeginMainGameLoop();
