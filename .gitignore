@@ -5,12 +5,7 @@ Release/*
 *.user
 *.lnk
 *.vs
-*.cmake
 *.BearBones.dir
-*.stamp
-!spec/*.stamp
-*.obj
-!spec/*.obj
 *.log
 !spec/*.log
 *.pdb
@@ -24,8 +19,6 @@ Release/*
 *.tlog
 !spec/*.tlog
 bin/*
-CMakeFiles/*
 *.depend
 !spec/*.depend
-*.txt
 *.sln
