@@ -1,27 +1,4 @@
-Debug/*
-Release/*
 *.vcxproj
 *.filters
 *.user
 *.lnk
-*.vs
-*.BearBones.dir
-*.log
-!spec/*.log
-*.pdb
-!spec/*.pdb
-*.exe
-!spec/*.exe
-*.dll
-!spec/*.dll
-*.lastbuildstate
-!spec/*.lastbuildstate
-*.tlog
-!spec/*.tlog
-bin/*
-*.depend
-!spec/*.depend
-<<<<<<< HEAD
-*.txt
-*.sln
-Game.dir/*
