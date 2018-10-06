@@ -10,12 +10,15 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include <map>
 
 #include "../Objects/World.h"
 #include "../Shaders/ShaderBase.h"
 #include "../Shaders/StaticShader.h"
+#include "../Shaders/BoundingBoxShader.h"
 #include "../Objects/Camera.h"
 #include "../Util/MathUtil.h"
+#include "../Util/Types.h"
 
 namespace Rendering
 {
@@ -42,6 +45,7 @@ namespace Rendering
 			 * @param[in] y The height of the screen.
 			 */
 		void SetDimensions(int x, int y);
+		void SetPrimitiveIds(std::shared_ptr<std::map<Util::BB_Primitives, GLuint>> primitives);
 			/**
 			 * Renders a world onto the screen using a particular camera as reference.
 			 * @param[in] A pointer to the world to draw.
@@ -59,6 +63,8 @@ namespace Rendering
 			 * @param[in] A pointer to an OBJ model
 			 */
 		void RenderOBJModel(std::shared_ptr<Objects::ObjModel> model);
+
+		void RenderEntityAABB();
 
 			/**
 			 * Creates the projection matrix for rendering.
@@ -82,6 +88,8 @@ namespace Rendering
 		int m_x, m_y;
 		glm::mat4x4 m_projectionMatrix;
 		std::shared_ptr<Shaders::ShaderBase> m_staticShader;
+		std::shared_ptr<Shaders::ShaderBase> m_boundingBoxShader;
+		std::shared_ptr<std::map<Util::BB_Primitives, GLuint>> m_primitives;
 		const float FOV = 70.0f;
 		const float NEAR_PLANE = 0.1f;
 		const float FAR_PLANE = 1000.0f;

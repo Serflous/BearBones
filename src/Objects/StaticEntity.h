@@ -1,5 +1,8 @@
 #pragma once
 
+#include <GLM/gtc/matrix_transform.hpp>
+#include <GLM/vec4.hpp>
+
 #include "Entity.h"
 #include "../Collision/AABB.h"
 
@@ -22,6 +25,7 @@ namespace Objects
 			 * Creates a bounding box for the StaticEntity. Static entities use AABB.
 			 */
 		void CreateBoundingBox();
+		Collision::AABB GetBoundingBox();
 
 	private:
 		Collision::AABB m_boundingBox;

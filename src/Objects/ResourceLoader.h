@@ -59,6 +59,8 @@ namespace Objects
 			 */
 		std::shared_ptr<StaticEntity> CreateStaticEntity(std::shared_ptr<ObjModel> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
+		GLuint LoadPrimitive(std::vector<glm::vec3> positions, std::vector<int> indicies);
+
 	private:
 			/**
 			 * Uploads all the model information to the GPU for OpengGL to use.
@@ -69,6 +71,7 @@ namespace Objects
 			 * @return The ID of the VAO that was created.
 			 */
 		int LoadToVAO(std::vector<glm::vec3> positions, std::vector<glm::vec2> textureCoords, std::vector<glm::vec3> normals, std::vector<int> indicies);
+		int LoadToVAO(std::vector<glm::vec3> positions, std::vector<int> indicies);
 			/**
 			 * Adds vec2 data to a VBO and adds that to the VAO.
 			 * @param[in] attribList The attribute list number to upload the data to.

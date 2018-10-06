@@ -94,6 +94,11 @@ std::shared_ptr<Objects::StaticEntity> Objects::ResourceLoader::CreateStaticEnti
 	return entity;
 }
 
+GLuint Objects::ResourceLoader::LoadPrimitive(std::vector<glm::vec3> positions, std::vector<int> indicies)
+{
+	return LoadToVAO(positions, indicies);
+}
+
 int Objects::ResourceLoader::LoadToVAO(std::vector<glm::vec3> positions, std::vector<glm::vec2> textureCoords, std::vector<glm::vec3> normals, std::vector<int> indicies)
 {
 	GLuint vaoId = 0;
@@ -104,6 +109,19 @@ int Objects::ResourceLoader::LoadToVAO(std::vector<glm::vec3> positions, std::ve
 	AddDataToVAO(0, 3, positions);
 	AddDataToVAO(1, 2, textureCoords);
 	AddDataToVAO(2, 3, normals);
+	glBindVertexArray(0);
+	return vaoId;
+}
+
+int Objects::ResourceLoader::LoadToVAO(std::vector<glm::vec3> positions, std::vector<int> indicies)
+{
+	GLuint vaoId = 0;
+	glGenVertexArrays(1, &vaoId);
+	glBindVertexArray(vaoId);
+
+	AddIndiciesToVAO(indicies);
+	AddDataToVAO(0, 3, positions);
+
 	glBindVertexArray(0);
 	return vaoId;
 }
