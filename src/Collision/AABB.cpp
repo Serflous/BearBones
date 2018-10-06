@@ -8,7 +8,7 @@ Collision::AABB::AABB()
 
 Collision::AABB::AABB(const AABB & other)
 {
-	m_minBounds = other.m_maxBounds;
+	m_minBounds = other.m_minBounds;
 	m_maxBounds = other.m_maxBounds;
 }
 
@@ -16,6 +16,8 @@ Collision::AABB::~AABB()
 {
 
 }
+
+
 
 void Collision::AABB::SetMinBounds(glm::vec3 minBounds)
 {
