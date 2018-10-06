@@ -69,4 +69,9 @@ glm::vec3 Collision::OBB::GetCenterPoint()
 	return m_centerPoint;
 }
 
+glm::vec3 Collision::OBB::GetHalfSize()
+{
+	return m_halfSize;
+}
+
 

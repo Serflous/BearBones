@@ -24,6 +24,7 @@ namespace Collision
 		glm::vec3 GetAxesZ();
 		glm::vec3 * GetAxes();
 		glm::vec3 GetCenterPoint();
+		glm::vec3 GetHalfSize();
 
 
 	private:

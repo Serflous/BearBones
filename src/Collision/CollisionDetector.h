@@ -16,7 +16,7 @@ namespace Collision
 	{
 	public:
 		CollisionDetector();
-		void TestOBBOBB(OBB &a, OBB&b);
+		bool TestOBBOBB(OBB &a, OBB&b);
 	private:
 
 	};
