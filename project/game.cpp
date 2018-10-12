@@ -1,4 +1,6 @@
 #include <Core/BearBones.h>
+#include <Collision/OBB.h>
+#include <Collision/CollisionDetector.h>
 
 void CalculateFrameRate()
 {
@@ -86,6 +88,18 @@ int main(int argc, char ** argv)
 	bb->GetCamera(camera);
 	// Set the camera position
 	camera->SetPosition(-132.0f, 0.0f, 167.0f);
+
+	Collision::AABB ab1;
+	Collision::AABB ab2;
+	ab1.SetMinBounds(0, 0, 0);
+	ab1.SetMaxBounds(10, 10, 10);
+	ab2.SetMinBounds(0, 0, 0);
+	ab2.SetMinBounds(10, 10, 10);
+	Collision::OBB ob1(ab1);
+	Collision::OBB ob2(ab2);
+
+	Collision::CollisionDetector detector;
+	std::cout << detector.TestOBBOBB(ob1, ob2);
 
 	// Add resources here
 	std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/ECL_Texture.png");

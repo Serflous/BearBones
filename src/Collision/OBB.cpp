@@ -22,6 +22,9 @@ Collision::OBB::OBB(AABB & other)
 	m_centerPoint.y = (other.GetMaxBounds().y + other.GetMinBounds().y) * 0.5f;
 	m_centerPoint.z = (other.GetMaxBounds().z + other.GetMinBounds().z) * 0.5f;
 
+	m_minBounds = other.GetMinBounds();
+	m_maxBounds = other.GetMaxBounds();
+
 	m_halfSize = HalfSize(other);
 
 	m_axes[0] = glm::vec3(1, 0, 0);

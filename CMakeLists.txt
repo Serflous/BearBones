@@ -39,7 +39,19 @@ include_directories (${PATH_TO_DEPS}/include ${CMAKE_SOURCE_DIR}/src)
 
 add_executable(Game ${CMAKE_SOURCE_DIR}/project/game.cpp)
 target_link_libraries(Game BearBones)
-target_link_libraries(Game ${PATH_TO_DEPS}/lib/assimp-vc140-mt.lib ${PATH_TO_DEPS}/lib/freeglut.lib ${PATH_TO_DEPS}/lib/glew32.lib ${PATH_TO_DEPS}/lib/IrrXML.lib ${PATH_TO_DEPS}/lib/SOIL.lib ${PATH_TO_DEPS}/lib/zlibd.lib)
+target_link_libraries(
+    Game ${PATH_TO_DEPS}/lib/assimp-vc140-mt.lib
+    ${PATH_TO_DEPS}/lib/freeglut.lib
+    ${PATH_TO_DEPS}/lib/glew32.lib
+    ${PATH_TO_DEPS}/lib/IrrXML.lib
+    ${PATH_TO_DEPS}/lib/SOIL.lib
+    ${PATH_TO_DEPS}/lib/zlibd.lib
+    ${PATH_TO_DEPS}/lib/Bullet3Collision.lib
+    ${PATH_TO_DEPS}/lib/Bullet3Common.lib
+    ${PATH_TO_DEPS}/lib/Bullet3Dynamics.lib
+    ${PATH_TO_DEPS}/lib/Bullet3Geometry.lib
+    ${PATH_TO_DEPS}/lib/LinearMath.lib
+)
 set_target_properties(Game
     PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin"

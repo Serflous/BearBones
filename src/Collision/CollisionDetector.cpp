@@ -29,6 +29,14 @@ bool Collision::CollisionDetector::TestOBBOBB(OBB & a, OBB & b)
 			return 0;
 	}
 
+	for (int i = 0; i < 3; i++)
+	{
+		ra = a.GetHalfSize()[0] * AbsR[0][i] + a.GetHalfSize()[1] * AbsR[1][i] + a.GetHalfSize()[2] * AbsR[i][2];
+		rb = b.GetHalfSize()[i];
+		if (abs(t[0] * R[0][i] + t[1] * R[1][i] + t[2] * R[2][i]) > ra + rb)
+			return 0;
+	}
+
 	ra = a.GetHalfSize()[1] * AbsR[2][0] + a.GetHalfSize()[2] * AbsR[1][0];
 	rb = b.GetHalfSize()[1] * AbsR[0][2] + b.GetHalfSize()[2] * AbsR[0][1];
 	if (abs(t[2] * R[1][0] - t[1] * R[2][0]) > ra + rb)
