@@ -46,10 +46,8 @@ target_link_libraries(
     ${PATH_TO_DEPS}/lib/IrrXML.lib
     ${PATH_TO_DEPS}/lib/SOIL.lib
     ${PATH_TO_DEPS}/lib/zlibd.lib
-    ${PATH_TO_DEPS}/lib/Bullet3Collision.lib
-    ${PATH_TO_DEPS}/lib/Bullet3Common.lib
-    ${PATH_TO_DEPS}/lib/Bullet3Dynamics.lib
-    ${PATH_TO_DEPS}/lib/Bullet3Geometry.lib
+    ${PATH_TO_DEPS}/lib/BulletCollision.lib
+    ${PATH_TO_DEPS}/lib/BulletDynamics.lib
     ${PATH_TO_DEPS}/lib/LinearMath.lib
 )
 set_target_properties(Game

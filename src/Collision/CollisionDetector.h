@@ -1,7 +1,4 @@
-#include <GLM/vec3.hpp>
-#include <GLM/gtc/quaternion.hpp>
-#include "AABB.h"
-#include "OBB.h"
+#include <bullet/btBulletCollisionCommon.h>
 
 namespace Collision
 {
@@ -16,10 +13,10 @@ namespace Collision
 	{
 	public:
 		CollisionDetector();
-		bool TestOBBOBB(OBB &a, OBB&b);
-		void TestPointOfIntersection();
+		//bool TestOBBOBB(OBB &a, OBB&b);
+		//void TestPointOfIntersection();
 	private:
-
+		std::shared_ptr<btCollisionWorld> m_collisionWorld;
 	};
 
 }

@@ -4,7 +4,7 @@ Collision::CollisionDetector::CollisionDetector()
 {
 }
 
-bool Collision::CollisionDetector::TestOBBOBB(OBB & a, OBB & b)
+/*bool Collision::CollisionDetector::TestOBBOBB(OBB & a, OBB & b)
 {
 	float ra, rb;
 	glm::mat3x3 R, AbsR;
@@ -83,4 +83,4 @@ bool Collision::CollisionDetector::TestOBBOBB(OBB & a, OBB & b)
 		return 0;
 
 	return 1;
-}
+}*/
