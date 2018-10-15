@@ -68,6 +68,7 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 	m_renderer = std::make_shared<Rendering::Renderer>();
 	m_world = std::make_shared<Objects::World>();
 	m_camera = std::make_shared<Objects::Camera>();
+	m_collisionDetector = std::make_unique<Collision::CollisionDetector>();
 	return 0;
 
 }

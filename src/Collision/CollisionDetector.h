@@ -1,3 +1,7 @@
+#pragma once
+
+#include <memory>
+
 #include <bullet/btBulletCollisionCommon.h>
 
 namespace Collision
@@ -13,10 +17,11 @@ namespace Collision
 	{
 	public:
 		CollisionDetector();
-		//bool TestOBBOBB(OBB &a, OBB&b);
-		//void TestPointOfIntersection();
 	private:
-		std::shared_ptr<btCollisionWorld> m_collisionWorld;
+		std::unique_ptr<btCollisionConfiguration> m_collisionConfiguration;
+		std::unique_ptr<btCollisionWorld> m_collisionWorld;
+		std::unique_ptr<btCollisionDispatcher> m_collisionDispatcher;
+		std::unique_ptr<btBroadphaseInterface> m_collisionBroadphase;
 	};
 
 }

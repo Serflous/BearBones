@@ -10,6 +10,7 @@
 #include "../Input/InputManager.h"
 #include "../Rendering/Renderer.h"
 #include "../Objects/Camera.h"
+#include "../Collision/CollisionDetector.h"
 
 namespace Core
 {
@@ -115,6 +116,7 @@ namespace Core
 		std::shared_ptr<Rendering::Renderer> m_renderer;
 		std::shared_ptr<Objects::World> m_world;
 		std::shared_ptr<Objects::Camera> m_camera;
+		std::unique_ptr<Collision::CollisionDetector> m_collisionDetector;
 	};
 
 
