@@ -3,6 +3,8 @@
 #include "Entity.h"
 #include <memory>
 
+#include <GLM/gtc/quaternion.hpp>
+
 namespace Objects
 {
 

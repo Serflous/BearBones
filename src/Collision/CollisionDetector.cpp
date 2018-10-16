@@ -14,14 +14,21 @@ void Collision::CollisionDetector::RegisterEntityForCollision(std::shared_ptr<Ob
 	m_collisionObjectLookup[entity->GetCollisionObject()] = entity;
 }
 
-void Collision::CollisionDetector::TestForCollisions()
+void Collision::CollisionDetector::TestForCollisions(fc callback)
 {
 	m_collisionWorld->performDiscreteCollisionDetection();
 	int nMan = m_collisionWorld->getDispatcher()->getNumManifolds();
 	for (int i = 0; i < nMan; i++)
 	{
 		// Get collisions Objects
+		btPersistentManifold * manifold = m_collisionWorld->getDispatcher()->getManifoldByIndexInternal(i);
+		std::shared_ptr<btCollisionObject> object1 = std::make_shared<btCollisionObject>(*(manifold->getBody0()));
+		std::shared_ptr<btCollisionObject> object2 = std::make_shared<btCollisionObject>(*(manifold->getBody1()));
+		std::shared_ptr<Objects::Entity> entity1 = m_collisionObjectLookup[object1];
+		std::shared_ptr<Objects::Entity> entity2 = m_collisionObjectLookup[object2];
 		// Get contact points
 		// Alert callback
+
+		callback(entity1, entity2);
 	}
 }

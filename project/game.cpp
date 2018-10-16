@@ -16,6 +16,11 @@ void CalculateFrameRate()
 	}
 }
 
+void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2)
+{
+
+}
+
 void updateCallback(int dx)
 {
 	int currentMouseX = 0;
@@ -98,6 +103,7 @@ int main(int argc, char ** argv)
 	world->AddStaticEntity(entity);
 	// Set the update callback and begin the main loop
 	bb->SetUpdateCallback(updateCallback);
+	bb->SetCollisionCallback(collisionCallback);
 	bb->BeginMainGameLoop();
 
 }

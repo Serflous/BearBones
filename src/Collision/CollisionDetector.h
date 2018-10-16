@@ -10,6 +10,9 @@
 namespace Collision
 {
 
+
+	typedef void(*fc)(std::shared_ptr<Objects::Entity> ent1, std::shared_ptr<Objects::Entity> ent2);
+
 	/**
 	 * An Oriented Bounding Box.
 	 * @author Mathew Causby
@@ -22,7 +25,7 @@ namespace Collision
 		CollisionDetector();
 
 		void RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity);
-		void TestForCollisions();
+		void TestForCollisions(fc Callback);
 	private:
 		std::unique_ptr<btCollisionConfiguration> m_collisionConfiguration;
 		std::unique_ptr<btCollisionWorld> m_collisionWorld;

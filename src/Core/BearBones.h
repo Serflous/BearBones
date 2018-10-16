@@ -16,6 +16,7 @@ namespace Core
 {
 
 	typedef void(*f)(int);
+	typedef void(*fc)(std::shared_ptr<Objects::Entity> ent1, std::shared_ptr<Objects::Entity> ent2);
 		/**
 		* This is the main class of the engine. It is a singleton class that manages all of the engine's resources, and controls the interfaces
 		* with FreeGLUT.
@@ -92,6 +93,7 @@ namespace Core
 		void GetCamera(std::shared_ptr<Objects::Camera> & camera);
 
 		void RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity);
+		void SetCollisionCallback(fc callback);
 
 		static void StaticDrawCallback();
 		static void StaticReshapeCallback(int x, int y);
@@ -112,6 +114,7 @@ namespace Core
 		int m_winX;
 		int m_winY;
 		f m_updateCallback;
+		fc m_collisionCallback;
 		static BearBones * m_instance;
 
 		std::shared_ptr<Objects::ResourceLoader> m_loader;

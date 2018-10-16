@@ -99,7 +99,7 @@ void Core::BearBones::Update(int dx)
 	int deltaTime = currentTime - dx;
 	glutTimerFunc(16, StaticUpdateCallback, currentTime);
 
-	m_collisionDetector->TestForCollisions();
+	m_collisionDetector->TestForCollisions(m_collisionCallback);
 
 	m_updateCallback(deltaTime);
 	glutWarpPointer(m_winX / 2, m_winY / 2);
@@ -139,6 +139,11 @@ void Core::BearBones::GetCamera(std::shared_ptr<Objects::Camera> & camera)
 void Core::BearBones::RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity)
 {
 	m_collisionDetector->RegisterEntityForCollision(entity);
+}
+
+void Core::BearBones::SetCollisionCallback(fc callback)
+{
+	m_collisionCallback = callback;
 }
 
 void Core::BearBones::StaticDrawCallback()
