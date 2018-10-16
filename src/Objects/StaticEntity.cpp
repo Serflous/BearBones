@@ -43,7 +43,11 @@ void Objects::StaticEntity::CreateBoundingBox()
 		if (vert.z > maxZ)
 			maxZ = vert.z;
 	}
-	m_boundingBox.SetMinBounds(glm::vec3(minX, minY, minZ));
-	m_boundingBox.SetMaxBounds(glm::vec3(maxX, maxY, maxZ));
+	btCollisionObject * collisionObject = new btCollisionObject();
+	collisionObject->setCollisionShape(new btBoxShape(btVector3(maxX - minX, maxY - minY, maxZ - minZ)));
+	glm::vec3 position = GetPosition();
+	collisionObject->getWorldTransform().setOrigin(btVector3(position.x, position.y, position.z));
+	//m_boundingBox.SetMinBounds(glm::vec3(minX, minY, minZ));
+	//m_boundingBox.SetMaxBounds(glm::vec3(maxX, maxY, maxZ));
 
 }

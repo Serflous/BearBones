@@ -59,3 +59,13 @@ glm::vec3 Objects::Entity::GetScale()
 {
 	return m_scale;
 }
+
+void Objects::Entity::SetCollisionObject(std::shared_ptr<btCollisionObject> object)
+{
+	m_collisionObject = object;
+}
+
+std::shared_ptr<btCollisionObject> Objects::Entity::GetCollisionObject()
+{
+	return m_collisionObject;
+}

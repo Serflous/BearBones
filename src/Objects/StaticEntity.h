@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Entity.h"
-#include "../Collision/AABB.h"
+#include <memory>
 
 namespace Objects
 {
@@ -24,7 +24,7 @@ namespace Objects
 		void CreateBoundingBox();
 
 	private:
-		Collision::AABB m_boundingBox;
+		//Collision::AABB m_boundingBox;
 	};
 
 }

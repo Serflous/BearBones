@@ -91,6 +91,8 @@ namespace Core
 			 */
 		void GetCamera(std::shared_ptr<Objects::Camera> & camera);
 
+		void RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity);
+
 		static void StaticDrawCallback();
 		static void StaticReshapeCallback(int x, int y);
 		static void StaticKeyboardCallback(unsigned char key, int x, int y);

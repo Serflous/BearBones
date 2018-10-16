@@ -2,6 +2,8 @@
 
 #include <GLM/vec3.hpp>
 
+#include <bullet/btBulletCollisionCommon.h>
+
 #include <memory>
 
 #include "ObjModel.h"
@@ -63,6 +65,10 @@ namespace Objects
 			 */
 		glm::vec3 GetScale();
 
+		void SetCollisionObject(std::shared_ptr<btCollisionObject> object);
+
+		std::shared_ptr<btCollisionObject> GetCollisionObject();
+
 			/**
 			 * Pure virtual function. Creates the bounding box. As each type of entity will have its own type of the bounding box.
 			 */
@@ -73,6 +79,8 @@ namespace Objects
 		glm::vec3 m_position;
 		glm::vec3 m_rotation;
 		glm::vec3 m_scale;
+
+		std::shared_ptr<btCollisionObject> m_collisionObject;
 	};
 
 }

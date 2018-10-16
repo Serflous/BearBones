@@ -1,8 +1,11 @@
 #pragma once
 
 #include <memory>
+#include <map>
 
 #include <bullet/btBulletCollisionCommon.h>
+
+#include "../Objects/Entity.h"
 
 namespace Collision
 {
@@ -17,11 +20,16 @@ namespace Collision
 	{
 	public:
 		CollisionDetector();
+
+		void RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity);
+		void TestForCollisions();
 	private:
 		std::unique_ptr<btCollisionConfiguration> m_collisionConfiguration;
 		std::unique_ptr<btCollisionWorld> m_collisionWorld;
 		std::unique_ptr<btCollisionDispatcher> m_collisionDispatcher;
 		std::unique_ptr<btBroadphaseInterface> m_collisionBroadphase;
+		
+		std::map<std::shared_ptr<btCollisionObject>, std::shared_ptr<Objects::Entity>> m_collisionObjectLookup;
 	};
 
 }
