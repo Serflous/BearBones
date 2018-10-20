@@ -29,12 +29,17 @@ Objects::RigidBody::RigidBody() : Entity()
 	m_position = glm::vec3(0, 0, 0);
 	m_force = glm::vec3(0, 0, 0);*/
 	m_velocity = glm::vec3(0, 0, 0);
-	/*m_acceleration = glm::vec3(0, 0, 0);*/
+	m_acceleration = glm::vec3(0, 0, 0);
 
 }
 void Objects::RigidBody::SetVelocity(glm::vec3 velocity)
 {
 	m_velocity = velocity;
+}
+
+void Objects::RigidBody::SetAcceleration(glm::vec3 acceleration)
+{
+	m_acceleration = acceleration;
 }
 
 
@@ -78,6 +83,10 @@ glm::vec3 Objects::RigidBody::getVelocity()
 	return m_velocity;
 }
 
+glm::vec3 Objects::RigidBody::GetAcceleration()
+{
+	return m_acceleration;
+}
 
 void Objects::RigidBody::CreateBoundingBox()
 {
@@ -116,6 +125,7 @@ void Objects::RigidBody::CreateBoundingBox()
 void Objects::RigidBody::Step(float dt)
 {
 	glm::vec3 position = GetPosition();
+	m_velocity += m_acceleration * dt;
 	position += m_velocity * dt;
 	SetPosition(position, true);
 }

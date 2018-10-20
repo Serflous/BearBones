@@ -19,7 +19,9 @@ namespace Objects
 		float getLift();*/
 
 		void SetVelocity(glm::vec3 velocity);
+		void SetAcceleration(glm::vec3 acceleration);
 		glm::vec3 getVelocity();
+		glm::vec3 GetAcceleration();
 
 		void CreateBoundingBox();
 		void Step(float dt);
@@ -64,10 +66,10 @@ namespace Objects
 		glm::vec3 m_force;
 		glm::vec3 m_LinearVelocity;
 		glm::vec3 m_AngularVelocity;
-		glm::vec3 m_acceleration;
 
 		glm::vec3 m_liftVector;*/
 
 		glm::vec3 m_velocity;
+		glm::vec3 m_acceleration;
 	};
 }
