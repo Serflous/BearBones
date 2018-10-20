@@ -11,21 +11,23 @@ namespace Objects
 		RigidBody(float mass, glm::vec3 position, float length, float width, float height);
 		RigidBody();
 		RigidBody(const RigidBody & other);
-		RigidBody(const Entity & other);
+		RigidBody(const Entity & other);/*
 		float getMass();
 		float* getLengthWidthHeight();
 		float getSpeed();
 		float getVolume();
-		float getLift();
+		float getLift();*/
 
+		void SetVelocity(glm::vec3 velocity);
 		glm::vec3 getVelocity();
 
 		void CreateBoundingBox();
+		void Step(float dt);
 
 		virtual ~RigidBody();
 
 		///Actual Physics Equations Used
-		const glm::vec3& velocity() const { return m_LinearVelocity; }
+		/*const glm::vec3& velocity() const { return m_LinearVelocity; }
 
 		void velocity(const glm::vec3& v) { m_LinearVelocity = v; }
 
@@ -35,7 +37,7 @@ namespace Objects
 
 		const glm::mat3x3& inertiaTensor() const { return m_inertiaTensor; }
 
-		const glm::mat3x3& inverseInertiaTensor() const { return m_inverseInertiaTensor; }
+		const glm::mat3x3& inverseInertiaTensor() const { return m_inverseInertiaTensor; }*/
 
 		//calculate the inertia tensor and its
 		//inverse from the current orientation
@@ -45,7 +47,7 @@ namespace Objects
 
 
 	private:
-		float m_mass;
+		/*float m_mass;
 		float m_massInv;
 		float m_volume;
 		float m_lift;
@@ -60,11 +62,12 @@ namespace Objects
 		glm::vec3 m_oldPosition;
 		glm::vec3 m_position;
 		glm::vec3 m_force;
-		glm::vec3 m_velocity;
 		glm::vec3 m_LinearVelocity;
 		glm::vec3 m_AngularVelocity;
 		glm::vec3 m_acceleration;
 
-		glm::vec3 m_liftVector;
+		glm::vec3 m_liftVector;*/
+
+		glm::vec3 m_velocity;
 	};
 }

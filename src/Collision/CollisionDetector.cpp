@@ -33,11 +33,11 @@ void Collision::CollisionDetector::TestForCollisions(fc callback)
 		int contactNo = manifold->getNumContacts();
 		if (contactNo > 0)
 		{
-			std::cout << "Contact no: " << contactNo << std::endl;
+			//std::cout << "Contact no: " << contactNo << std::endl;
 			for (int j = 0; j < contactNo; j++)
 			{
-				std::cout << "Vector " << j + 1 << " A: " << manifold->getContactPoint(j).getPositionWorldOnA().getX() << "," << manifold->getContactPoint(j).getPositionWorldOnA().getY() << "," << manifold->getContactPoint(j).getPositionWorldOnA().getZ() << std::endl;
-				std::cout << "Vector " << j + 1 << " B: " << manifold->getContactPoint(j).getPositionWorldOnB().getX() << "," << manifold->getContactPoint(j).getPositionWorldOnB().getY() << "," << manifold->getContactPoint(j).getPositionWorldOnB().getZ() << std::endl;
+				//std::cout << "Vector " << j + 1 << " A: " << manifold->getContactPoint(j).getPositionWorldOnA().getX() << "," << manifold->getContactPoint(j).getPositionWorldOnA().getY() << "," << manifold->getContactPoint(j).getPositionWorldOnA().getZ() << std::endl;
+				//std::cout << "Vector " << j + 1 << " B: " << manifold->getContactPoint(j).getPositionWorldOnB().getX() << "," << manifold->getContactPoint(j).getPositionWorldOnB().getY() << "," << manifold->getContactPoint(j).getPositionWorldOnB().getZ() << std::endl;
 			}
 			// Alert callback
 

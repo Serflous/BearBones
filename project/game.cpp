@@ -1,8 +1,7 @@
 #include <Core/BearBones.h>
 #include <Collision/CollisionDetector.h>
 
-std::shared_ptr<Objects::StaticEntity> entity1, entity2;
-std::shared_ptr<Objects::RigidBody> body1, body2;
+std::shared_ptr<Objects::RigidBody> body1, body2, body3, body4, body5;
 
 
 void CalculateFrameRate()
@@ -30,7 +29,7 @@ void updateCallback(int dx)
 	int currentMouseY = 0;
 	int winX = 0;
 	int winY = 0;
-	//CalculateFrameRate();
+	CalculateFrameRate();
 	// Get the managers.
 	Core::BearBones * bb = Core::BearBones::GetInstance();
 	Input::InputManager * im = Input::InputManager::GetInstance();
@@ -79,14 +78,12 @@ void updateCallback(int dx)
 	{
 		camera->Strafe(Objects::RIGHT, dx);
 	}
-	if (im->GetKeyState('l') == Input::KS_KEY_PRESSED || im->GetKeyState('l') == Input::KS_KEY_REPEAT)
+	if (im->GetKeyState('l') == Input::KS_KEY_PRESSED)// || im->GetKeyState('l') == Input::KS_KEY_REPEAT)
 	{
-		entity1->SetPosition(glm::vec3(entity1->GetPosition().x + 0.1f, entity1->GetPosition().y, entity1->GetPosition().z), true);
+		//body1->SetPosition(glm::vec3(body1->GetPosition().x + 0.1f, body1->GetPosition().y, body1->GetPosition().z), true);
+		body1->SetVelocity(glm::vec3(0.01f, 0, 0));
 	}
-	if (im->GetKeyState('j') == Input::KS_KEY_PRESSED || im->GetKeyState('j') == Input::KS_KEY_REPEAT)
-	{
-		entity1->SetPosition(glm::vec3(entity1->GetPosition().x - 0.1f, entity1->GetPosition().y, entity1->GetPosition().z), true);
-	}
+	body1->Step(dx);
 }
 
 int main(int argc, char ** argv)
@@ -115,26 +112,27 @@ int main(int argc, char ** argv)
 	world->AddStaticEntity(entity);*/
 	std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/rock.png");
 	std::shared_ptr<Objects::ObjModel> model = loader->LoadOBJModel("res/rock.obj", tex);
-	entity1 = loader->CreateStaticEntity(model, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	entity2 = loader->CreateStaticEntity(model, glm::vec3(20, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 
-	body1 = loader->CreateRigidBody(model, glm::vec3(30, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	body2 = loader->CreateRigidBody(model, glm::vec3(50, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-
-	bb->RegisterEntityForCollision(entity1);
-	bb->RegisterEntityForCollision(entity2);
+	body1 = loader->CreateRigidBody(model, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	body2 = loader->CreateRigidBody(model, glm::vec3(20, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	body3 = loader->CreateRigidBody(model, glm::vec3(40, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	body4 = loader->CreateRigidBody(model, glm::vec3(60, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	body5 = loader->CreateRigidBody(model, glm::vec3(80, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 
 	bb->RegisterEntityForCollision(body1);
 	bb->RegisterEntityForCollision(body2);
+	bb->RegisterEntityForCollision(body3);
+	bb->RegisterEntityForCollision(body4);
+	bb->RegisterEntityForCollision(body5);
 
 	world->AddTexture(tex);
 	world->AddObjModel(model);
 
-	world->AddStaticEntity(entity1);
-	world->AddStaticEntity(entity2);
-
 	world->AddRigidBody(body1);
 	world->AddRigidBody(body2);
+	world->AddRigidBody(body3);
+	world->AddRigidBody(body4);
+	world->AddRigidBody(body5);
 
 	// Set the update callback and begin the main loop
 	bb->SetUpdateCallback(updateCallback);

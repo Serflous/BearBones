@@ -3,7 +3,7 @@
 
 Objects::RigidBody::RigidBody(float mass, glm::vec3 position, float length, float width, float height)
 {
-	m_mass = mass;
+	/*m_mass = mass;
 	m_volume = 0;
 	m_lift = 0;
 	m_speed = 0;
@@ -14,24 +14,29 @@ Objects::RigidBody::RigidBody(float mass, glm::vec3 position, float length, floa
 
 	m_position = position;
 
-	m_force = glm::vec3(0, 0, 0);
+	m_force = glm::vec3(0, 0, 0);*/
 	m_velocity = glm::vec3(0, 0, 0);
-	m_acceleration = glm::vec3(0, 0, 0);
+	/*m_acceleration = glm::vec3(0, 0, 0);*/
 }
 
 Objects::RigidBody::RigidBody() : Entity()
-{
+{/*
 	m_mass = 1;
 	m_volume = 0;
 	m_lift = 0;
 	m_speed = 0;
 
 	m_position = glm::vec3(0, 0, 0);
-	m_force = glm::vec3(0, 0, 0);
+	m_force = glm::vec3(0, 0, 0);*/
 	m_velocity = glm::vec3(0, 0, 0);
-	m_acceleration = glm::vec3(0, 0, 0);
+	/*m_acceleration = glm::vec3(0, 0, 0);*/
 
 }
+void Objects::RigidBody::SetVelocity(glm::vec3 velocity)
+{
+	m_velocity = velocity;
+}
+
 
 Objects::RigidBody::RigidBody(const RigidBody & other) : Entity(other)
 {
@@ -43,30 +48,30 @@ Objects::RigidBody::RigidBody(const Entity & other) : Entity(other)
 
 }
 
-float Objects::RigidBody::getMass()
-{
-	return m_mass;
-}
-
-float * Objects::RigidBody::getLengthWidthHeight()
-{
-	return nullptr;
-}
-
-float Objects::RigidBody::getSpeed()
-{
-	return m_speed;
-}
-
-float Objects::RigidBody::getVolume()
-{
-	return m_volume;
-}
-
-float Objects::RigidBody::getLift()
-{
-	return m_lift;
-}
+//float Objects::RigidBody::getMass()
+//{
+//	return m_mass;
+//}
+//
+//float * Objects::RigidBody::getLengthWidthHeight()
+//{
+//	return nullptr;
+//}
+//
+//float Objects::RigidBody::getSpeed()
+//{
+//	return m_speed;
+//}
+//
+//float Objects::RigidBody::getVolume()
+//{
+//	return m_volume;
+//}
+//
+//float Objects::RigidBody::getLift()
+//{
+//	return m_lift;
+//}
 
 glm::vec3 Objects::RigidBody::getVelocity()
 {
@@ -106,6 +111,13 @@ void Objects::RigidBody::CreateBoundingBox()
 	//m_boundingBox.SetMinBounds(glm::vec3(minX, minY, minZ));
 	//m_boundingBox.SetMaxBounds(glm::vec3(maxX, maxY, maxZ));
 
+}
+
+void Objects::RigidBody::Step(float dt)
+{
+	glm::vec3 position = GetPosition();
+	position += m_velocity * dt;
+	SetPosition(position, true);
 }
 
 Objects::RigidBody::~RigidBody()
