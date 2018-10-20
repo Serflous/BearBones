@@ -98,7 +98,7 @@ void Objects::RigidBody::CreateBoundingBox()
 			maxZ = vert.z;
 	}
 	m_collisionObject = std::make_shared<btCollisionObject>();
-	m_collisionObject->setCollisionShape(new btBoxShape(btVector3(maxX - minX, maxY - minY, maxZ - minZ)));
+	m_collisionObject->setCollisionShape(new btBoxShape(btVector3((maxX - minX) * 0.5f, (maxY - minY) * 0.5f, (maxZ - minZ)) * 0.5f));
 	glm::vec3 position = GetPosition();
 	glm::vec3 rotationEular = GetRotation();
 	m_collisionObject->getWorldTransform().setOrigin(btVector3(position.x, position.y, position.z));

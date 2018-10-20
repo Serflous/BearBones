@@ -25,14 +25,22 @@ void Objects::Entity::SetModel(std::shared_ptr<Objects::ObjModel> model)
 	m_model = model;
 }
 
-void Objects::Entity::SetPosition(glm::vec3 position)
+void Objects::Entity::SetPosition(glm::vec3 position, bool updateBB)
 {
 	m_position = position;
+	if (updateBB)
+	{
+		m_collisionObject->getWorldTransform().setOrigin(btVector3(position.x, position.y, position.z));
+	}
 }
 
-void Objects::Entity::SetRotation(glm::vec3 rotation)
+void Objects::Entity::SetRotation(glm::vec3 rotation, bool updateBB)
 {
 	m_rotation = rotation;
+	if (updateBB)
+	{
+		m_collisionObject->getWorldTransform().setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
+	}
 }
 
 void Objects::Entity::SetScale(glm::vec3 scale)

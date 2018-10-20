@@ -32,12 +32,12 @@ namespace Objects
 			 * Sets the position of the entity.
 			 * @param[in] position The position of the entity
 			 */
-		void SetPosition(glm::vec3 position);
+		void SetPosition(glm::vec3 position, bool updateBB = false);
 			/**
 			 * Sets the rotation of the entity.
 			 * @param[in] rotation The rotation of the entity.
 			 */
-		void SetRotation(glm::vec3 rotation);
+		void SetRotation(glm::vec3 rotation, bool updateBB = false);
 			/**
 			 * Sets the scale of the entity.
 			 * @param[in] scale The scale of the entity.

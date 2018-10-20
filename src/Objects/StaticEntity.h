@@ -28,8 +28,6 @@ namespace Objects
 			 * Creates a bounding box for the StaticEntity. Static entities use AABB.
 			 */
 		void CreateBoundingBox();
-		void SetPosition(glm::vec3 position, bool updateBB = false);
-		void SetRotation(glm::vec3 rortation, bool updateBB = false);
 
 	private:
 	};

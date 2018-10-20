@@ -57,22 +57,3 @@ void Objects::StaticEntity::CreateBoundingBox()
 	m_collisionObject->getWorldTransform().setOrigin(btVector3(position.x, position.y, position.z));
 	m_collisionObject->getWorldTransform().setRotation(btQuaternion(rotationEular.x, rotationEular.y, rotationEular.z));
 }
-
-
-void Objects::StaticEntity::SetPosition(glm::vec3 position, bool updateBB)
-{
-	Objects::Entity::SetPosition(position);
-	if (updateBB)
-	{
-		m_collisionObject->getWorldTransform().setOrigin(btVector3(position.x, position.y, position.z));
-	}
-}
-
-void Objects::StaticEntity::SetRotation(glm::vec3 rotation, bool updateBB)
-{
-	Objects::Entity::SetRotation(rotation);
-	if (updateBB)
-	{
-		m_collisionObject->getWorldTransform().setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
-	}
-}

@@ -21,8 +21,7 @@ void CalculateFrameRate()
 
 void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2)
 {
-	std::shared_ptr<Objects::StaticEntity> entity2Static = std::dynamic_pointer_cast<Objects::StaticEntity>(entity2);
-	entity2Static->SetPosition(glm::vec3(entity2Static->GetPosition().x + 0.1f, entity2Static->GetPosition().y, entity2Static->GetPosition().z), true);
+	entity2->SetPosition(glm::vec3(entity2->GetPosition().x + 0.1f, entity2->GetPosition().y, entity2->GetPosition().z), true);
 }
 
 void updateCallback(int dx)
