@@ -1,5 +1,5 @@
 #pragma once
-#include "Objects/PhysicsEntity.h"
+#include "Objects/RigidBody.h"
 #include <vector>
 
 class PhysicsEngine
@@ -8,9 +8,9 @@ public:
 	PhysicsEngine();
 	~PhysicsEngine();
 
-	void AddObject(const Objects::PhysicsEntity& object);
+	void AddObject(const Objects::RigidBody& object);
 	void Simulate(float delta);
 private:
-	std::vector< Objects::PhysicsEntity> m_pObjects;
+	std::vector< Objects::RigidBody> m_pObjects;
 };
 
