@@ -20,8 +20,11 @@ namespace Objects
 
 		void SetVelocity(glm::vec3 velocity);
 		void SetAcceleration(glm::vec3 acceleration);
+		void SetTorque(glm::vec3 torque);
 		glm::vec3 getVelocity();
 		glm::vec3 GetAcceleration();
+
+		glm::vec3 GetTorque();
 
 		void CreateBoundingBox();
 		void Step(float dt);
@@ -71,5 +74,6 @@ namespace Objects
 
 		glm::vec3 m_velocity;
 		glm::vec3 m_acceleration;
+		glm::vec3 m_torque;
 	};
 }

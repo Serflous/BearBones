@@ -82,7 +82,8 @@ void updateCallback(int dx)
 	{
 		//body1->SetPosition(glm::vec3(body1->GetPosition().x + 0.1f, body1->GetPosition().y, body1->GetPosition().z), true);
 		//body1->SetVelocity(glm::vec3(0.01f, 0, 0));
-		body1->SetAcceleration(glm::vec3(0.00001f, 0, 0));
+		//body1->SetAcceleration(glm::vec3(0.00001f, 0, 0));
+		body1->SetTorque(glm::vec3(0.1f, 0, 0));
 	}
 	body1->Step(dx);
 }

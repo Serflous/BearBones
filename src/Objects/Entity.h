@@ -83,6 +83,7 @@ namespace Objects
 		glm::vec3 m_rotation;
 		glm::vec3 m_scale;
 
+
 	};
 
 }
