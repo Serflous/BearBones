@@ -2,22 +2,25 @@
 
 
 
-PhysicsEngine::PhysicsEngine()
+Physics::PhysicsEngine::PhysicsEngine()
 {
 }
 
 
-PhysicsEngine::~PhysicsEngine()
+Physics::PhysicsEngine::~PhysicsEngine()
 {
 }
 
-void PhysicsEngine::AddObject(const Objects::RigidBody& object)
+void Physics::PhysicsEngine::RegisterRidigBodyForPhysics(std::shared_ptr<Objects::RigidBody> object)
 {
 	m_pObjects.push_back(object);
 }
 
-void PhysicsEngine::Simulate(float delta)
+void Physics::PhysicsEngine::Simulate(float delta)
 {
-	for (unsigned int i = 0; i < m_pObjects.size(); i++) {
+	std::vector<std::shared_ptr<Objects::RigidBody>>::iterator iter;
+	for (iter = m_pObjects.begin(); iter != m_pObjects.end(); iter++)
+	{
+		(*iter)->Step(delta);
 	}
 }

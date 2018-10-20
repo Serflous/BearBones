@@ -96,6 +96,7 @@ namespace Core
 		void GetCamera(std::shared_ptr<Objects::Camera> & camera);
 
 		void RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity);
+		void RegisterRigidBodyForPhysics(std::shared_ptr<Objects::RigidBody> rb);
 		void SetCollisionCallback(fc callback);
 
 		static void StaticDrawCallback();
@@ -129,6 +130,7 @@ namespace Core
 		std::shared_ptr<Objects::World> m_world;
 		std::shared_ptr<Objects::Camera> m_camera;
 		std::unique_ptr<Collision::CollisionDetector> m_collisionDetector;
+		std::unique_ptr<Physics::PhysicsEngine> m_physicsEngine;
 	};
 
 

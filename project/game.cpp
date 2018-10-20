@@ -85,7 +85,7 @@ void updateCallback(int dx)
 		//body1->SetAcceleration(glm::vec3(0.00001f, 0, 0));
 		body1->SetTorque(glm::vec3(0.1f, 0, 0));
 	}
-	body1->Step(dx);
+	//body1->Step(dx);
 }
 
 int main(int argc, char ** argv)
@@ -126,6 +126,12 @@ int main(int argc, char ** argv)
 	bb->RegisterEntityForCollision(body3);
 	bb->RegisterEntityForCollision(body4);
 	bb->RegisterEntityForCollision(body5);
+
+	bb->RegisterRigidBodyForPhysics(body1);
+	bb->RegisterRigidBodyForPhysics(body2);
+	bb->RegisterRigidBodyForPhysics(body3);
+	bb->RegisterRigidBodyForPhysics(body4);
+	bb->RegisterRigidBodyForPhysics(body5);
 
 	world->AddTexture(tex);
 	world->AddObjModel(model);

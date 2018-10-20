@@ -76,6 +76,7 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 	m_world = std::make_shared<Objects::World>();
 	m_camera = std::make_shared<Objects::Camera>();
 	m_collisionDetector = std::make_unique<Collision::CollisionDetector>();
+	m_physicsEngine = std::make_unique<Physics::PhysicsEngine>();
 	return 0;
 
 }
@@ -104,12 +105,14 @@ void Core::BearBones::Update(int dx)
 {
 	int currentTime = glutGet(GLUT_ELAPSED_TIME);
 	int deltaTime = currentTime - dx;
-	glutTimerFunc(16, StaticUpdateCallback, currentTime);
 
 	m_collisionDetector->TestForCollisions(m_collisionCallback);
+	m_physicsEngine->Simulate(deltaTime);
 
 	m_updateCallback(deltaTime);
 	glutWarpPointer(m_winX / 2, m_winY / 2);
+
+	glutTimerFunc(16, StaticUpdateCallback, currentTime);
 }
 
 void Core::BearBones::GetWindowSize(int & x, int & y)
@@ -146,6 +149,11 @@ void Core::BearBones::GetCamera(std::shared_ptr<Objects::Camera> & camera)
 void Core::BearBones::RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity)
 {
 	m_collisionDetector->RegisterEntityForCollision(entity);
+}
+
+void Core::BearBones::RegisterRigidBodyForPhysics(std::shared_ptr<Objects::RigidBody> rb)
+{
+	m_physicsEngine->RegisterRidigBodyForPhysics(rb);
 }
 
 void Core::BearBones::SetCollisionCallback(fc callback)
