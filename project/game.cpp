@@ -1,4 +1,7 @@
 #include <Core/BearBones.h>
+#include <Collision/CollisionDetector.h>
+
+std::shared_ptr<Objects::StaticEntity> entity1, entity2;
 
 void CalculateFrameRate()
 {
@@ -14,13 +17,19 @@ void CalculateFrameRate()
 	}
 }
 
+void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2)
+{
+	std::shared_ptr<Objects::StaticEntity> entity2Static = std::dynamic_pointer_cast<Objects::StaticEntity>(entity2);
+	entity2Static->SetPosition(glm::vec3(entity2Static->GetPosition().x + 0.1f, entity2Static->GetPosition().y, entity2Static->GetPosition().z), true);
+}
+
 void updateCallback(int dx)
 {
 	int currentMouseX = 0;
 	int currentMouseY = 0;
 	int winX = 0;
 	int winY = 0;
-	CalculateFrameRate();
+	//CalculateFrameRate();
 	// Get the managers.
 	Core::BearBones * bb = Core::BearBones::GetInstance();
 	Input::InputManager * im = Input::InputManager::GetInstance();
@@ -69,6 +78,14 @@ void updateCallback(int dx)
 	{
 		camera->Strafe(Objects::RIGHT, dx);
 	}
+	if (im->GetKeyState('l') == Input::KS_KEY_PRESSED || im->GetKeyState('l') == Input::KS_KEY_REPEAT)
+	{
+		entity1->SetPosition(glm::vec3(entity1->GetPosition().x + 0.1f, entity1->GetPosition().y, entity1->GetPosition().z), true);
+	}
+	if (im->GetKeyState('j') == Input::KS_KEY_PRESSED || im->GetKeyState('j') == Input::KS_KEY_REPEAT)
+	{
+		entity1->SetPosition(glm::vec3(entity1->GetPosition().x - 0.1f, entity1->GetPosition().y, entity1->GetPosition().z), true);
+	}
 }
 
 int main(int argc, char ** argv)
@@ -85,17 +102,32 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::Camera> camera;
 	bb->GetCamera(camera);
 	// Set the camera position
-	camera->SetPosition(-132.0f, 0.0f, 167.0f);
+	//camera->SetPosition(-132.0f, 0.0f, 167.0f);
+	camera->SetPosition(0.0f, 0.0f, 0.0f);
 
 	// Add resources here
-	std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/ECL_Texture.png");
+	/*std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/ECL_Texture.png");
 	std::shared_ptr<Objects::ObjModel> model = loader->LoadOBJModel("res/ECL_baked.obj", tex);
 	std::shared_ptr<Objects::StaticEntity> entity = loader->CreateStaticEntity(model, glm::vec3(0, -25, 0), glm::vec3(270, 0, 0), glm::vec3(10, 10, 10));
 	world->AddTexture(tex);
 	world->AddObjModel(model);
-	world->AddStaticEntity(entity);
+	world->AddStaticEntity(entity);*/
+	std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/rock.png");
+	std::shared_ptr<Objects::ObjModel> model = loader->LoadOBJModel("res/rock.obj", tex);
+	entity1 = loader->CreateStaticEntity(model, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	entity2 = loader->CreateStaticEntity(model, glm::vec3(20, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+
+	bb->RegisterEntityForCollision(entity1);
+	bb->RegisterEntityForCollision(entity2);
+
+	world->AddTexture(tex);
+	world->AddObjModel(model);
+	world->AddStaticEntity(entity1);
+	world->AddStaticEntity(entity2);
+
 	// Set the update callback and begin the main loop
 	bb->SetUpdateCallback(updateCallback);
+	bb->SetCollisionCallback(collisionCallback);
 	bb->BeginMainGameLoop();
 
 }

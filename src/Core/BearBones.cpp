@@ -29,6 +29,8 @@ Core::BearBones::BearBones(const BearBones & other)
 int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int winY)
 {
 	glutInit(argc, argv);
+	glutInitContextVersion(3, 1);
+	glutInitContextProfile(GLUT_CORE_PROFILE);
 	glutSetOption(GLUT_MULTISAMPLE, 16);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
 	m_winX = winX;
@@ -73,6 +75,7 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 
 	m_world = std::make_shared<Objects::World>();
 	m_camera = std::make_shared<Objects::Camera>();
+	m_collisionDetector = std::make_unique<Collision::CollisionDetector>();
 	return 0;
 
 }
@@ -102,6 +105,8 @@ void Core::BearBones::Update(int dx)
 	int currentTime = glutGet(GLUT_ELAPSED_TIME);
 	int deltaTime = currentTime - dx;
 	glutTimerFunc(16, StaticUpdateCallback, currentTime);
+
+	m_collisionDetector->TestForCollisions(m_collisionCallback);
 
 	m_updateCallback(deltaTime);
 	glutWarpPointer(m_winX / 2, m_winY / 2);
@@ -136,6 +141,16 @@ void Core::BearBones::GetWorld(std::shared_ptr<Objects::World> & world)
 void Core::BearBones::GetCamera(std::shared_ptr<Objects::Camera> & camera)
 {
 	camera = m_camera;
+}
+
+void Core::BearBones::RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity)
+{
+	m_collisionDetector->RegisterEntityForCollision(entity);
+}
+
+void Core::BearBones::SetCollisionCallback(fc callback)
+{
+	m_collisionCallback = callback;
 }
 
 void Core::BearBones::StaticDrawCallback()

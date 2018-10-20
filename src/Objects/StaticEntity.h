@@ -4,7 +4,10 @@
 #include <GLM/vec4.hpp>
 
 #include "Entity.h"
-#include "../Collision/AABB.h"
+#include <memory>
+#include <iostream>
+
+#include <GLM/gtc/quaternion.hpp>
 
 namespace Objects
 {
@@ -25,10 +28,10 @@ namespace Objects
 			 * Creates a bounding box for the StaticEntity. Static entities use AABB.
 			 */
 		void CreateBoundingBox();
-		Collision::AABB GetBoundingBox();
+		void SetPosition(glm::vec3 position, bool updateBB = false);
+		void SetRotation(glm::vec3 rortation, bool updateBB = false);
 
 	private:
-		Collision::AABB m_boundingBox;
 	};
 
 }
