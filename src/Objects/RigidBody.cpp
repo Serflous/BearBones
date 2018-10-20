@@ -43,6 +43,11 @@ void Objects::RigidBody::SetAcceleration(glm::vec3 acceleration)
 	m_acceleration = acceleration;
 }
 
+void Objects::RigidBody::SetRotationalVelocity(glm::vec3 rotationalVelocity)
+{
+	m_rotationalVelocity = rotationalVelocity;
+}
+
 void Objects::RigidBody::SetTorque(glm::vec3 torque)
 {
 	m_torque = torque;
@@ -94,6 +99,11 @@ glm::vec3 Objects::RigidBody::GetAcceleration()
 	return m_acceleration;
 }
 
+glm::vec3 Objects::RigidBody::GetRotationalVelocity()
+{
+	return m_rotationalVelocity;
+}
+
 glm::vec3 Objects::RigidBody::GetTorque()
 {
 	return m_torque;
@@ -138,8 +148,9 @@ void Objects::RigidBody::Step(float dt)
 	glm::vec3 position = GetPosition();
 	glm::vec3 rotation = GetRotation();
 	m_velocity += m_acceleration * dt;
+	m_rotationalVelocity += m_torque * dt;
 	position += m_velocity * dt;
-	rotation += m_torque * dt;
+	rotation += m_rotationalVelocity * dt;
 	SetRotation(rotation, true);
 	SetPosition(position, true);
 
