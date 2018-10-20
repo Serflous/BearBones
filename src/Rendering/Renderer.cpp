@@ -53,8 +53,12 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 	m_boundingBoxShader->Start();
 	std::dynamic_pointer_cast<Shaders::BoundingBoxShader>(m_boundingBoxShader)->LoadViewMatrix(Util::MathUtil::GetViewMatrix(camera->GetPosition().x, camera->GetPosition().y, camera->GetPosition().z, camera->GetPitch(), camera->GetYaw(), camera->GetRoll()));
 	m_boundingBoxShader->Stop();
+
 	std::shared_ptr<std::vector<std::shared_ptr<Objects::StaticEntity>>> staticEntities = world->GetStaticEntities();
+	std::shared_ptr<std::vector<std::shared_ptr<Objects::RigidBody>>> rigidBodies = world->GetRigidBodies();
+	
 	std::vector<std::shared_ptr<Objects::StaticEntity>>::iterator staticEntityIter;
+	std::vector<std::shared_ptr<Objects::RigidBody>>::iterator rigidBodiesIter;
 	for (staticEntityIter = staticEntities->begin(); staticEntityIter != staticEntities->end(); staticEntityIter++)
 	{
 		m_staticShader->Start();
@@ -62,6 +66,15 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 		RenderOBJModel((*staticEntityIter)->GetModel());
 		m_staticShader->Stop();
 	}
+
+	for (rigidBodiesIter = rigidBodies->begin(); rigidBodiesIter != rigidBodies->end(); rigidBodiesIter++)
+	{
+		m_staticShader->Start();
+		std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*rigidBodiesIter)->GetPosition(), (*rigidBodiesIter)->GetRotation(), (*rigidBodiesIter)->GetScale()));
+		RenderOBJModel((*rigidBodiesIter)->GetModel());
+		m_staticShader->Stop();
+	}
+
 	for (staticEntityIter = staticEntities->begin(); staticEntityIter != staticEntities->end(); staticEntityIter++)
 	{
 		/*Collision::AABB bb = (*staticEntityIter)->GetBoundingBox();
