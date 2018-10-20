@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <map>
+#include <iostream>
 
 #include <bullet/btBulletCollisionCommon.h>
 
@@ -32,7 +33,9 @@ namespace Collision
 		std::unique_ptr<btCollisionDispatcher> m_collisionDispatcher;
 		std::unique_ptr<btBroadphaseInterface> m_collisionBroadphase;
 		
-		std::map<std::shared_ptr<btCollisionObject>, std::shared_ptr<Objects::Entity>> m_collisionObjectLookup;
+		std::map<const btCollisionObject*, std::shared_ptr<Objects::Entity>> m_collisionObjectLookup;
+
+		const int WORLD_SIZE = 1000;
 	};
 
 }

@@ -2,16 +2,20 @@
 
 Collision::CollisionDetector::CollisionDetector()
 {
+	btVector3 boxMin(-WORLD_SIZE, -WORLD_SIZE, -WORLD_SIZE);
+	btVector3 boxMax(WORLD_SIZE, WORLD_SIZE, WORLD_SIZE);
+
 	m_collisionConfiguration = std::make_unique<btDefaultCollisionConfiguration>();
 	m_collisionDispatcher = std::make_unique<btCollisionDispatcher>(m_collisionConfiguration.get());
-	m_collisionBroadphase = std::make_unique<btDbvtBroadphase>();
+	m_collisionBroadphase = std::make_unique<bt32BitAxisSweep3>(boxMin, boxMax, 1000, nullptr, true);
 	m_collisionWorld = std::make_unique<btCollisionWorld>(m_collisionDispatcher.get(), m_collisionBroadphase.get(), m_collisionConfiguration.get());
+	m_collisionWorld->setForceUpdateAllAabbs(true);
 }
 
 void Collision::CollisionDetector::RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity)
 {
 	m_collisionWorld->addCollisionObject(entity->GetCollisionObject().get());
-	m_collisionObjectLookup[entity->GetCollisionObject()] = entity;
+	m_collisionObjectLookup[entity->GetCollisionObject().get()] = entity;
 }
 
 void Collision::CollisionDetector::TestForCollisions(fc callback)
@@ -22,13 +26,17 @@ void Collision::CollisionDetector::TestForCollisions(fc callback)
 	{
 		// Get collisions Objects
 		btPersistentManifold * manifold = m_collisionWorld->getDispatcher()->getManifoldByIndexInternal(i);
-		std::shared_ptr<btCollisionObject> object1 = std::make_shared<btCollisionObject>(*(manifold->getBody0()));
-		std::shared_ptr<btCollisionObject> object2 = std::make_shared<btCollisionObject>(*(manifold->getBody1()));
-		std::shared_ptr<Objects::Entity> entity1 = m_collisionObjectLookup[object1];
-		std::shared_ptr<Objects::Entity> entity2 = m_collisionObjectLookup[object2];
+		std::shared_ptr<Objects::Entity> entity1 = m_collisionObjectLookup[manifold->getBody0()];
+		std::shared_ptr<Objects::Entity> entity2 = m_collisionObjectLookup[manifold->getBody1()];
 		// Get contact points
-		// Alert callback
+		manifold->refreshContactPoints(manifold->getBody0()->getWorldTransform(), manifold->getBody1()->getWorldTransform());
+		int contactNo = manifold->getNumContacts();
+		if (contactNo > 0)
+		{
+			std::cout << "Contact no: " << contactNo << std::endl;
+			// Alert callback
 
-		callback(entity1, entity2);
+			callback(entity1, entity2);
+		}
 	}
 }

@@ -43,13 +43,28 @@ void Objects::StaticEntity::CreateBoundingBox()
 		if (vert.z > maxZ)
 			maxZ = vert.z;
 	}
-	btCollisionObject * collisionObject = new btCollisionObject();
-	collisionObject->setCollisionShape(new btBoxShape(btVector3(maxX - minX, maxY - minY, maxZ - minZ)));
+	m_collisionObject = std::make_shared<btCollisionObject>();
+	m_collisionObject->setCollisionShape(new btBoxShape(btVector3(maxX - minX, maxY - minY, maxZ - minZ)));
 	glm::vec3 position = GetPosition();
 	glm::vec3 rotationEular = GetRotation();
-	collisionObject->getWorldTransform().setOrigin(btVector3(position.x, position.y, position.z));
-	collisionObject->getWorldTransform().setRotation(btQuaternion(rotationEular.x, rotationEular.y, rotationEular.z));
-	//m_boundingBox.SetMinBounds(glm::vec3(minX, minY, minZ));
-	//m_boundingBox.SetMaxBounds(glm::vec3(maxX, maxY, maxZ));
+	m_collisionObject->getWorldTransform().setOrigin(btVector3(position.x, position.y, position.z));
+	m_collisionObject->getWorldTransform().setRotation(btQuaternion(rotationEular.x, rotationEular.y, rotationEular.z));
+}
 
+void Objects::StaticEntity::SetPosition(glm::vec3 position, bool updateBB)
+{
+	Objects::Entity::SetPosition(position);
+	if (updateBB)
+	{
+		m_collisionObject->getWorldTransform().setOrigin(btVector3(position.x, position.y, position.z));
+	}
+}
+
+void Objects::StaticEntity::SetRotation(glm::vec3 rotation, bool updateBB)
+{
+	Objects::Entity::SetRotation(rotation);
+	if (updateBB)
+	{
+		m_collisionObject->getWorldTransform().setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
+	}
 }

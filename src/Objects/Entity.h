@@ -74,13 +74,15 @@ namespace Objects
 			 */
 		virtual void CreateBoundingBox() = 0;
 
+	protected:
+		std::shared_ptr<btCollisionObject> m_collisionObject;
+
 	private:
 		std::shared_ptr<Objects::ObjModel> m_model;
 		glm::vec3 m_position;
 		glm::vec3 m_rotation;
 		glm::vec3 m_scale;
 
-		std::shared_ptr<btCollisionObject> m_collisionObject;
 	};
 
 }
