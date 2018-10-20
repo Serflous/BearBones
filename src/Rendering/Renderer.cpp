@@ -64,12 +64,12 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 	}
 	for (staticEntityIter = staticEntities->begin(); staticEntityIter != staticEntities->end(); staticEntityIter++)
 	{
-		Collision::AABB bb = (*staticEntityIter)->GetBoundingBox();
+		/*Collision::AABB bb = (*staticEntityIter)->GetBoundingBox();
 		glm::vec3 scale = bb.GetMaxBounds() - bb.GetMinBounds();
 		m_boundingBoxShader->Start();
 		std::dynamic_pointer_cast<Shaders::BoundingBoxShader>(m_boundingBoxShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*staticEntityIter)->GetPosition(), (*staticEntityIter)->GetRotation(), scale));
 		RenderEntityAABB();
-		m_boundingBoxShader->Stop();
+		m_boundingBoxShader->Stop();*/
 	}
 
 }
