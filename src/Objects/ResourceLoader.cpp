@@ -94,6 +94,17 @@ std::shared_ptr<Objects::StaticEntity> Objects::ResourceLoader::CreateStaticEnti
 	return entity;
 }
 
+std::shared_ptr<Objects::RigidBody> Objects::ResourceLoader::CreateRigidBody(std::shared_ptr<Objects::ObjModel> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+{
+	std::shared_ptr<Objects::RigidBody> entity = std::make_shared<Objects::RigidBody>();
+	entity->SetModel(model);
+	entity->SetPosition(position);
+	entity->SetRotation(rotation);
+	entity->SetScale(scale);
+	entity->CreateBoundingBox();
+	return entity;
+}
+
 GLuint Objects::ResourceLoader::LoadPrimitive(std::vector<glm::vec3> positions, std::vector<int> indicies)
 {
 	return LoadToVAO(positions, indicies);

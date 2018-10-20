@@ -2,6 +2,8 @@
 #include <Collision/CollisionDetector.h>
 
 std::shared_ptr<Objects::StaticEntity> entity1, entity2;
+std::shared_ptr<Objects::RigidBody> body1, body2;
+
 
 void CalculateFrameRate()
 {
@@ -117,13 +119,23 @@ int main(int argc, char ** argv)
 	entity1 = loader->CreateStaticEntity(model, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	entity2 = loader->CreateStaticEntity(model, glm::vec3(20, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 
+	body1 = loader->CreateRigidBody(model, glm::vec3(30, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	body2 = loader->CreateRigidBody(model, glm::vec3(50, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+
 	bb->RegisterEntityForCollision(entity1);
 	bb->RegisterEntityForCollision(entity2);
 
+	bb->RegisterEntityForCollision(body1);
+	bb->RegisterEntityForCollision(body2);
+
 	world->AddTexture(tex);
 	world->AddObjModel(model);
+
 	world->AddStaticEntity(entity1);
 	world->AddStaticEntity(entity2);
+
+	world->AddRigidBody(body1);
+	world->AddRigidBody(body2);
 
 	// Set the update callback and begin the main loop
 	bb->SetUpdateCallback(updateCallback);

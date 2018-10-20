@@ -17,6 +17,7 @@
 #include "ObjModel.h"
 #include "Entity.h"
 #include "StaticEntity.h"
+#include "RigidBody.h"
 
 namespace Objects
 {
@@ -58,6 +59,8 @@ namespace Objects
 			 * @return A pointer to the newly created entity.
 			 */
 		std::shared_ptr<StaticEntity> CreateStaticEntity(std::shared_ptr<ObjModel> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+
+		std::shared_ptr<Objects::RigidBody> CreateRigidBody(std::shared_ptr<Objects::ObjModel> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
 		GLuint LoadPrimitive(std::vector<glm::vec3> positions, std::vector<int> indicies);
 

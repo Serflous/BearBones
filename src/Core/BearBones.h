@@ -13,6 +13,7 @@
 #include "../Objects/Camera.h"
 #include "../Util/Types.h"
 #include "../Collision/CollisionDetector.h"
+#include "../Physics/PhysicsEngine.h"
 
 namespace Core
 {

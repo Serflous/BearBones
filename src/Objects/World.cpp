@@ -34,6 +34,11 @@ void Objects::World::AddStaticEntity(std::shared_ptr<Objects::StaticEntity> enti
 	m_staticEntities->push_back(entity);
 }
 
+void Objects::World::AddRigidBody(std::shared_ptr<Objects::RigidBody> entity)
+{
+	m_rigidBodies->push_back(entity);
+}
+
 std::shared_ptr<std::vector<std::shared_ptr<Objects::Texture>>> Objects::World::GetTextures()
 {
 	return m_textures;
@@ -47,4 +52,9 @@ std::shared_ptr<std::vector<std::shared_ptr<Objects::ObjModel>>> Objects::World:
 std::shared_ptr<std::vector<std::shared_ptr<Objects::StaticEntity>>> Objects::World::GetStaticEntities()
 {
 	return m_staticEntities;
+}
+
+std::shared_ptr<std::vector<std::shared_ptr<Objects::RigidBody>>> Objects::World::GetRigidBodies()
+{
+	return m_rigidBodies;
 }

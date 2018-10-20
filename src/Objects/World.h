@@ -7,6 +7,7 @@
 #include "ObjModel.h"
 #include "Entity.h"
 #include "StaticEntity.h"
+#include "RigidBody.h"
 
 namespace Objects
 {
@@ -42,6 +43,8 @@ namespace Objects
 			 */
 		void AddStaticEntity(std::shared_ptr<StaticEntity> entity);
 
+		void AddRigidBody(std::shared_ptr<Objects::RigidBody> entity);
+
 			/**
 			 * Gets the textures currently loaded.
 			 * @return A vector of pointers to textures currently in the world
@@ -58,10 +61,13 @@ namespace Objects
 			 */
 		std::shared_ptr<std::vector<std::shared_ptr<StaticEntity>>> GetStaticEntities();
 
+		std::shared_ptr<std::vector<std::shared_ptr<RigidBody>>> GetRigidBodies();
+
 	private:
 		std::shared_ptr<std::vector<std::shared_ptr<Texture>>> m_textures;
 		std::shared_ptr<std::vector<std::shared_ptr<ObjModel>>> m_models;
 		std::shared_ptr<std::vector<std::shared_ptr<StaticEntity>>> m_staticEntities;
+		std::shared_ptr<std::vector<std::shared_ptr<RigidBody>>> m_rigidBodies;
 	};
 
 }
