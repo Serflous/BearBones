@@ -5,6 +5,7 @@ Objects::World::World()
 	m_textures = std::make_shared<std::vector<std::shared_ptr<Texture>>>();
 	m_models = std::make_shared<std::vector<std::shared_ptr<ObjModel>>>();
 	m_staticEntities = std::make_shared<std::vector<std::shared_ptr<StaticEntity>>>();
+	m_rigidBodies = std::make_shared<std::vector<std::shared_ptr<Objects::RigidBody>>>();
 }
 
 Objects::World::World(const World & other)

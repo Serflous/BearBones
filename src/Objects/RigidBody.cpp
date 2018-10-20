@@ -73,10 +73,6 @@ glm::vec3 Objects::RigidBody::getVelocity()
 	return m_velocity;
 }
 
-btCollisionObject* Objects::RigidBody::getCollisionObject()
-{
-	return m_collisionBox;
-}
 
 void Objects::RigidBody::CreateBoundingBox()
 {
@@ -101,12 +97,12 @@ void Objects::RigidBody::CreateBoundingBox()
 		if (vert.z > maxZ)
 			maxZ = vert.z;
 	}
-	m_collisionBox = new btCollisionObject();
-	m_collisionBox->setCollisionShape(new btBoxShape(btVector3(maxX - minX, maxY - minY, maxZ - minZ)));
+	m_collisionObject = std::make_shared<btCollisionObject>();
+	m_collisionObject->setCollisionShape(new btBoxShape(btVector3(maxX - minX, maxY - minY, maxZ - minZ)));
 	glm::vec3 position = GetPosition();
 	glm::vec3 rotationEular = GetRotation();
-	m_collisionBox->getWorldTransform().setOrigin(btVector3(position.x, position.y, position.z));
-	m_collisionBox->getWorldTransform().setRotation(btQuaternion(rotationEular.x, rotationEular.y, rotationEular.z));
+	m_collisionObject->getWorldTransform().setOrigin(btVector3(position.x, position.y, position.z));
+	m_collisionObject->getWorldTransform().setRotation(btQuaternion(rotationEular.x, rotationEular.y, rotationEular.z));
 	//m_boundingBox.SetMinBounds(glm::vec3(minX, minY, minZ));
 	//m_boundingBox.SetMaxBounds(glm::vec3(maxX, maxY, maxZ));
 

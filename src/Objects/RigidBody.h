@@ -20,8 +20,6 @@ namespace Objects
 
 		glm::vec3 getVelocity();
 
-		btCollisionObject* getCollisionObject();
-
 		void CreateBoundingBox();
 
 		virtual ~RigidBody();
@@ -59,8 +57,6 @@ namespace Objects
 		float m_angularRotation;
 
 		float lwh[3] = { 1, 1, 1 };
-
-		btCollisionObject * m_collisionBox;
 		glm::vec3 m_oldPosition;
 		glm::vec3 m_position;
 		glm::vec3 m_force;
