@@ -31,6 +31,7 @@ set_target_properties(BearBones
 )
 
 add_compile_definitions(NDEBUG)
+add_compile_definitions(_ENABLE_EXTENDED_ALIGNED_STORAGE)
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Game)
 

@@ -29,6 +29,8 @@ Core::BearBones::BearBones(const BearBones & other)
 int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int winY)
 {
 	glutInit(argc, argv);
+	glutInitContextVersion(3, 1);
+	glutInitContextProfile(GLUT_CORE_PROFILE);
 	glutSetOption(GLUT_MULTISAMPLE, 16);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
 	m_winX = winX;

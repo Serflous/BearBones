@@ -29,7 +29,7 @@ void updateCallback(int dx)
 	int currentMouseY = 0;
 	int winX = 0;
 	int winY = 0;
-	CalculateFrameRate();
+	//CalculateFrameRate();
 	// Get the managers.
 	Core::BearBones * bb = Core::BearBones::GetInstance();
 	Input::InputManager * im = Input::InputManager::GetInstance();
