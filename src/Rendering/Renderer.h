@@ -16,6 +16,7 @@
 #include "../Shaders/ShaderBase.h"
 #include "../Shaders/StaticShader.h"
 #include "../Shaders/BoundingBoxShader.h"
+#include "../Shaders/TerrainShader.h"
 #include "../Objects/Camera.h"
 #include "../Util/MathUtil.h"
 #include "../Util/Types.h"
@@ -64,6 +65,8 @@ namespace Rendering
 			 */
 		void RenderOBJModel(std::shared_ptr<Objects::ObjModel> model);
 
+		void RenderTerrain(std::shared_ptr<Objects::Terrain> terrain);
+
 		void RenderEntityAABB();
 
 			/**
@@ -89,6 +92,7 @@ namespace Rendering
 		glm::mat4x4 m_projectionMatrix;
 		std::shared_ptr<Shaders::ShaderBase> m_staticShader;
 		std::shared_ptr<Shaders::ShaderBase> m_boundingBoxShader;
+		std::shared_ptr<Shaders::ShaderBase> m_terrainShader;
 		std::shared_ptr<std::map<Util::BB_Primitives, GLuint>> m_primitives;
 		const float FOV = 70.0f;
 		const float NEAR_PLANE = 0.1f;

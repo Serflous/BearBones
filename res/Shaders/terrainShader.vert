@@ -9,13 +9,11 @@ out vec2 pass_textureCoords;
 uniform mat4 transformationMatrix;
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
-uniform sampler2D heightmapTexture;
 
 void main(void)
 {
 	
-	vec4 height = texture(heightmapTexture, position);
-	vec4 worldPosition = transformationMatrix * vec4(position.x, 0, position.y, 1.0);
+	vec4 worldPosition = transformationMatrix * vec4(position.x, position.y, position.z, 1.0);
 	gl_Position = projectionMatrix * viewMatrix * worldPosition;
 	pass_textureCoords = textureCoords;
 

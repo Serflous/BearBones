@@ -50,7 +50,7 @@ void Objects::Terrain::SetScale(glm::vec3 scale)
 	m_scale = scale;
 }
 
-void Objects::Terrain::SetTerrainTextureCollection(TerrainTextureCollection collection)
+void Objects::Terrain::SetTerrainTextureCollection(std::shared_ptr<TerrainTextureCollection> collection)
 {
 	m_terrainCollection = collection;
 }
@@ -80,7 +80,7 @@ glm::vec3 Objects::Terrain::GetScale()
 	return m_scale;
 }
 
-Objects::TerrainTextureCollection Objects::Terrain::GetTerrainTextureCollection()
+std::shared_ptr<Objects::TerrainTextureCollection> Objects::Terrain::GetTerrainTextureCollection()
 {
 	return m_terrainCollection;
 }

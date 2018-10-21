@@ -165,3 +165,72 @@ void Objects::ResourceLoader::AddIndiciesToVAO(std::vector<int> indicies)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboId);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicies.size() * sizeof(int), &indicies.front(), GL_STATIC_DRAW);
 }
+
+std::shared_ptr<Objects::TerrainTextureCollection> Objects::ResourceLoader::LoadTerrainTextures(std::string baseTexture, std::string rTexture, std::string gTexture, std::string bTexture)
+{
+	std::shared_ptr<Texture> baseTex = LoadTexture(baseTexture);
+	std::shared_ptr<Texture> rTex = LoadTexture(rTexture);
+	std::shared_ptr<Texture> gTex = LoadTexture(gTexture);
+	std::shared_ptr<Texture> bTex = LoadTexture(bTexture);
+
+	std::shared_ptr<TerrainTextureCollection> collection = std::make_shared<TerrainTextureCollection>();
+	collection->SetBaseTexture(baseTex);
+	collection->SetTexture(0, rTex);
+	collection->SetTexture(1, gTex);
+	collection->SetTexture(2, bTex);
+
+	return collection;
+}
+
+std::shared_ptr<Objects::Terrain> Objects::ResourceLoader::LoadTerrain(std::string filename, int mapSize, glm::vec3 scale, std::shared_ptr<TerrainTextureCollection> collection)
+{
+	std::ifstream file(filename, std::ios::binary);
+	if (!file)
+	{
+		std::cerr << "Error loading terrain" << std::endl;
+		return NULL;
+	}
+	int width, height, channels;
+	unsigned char * terrainData = SOIL_load_image(filename.c_str(), &width, &height, &channels, SOIL_LOAD_L);
+	std::shared_ptr<Terrain> terrain = std::make_shared<Terrain>();
+	terrain->SetScale(scale);
+	terrain->SetSize(mapSize);
+	terrain->SetTerrainHeightData(terrainData);
+	terrain->SetTerrainTextureCollection(collection);
+
+	std::vector<glm::vec3> verts;
+	std::vector<glm::vec3> norms;
+	std::vector<glm::vec2> uvs;
+	std::vector<int> indices;
+	int mapSizeMinusOne = mapSize - 1;
+
+	for (int z = 0; z < mapSizeMinusOne; z++)
+	{
+		for (int x = 0; x < mapSizeMinusOne; x++)
+		{
+			int y = terrain->GetHeight(x, z);
+			verts.push_back(glm::vec3(x, y, z));
+			norms.push_back(glm::vec3(0, 1, 0));
+			uvs.push_back(glm::vec2((float)x / ((float)mapSizeMinusOne), (float)z / ((float)mapSizeMinusOne)));
+
+			indices.push_back((z * mapSize + x));
+			indices.push_back(((z + 1) * mapSize) + x);
+			indices.push_back((z * mapSize) + x + 1);
+
+			indices.push_back((z * mapSize) + x + 1);
+			indices.push_back(((z + 1) * mapSize) + x);
+			indices.push_back(((z + 1) * mapSize) + x + 1);
+		}
+	}
+	int y = terrain->GetHeight(mapSizeMinusOne, mapSizeMinusOne);
+	verts.push_back(glm::vec3(mapSizeMinusOne, y, mapSizeMinusOne));
+	norms.push_back(glm::vec3(0, 1, 0));
+	uvs.push_back(glm::vec2(1, 1));
+
+	terrain->SetVertexCount(indices.size());
+
+	GLuint vaoId = LoadToVAO(verts, uvs, norms, indices);
+	terrain->SetVaoID(vaoId);
+
+	return terrain;
+}
