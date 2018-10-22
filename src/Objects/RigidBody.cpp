@@ -31,6 +31,7 @@ Objects::RigidBody::RigidBody() : Entity()
 	m_velocity = glm::vec3(0, 0, 0);
 	m_acceleration = glm::vec3(0, 0, 0);
 	m_torque = glm::vec3(0, 0, 0);
+	m_gravity = glm::vec3(0, 0, 0);
 
 }
 void Objects::RigidBody::SetVelocity(glm::vec3 velocity)
@@ -109,6 +110,11 @@ glm::vec3 Objects::RigidBody::GetTorque()
 	return m_torque;
 }
 
+void Objects::RigidBody::SetGravity(float gravity)
+{
+	m_gravity = glm::vec3(0, gravity, 0);
+}
+
 void Objects::RigidBody::CreateBoundingBox()
 {
 	float minX, minY, minZ, maxX, maxY, maxZ;
@@ -149,7 +155,7 @@ void Objects::RigidBody::Step(float dt)
 	glm::vec3 rotation = GetRotation();
 	m_velocity += m_acceleration * dt;
 	m_rotationalVelocity += m_torque * dt;
-	position += m_velocity * dt;
+	position += (m_velocity - m_gravity) * dt;
 	rotation += m_rotationalVelocity * dt;
 	SetRotation(rotation, true);
 	SetPosition(position, true);

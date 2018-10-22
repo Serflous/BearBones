@@ -26,6 +26,7 @@ namespace Objects
 		glm::vec3 GetAcceleration();
 		glm::vec3 GetRotationalVelocity();
 		glm::vec3 GetTorque();
+		void SetGravity(float gravity);
 
 		void CreateBoundingBox();
 		void Step(float dt);
@@ -77,5 +78,6 @@ namespace Objects
 		glm::vec3 m_rotationalVelocity;
 		glm::vec3 m_acceleration;
 		glm::vec3 m_torque;
+		glm::vec3 m_gravity;
 	};
 }

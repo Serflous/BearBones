@@ -83,7 +83,7 @@ void updateCallback(int dx)
 		//body1->SetPosition(glm::vec3(body1->GetPosition().x + 0.1f, body1->GetPosition().y, body1->GetPosition().z), true);
 		//body1->SetVelocity(glm::vec3(0.01f, 0, 0));
 		body1->SetAcceleration(glm::vec3(0.00001f, 0, 0));
-		body1->SetTorque(glm::vec3(0.1f, 0, 0));
+		body1->SetTorque(glm::vec3(0.0001f, 0, 0));
 	}
 	//body1->Step(dx);
 }
@@ -114,6 +114,8 @@ int main(int argc, char ** argv)
 	world->AddStaticEntity(entity);*/
 	std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/rock.png");
 	std::shared_ptr<Objects::ObjModel> model = loader->LoadOBJModel("res/rock.obj", tex);
+
+	bb->SetGravity(0.0001f);
 
 	body1 = loader->CreateRigidBody(model, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	body2 = loader->CreateRigidBody(model, glm::vec3(20, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));

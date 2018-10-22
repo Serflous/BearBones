@@ -94,7 +94,7 @@ namespace Core
 			 * @param[out] A pointer to the camera.
 			 */
 		void GetCamera(std::shared_ptr<Objects::Camera> & camera);
-
+		void SetGravity(float gravity);
 		void RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity);
 		void RegisterRigidBodyForPhysics(std::shared_ptr<Objects::RigidBody> rb);
 		void SetCollisionCallback(fc callback);

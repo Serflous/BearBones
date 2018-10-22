@@ -146,6 +146,11 @@ void Core::BearBones::GetCamera(std::shared_ptr<Objects::Camera> & camera)
 	camera = m_camera;
 }
 
+void Core::BearBones::SetGravity(float gravity)
+{
+	m_physicsEngine->SetGravity(gravity);
+}
+
 void Core::BearBones::RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity)
 {
 	m_collisionDetector->RegisterEntityForCollision(entity);
