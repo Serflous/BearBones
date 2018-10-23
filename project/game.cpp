@@ -115,7 +115,7 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/rock.png");
 	std::shared_ptr<Objects::ObjModel> model = loader->LoadOBJModel("res/rock.obj", tex);
 
-	bb->SetGravity(0.0001f);
+	bb->SetGravity(-0.0000001f);
 
 	body1 = loader->CreateRigidBody(model, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	body2 = loader->CreateRigidBody(model, glm::vec3(20, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));

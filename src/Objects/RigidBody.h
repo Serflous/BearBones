@@ -22,10 +22,12 @@ namespace Objects
 		void SetAcceleration(glm::vec3 acceleration);
 		void SetRotationalVelocity(glm::vec3 rotationalVelocity);
 		void SetTorque(glm::vec3 torque);
+		void SetMass(float mass);
 		glm::vec3 getVelocity();
 		glm::vec3 GetAcceleration();
 		glm::vec3 GetRotationalVelocity();
 		glm::vec3 GetTorque();
+		float GetMass();
 		void SetGravity(float gravity);
 
 		void CreateBoundingBox();
@@ -54,7 +56,7 @@ namespace Objects
 
 
 	private:
-		/*float m_mass;
+		/*
 		float m_massInv;
 		float m_volume;
 		float m_lift;
@@ -73,11 +75,13 @@ namespace Objects
 		glm::vec3 m_AngularVelocity;
 
 		glm::vec3 m_liftVector;*/
+		float m_mass;
 
 		glm::vec3 m_velocity;
 		glm::vec3 m_rotationalVelocity;
 		glm::vec3 m_acceleration;
 		glm::vec3 m_torque;
 		glm::vec3 m_gravity;
+		glm::vec3 m_force;
 	};
 }
