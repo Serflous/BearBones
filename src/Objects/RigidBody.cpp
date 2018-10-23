@@ -152,6 +152,10 @@ void Objects::RigidBody::CreateBoundingBox()
 	}
 	m_collisionObject = std::make_shared<btCollisionObject>();
 	m_collisionObject->setCollisionShape(new btBoxShape(btVector3((maxX - minX) * 0.5f, (maxY - minY) * 0.5f, (maxZ - minZ)) * 0.5f));
+	m_width = maxX - minX;
+	m_height = maxY - minY;
+	m_depth = maxZ - minZ;
+	CalculateInertiaTensor(); // putting this here for simplicity sake
 	glm::vec3 position = GetPosition();
 	glm::vec3 rotationEular = GetRotation();
 	m_collisionObject->getWorldTransform().setOrigin(btVector3(position.x, position.y, position.z));
@@ -185,5 +189,7 @@ void Objects::RigidBody::CalculateInertiaTensor()
 	float ih = 0.8333 * m_mass * ((m_width * m_width) + (m_depth * m_depth));
 	float iw = 0.8333 * m_mass * ((m_depth * m_depth) + (m_height * m_height));
 	float id = 0.8333 * m_mass * ((m_width * m_width) + (m_height * m_height));
+	//https://www.toptal.com/game/video-game-physics-part-i-an-introduction-to-rigid-body-dynamics
 	float i = (m_mass * (m_width * m_width + m_depth * m_depth + m_height * m_height)) / 12;
+
 }
