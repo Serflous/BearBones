@@ -20,9 +20,11 @@ void Rendering::Renderer::Init()
 	CreateProjectionMatrix();
 	m_staticShader = std::make_shared<Shaders::StaticShader>();
 	m_boundingBoxShader = std::make_shared<Shaders::BoundingBoxShader>();
+	m_primitiveShader = std::make_shared<Shaders::PrimitiveShader>();
 
 	LoadShader("res/Shaders/staticShader.vert", "res/Shaders/staticShader.frag", m_staticShader);
 	LoadShader("res/Shaders/boundingBoxShader.vert", "res/Shaders/boundingBoxShader.frag", m_boundingBoxShader);
+	LoadShader("res/Shaders/primitiveShader.vert", "res/Shaders/primitiveShader.frag", m_primitiveShader);
 
 	m_staticShader->Start();
 	std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadProjectionMatrix(m_projectionMatrix);
@@ -31,17 +33,16 @@ void Rendering::Renderer::Init()
 	m_boundingBoxShader->Start();
 	std::dynamic_pointer_cast<Shaders::BoundingBoxShader>(m_boundingBoxShader)->LoadProjectionMatrix(m_projectionMatrix);
 	m_boundingBoxShader->Stop();
+
+	m_primitiveShader->Start();
+	std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadProjectionMatrix(m_projectionMatrix);
+	m_primitiveShader->Stop();
 }
 
 void Rendering::Renderer::SetDimensions(int x, int y)
 {
 	m_x = x;
 	m_y = y;
-}
-
-void Rendering::Renderer::SetPrimitiveIds(std::shared_ptr<std::map<Util::BB_Primitives, GLuint>> primitives)
-{
-	m_primitives = primitives;
 }
 
 void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std::shared_ptr<Objects::Camera> camera)
@@ -53,6 +54,9 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 	m_boundingBoxShader->Start();
 	std::dynamic_pointer_cast<Shaders::BoundingBoxShader>(m_boundingBoxShader)->LoadViewMatrix(Util::MathUtil::GetViewMatrix(camera->GetPosition().x, camera->GetPosition().y, camera->GetPosition().z, camera->GetPitch(), camera->GetYaw(), camera->GetRoll()));
 	m_boundingBoxShader->Stop();
+	m_primitiveShader->Start();
+	std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadViewMatrix(Util::MathUtil::GetViewMatrix(camera->GetPosition().x, camera->GetPosition().y, camera->GetPosition().z, camera->GetPitch(), camera->GetYaw(), camera->GetRoll()));
+	m_primitiveShader->Stop();
 
 	std::shared_ptr<std::vector<std::shared_ptr<Objects::StaticEntity>>> staticEntities = world->GetStaticEntities();
 	std::shared_ptr<std::vector<std::shared_ptr<Objects::RigidBody>>> rigidBodies = world->GetRigidBodies();
@@ -61,19 +65,48 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 	std::vector<std::shared_ptr<Objects::RigidBody>>::iterator rigidBodiesIter;
 	for (staticEntityIter = staticEntities->begin(); staticEntityIter != staticEntities->end(); staticEntityIter++)
 	{
-		m_staticShader->Start();
-		std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*staticEntityIter)->GetPosition(), (*staticEntityIter)->GetRotation(), (*staticEntityIter)->GetScale()));
-		RenderOBJModel((*staticEntityIter)->GetModel());
-		m_staticShader->Stop();
+		if (dynamic_cast<Objects::ObjModel*>((*staticEntityIter)->GetModel().get()) != nullptr)
+		{
+			m_staticShader->Start();
+			std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*staticEntityIter)->GetPosition(), (*staticEntityIter)->GetRotation(), (*staticEntityIter)->GetScale()));
+			RenderOBJModel(std::dynamic_pointer_cast<Objects::ObjModel>((*staticEntityIter)->GetModel()));
+			m_staticShader->Stop();
+		}
+		else
+		{
+			m_primitiveShader->Start();
+			std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+			std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadColour(std::dynamic_pointer_cast<Objects::PrimitiveModel>((*staticEntityIter)->GetModel())->GetColour());
+			RenderPrimitive(std::dynamic_pointer_cast<Objects::PrimitiveModel>((*staticEntityIter)->GetModel()));
+			m_primitiveShader->Stop();
+		}
+		
 	}
 
 	for (rigidBodiesIter = rigidBodies->begin(); rigidBodiesIter != rigidBodies->end(); rigidBodiesIter++)
 	{
-		m_staticShader->Start();
-		std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*rigidBodiesIter)->GetPosition(), (*rigidBodiesIter)->GetRotation(), (*rigidBodiesIter)->GetScale()));
-		RenderOBJModel((*rigidBodiesIter)->GetModel());
-		m_staticShader->Stop();
+		if (dynamic_cast<Objects::ObjModel*>((*rigidBodiesIter)->GetModel().get()) != nullptr)
+		{
+			m_staticShader->Start();
+			std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*rigidBodiesIter)->GetPosition(), (*rigidBodiesIter)->GetRotation(), (*rigidBodiesIter)->GetScale()));
+			RenderOBJModel(std::dynamic_pointer_cast<Objects::ObjModel>((*rigidBodiesIter)->GetModel()));
+			m_staticShader->Stop();
+		}
+		else
+		{
+			m_primitiveShader->Start();
+			std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+			std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadColour(std::dynamic_pointer_cast<Objects::PrimitiveModel>((*rigidBodiesIter)->GetModel())->GetColour());
+			RenderPrimitive(std::dynamic_pointer_cast<Objects::PrimitiveModel>((*rigidBodiesIter)->GetModel()));
+			m_primitiveShader->Stop();
+		}
 	}
+
+	/*m_boundingBoxShader->Start();
+	std::dynamic_pointer_cast<Shaders::BoundingBoxShader>(m_boundingBoxShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	RenderPrimitive();
+	m_boundingBoxShader->Stop();*/
+
 
 	for (staticEntityIter = staticEntities->begin(); staticEntityIter != staticEntities->end(); staticEntityIter++)
 	{
@@ -112,12 +145,12 @@ void Rendering::Renderer::RenderOBJModel(std::shared_ptr<Objects::ObjModel> mode
 
 }
 
-void Rendering::Renderer::RenderEntityAABB()
+void Rendering::Renderer::RenderPrimitive(std::shared_ptr<Objects::PrimitiveModel> model)
 {
-	glBindVertexArray(m_primitives->find(Util::BB_CUBE)->second);
+	glBindVertexArray(model->GetVAOID());
 	glEnableVertexAttribArray(0);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, model->GetVertexCount(), GL_UNSIGNED_INT, 0);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glDisableVertexAttribArray(0);
 	glBindVertexArray(0);

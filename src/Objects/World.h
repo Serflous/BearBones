@@ -5,6 +5,7 @@
 
 #include "Texture.h"
 #include "ObjModel.h"
+#include "PrimitiveModel.h"
 #include "Entity.h"
 #include "StaticEntity.h"
 #include "RigidBody.h"
@@ -36,6 +37,7 @@ namespace Objects
 			 * @sa Objects::ObjModel
 			 */
 		void AddObjModel(std::shared_ptr<ObjModel> model);
+		void AddPrimitiveModel(std::shared_ptr<PrimitiveModel> model);
 			/**
 			 * Adds a static entity to the world
 			 * @param[in] A pointer to the static entity.
@@ -55,6 +57,7 @@ namespace Objects
 			 * @return A vector of pointers to models currently in the world.
 			 */
 		std::shared_ptr<std::vector<std::shared_ptr<ObjModel>>> GetOBJModels();	
+		std::shared_ptr<std::vector<std::shared_ptr<PrimitiveModel>>> GetPrimitiveModels();
 			/**
 			 * Gets the static entities currently loaded.
 			 * @return A vector of pointers to static entities currently in the world.
@@ -65,7 +68,8 @@ namespace Objects
 
 	private:
 		std::shared_ptr<std::vector<std::shared_ptr<Texture>>> m_textures;
-		std::shared_ptr<std::vector<std::shared_ptr<ObjModel>>> m_models;
+		std::shared_ptr<std::vector<std::shared_ptr<ObjModel>>> m_objModels;
+		std::shared_ptr<std::vector<std::shared_ptr<PrimitiveModel>>> m_primitiveModels;
 		std::shared_ptr<std::vector<std::shared_ptr<StaticEntity>>> m_staticEntities;
 		std::shared_ptr<std::vector<std::shared_ptr<RigidBody>>> m_rigidBodies;
 	};

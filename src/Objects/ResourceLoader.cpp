@@ -94,7 +94,99 @@ std::shared_ptr<Objects::StaticEntity> Objects::ResourceLoader::CreateStaticEnti
 	return entity;
 }
 
-std::shared_ptr<Objects::RigidBody> Objects::ResourceLoader::CreateRigidBody(std::shared_ptr<Objects::ObjModel> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+std::shared_ptr<Objects::PrimitiveModel> Objects::ResourceLoader::CreateCubePrimitive(glm::vec3 colour)
+{
+	// Cube
+	std::vector<glm::vec3> cubePositions =
+	{
+		glm::vec3(-1.0f, -1.0f, 1.0f),
+		glm::vec3(1.0f, -1.0f, 1.0f),
+		glm::vec3(1.0f, 1.0f, 1.0f),
+		glm::vec3(-1.0f, 1.0f, 1.0f),
+		glm::vec3(-1.0f, -1.0f, -1.0f),
+		glm::vec3(1.0f, -1.0f, -1.0f),
+		glm::vec3(1.0f, 1.0f, -1.0f),
+		glm::vec3(-1.0f, 1.0f, -1.0f)
+	};
+	std::vector<int> cubeElements =
+	{
+		0, 1, 2,
+		2, 3, 0,
+		1, 5, 6,
+		6, 2, 1,
+		7, 6, 5,
+		5, 4, 7,
+		4, 0, 3,
+		3, 7, 4,
+		4, 5, 1,
+		1, 0, 4,
+		3, 2, 6,
+		6, 7, 3,
+	};
+
+	GLuint cubeId = LoadPrimitive(cubePositions, cubeElements);
+	std::shared_ptr<Objects::PrimitiveModel> model = std::make_shared<Objects::PrimitiveModel>();
+	model->SetVAOID(cubeId);
+	model->SetVertexCount(cubeElements.size());
+	model->SetVerticies(cubePositions);
+	model->SetColour(colour);
+
+	return model;
+}
+
+std::shared_ptr<Objects::PrimitiveModel> Objects::ResourceLoader::CreateSpherePrimitive(glm::vec3 colour)
+{
+	// Sphere
+	// Code adapted from https://linustechtips.com/main/topic/758200-drawing-spheres-in-opengl/
+	std::vector<glm::vec3> spherePositions;
+	std::vector<int> sphereElements;
+	int latLevel = 40;
+	int longLevel = 40;
+
+	for (int i = 0; i <= latLevel; ++i)
+	{
+
+		double V = i / (double)latLevel;
+		double phi = V * glm::pi<double>();
+
+		for (int j = 0; j <= longLevel; ++j)
+		{
+
+			double U = j / (double)longLevel;
+			double theta = U * (glm::pi<double>() * 2);
+
+			double x = cosf(theta) * sinf(phi);
+			double y = cosf(phi);
+			double z = sinf(theta) * sinf(phi);
+
+			spherePositions.push_back(glm::vec3(x, y, z));
+		}
+	}
+
+	for (int i = 0; i < longLevel * latLevel + longLevel; i++)
+	{
+
+		sphereElements.push_back(i);
+		sphereElements.push_back(i + longLevel + 1);
+		sphereElements.push_back(i + longLevel);
+
+		sphereElements.push_back(i + longLevel + 1);
+		sphereElements.push_back(i);
+		sphereElements.push_back(i + 1);
+	}
+
+	GLuint sphereId = LoadPrimitive(spherePositions, sphereElements);
+
+	std::shared_ptr<Objects::PrimitiveModel> model = std::make_shared<Objects::PrimitiveModel>();
+	model->SetVAOID(sphereId);
+	model->SetVertexCount(sphereElements.size());
+	model->SetVerticies(spherePositions);
+	model->SetColour(colour);
+
+	return model;
+}
+
+std::shared_ptr<Objects::RigidBody> Objects::ResourceLoader::CreateRigidBody(std::shared_ptr<Objects::ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
 	std::shared_ptr<Objects::RigidBody> entity = std::make_shared<Objects::RigidBody>();
 	entity->SetModel(model);

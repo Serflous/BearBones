@@ -3,7 +3,8 @@
 Objects::World::World()
 {
 	m_textures = std::make_shared<std::vector<std::shared_ptr<Texture>>>();
-	m_models = std::make_shared<std::vector<std::shared_ptr<ObjModel>>>();
+	m_objModels = std::make_shared<std::vector<std::shared_ptr<ObjModel>>>();
+	m_primitiveModels = std::make_shared<std::vector<std::shared_ptr<PrimitiveModel>>>();
 	m_staticEntities = std::make_shared<std::vector<std::shared_ptr<StaticEntity>>>();
 	m_rigidBodies = std::make_shared<std::vector<std::shared_ptr<Objects::RigidBody>>>();
 }
@@ -11,8 +12,10 @@ Objects::World::World()
 Objects::World::World(const World & other)
 {
 	m_textures = other.m_textures;
-	m_models = other.m_models;
+	m_objModels = other.m_objModels;
+	m_primitiveModels = other.m_primitiveModels;
 	m_staticEntities = other.m_staticEntities;
+	m_rigidBodies = other.m_rigidBodies;
 }
 
 Objects::World::~World()
@@ -27,7 +30,12 @@ void Objects::World::AddTexture(std::shared_ptr<Objects::Texture> texture)
 
 void Objects::World::AddObjModel(std::shared_ptr<Objects::ObjModel> model)
 {
-	m_models->push_back(model);
+	m_objModels->push_back(model);
+}
+
+void Objects::World::AddPrimitiveModel(std::shared_ptr<PrimitiveModel> model)
+{
+	m_primitiveModels->push_back(model);
 }
 
 void Objects::World::AddStaticEntity(std::shared_ptr<Objects::StaticEntity> entity)
@@ -47,7 +55,12 @@ std::shared_ptr<std::vector<std::shared_ptr<Objects::Texture>>> Objects::World::
 
 std::shared_ptr<std::vector<std::shared_ptr<Objects::ObjModel>>> Objects::World::GetOBJModels()
 {
-	return m_models;
+	return m_objModels;
+}
+
+std::shared_ptr<std::vector<std::shared_ptr<Objects::PrimitiveModel>>> Objects::World::GetPrimitiveModels()
+{
+	return m_primitiveModels;
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<Objects::StaticEntity>>> Objects::World::GetStaticEntities()

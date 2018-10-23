@@ -15,6 +15,7 @@
 
 #include "Texture.h"
 #include "ObjModel.h"
+#include "PrimitiveModel.h"
 #include "Entity.h"
 #include "StaticEntity.h"
 #include "RigidBody.h"
@@ -60,9 +61,10 @@ namespace Objects
 			 */
 		std::shared_ptr<StaticEntity> CreateStaticEntity(std::shared_ptr<ObjModel> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
-		std::shared_ptr<Objects::RigidBody> CreateRigidBody(std::shared_ptr<Objects::ObjModel> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+		std::shared_ptr<PrimitiveModel> CreateCubePrimitive(glm::vec3 colour);
+		std::shared_ptr<PrimitiveModel> CreateSpherePrimitive(glm::vec3 colour);
 
-		GLuint LoadPrimitive(std::vector<glm::vec3> positions, std::vector<int> indicies);
+		std::shared_ptr<Objects::RigidBody> CreateRigidBody(std::shared_ptr<Objects::ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
 	private:
 			/**
@@ -92,6 +94,8 @@ namespace Objects
 			 * @param indicies A vector containing al the indicies.
 			 */
 		void AddIndiciesToVAO(std::vector<int> indicies);
+
+		GLuint LoadPrimitive(std::vector<glm::vec3> positions, std::vector<int> indicies);
 	};
 
 }

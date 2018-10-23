@@ -5,6 +5,7 @@ namespace Util
 
 	enum BB_Primitives
 	{
-		BB_CUBE
+		BB_CUBE,
+		BB_SPHERE
 	};
 }

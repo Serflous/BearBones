@@ -6,7 +6,7 @@
 
 #include <memory>
 
-#include "ObjModel.h"
+#include "ModelBase.h"
 
 namespace Objects
 {
@@ -27,7 +27,7 @@ namespace Objects
 			 * Sets the model of the entity.
 			 * @param[in] model A shared pointer to the model.
 			 */
-		void SetModel(std::shared_ptr<Objects::ObjModel> model);
+		void SetModel(std::shared_ptr<Objects::ModelBase> model);
 			/**
 			 * Sets the position of the entity.
 			 * @param[in] position The position of the entity
@@ -48,7 +48,7 @@ namespace Objects
 			 * Gets a shared pointer to the model to draw.
 			 * @return The pointer to the model.
 			 */
-		std::shared_ptr<Objects::ObjModel> GetModel();
+		std::shared_ptr<Objects::ModelBase> GetModel();
 			/**
 			 * Gets the position of the entity.
 			 * @return The position of the entity.
@@ -78,7 +78,7 @@ namespace Objects
 		std::shared_ptr<btCollisionObject> m_collisionObject;
 
 	private:
-		std::shared_ptr<Objects::ObjModel> m_model;
+		std::shared_ptr<Objects::ModelBase> m_model;
 		glm::vec3 m_position;
 		glm::vec3 m_rotation;
 		glm::vec3 m_scale;

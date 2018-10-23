@@ -3,6 +3,8 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
+#include <GLM/gtc/type_ptr.hpp>
+
 #include <iostream>
 #include <map>
 
@@ -115,15 +117,11 @@ namespace Core
 		~BearBones();
 		BearBones(const BearBones & other);
 
-		void GeneratePrimitives();
-
 		int m_winX;
 		int m_winY;
 		f m_updateCallback;
 		fc m_collisionCallback;
 		static BearBones * m_instance;
-
-		std::shared_ptr<std::map<Util::BB_Primitives, GLuint>> m_primitiveIds;
 
 		std::shared_ptr<Objects::ResourceLoader> m_loader;
 		std::shared_ptr<Rendering::Renderer> m_renderer;

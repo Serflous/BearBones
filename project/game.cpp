@@ -29,7 +29,7 @@ void updateCallback(int dx)
 	int currentMouseY = 0;
 	int winX = 0;
 	int winY = 0;
-	CalculateFrameRate();
+	//CalculateFrameRate();
 	// Get the managers.
 	Core::BearBones * bb = Core::BearBones::GetInstance();
 	Input::InputManager * im = Input::InputManager::GetInstance();
@@ -114,6 +114,7 @@ int main(int argc, char ** argv)
 	world->AddStaticEntity(entity);*/
 	std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/rock.png");
 	std::shared_ptr<Objects::ObjModel> model = loader->LoadOBJModel("res/rock.obj", tex);
+	std::shared_ptr<Objects::PrimitiveModel> primSphere = loader->CreateSpherePrimitive(glm::vec3(0.827, 0.827, 0.827));
 
 	bb->SetGravity(-0.0000001f);
 
@@ -123,26 +124,32 @@ int main(int argc, char ** argv)
 	body4 = loader->CreateRigidBody(model, glm::vec3(60, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	body5 = loader->CreateRigidBody(model, glm::vec3(80, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 
+	std::shared_ptr<Objects::RigidBody> sphereBody = loader->CreateRigidBody(primSphere, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+
 	bb->RegisterEntityForCollision(body1);
 	bb->RegisterEntityForCollision(body2);
 	bb->RegisterEntityForCollision(body3);
 	bb->RegisterEntityForCollision(body4);
 	bb->RegisterEntityForCollision(body5);
+	bb->RegisterEntityForCollision(sphereBody);
 
 	bb->RegisterRigidBodyForPhysics(body1);
 	bb->RegisterRigidBodyForPhysics(body2);
 	bb->RegisterRigidBodyForPhysics(body3);
 	bb->RegisterRigidBodyForPhysics(body4);
 	bb->RegisterRigidBodyForPhysics(body5);
+	bb->RegisterRigidBodyForPhysics(sphereBody);
 
 	world->AddTexture(tex);
 	world->AddObjModel(model);
+	world->AddPrimitiveModel(primSphere);
 
 	world->AddRigidBody(body1);
 	world->AddRigidBody(body2);
 	world->AddRigidBody(body3);
 	world->AddRigidBody(body4);
 	world->AddRigidBody(body5);
+	world->AddRigidBody(sphereBody);
 
 	// Set the update callback and begin the main loop
 	bb->SetUpdateCallback(updateCallback);

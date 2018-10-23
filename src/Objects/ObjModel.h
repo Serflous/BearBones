@@ -6,6 +6,7 @@
 
 #include <memory>
 
+#include "ModelBase.h"
 #include "Texture.h"
 
 namespace Objects
@@ -17,23 +18,13 @@ namespace Objects
 		 * @version 0.1
 		 * @todo Rename all vertex counts to element counts
 		 */
-	class ObjModel
+	class ObjModel : public ModelBase
 	{
 	public:
 		ObjModel();
 		ObjModel(const ObjModel & other);
 		~ObjModel();
 
-			/**
-			 * Sets the VAO id.
-			 * @param[in] vaoId The VAO ID.
-			 */
-		void SetVAOID(int vaoId);
-			/**
-			 * Sets the number of elements.
-			 * @param[in] count The number of elements
-			 */
-		void SetVertexCount(int count);
 			/**
 			 * Sets the height of the model.
 			 * @param[in] height The height of the model
@@ -45,10 +36,6 @@ namespace Objects
 			 */
 		void SetTexture(std::shared_ptr<Texture> tex);
 			/**
-			 * Sets the verticies of the model.
-			 * @param[in] verts A vector containing every vertex in the model.
-			 */
-		void SetVerticies(std::vector<glm::vec3> verts);
 			/**
 			 * Sets the UVs of the model.
 			 * @param[in] uvs A vector containing every uv map in the model.
@@ -61,25 +48,10 @@ namespace Objects
 		void SetNormals(std::vector<glm::vec3> norms);
 
 			/**
-			 * Gets the VAO Id of the model.
-			 * @return The VAO Id.
-			 */
-		int GetVAOID();
-			/**
-			 * Gets the number of elements in the model.
-			 * @return The number of elements in the model
-			 */
-		int GetVertexCount();
-			/**
 			 * Gets the height of the model.
 			 * @return The height of the model.
 			 */
 		double GetModelHeight();
-			/**
-			 * Gets the verticies of the model.
-			 * @return A vector containing all the verticies in the model
-			 */
-		std::vector<glm::vec3> GetVerticies();
 			/**
 			 * Gets the UVs of the model.
 			 * @return A vector containing all of the UV mappings of the model
@@ -97,11 +69,8 @@ namespace Objects
 		std::shared_ptr<Texture> GetTexture();
 
 	private:
-		int m_vaoId;
-		int m_vertexCount;
 		double m_modelHeight;
 		std::shared_ptr<Texture> m_texture;
-		std::vector<glm::vec3> m_verticies;
 		std::vector<glm::vec2> m_uvs;
 		std::vector<glm::vec3> m_normals;
 	};
