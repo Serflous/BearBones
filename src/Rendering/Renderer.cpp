@@ -25,6 +25,11 @@ void Rendering::Renderer::Init()
 	LoadShader("res/Shaders/staticShader.vert", "res/Shaders/staticShader.frag", m_staticShader);
 	LoadShader("res/Shaders/boundingBoxShader.vert", "res/Shaders/boundingBoxShader.frag", m_boundingBoxShader);
 	LoadShader("res/Shaders/primitiveShader.vert", "res/Shaders/primitiveShader.frag", m_primitiveShader);
+	m_terrainShader = std::make_shared<Shaders::TerrainShader>();
+
+	LoadShader("res/Shaders/staticShader.vert", "res/Shaders/staticShader.frag", m_staticShader);
+	LoadShader("res/Shaders/boundingBoxShader.vert", "res/Shaders/boundingBoxShader.frag", m_boundingBoxShader);
+	LoadShader("res/Shaders/terrainShader.vert", "res/Shaders/terrainShader.frag", m_terrainShader);
 
 	m_staticShader->Start();
 	std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadProjectionMatrix(m_projectionMatrix);
@@ -37,6 +42,10 @@ void Rendering::Renderer::Init()
 	m_primitiveShader->Start();
 	std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadProjectionMatrix(m_projectionMatrix);
 	m_primitiveShader->Stop();
+
+	m_terrainShader->Start();
+	std::dynamic_pointer_cast<Shaders::TerrainShader>(m_terrainShader)->LoadProjectionMatrix(m_projectionMatrix);
+	m_terrainShader->Stop();
 }
 
 void Rendering::Renderer::SetDimensions(int x, int y)
@@ -60,9 +69,11 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 
 	std::shared_ptr<std::vector<std::shared_ptr<Objects::StaticEntity>>> staticEntities = world->GetStaticEntities();
 	std::shared_ptr<std::vector<std::shared_ptr<Objects::RigidBody>>> rigidBodies = world->GetRigidBodies();
+	std::shared_ptr<std::vector<std::shared_ptr<Objects::Terrain>>> terrains = world->GetTerrains();
 	
 	std::vector<std::shared_ptr<Objects::StaticEntity>>::iterator staticEntityIter;
 	std::vector<std::shared_ptr<Objects::RigidBody>>::iterator rigidBodiesIter;
+	std::vector<std::shared_ptr<Objects::Terrain>>::iterator terrainIter;
 	for (staticEntityIter = staticEntities->begin(); staticEntityIter != staticEntities->end(); staticEntityIter++)
 	{
 		if (dynamic_cast<Objects::ObjModel*>((*staticEntityIter)->GetModel().get()) != nullptr)
@@ -107,6 +118,13 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 	RenderPrimitive();
 	m_boundingBoxShader->Stop();*/
 
+	for (terrainIter = terrains->begin(); terrainIter != terrains->end(); terrainIter++)
+	{
+		m_terrainShader->Start();
+		std::dynamic_pointer_cast<Shaders::TerrainShader>(m_terrainShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), (*terrainIter)->GetScale()));
+		RenderTerrain(*terrainIter);
+		m_terrainShader->Stop();
+	}
 
 	for (staticEntityIter = staticEntities->begin(); staticEntityIter != staticEntities->end(); staticEntityIter++)
 	{
@@ -143,6 +161,29 @@ void Rendering::Renderer::RenderOBJModel(std::shared_ptr<Objects::ObjModel> mode
 	glDisableVertexAttribArray(2);
 	glBindVertexArray(0);
 
+}
+
+void Rendering::Renderer::RenderTerrain(std::shared_ptr<Objects::Terrain> terrain)
+{
+	glBindVertexArray(terrain->GetVaoID());
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
+
+	glActiveTexture(GL_TEXTURE0);
+	terrain->GetTerrainTextureCollection()->GetBaseTexture()->Bind();
+	glActiveTexture(GL_TEXTURE1);
+	terrain->GetTerrainTextureCollection()->GetTextureAt(0)->Bind();
+	glActiveTexture(GL_TEXTURE2);
+	terrain->GetTerrainTextureCollection()->GetTextureAt(1)->Bind();
+	glActiveTexture(GL_TEXTURE3);
+	terrain->GetTerrainTextureCollection()->GetTextureAt(2)->Bind();
+	glDrawElements(GL_TRIANGLES, terrain->GetVertexCount(), GL_UNSIGNED_INT, 0);
+
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
+	glBindVertexArray(0);
 }
 
 void Rendering::Renderer::RenderPrimitive(std::shared_ptr<Objects::PrimitiveModel> model)

@@ -19,6 +19,8 @@
 #include "Entity.h"
 #include "StaticEntity.h"
 #include "RigidBody.h"
+#include "Terrain.h"
+#include "TerrainTextureCollection.h"
 
 namespace Objects
 {
@@ -65,6 +67,9 @@ namespace Objects
 		std::shared_ptr<PrimitiveModel> CreateSpherePrimitive(glm::vec3 colour);
 
 		std::shared_ptr<Objects::RigidBody> CreateRigidBody(std::shared_ptr<Objects::ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+
+		std::shared_ptr<Objects::TerrainTextureCollection> LoadTerrainTextures(std::string baseTexture, std::string rTexture, std::string gTexture, std::string bTexture);
+		std::shared_ptr<Objects::Terrain> LoadTerrain(std::string filename, int mapSize, glm::vec3 scale, std::shared_ptr<TerrainTextureCollection> collection);
 
 	private:
 			/**

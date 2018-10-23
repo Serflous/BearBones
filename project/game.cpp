@@ -85,7 +85,6 @@ void updateCallback(int dx)
 		body1->SetAcceleration(glm::vec3(0.00001f, 0, 0));
 		body1->SetTorque(glm::vec3(0.0001f, 0, 0));
 	}
-	//body1->Step(dx);
 }
 
 int main(int argc, char ** argv)

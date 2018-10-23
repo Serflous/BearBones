@@ -17,6 +17,7 @@
 #include "../Shaders/StaticShader.h"
 #include "../Shaders/BoundingBoxShader.h"
 #include "../Shaders/PrimitiveShader.h"
+#include "../Shaders/TerrainShader.h"
 #include "../Objects/Camera.h"
 #include "../Util/MathUtil.h"
 #include "../Util/Types.h"
@@ -65,6 +66,7 @@ namespace Rendering
 		void RenderOBJModel(std::shared_ptr<Objects::ObjModel> model);
 
 		void RenderPrimitive(std::shared_ptr<Objects::PrimitiveModel> model);
+		void RenderTerrain(std::shared_ptr<Objects::Terrain> terrain);
 
 			/**
 			 * Creates the projection matrix for rendering.
@@ -90,6 +92,7 @@ namespace Rendering
 		std::shared_ptr<Shaders::ShaderBase> m_staticShader;
 		std::shared_ptr<Shaders::ShaderBase> m_boundingBoxShader;
 		std::shared_ptr<Shaders::ShaderBase> m_primitiveShader;
+		std::shared_ptr<Shaders::ShaderBase> m_terrainShader;
 		const float FOV = 70.0f;
 		const float NEAR_PLANE = 0.1f;
 		const float FAR_PLANE = 1000.0f;
