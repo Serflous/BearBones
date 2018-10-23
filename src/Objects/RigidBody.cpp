@@ -165,6 +165,7 @@ void Objects::RigidBody::Step(float dt)
 {
 	glm::vec3 position = GetPosition();
 	glm::vec3 rotation = GetRotation();
+	m_force = m_mass * m_acceleration;
 	m_velocity += m_acceleration + m_gravity * dt;
 	m_rotationalVelocity += m_torque * dt;
 	position += m_velocity * dt;
