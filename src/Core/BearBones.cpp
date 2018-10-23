@@ -61,19 +61,20 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_DEBUG_OUTPUT);
 	glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-	glEnable(GL_PRIMITIVE_RESTART_FIXED_INDEX);
 	glDebugMessageCallback(StaticMessageCallback, nullptr);
 	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true);
 
 	glutSetCursor(GLUT_CURSOR_NONE);
+
 	m_loader = std::make_shared<Objects::ResourceLoader>();
-
 	m_renderer = std::make_shared<Rendering::Renderer>();
-
 	m_world = std::make_shared<Objects::World>();
 	m_camera = std::make_shared<Objects::Camera>();
 	m_collisionDetector = std::make_unique<Collision::CollisionDetector>();
-	m_physicsEngine = std::make_unique<Physics::PhysicsEngine>();
+	m_physicsEngine = std::make_shared<Physics::PhysicsEngine>();
+
+	m_collisionDetector->SetWorld(m_world);
+	m_collisionDetector->SetPhysicsEngine(m_physicsEngine);
 	return 0;
 
 }
@@ -104,6 +105,7 @@ void Core::BearBones::Update(int dx)
 	int deltaTime = currentTime - dx;
 
 	m_collisionDetector->TestForCollisions(m_collisionCallback);
+	m_collisionDetector->Update(dx);
 	m_physicsEngine->Simulate(deltaTime);
 
 	m_updateCallback(deltaTime);
@@ -143,7 +145,7 @@ void Core::BearBones::GetCamera(std::shared_ptr<Objects::Camera> & camera)
 	camera = m_camera;
 }
 
-void Core::BearBones::SetGravity(float gravity)
+void Core::BearBones::SetGravity(glm::vec3 gravity)
 {
 	m_physicsEngine->SetGravity(gravity);
 }

@@ -1,6 +1,6 @@
 #version 400 core
 
-in vec2 position;
+in vec3 position;
 in vec2 textureCoords;
 in vec3 normal;
 
@@ -12,9 +12,8 @@ uniform mat4 viewMatrix;
 
 void main(void)
 {
-	
-	vec4 worldPosition = transformationMatrix * vec4(position.x, position.y, position.z, 1.0);
+	vec4 worldPosition = transformationMatrix * vec4(position, 1.0);
 	gl_Position = projectionMatrix * viewMatrix * worldPosition;
 	pass_textureCoords = textureCoords;
-
+	
 }

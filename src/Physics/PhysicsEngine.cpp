@@ -4,7 +4,7 @@
 
 Physics::PhysicsEngine::PhysicsEngine()
 {
-	m_gravity = 0.0f;
+	m_gravity = glm::vec3(0, 0, 0);
 }
 
 
@@ -12,12 +12,12 @@ Physics::PhysicsEngine::~PhysicsEngine()
 {
 }
 
-float Physics::PhysicsEngine::GetGravity()
+glm::vec3 Physics::PhysicsEngine::GetGravity()
 {
 	return m_gravity;
 }
 
-void Physics::PhysicsEngine::SetGravity(float gravity)
+void Physics::PhysicsEngine::SetGravity(glm::vec3 gravity)
 {
 	m_gravity = gravity;
 }
@@ -32,7 +32,7 @@ void Physics::PhysicsEngine::Simulate(float delta)
 	std::vector<std::shared_ptr<Objects::RigidBody>>::iterator iter;
 	for (iter = m_pObjects.begin(); iter != m_pObjects.end(); iter++)
 	{
-		(*iter)->SetGravity(m_gravity);
+		(*iter)->ApplyGravitationalForce(m_gravity);
 		(*iter)->Step(delta);
 	}
 }

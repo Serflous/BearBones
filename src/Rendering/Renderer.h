@@ -93,7 +93,7 @@ namespace Rendering
 		std::shared_ptr<Shaders::ShaderBase> m_boundingBoxShader;
 		std::shared_ptr<Shaders::ShaderBase> m_primitiveShader;
 		std::shared_ptr<Shaders::ShaderBase> m_terrainShader;
-		const float FOV = 70.0f;
+		const float FOV = 45.0f;
 		const float NEAR_PLANE = 0.1f;
 		const float FAR_PLANE = 1000.0f;
 	};

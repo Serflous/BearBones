@@ -66,6 +66,9 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 	m_primitiveShader->Start();
 	std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadViewMatrix(Util::MathUtil::GetViewMatrix(camera->GetPosition().x, camera->GetPosition().y, camera->GetPosition().z, camera->GetPitch(), camera->GetYaw(), camera->GetRoll()));
 	m_primitiveShader->Stop();
+	m_terrainShader->Start();
+	std::dynamic_pointer_cast<Shaders::TerrainShader>(m_terrainShader)->LoadViewMatrix(Util::MathUtil::GetViewMatrix(camera->GetPosition().x, camera->GetPosition().y, camera->GetPosition().z, camera->GetPitch(), camera->GetYaw(), camera->GetRoll()));
+	m_terrainShader->Stop();
 
 	std::shared_ptr<std::vector<std::shared_ptr<Objects::StaticEntity>>> staticEntities = world->GetStaticEntities();
 	std::shared_ptr<std::vector<std::shared_ptr<Objects::RigidBody>>> rigidBodies = world->GetRigidBodies();
@@ -86,7 +89,7 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 		else
 		{
 			m_primitiveShader->Start();
-			std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+			std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*staticEntityIter)->GetPosition(), (*staticEntityIter)->GetRotation(), (*staticEntityIter)->GetScale()));
 			std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadColour(std::dynamic_pointer_cast<Objects::PrimitiveModel>((*staticEntityIter)->GetModel())->GetColour());
 			RenderPrimitive(std::dynamic_pointer_cast<Objects::PrimitiveModel>((*staticEntityIter)->GetModel()));
 			m_primitiveShader->Stop();
@@ -106,7 +109,7 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 		else
 		{
 			m_primitiveShader->Start();
-			std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+			std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*rigidBodiesIter)->GetPosition(), (*rigidBodiesIter)->GetRotation(), (*rigidBodiesIter)->GetScale()));
 			std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadColour(std::dynamic_pointer_cast<Objects::PrimitiveModel>((*rigidBodiesIter)->GetModel())->GetColour());
 			RenderPrimitive(std::dynamic_pointer_cast<Objects::PrimitiveModel>((*rigidBodiesIter)->GetModel()));
 			m_primitiveShader->Stop();
@@ -121,7 +124,7 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 	for (terrainIter = terrains->begin(); terrainIter != terrains->end(); terrainIter++)
 	{
 		m_terrainShader->Start();
-		std::dynamic_pointer_cast<Shaders::TerrainShader>(m_terrainShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), (*terrainIter)->GetScale()));
+		std::dynamic_pointer_cast<Shaders::TerrainShader>(m_terrainShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*terrainIter)->GetPosition(), glm::vec3(0, 0, 0), (*terrainIter)->GetScale()));
 		RenderTerrain(*terrainIter);
 		m_terrainShader->Stop();
 	}
@@ -178,7 +181,9 @@ void Rendering::Renderer::RenderTerrain(std::shared_ptr<Objects::Terrain> terrai
 	terrain->GetTerrainTextureCollection()->GetTextureAt(1)->Bind();
 	glActiveTexture(GL_TEXTURE3);
 	terrain->GetTerrainTextureCollection()->GetTextureAt(2)->Bind();
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glDrawElements(GL_TRIANGLES, terrain->GetVertexCount(), GL_UNSIGNED_INT, 0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);

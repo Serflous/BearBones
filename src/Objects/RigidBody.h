@@ -23,7 +23,7 @@ namespace Objects
 		void SetRotationalVelocity(glm::vec3 rotationalVelocity);
 		void SetTorque(glm::vec3 torque);
 		void SetMass(float mass);
-		void SetGravity(float gravity);
+		void SetGrounded(bool grounded);
 
 		glm::vec3 getVelocity();
 		glm::vec3 GetAcceleration();
@@ -31,6 +31,7 @@ namespace Objects
 		glm::vec3 GetTorque();
 		float GetMass();
 		
+		void ApplyGravitationalForce(glm::vec3 gravity);
 
 		void CreateBoundingBox();
 		void Step(float dt);
@@ -82,11 +83,12 @@ namespace Objects
 		float m_height;
 		float m_depth;
 
+		bool m_grounded;
+
 		glm::vec3 m_velocity;
 		glm::vec3 m_rotationalVelocity;
 		glm::vec3 m_acceleration;
 		glm::vec3 m_torque;
-		glm::vec3 m_gravity;
 		glm::vec3 m_force;
 	};
 }

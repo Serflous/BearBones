@@ -102,7 +102,7 @@ int main(int argc, char ** argv)
 	bb->GetCamera(camera);
 	// Set the camera position
 	//camera->SetPosition(-132.0f, 0.0f, 167.0f);
-	camera->SetPosition(0.0f, 0.0f, 0.0f);
+	camera->SetPosition(0.0f, 2.0f, 0.0f);
 
 	// Add resources here
 	/*std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/ECL_Texture.png");
@@ -115,40 +115,40 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::ObjModel> model = loader->LoadOBJModel("res/rock.obj", tex);
 	std::shared_ptr<Objects::PrimitiveModel> primSphere = loader->CreateSpherePrimitive(glm::vec3(0.827, 0.827, 0.827));
 
-	bb->SetGravity(-0.0000001f);
+	//bb->SetGravity(-0.0000001f);
+	bb->SetGravity(glm::vec3(0, -0.0001, 0));
+	
+	std::shared_ptr<Objects::RigidBody> sphereBody1 = loader->CreateRigidBody(primSphere, glm::vec3(10, 10, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::RigidBody> sphereBody2 = loader->CreateRigidBody(primSphere, glm::vec3(30, 20, 20), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::RigidBody> sphereBody3 = loader->CreateRigidBody(primSphere, glm::vec3(20, 30, 30), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::RigidBody> sphereBody4 = loader->CreateRigidBody(primSphere, glm::vec3(40, 40, 10), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::RigidBody> sphereBody5 = loader->CreateRigidBody(primSphere, glm::vec3(10, 50, 40), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::TerrainTextureCollection> terrainTextures = loader->LoadTerrainTextures("res/Grass_Terrain.png", "res/Dirt_Terrain.png", "res/Rock_Terrain.png", "res/RockIce_Terrain.png");
+	std::shared_ptr<Objects::Terrain> terrain = loader->LoadTerrain("res/heightFlat256.png", 256, glm::vec3(10, 1, 10), terrainTextures);
+	terrain->SetPosition(glm::vec3(-127, 0, -127));
 
-	body1 = loader->CreateRigidBody(model, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	body2 = loader->CreateRigidBody(model, glm::vec3(20, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	body3 = loader->CreateRigidBody(model, glm::vec3(40, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	body4 = loader->CreateRigidBody(model, glm::vec3(60, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	body5 = loader->CreateRigidBody(model, glm::vec3(80, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-
-	std::shared_ptr<Objects::RigidBody> sphereBody = loader->CreateRigidBody(primSphere, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-
-	bb->RegisterEntityForCollision(body1);
-	bb->RegisterEntityForCollision(body2);
-	bb->RegisterEntityForCollision(body3);
-	bb->RegisterEntityForCollision(body4);
-	bb->RegisterEntityForCollision(body5);
-	bb->RegisterEntityForCollision(sphereBody);
-
-	bb->RegisterRigidBodyForPhysics(body1);
-	bb->RegisterRigidBodyForPhysics(body2);
-	bb->RegisterRigidBodyForPhysics(body3);
-	bb->RegisterRigidBodyForPhysics(body4);
-	bb->RegisterRigidBodyForPhysics(body5);
-	bb->RegisterRigidBodyForPhysics(sphereBody);
+	//sphereBody1->SetVelocity(glm::vec3(0, 0.01, 0));
+	bb->RegisterEntityForCollision(sphereBody1);
+	bb->RegisterEntityForCollision(sphereBody2);
+	bb->RegisterEntityForCollision(sphereBody3);
+	bb->RegisterEntityForCollision(sphereBody4);
+	bb->RegisterEntityForCollision(sphereBody5);
+	bb->RegisterRigidBodyForPhysics(sphereBody1);
+	bb->RegisterRigidBodyForPhysics(sphereBody2);
+	bb->RegisterRigidBodyForPhysics(sphereBody3);
+	bb->RegisterRigidBodyForPhysics(sphereBody4);
+	bb->RegisterRigidBodyForPhysics(sphereBody5);
 
 	world->AddTexture(tex);
 	world->AddObjModel(model);
 	world->AddPrimitiveModel(primSphere);
+	world->AddTerrain(terrain);
 
-	world->AddRigidBody(body1);
-	world->AddRigidBody(body2);
-	world->AddRigidBody(body3);
-	world->AddRigidBody(body4);
-	world->AddRigidBody(body5);
-	world->AddRigidBody(sphereBody);
+	world->AddRigidBody(sphereBody1);
+	world->AddRigidBody(sphereBody2);
+	world->AddRigidBody(sphereBody3);
+	world->AddRigidBody(sphereBody4);
+	world->AddRigidBody(sphereBody5);
 
 	// Set the update callback and begin the main loop
 	bb->SetUpdateCallback(updateCallback);

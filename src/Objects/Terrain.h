@@ -18,6 +18,7 @@ namespace Objects
 		void SetVertexCount(int vertexCount);
 		void SetTerrainHeightData(unsigned char * data);
 		void SetSize(int size);
+		void SetPosition(glm::vec3 position);
 		void SetScale(glm::vec3 scale);
 		void SetTerrainTextureCollection(std::shared_ptr<TerrainTextureCollection> collection);
 
@@ -25,6 +26,7 @@ namespace Objects
 		int GetVertexCount();
 		unsigned char * GetTerrainHeightData();
 		int GetSize();
+		glm::vec3 GetPosition();
 		glm::vec3 GetScale();
 		std::shared_ptr<TerrainTextureCollection> GetTerrainTextureCollection();
 
@@ -39,6 +41,7 @@ namespace Objects
 		int m_vertexCount;
 		unsigned char * m_terrainHeightData;
 		int m_size;
+		glm::vec3 m_position;
 		glm::vec3 m_scale;
 		std::shared_ptr<TerrainTextureCollection> m_terrainCollection;
 	};

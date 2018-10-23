@@ -45,3 +45,37 @@ void Collision::CollisionDetector::TestForCollisions(fc callback)
 		}
 	}
 }
+
+void Collision::CollisionDetector::Update(float dt)
+{
+	std::shared_ptr<std::vector<std::shared_ptr<Objects::RigidBody>>> rbs = m_world->GetRigidBodies();
+	std::vector<std::shared_ptr<Objects::RigidBody>>::iterator rbIter;
+	for (rbIter = rbs->begin(); rbIter != rbs->end(); rbIter++)
+	{
+		if ((*rbIter)->GetPosition().y <= 0)
+		{
+			(*rbIter)->SetGrounded(true);
+			if ((*rbIter)->getVelocity().y < 0)
+			{
+				glm::vec3 velocity = (*rbIter)->getVelocity();
+
+				velocity.y *= -0.4f;
+				(*rbIter)->SetVelocity(velocity);
+			}
+		}
+		else
+		{
+			(*rbIter)->SetGrounded(false);
+		}
+	}
+}
+
+void Collision::CollisionDetector::SetPhysicsEngine(std::shared_ptr<Physics::PhysicsEngine> engine)
+{
+	m_physicsEngine = engine;
+}
+
+void Collision::CollisionDetector::SetWorld(std::shared_ptr<Objects::World> world)
+{
+	m_world = world;
+}

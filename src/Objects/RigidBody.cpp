@@ -33,7 +33,6 @@ Objects::RigidBody::RigidBody() : Entity()
 	m_velocity = glm::vec3(0, 0, 0);
 	m_acceleration = glm::vec3(0, 0, 0);
 	m_torque = glm::vec3(0, 0, 0);
-	m_gravity = glm::vec3(0, 0, 0);
 	m_force = glm::vec3(0, 0, 0);
 
 }
@@ -60,6 +59,11 @@ void Objects::RigidBody::SetTorque(glm::vec3 torque)
 void Objects::RigidBody::SetMass(float mass)
 {
 	m_mass = mass;
+}
+
+void Objects::RigidBody::SetGrounded(bool grounded)
+{
+	m_grounded = grounded;
 }
 
 Objects::RigidBody::RigidBody(const RigidBody & other) : Entity(other)
@@ -122,9 +126,12 @@ float Objects::RigidBody::GetMass()
 	return m_mass;
 }
 
-void Objects::RigidBody::SetGravity(float gravity)
+void Objects::RigidBody::ApplyGravitationalForce(glm::vec3 gravity)
 {
-	m_gravity = glm::vec3(0, gravity, 0);
+	if (!m_grounded)
+	{
+		m_velocity += gravity;
+	}
 }
 
 void Objects::RigidBody::CreateBoundingBox()
@@ -170,7 +177,7 @@ void Objects::RigidBody::Step(float dt)
 	glm::vec3 position = GetPosition();
 	glm::vec3 rotation = GetRotation();
 	m_force = m_mass * m_acceleration;
-	m_velocity += m_acceleration + m_gravity * dt;
+	m_velocity += m_acceleration * dt;
 	m_rotationalVelocity += m_torque * dt;
 	position += m_velocity * dt;
 	rotation += m_rotationalVelocity * dt;

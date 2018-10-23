@@ -7,7 +7,7 @@ Objects::Terrain::Terrain()
 	m_terrainHeightData = nullptr;
 	m_size = 0;
 	m_scale = glm::vec3(0, 0, 0);
-
+	m_position = glm::vec3(0, 0, 0);
 }
 
 Objects::Terrain::Terrain(const Terrain & other)
@@ -18,6 +18,7 @@ Objects::Terrain::Terrain(const Terrain & other)
 	m_size = other.m_size;
 	m_scale = other.m_scale;
 	m_terrainCollection = other.m_terrainCollection;
+	m_position = other.m_position;
 }
 
 Objects::Terrain::~Terrain()
@@ -43,6 +44,11 @@ void Objects::Terrain::SetTerrainHeightData(unsigned char * data)
 void Objects::Terrain::SetSize(int size)
 {
 	m_size = size;
+}
+
+void Objects::Terrain::SetPosition(glm::vec3 position)
+{
+	m_position = position;
 }
 
 void Objects::Terrain::SetScale(glm::vec3 scale)
@@ -73,6 +79,11 @@ unsigned char * Objects::Terrain::GetTerrainHeightData()
 int Objects::Terrain::GetSize()
 {
 	return m_size;
+}
+
+glm::vec3 Objects::Terrain::GetPosition()
+{
+	return m_position;
 }
 
 glm::vec3 Objects::Terrain::GetScale()

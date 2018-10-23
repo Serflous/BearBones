@@ -12,6 +12,6 @@ uniform sampler2D bTexture;
 void main(void)
 {
 
-	out_Color = vec4(1.0);
+	out_Color = texture(baseTexture, pass_textureCoords);
 
 }

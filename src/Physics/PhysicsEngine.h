@@ -10,14 +10,14 @@ namespace Physics
 	public:
 		PhysicsEngine();
 		~PhysicsEngine();
-		float GetGravity();
-		void SetGravity(float gravity);
+		glm::vec3 GetGravity();
+		void SetGravity(glm::vec3 gravity);
 
 		void RegisterRidigBodyForPhysics(std::shared_ptr<Objects::RigidBody> object);
 		void Simulate(float delta);
 	private:
 		std::vector<std::shared_ptr<Objects::RigidBody>> m_pObjects;
-		float m_gravity;
+		glm::vec3 m_gravity;
 	};
 
 }

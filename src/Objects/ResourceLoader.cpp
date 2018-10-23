@@ -294,17 +294,21 @@ std::shared_ptr<Objects::Terrain> Objects::ResourceLoader::LoadTerrain(std::stri
 	std::vector<glm::vec3> norms;
 	std::vector<glm::vec2> uvs;
 	std::vector<int> indices;
-	int mapSizeMinusOne = mapSize - 1;
 
-	for (int z = 0; z < mapSizeMinusOne; z++)
+	for (int z = 0; z < mapSize; z++)
 	{
-		for (int x = 0; x < mapSizeMinusOne; x++)
+		for (int x = 0; x < mapSize; x++)
 		{
 			int y = terrain->GetHeight(x, z);
 			verts.push_back(glm::vec3(x, y, z));
 			norms.push_back(glm::vec3(0, 1, 0));
-			uvs.push_back(glm::vec2((float)x / ((float)mapSizeMinusOne), (float)z / ((float)mapSizeMinusOne)));
-
+			uvs.push_back(glm::vec2((float)x / ((float)mapSize - 1), (float)z / ((float)mapSize - 1)));
+		}
+	}
+	for (int z = 0; z < mapSize - 1; z++)
+	{
+		for (int x = 0; x < mapSize - 1; x++)
+		{
 			indices.push_back((z * mapSize + x));
 			indices.push_back(((z + 1) * mapSize) + x);
 			indices.push_back((z * mapSize) + x + 1);
@@ -314,10 +318,6 @@ std::shared_ptr<Objects::Terrain> Objects::ResourceLoader::LoadTerrain(std::stri
 			indices.push_back(((z + 1) * mapSize) + x + 1);
 		}
 	}
-	int y = terrain->GetHeight(mapSizeMinusOne, mapSizeMinusOne);
-	verts.push_back(glm::vec3(mapSizeMinusOne, y, mapSizeMinusOne));
-	norms.push_back(glm::vec3(0, 1, 0));
-	uvs.push_back(glm::vec2(1, 1));
 
 	terrain->SetVertexCount(indices.size());
 
