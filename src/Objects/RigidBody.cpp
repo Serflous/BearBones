@@ -179,3 +179,11 @@ Objects::RigidBody::~RigidBody()
 {
 
 }
+
+void Objects::RigidBody::CalculateInertiaTensor()
+{
+	float ih = 0.8333 * m_mass * ((m_width * m_width) + (m_depth * m_depth));
+	float iw = 0.8333 * m_mass * ((m_depth * m_depth) + (m_height * m_height));
+	float id = 0.8333 * m_mass * ((m_width * m_width) + (m_height * m_height));
+	float i = (m_mass * (m_width * m_width + m_depth * m_depth + m_height * m_height)) / 12;
+}

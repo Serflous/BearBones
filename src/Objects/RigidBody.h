@@ -23,16 +23,18 @@ namespace Objects
 		void SetRotationalVelocity(glm::vec3 rotationalVelocity);
 		void SetTorque(glm::vec3 torque);
 		void SetMass(float mass);
+		void SetGravity(float gravity);
+
 		glm::vec3 getVelocity();
 		glm::vec3 GetAcceleration();
 		glm::vec3 GetRotationalVelocity();
 		glm::vec3 GetTorque();
 		float GetMass();
-		void SetGravity(float gravity);
+		
 
 		void CreateBoundingBox();
 		void Step(float dt);
-
+		void CalculateInertiaTensor();
 		virtual ~RigidBody();
 
 		///Actual Physics Equations Used
@@ -52,7 +54,7 @@ namespace Objects
 		//inverse from the current orientation
 		//and the principal moments of inertia
 
-		void calculateInertiaTensor(const glm::vec3& ip);
+		
 
 
 	private:
@@ -76,6 +78,9 @@ namespace Objects
 
 		glm::vec3 m_liftVector;*/
 		float m_mass;
+		float m_width;
+		float m_height;
+		float m_depth;
 
 		glm::vec3 m_velocity;
 		glm::vec3 m_rotationalVelocity;
