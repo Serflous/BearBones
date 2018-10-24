@@ -21,7 +21,7 @@ namespace Core
 {
 
 	typedef void(*f)(int);
-	typedef void(*fc)(std::shared_ptr<Objects::Entity> ent1, std::shared_ptr<Objects::Entity> ent2);
+	typedef void(*fc)(std::shared_ptr<Objects::Entity> ent1, std::shared_ptr<Objects::Entity> ent2, glm::vec3 direction);
 		/**
 		* This is the main class of the engine. It is a singleton class that manages all of the engine's resources, and controls the interfaces
 		* with FreeGLUT.

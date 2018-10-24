@@ -14,7 +14,7 @@ namespace Collision
 {
 
 
-	typedef void(*fc)(std::shared_ptr<Objects::Entity> ent1, std::shared_ptr<Objects::Entity> ent2);
+	typedef void(*fc)(std::shared_ptr<Objects::Entity> ent1, std::shared_ptr<Objects::Entity> ent2, glm::vec3 direction);
 
 	/**
 	 * An Oriented Bounding Box.

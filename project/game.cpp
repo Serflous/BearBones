@@ -18,9 +18,10 @@ void CalculateFrameRate()
 	}
 }
 
-void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2)
+void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2, glm::vec3 direction)
 {
-	entity2->SetPosition(glm::vec3(entity2->GetPosition().x + 0.1f, entity2->GetPosition().y, entity2->GetPosition().z), true);
+	//entity2->SetPosition(glm::vec3(entity2->GetPosition().x + 0.1f, entity2->GetPosition().y, entity2->GetPosition().z), true);
+	//std::cout << "Collision Dir: x-" << direction.x << " y-" << direction.y << " z-" << direction.z << std::endl;
 }
 
 void updateCallback(int dx)
@@ -45,7 +46,7 @@ void updateCallback(int dx)
 	bb->GetCamera(camera);
 
 	// Rotate the camera.
-	camera->Rotate(deltaX, deltaY, dx);
+	//camera->Rotate(deltaX, deltaY, dx);
 
 	// On x -> Quit the game.
 	if (im->GetKeyState('x') == Input::KS_KEY_PRESSED)
@@ -57,6 +58,7 @@ void updateCallback(int dx)
 	{
 		glm::vec3 position = camera->GetPosition();
 		std::cout << "Camera Position: x-" << position.x << " y-" << position.y << " z-" << position.z << std::endl;
+		std::cout << "Camera Rotation: x-" << camera->GetPitch() << " y-" << camera->GetYaw() << " z-" << camera->GetRoll() << std::endl;
 	}
 	// On w -> Walk forward.
 	if (im->GetKeyState('w') == Input::KS_KEY_PRESSED || im->GetKeyState('w') == Input::KS_KEY_REPEAT)
@@ -102,7 +104,8 @@ int main(int argc, char ** argv)
 	bb->GetCamera(camera);
 	// Set the camera position
 	//camera->SetPosition(-132.0f, 0.0f, 167.0f);
-	camera->SetPosition(0.0f, 2.0f, 0.0f);
+	camera->SetPosition(-13.0f, 2.0f, 13.0f);
+	camera->SetRotation(glm::vec3(6, 83, 0));
 
 	// Add resources here
 	/*std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/ECL_Texture.png");
@@ -118,8 +121,8 @@ int main(int argc, char ** argv)
 	//bb->SetGravity(-0.0000001f);
 	bb->SetGravity(glm::vec3(0, -0.0001, 0));
 	
-	std::shared_ptr<Objects::RigidBody> sphereBody1 = loader->CreateRigidBody(primSphere, glm::vec3(10, 10, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::RigidBody> sphereBody2 = loader->CreateRigidBody(primSphere, glm::vec3(30, 20, 20), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::RigidBody> sphereBody1 = loader->CreateRigidBody(primSphere, glm::vec3(10, 1, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::RigidBody> sphereBody2 = loader->CreateRigidBody(primSphere, glm::vec3(10, 0, 10), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::RigidBody> sphereBody3 = loader->CreateRigidBody(primSphere, glm::vec3(20, 30, 30), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::RigidBody> sphereBody4 = loader->CreateRigidBody(primSphere, glm::vec3(40, 40, 10), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::RigidBody> sphereBody5 = loader->CreateRigidBody(primSphere, glm::vec3(10, 50, 40), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
@@ -127,7 +130,7 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::Terrain> terrain = loader->LoadTerrain("res/heightFlat256.png", 256, glm::vec3(10, 1, 10), terrainTextures);
 	terrain->SetPosition(glm::vec3(-127, 0, -127));
 
-	sphereBody1->SetVelocity(glm::vec3(0.001, 0, 0.001));
+	sphereBody1->SetVelocity(glm::vec3(0, 0, 0.004));
 
 	//sphereBody1->SetVelocity(glm::vec3(0, 0.01, 0));
 	bb->RegisterEntityForCollision(sphereBody1);
@@ -136,8 +139,8 @@ int main(int argc, char ** argv)
 	bb->RegisterEntityForCollision(sphereBody4);
 	bb->RegisterEntityForCollision(sphereBody5);
 	bb->RegisterRigidBodyForPhysics(sphereBody1);
-	/*bb->RegisterRigidBodyForPhysics(sphereBody2);
-	bb->RegisterRigidBodyForPhysics(sphereBody3);
+	bb->RegisterRigidBodyForPhysics(sphereBody2);
+	/*bb->RegisterRigidBodyForPhysics(sphereBody3);
 	bb->RegisterRigidBodyForPhysics(sphereBody4);
 	bb->RegisterRigidBodyForPhysics(sphereBody5);*/
 

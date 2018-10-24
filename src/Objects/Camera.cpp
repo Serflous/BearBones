@@ -63,6 +63,13 @@ void Objects::Camera::SetPosition(float x, float y, float z)
 	m_position.z = z;
 }
 
+void Objects::Camera::SetRotation(glm::vec3 rotation)
+{
+	m_pitch = rotation.x;
+	m_yaw = rotation.y;
+	m_roll = rotation.z;
+}
+
 void Objects::Camera::Walk(CameraDirection direction, int dt)
 {
 	if (direction == FORWARD)

@@ -70,7 +70,7 @@ namespace Objects
 			 * @param[in] z The z position to set the camera to.
 			 */
 		void SetPosition(float x, float y, float z);
-
+		void SetRotation(glm::vec3 rotation);
 			/**
 			 * Makes the camera walk in a certain direction. Can be FORWARD or BACKWARD.
 			 * @param[in] direction The direction of to walk in.

@@ -153,6 +153,14 @@ void Objects::RigidBody::ApplyFriction(double friction)
 	}
 }
 
+void Objects::RigidBody::ApplyForceFromRigidBody(std::shared_ptr<Objects::RigidBody> other, glm::vec3 direction)
+{
+	glm::vec3 relativeAcceleration = m_velocity + other->getVelocity();
+
+	m_velocity = (relativeAcceleration * 0.5f) * direction;
+	//m_velocity += force;
+}
+
 void Objects::RigidBody::CreateBoundingBox()
 {
 	float minX, minY, minZ, maxX, maxY, maxZ;

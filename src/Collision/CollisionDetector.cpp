@@ -39,9 +39,31 @@ void Collision::CollisionDetector::TestForCollisions(fc callback)
 				//std::cout << "Vector " << j + 1 << " A: " << manifold->getContactPoint(j).getPositionWorldOnA().getX() << "," << manifold->getContactPoint(j).getPositionWorldOnA().getY() << "," << manifold->getContactPoint(j).getPositionWorldOnA().getZ() << std::endl;
 				//std::cout << "Vector " << j + 1 << " B: " << manifold->getContactPoint(j).getPositionWorldOnB().getX() << "," << manifold->getContactPoint(j).getPositionWorldOnB().getY() << "," << manifold->getContactPoint(j).getPositionWorldOnB().getZ() << std::endl;
 			}
-			// Alert callback
+			if (contactNo >= 3)
+			{
+				btVector3 v = manifold->getContactPoint(0).getPositionWorldOnA();
+				glm::vec3 A = glm::vec3((float)v.getX(), (float)v.getY(), (float)v.getZ());
+				v = manifold->getContactPoint(1).getPositionWorldOnA();
+				glm::vec3 B = glm::vec3((float)v.getX(), (float)v.getY(), (float)v.getZ());
+				v = manifold->getContactPoint(2).getPositionWorldOnA();
+				glm::vec3 C = glm::vec3((float)v.getX(), (float)v.getY(), (float)v.getZ());
 
-			callback(entity1, entity2);
+				glm::vec3 N = glm::cross(A - B, B - C);
+				if (glm::length(N) > 0)
+				{
+					N = glm::normalize(N);
+				}
+				
+				// Rigid body to Rigid Body
+				if (dynamic_cast<Objects::RigidBody*>(entity1.get()) != nullptr && dynamic_cast<Objects::RigidBody*>(entity2.get()) != nullptr)
+				{
+					std::dynamic_pointer_cast<Objects::RigidBody>(entity1)->ApplyForceFromRigidBody(std::dynamic_pointer_cast<Objects::RigidBody>(entity2), N);
+					std::dynamic_pointer_cast<Objects::RigidBody>(entity2)->ApplyForceFromRigidBody(std::dynamic_pointer_cast<Objects::RigidBody>(entity1), N);
+					std::dynamic_pointer_cast<Objects::RigidBody>(entity1)->SetGrounded(false);
+					std::dynamic_pointer_cast<Objects::RigidBody>(entity2)->SetGrounded(false);
+				}
+				callback(entity1, entity2, N);
+			}
 		}
 	}
 }

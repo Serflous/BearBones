@@ -36,6 +36,7 @@ namespace Objects
 		
 		void ApplyGravitationalForce(glm::vec3 gravity);
 		void ApplyFriction(double friction);
+		void ApplyForceFromRigidBody(std::shared_ptr<Objects::RigidBody> other, glm::vec3 direction);
 
 		void CreateBoundingBox();
 		void Step(float dt);
