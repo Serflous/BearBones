@@ -66,6 +66,11 @@ void Objects::RigidBody::SetGrounded(bool grounded)
 	m_grounded = grounded;
 }
 
+bool Objects::RigidBody::HasVelocity()
+{
+	return (m_velocity.x > 0 || m_velocity.y > 0 || m_velocity.z > 0);
+}
+
 Objects::RigidBody::RigidBody(const RigidBody & other) : Entity(other)
 {
 
@@ -126,11 +131,25 @@ float Objects::RigidBody::GetMass()
 	return m_mass;
 }
 
+bool Objects::RigidBody::GetGrounded()
+{
+	return m_grounded;
+}
+
 void Objects::RigidBody::ApplyGravitationalForce(glm::vec3 gravity)
 {
 	if (!m_grounded)
 	{
 		m_velocity += gravity;
+	}
+}
+
+void Objects::RigidBody::ApplyFriction(double friction)
+{
+	if (m_grounded)
+	{
+
+		m_velocity *= friction;
 	}
 }
 

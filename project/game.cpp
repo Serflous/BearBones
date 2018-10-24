@@ -127,6 +127,8 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::Terrain> terrain = loader->LoadTerrain("res/heightFlat256.png", 256, glm::vec3(10, 1, 10), terrainTextures);
 	terrain->SetPosition(glm::vec3(-127, 0, -127));
 
+	sphereBody1->SetVelocity(glm::vec3(0.001, 0, 0.001));
+
 	//sphereBody1->SetVelocity(glm::vec3(0, 0.01, 0));
 	bb->RegisterEntityForCollision(sphereBody1);
 	bb->RegisterEntityForCollision(sphereBody2);
@@ -134,10 +136,10 @@ int main(int argc, char ** argv)
 	bb->RegisterEntityForCollision(sphereBody4);
 	bb->RegisterEntityForCollision(sphereBody5);
 	bb->RegisterRigidBodyForPhysics(sphereBody1);
-	bb->RegisterRigidBodyForPhysics(sphereBody2);
+	/*bb->RegisterRigidBodyForPhysics(sphereBody2);
 	bb->RegisterRigidBodyForPhysics(sphereBody3);
 	bb->RegisterRigidBodyForPhysics(sphereBody4);
-	bb->RegisterRigidBodyForPhysics(sphereBody5);
+	bb->RegisterRigidBodyForPhysics(sphereBody5);*/
 
 	world->AddTexture(tex);
 	world->AddObjModel(model);

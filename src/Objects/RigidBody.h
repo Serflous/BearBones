@@ -25,13 +25,17 @@ namespace Objects
 		void SetMass(float mass);
 		void SetGrounded(bool grounded);
 
+		bool HasVelocity();
+
 		glm::vec3 getVelocity();
 		glm::vec3 GetAcceleration();
 		glm::vec3 GetRotationalVelocity();
 		glm::vec3 GetTorque();
 		float GetMass();
+		bool GetGrounded();
 		
 		void ApplyGravitationalForce(glm::vec3 gravity);
+		void ApplyFriction(double friction);
 
 		void CreateBoundingBox();
 		void Step(float dt);

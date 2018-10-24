@@ -1,6 +1,8 @@
 #pragma once
 #include "Objects/RigidBody.h"
 #include <vector>
+#include <GLM/glm.hpp>
+#include <GLM/gtc/constants.hpp>
 
 namespace Physics
 {
@@ -18,6 +20,7 @@ namespace Physics
 	private:
 		std::vector<std::shared_ptr<Objects::RigidBody>> m_pObjects;
 		glm::vec3 m_gravity;
+		const double GROUND_FRICTION = 0.95;
 	};
 
 }

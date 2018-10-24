@@ -33,6 +33,16 @@ void Physics::PhysicsEngine::Simulate(float delta)
 	for (iter = m_pObjects.begin(); iter != m_pObjects.end(); iter++)
 	{
 		(*iter)->ApplyGravitationalForce(m_gravity);
+		(*iter)->ApplyFriction(GROUND_FRICTION);
+		if ((*iter)->GetGrounded())
+		{
+			if ((*iter)->HasVelocity())
+			{
+				glm::vec3 usableVelocity = glm::vec3((*iter)->getVelocity().z, 0, -(*iter)->getVelocity().x);
+				glm::vec3 rotationalVelocity = usableVelocity / (2 * glm::pi<float>()) * 360.0f;
+				(*iter)->SetRotationalVelocity(rotationalVelocity * 1.0f);
+			}
+		}
 		(*iter)->Step(delta);
 	}
 }
