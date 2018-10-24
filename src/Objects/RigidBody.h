@@ -95,5 +95,7 @@ namespace Objects
 		glm::vec3 m_acceleration;
 		glm::vec3 m_torque;
 		glm::vec3 m_force;
+
+		glm::vec3 m_oldPosition;
 	};
 }

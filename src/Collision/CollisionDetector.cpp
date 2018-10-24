@@ -41,13 +41,14 @@ void Collision::CollisionDetector::TestForCollisions(fc callback)
 			}
 			if (contactNo >= 3)
 			{
+				float distance = (manifold->getContactPoint(0).getDistance() + manifold->getContactPoint(1).getDistance() + manifold->getContactPoint(2).getDistance()) / 3.0f;
 				btVector3 v = manifold->getContactPoint(0).getPositionWorldOnA();
 				glm::vec3 A = glm::vec3((float)v.getX(), (float)v.getY(), (float)v.getZ());
 				v = manifold->getContactPoint(1).getPositionWorldOnA();
 				glm::vec3 B = glm::vec3((float)v.getX(), (float)v.getY(), (float)v.getZ());
 				v = manifold->getContactPoint(2).getPositionWorldOnA();
 				glm::vec3 C = glm::vec3((float)v.getX(), (float)v.getY(), (float)v.getZ());
-
+				
 				glm::vec3 N = glm::cross(A - B, B - C);
 				if (glm::length(N) > 0)
 				{

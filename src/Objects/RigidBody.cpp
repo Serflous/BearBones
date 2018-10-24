@@ -156,8 +156,9 @@ void Objects::RigidBody::ApplyFriction(double friction)
 void Objects::RigidBody::ApplyForceFromRigidBody(std::shared_ptr<Objects::RigidBody> other, glm::vec3 direction)
 {
 	glm::vec3 relativeAcceleration = m_velocity + other->getVelocity();
-
-	m_velocity = (relativeAcceleration * 0.5f) * direction;
+	float relativeMass = other->GetMass() / (m_mass + other->GetMass());
+	m_velocity = (relativeAcceleration * relativeMass) * direction;
+	SetPosition(m_oldPosition);
 	//m_velocity += force;
 }
 
@@ -202,6 +203,7 @@ void Objects::RigidBody::CreateBoundingBox()
 void Objects::RigidBody::Step(float dt)
 {
 	glm::vec3 position = GetPosition();
+	m_oldPosition = position;
 	glm::vec3 rotation = GetRotation();
 	m_force = m_mass * m_acceleration;
 	m_velocity += m_acceleration * dt;

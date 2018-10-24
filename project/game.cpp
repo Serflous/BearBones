@@ -2,6 +2,7 @@
 #include <Collision/CollisionDetector.h>
 
 std::shared_ptr<Objects::RigidBody> body1, body2, body3, body4, body5;
+std::shared_ptr<Objects::RigidBody> sphereBody1, sphereBody2, sphereBody3, sphereBody4, sphereBody5;
 
 
 void CalculateFrameRate()
@@ -87,6 +88,12 @@ void updateCallback(int dx)
 		body1->SetAcceleration(glm::vec3(0.00001f, 0, 0));
 		body1->SetTorque(glm::vec3(0.0001f, 0, 0));
 	}
+	if (im->GetKeyState('r') == Input::KS_KEY_PRESSED)
+	{
+		sphereBody1->SetPosition(glm::vec3(10, 1, 0), true);
+		sphereBody2->SetPosition(glm::vec3(10, 0, 10), true);
+		sphereBody1->SetVelocity(glm::vec3(0, 0, 0.008));
+	}
 }
 
 int main(int argc, char ** argv)
@@ -121,16 +128,18 @@ int main(int argc, char ** argv)
 	//bb->SetGravity(-0.0000001f);
 	bb->SetGravity(glm::vec3(0, -0.0001, 0));
 	
-	std::shared_ptr<Objects::RigidBody> sphereBody1 = loader->CreateRigidBody(primSphere, glm::vec3(10, 1, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::RigidBody> sphereBody2 = loader->CreateRigidBody(primSphere, glm::vec3(10, 0, 10), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::RigidBody> sphereBody3 = loader->CreateRigidBody(primSphere, glm::vec3(20, 30, 30), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::RigidBody> sphereBody4 = loader->CreateRigidBody(primSphere, glm::vec3(40, 40, 10), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::RigidBody> sphereBody5 = loader->CreateRigidBody(primSphere, glm::vec3(10, 50, 40), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	sphereBody1 = loader->CreateRigidBody(primSphere, glm::vec3(10, 1, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	sphereBody2 = loader->CreateRigidBody(primSphere, glm::vec3(10, 0, 10), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	sphereBody3 = loader->CreateRigidBody(primSphere, glm::vec3(20, 30, 30), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	sphereBody4 = loader->CreateRigidBody(primSphere, glm::vec3(40, 40, 10), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	sphereBody5 = loader->CreateRigidBody(primSphere, glm::vec3(10, 50, 40), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::TerrainTextureCollection> terrainTextures = loader->LoadTerrainTextures("res/Grass_Terrain.png", "res/Dirt_Terrain.png", "res/Rock_Terrain.png", "res/RockIce_Terrain.png");
 	std::shared_ptr<Objects::Terrain> terrain = loader->LoadTerrain("res/heightFlat256.png", 256, glm::vec3(10, 1, 10), terrainTextures);
 	terrain->SetPosition(glm::vec3(-127, 0, -127));
 
-	sphereBody1->SetVelocity(glm::vec3(0, 0, 0.004));
+	//sphereBody1->SetVelocity(glm::vec3(0, 0, 0.004));
+	sphereBody1->SetMass(2);
+	sphereBody2->SetMass(1);
 
 	//sphereBody1->SetVelocity(glm::vec3(0, 0.01, 0));
 	bb->RegisterEntityForCollision(sphereBody1);
