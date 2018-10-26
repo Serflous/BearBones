@@ -27,7 +27,8 @@ namespace Objects
 			/**
 			 * Creates a bounding box for the StaticEntity. Static entities use AABB.
 			 */
-		void CreateBoundingBox();
+		void CreateBoundingBox(Util::BB_BoundingVolume type);
+		void UpdateBoundingBox();
 
 	private:
 	};

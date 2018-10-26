@@ -1,9 +1,9 @@
 #include <Core/BearBones.h>
 #include <Collision/CollisionDetector.h>
+#include <Collision/BoundingSphere.h>
+#include <Collision/AABB.h>
 
-std::shared_ptr<Objects::RigidBody> body1, body2, body3, body4, body5;
-std::shared_ptr<Objects::RigidBody> sphereBody1, sphereBody2, sphereBody3, sphereBody4, sphereBody5;
-
+std::shared_ptr<Objects::StaticEntity> rockEnt1, rockEnt2;
 
 void CalculateFrameRate()
 {
@@ -21,8 +21,7 @@ void CalculateFrameRate()
 
 void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2, glm::vec3 direction)
 {
-	//entity2->SetPosition(glm::vec3(entity2->GetPosition().x + 0.1f, entity2->GetPosition().y, entity2->GetPosition().z), true);
-	//std::cout << "Collision Dir: x-" << direction.x << " y-" << direction.y << " z-" << direction.z << std::endl;
+	std::cout << "Collision Detected!" << std::endl;
 }
 
 void updateCallback(int dx)
@@ -47,7 +46,7 @@ void updateCallback(int dx)
 	bb->GetCamera(camera);
 
 	// Rotate the camera.
-	//camera->Rotate(deltaX, deltaY, dx);
+	camera->Rotate(deltaX, deltaY, dx);
 
 	// On x -> Quit the game.
 	if (im->GetKeyState('x') == Input::KS_KEY_PRESSED)
@@ -81,18 +80,20 @@ void updateCallback(int dx)
 	{
 		camera->Strafe(Objects::RIGHT, dx);
 	}
-	if (im->GetKeyState('l') == Input::KS_KEY_PRESSED)// || im->GetKeyState('l') == Input::KS_KEY_REPEAT)
+
+	if (im->GetKeyState('j') == Input::KS_KEY_PRESSED || im->GetKeyState('j') == Input::KS_KEY_REPEAT)
 	{
-		//body1->SetPosition(glm::vec3(body1->GetPosition().x + 0.1f, body1->GetPosition().y, body1->GetPosition().z), true);
-		//body1->SetVelocity(glm::vec3(0.01f, 0, 0));
-		body1->SetAcceleration(glm::vec3(0.00001f, 0, 0));
-		body1->SetTorque(glm::vec3(0.0001f, 0, 0));
+		glm::vec3 pos = rockEnt1->GetPosition();
+		pos.x -= 0.01f * dx;
+		rockEnt1->SetPosition(pos);
+		rockEnt1->UpdateBoundingBox();
 	}
-	if (im->GetKeyState('r') == Input::KS_KEY_PRESSED)
+	if (im->GetKeyState('l') == Input::KS_KEY_PRESSED || im->GetKeyState('l') == Input::KS_KEY_REPEAT)
 	{
-		sphereBody1->SetPosition(glm::vec3(10, 1, 0), true);
-		sphereBody2->SetPosition(glm::vec3(10, 0, 10), true);
-		sphereBody1->SetVelocity(glm::vec3(0, 0, 0.008));
+		glm::vec3 pos = rockEnt1->GetPosition();
+		pos.x += 0.01f * dx;
+		rockEnt1->SetPosition(pos);
+		rockEnt1->UpdateBoundingBox();
 	}
 }
 
@@ -124,45 +125,25 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/rock.png");
 	std::shared_ptr<Objects::ObjModel> model = loader->LoadOBJModel("res/rock.obj", tex);
 	std::shared_ptr<Objects::PrimitiveModel> primSphere = loader->CreateSpherePrimitive(glm::vec3(0.827, 0.827, 0.827));
+	rockEnt1 = loader->CreateStaticEntity(model, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	rockEnt2 = loader->CreateStaticEntity(model, glm::vec3(10, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 
 	//bb->SetGravity(-0.0000001f);
 	bb->SetGravity(glm::vec3(0, -0.0001, 0));
 	
-	sphereBody1 = loader->CreateRigidBody(primSphere, glm::vec3(10, 1, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	sphereBody2 = loader->CreateRigidBody(primSphere, glm::vec3(10, 0, 10), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	sphereBody3 = loader->CreateRigidBody(primSphere, glm::vec3(20, 30, 30), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	sphereBody4 = loader->CreateRigidBody(primSphere, glm::vec3(40, 40, 10), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	sphereBody5 = loader->CreateRigidBody(primSphere, glm::vec3(10, 50, 40), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::TerrainTextureCollection> terrainTextures = loader->LoadTerrainTextures("res/Grass_Terrain.png", "res/Dirt_Terrain.png", "res/Rock_Terrain.png", "res/RockIce_Terrain.png");
 	std::shared_ptr<Objects::Terrain> terrain = loader->LoadTerrain("res/heightFlat256.png", 256, glm::vec3(10, 1, 10), terrainTextures);
 	terrain->SetPosition(glm::vec3(-127, 0, -127));
 
-	//sphereBody1->SetVelocity(glm::vec3(0, 0, 0.004));
-	sphereBody1->SetMass(2);
-	sphereBody2->SetMass(1);
-
-	//sphereBody1->SetVelocity(glm::vec3(0, 0.01, 0));
-	bb->RegisterEntityForCollision(sphereBody1);
-	bb->RegisterEntityForCollision(sphereBody2);
-	bb->RegisterEntityForCollision(sphereBody3);
-	bb->RegisterEntityForCollision(sphereBody4);
-	bb->RegisterEntityForCollision(sphereBody5);
-	bb->RegisterRigidBodyForPhysics(sphereBody1);
-	bb->RegisterRigidBodyForPhysics(sphereBody2);
-	/*bb->RegisterRigidBodyForPhysics(sphereBody3);
-	bb->RegisterRigidBodyForPhysics(sphereBody4);
-	bb->RegisterRigidBodyForPhysics(sphereBody5);*/
-
 	world->AddTexture(tex);
 	world->AddObjModel(model);
 	world->AddPrimitiveModel(primSphere);
+	world->AddStaticEntity(rockEnt1);
+	world->AddStaticEntity(rockEnt2);
 	world->AddTerrain(terrain);
 
-	world->AddRigidBody(sphereBody1);
-	world->AddRigidBody(sphereBody2);
-	world->AddRigidBody(sphereBody3);
-	world->AddRigidBody(sphereBody4);
-	world->AddRigidBody(sphereBody5);
+	bb->RegisterEntityForCollision(rockEnt1);
+	bb->RegisterEntityForCollision(rockEnt2);
 
 	// Set the update callback and begin the main loop
 	bb->SetUpdateCallback(updateCallback);

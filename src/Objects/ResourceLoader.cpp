@@ -90,7 +90,7 @@ std::shared_ptr<Objects::StaticEntity> Objects::ResourceLoader::CreateStaticEnti
 	entity->SetPosition(position);
 	entity->SetRotation(rotation);
 	entity->SetScale(scale);
-	entity->CreateBoundingBox();
+	entity->CreateBoundingBox(Util::BB_BV_AABB);
 	return entity;
 }
 
@@ -193,7 +193,7 @@ std::shared_ptr<Objects::RigidBody> Objects::ResourceLoader::CreateRigidBody(std
 	entity->SetPosition(position);
 	entity->SetRotation(rotation);
 	entity->SetScale(scale);
-	entity->CreateBoundingBox();
+	entity->CreateBoundingBox(Util::BB_BV_AABB);
 	return entity;
 }
 

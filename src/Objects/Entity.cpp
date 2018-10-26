@@ -25,22 +25,14 @@ void Objects::Entity::SetModel(std::shared_ptr<Objects::ModelBase> model)
 	m_model = model;
 }
 
-void Objects::Entity::SetPosition(glm::vec3 position, bool updateBB)
+void Objects::Entity::SetPosition(glm::vec3 position)
 {
 	m_position = position;
-	if (updateBB)
-	{
-		m_collisionObject->getWorldTransform().setOrigin(btVector3(position.x, position.y, position.z));
-	}
 }
 
-void Objects::Entity::SetRotation(glm::vec3 rotation, bool updateBB)
+void Objects::Entity::SetRotation(glm::vec3 rotation)
 {
 	m_rotation = rotation;
-	if (updateBB)
-	{
-		m_collisionObject->getWorldTransform().setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
-	}
 }
 
 void Objects::Entity::SetScale(glm::vec3 scale)
@@ -68,12 +60,7 @@ glm::vec3 Objects::Entity::GetScale()
 	return m_scale;
 }
 
-void Objects::Entity::SetCollisionObject(std::shared_ptr<btCollisionObject> object)
+std::shared_ptr<Collision::BoundingVolume> Objects::Entity::GetBoundingVolume()
 {
-	m_collisionObject = object;
-}
-
-std::shared_ptr<btCollisionObject> Objects::Entity::GetCollisionObject()
-{
-	return m_collisionObject;
+	return m_boundingVolume;
 }

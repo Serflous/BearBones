@@ -2,6 +2,8 @@
 #include "Objects/Entity.h"
 #include "bullet/btBulletCollisionCommon.h"
 #include "GLM/mat3x3.hpp"
+#include <GLM/gtc/matrix_transform.hpp>
+#include <GLM/vec4.hpp>
 
 namespace Objects
 {
@@ -38,7 +40,8 @@ namespace Objects
 		void ApplyFriction(double friction);
 		void ApplyForceFromRigidBody(std::shared_ptr<Objects::RigidBody> other, glm::vec3 direction);
 
-		void CreateBoundingBox();
+		void CreateBoundingBox(Util::BB_BoundingVolume volume);
+		void UpdateBoundingBox();
 		void Step(float dt);
 		void CalculateInertiaTensor();
 		virtual ~RigidBody();

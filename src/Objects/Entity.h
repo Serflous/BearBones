@@ -2,11 +2,12 @@
 
 #include <GLM/vec3.hpp>
 
-#include <bullet/btBulletCollisionCommon.h>
-
 #include <memory>
 
+#include "../Util/Types.h"
 #include "ModelBase.h"
+#include "../Collision/BoundingVolume.h"
+#include "../Collision/AABB.h"
 
 namespace Objects
 {
@@ -32,12 +33,12 @@ namespace Objects
 			 * Sets the position of the entity.
 			 * @param[in] position The position of the entity
 			 */
-		void SetPosition(glm::vec3 position, bool updateBB = false);
+		void SetPosition(glm::vec3 position);
 			/**
 			 * Sets the rotation of the entity.
 			 * @param[in] rotation The rotation of the entity.
 			 */
-		void SetRotation(glm::vec3 rotation, bool updateBB = false);
+		void SetRotation(glm::vec3 rotation);
 			/**
 			 * Sets the scale of the entity.
 			 * @param[in] scale The scale of the entity.
@@ -65,24 +66,24 @@ namespace Objects
 			 */
 		glm::vec3 GetScale();
 
-		void SetCollisionObject(std::shared_ptr<btCollisionObject> object);
-
-		std::shared_ptr<btCollisionObject> GetCollisionObject();
-
 			/**
 			 * Pure virtual function. Creates the bounding box. As each type of entity will have its own type of the bounding box.
 			 */
-		virtual void CreateBoundingBox() = 0;
+		virtual void CreateBoundingBox(Util::BB_BoundingVolume type) = 0;
+		virtual void UpdateBoundingBox() = 0;
+		
+		std::shared_ptr<Collision::BoundingVolume> GetBoundingVolume();
 
 	protected:
-		std::shared_ptr<btCollisionObject> m_collisionObject;
+		std::shared_ptr<Collision::BoundingVolume> m_boundingVolume;
+		Util::BB_BoundingVolume m_volumeType;
 
 	private:
 		std::shared_ptr<Objects::ModelBase> m_model;
 		glm::vec3 m_position;
 		glm::vec3 m_rotation;
 		glm::vec3 m_scale;
-
+		
 
 	};
 

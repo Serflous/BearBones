@@ -105,7 +105,6 @@ void Core::BearBones::Update(int dx)
 	int deltaTime = currentTime - dx;
 
 	m_collisionDetector->TestForCollisions(m_collisionCallback);
-	m_collisionDetector->Update(dx);
 	m_physicsEngine->Simulate(deltaTime);
 
 	m_updateCallback(deltaTime);
