@@ -22,11 +22,7 @@ void CalculateFrameRate()
 
 void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2, glm::vec3 direction)
 {
-	std::shared_ptr<Collision::BoundingVolume> vol1 = entity1->GetBoundingVolume();
-	std::shared_ptr<Collision::BoundingVolume> vol2 = entity2->GetBoundingVolume();
-	Collision::OBB box1 = *(std::dynamic_pointer_cast<Collision::OBB>(vol1));
-	Collision::OBB box2 = *(std::dynamic_pointer_cast<Collision::OBB>(vol2));
-	std::cout << "Collision detected!" << std::endl;
+	std::cout << "Collision detected at point: X-(" << direction.x << ") Y-(" << direction.y << ") Z-(" << direction.z << ")" << std::endl;
 }
 
 void updateCallback(int dx)
@@ -89,14 +85,14 @@ void updateCallback(int dx)
 	if (im->GetKeyState('j') == Input::KS_KEY_PRESSED || im->GetKeyState('j') == Input::KS_KEY_REPEAT)
 	{
 		glm::vec3 pos = rockEnt1->GetPosition();
-		pos.x -= 0.01f * dx;
+		pos.x -= 0.001f * dx;
 		rockEnt1->SetPosition(pos);
 		rockEnt1->UpdateBoundingBox();
 	}
 	if (im->GetKeyState('l') == Input::KS_KEY_PRESSED || im->GetKeyState('l') == Input::KS_KEY_REPEAT)
 	{
 		glm::vec3 pos = rockEnt1->GetPosition();
-		pos.x += 0.01f * dx;
+		pos.x += 0.001f * dx;
 		rockEnt1->SetPosition(pos);
 		rockEnt1->UpdateBoundingBox();
 	}
@@ -131,8 +127,8 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::ObjModel> model = loader->LoadOBJModel("res/rock.obj", tex);
 	std::shared_ptr<Objects::PrimitiveModel> primCube = loader->CreateCubePrimitive(glm::vec3(0.827, 0.827, 0.827));
 	std::shared_ptr<Objects::PrimitiveModel> primSphere = loader->CreateSpherePrimitive(glm::vec3(0.827, 0.827, 0.827));
-	rockEnt1 = loader->CreateStaticEntity(model, glm::vec3(0, 0, 0), glm::vec3(0, 0, 45), glm::vec3(1, 1, 1));
-	rockEnt2 = loader->CreateStaticEntity(model, glm::vec3(10, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	rockEnt1 = loader->CreateStaticEntity(primSphere, glm::vec3(0, 1, 0), glm::vec3(0, 0, 45), glm::vec3(1, 1, 1));
+	rockEnt2 = loader->CreateStaticEntity(primSphere, glm::vec3(10, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 
 	//bb->SetGravity(-0.0000001f);
 	bb->SetGravity(glm::vec3(0, -0.0001, 0));
