@@ -3,6 +3,8 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
+#include <GLM/gtc/type_ptr.hpp>
+
 #include <iostream>
 #include <map>
 
@@ -13,12 +15,13 @@
 #include "../Objects/Camera.h"
 #include "../Util/Types.h"
 #include "../Collision/CollisionDetector.h"
+#include "../Physics/PhysicsEngine.h"
 
 namespace Core
 {
 
 	typedef void(*f)(int);
-	typedef void(*fc)(std::shared_ptr<Objects::Entity> ent1, std::shared_ptr<Objects::Entity> ent2);
+	typedef void(*fc)(std::shared_ptr<Objects::Entity> ent1, std::shared_ptr<Objects::Entity> ent2, glm::vec3 direction);
 		/**
 		* This is the main class of the engine. It is a singleton class that manages all of the engine's resources, and controls the interfaces
 		* with FreeGLUT.
@@ -93,8 +96,9 @@ namespace Core
 			 * @param[out] A pointer to the camera.
 			 */
 		void GetCamera(std::shared_ptr<Objects::Camera> & camera);
-
+		void SetGravity(glm::vec3 gravity);
 		void RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity);
+		void RegisterRigidBodyForPhysics(std::shared_ptr<Objects::RigidBody> rb);
 		void SetCollisionCallback(fc callback);
 
 		static void StaticDrawCallback();
@@ -113,21 +117,21 @@ namespace Core
 		~BearBones();
 		BearBones(const BearBones & other);
 
-		void GeneratePrimitives();
-
 		int m_winX;
 		int m_winY;
 		f m_updateCallback;
 		fc m_collisionCallback;
 		static BearBones * m_instance;
 
-		std::shared_ptr<std::map<Util::BB_Primitives, GLuint>> m_primitiveIds;
-
 		std::shared_ptr<Objects::ResourceLoader> m_loader;
 		std::shared_ptr<Rendering::Renderer> m_renderer;
 		std::shared_ptr<Objects::World> m_world;
 		std::shared_ptr<Objects::Camera> m_camera;
 		std::unique_ptr<Collision::CollisionDetector> m_collisionDetector;
+		std::shared_ptr<Physics::PhysicsEngine> m_physicsEngine;
+		std::shared_ptr<Objects::AIEntity> m_ai;
+
+		int nextWaypoint = 0;
 	};
 
 

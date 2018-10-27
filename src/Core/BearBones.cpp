@@ -66,18 +66,24 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 
 	glutSetCursor(GLUT_CURSOR_NONE);
 
-	m_primitiveIds = std::make_shared<std::map<Util::BB_Primitives, GLuint>>();
 	m_loader = std::make_shared<Objects::ResourceLoader>();
-	GeneratePrimitives();
-
 	m_renderer = std::make_shared<Rendering::Renderer>();
-	m_renderer->SetPrimitiveIds(m_primitiveIds);
-
 	m_world = std::make_shared<Objects::World>();
 	m_camera = std::make_shared<Objects::Camera>();
 	m_collisionDetector = std::make_unique<Collision::CollisionDetector>();
-	return 0;
+	m_physicsEngine = std::make_shared<Physics::PhysicsEngine>();
+	m_ai = std::make_shared<Objects::AIEntity>();
 
+	m_ai = std::make_shared<Objects::AIEntity>();
+
+	m_world->AddDebugObject(m_ai);
+
+	m_collisionDetector->SetWorld(m_world);
+	m_collisionDetector->SetPhysicsEngine(m_physicsEngine);
+
+	m_ai->SetDestination(glm::vec3(20, 0, 0));
+
+	return 0;
 }
 
 void Core::BearBones::BeginMainGameLoop()
@@ -90,6 +96,7 @@ void Core::BearBones::DrawCallback()
 {
 	m_renderer->RenderWorld(m_world, m_camera);
 	glutSwapBuffers();
+	m_world->Update();
 }
 
 void Core::BearBones::ReshapeCallback(int x, int y)
@@ -104,12 +111,34 @@ void Core::BearBones::Update(int dx)
 {
 	int currentTime = glutGet(GLUT_ELAPSED_TIME);
 	int deltaTime = currentTime - dx;
-	glutTimerFunc(16, StaticUpdateCallback, currentTime);
 
 	m_collisionDetector->TestForCollisions(m_collisionCallback);
+	m_collisionDetector->Update(dx);
+	m_physicsEngine->Simulate(deltaTime);
 
 	m_updateCallback(deltaTime);
 	glutWarpPointer(m_winX / 2, m_winY / 2);
+
+	glutTimerFunc(16, StaticUpdateCallback, currentTime);
+
+	bool reachedDestination = m_ai->IncrementMovement(deltaTime);
+
+	//pick a new waypoint. maybe dont move for a certain amount of deltaTime..
+	if (reachedDestination) {
+		switch (nextWaypoint) {
+		case 0:
+			m_ai->SetDestination(glm::vec3(0, 0, 0));
+			nextWaypoint++;
+			break;
+		case 1:
+			m_ai->SetDestination(glm::vec3(0, 0, 20));
+			nextWaypoint++;
+			break;
+		case 2:
+			m_ai->SetDestination(glm::vec3(0, 0, 0));
+			break;
+		}
+	}
 }
 
 void Core::BearBones::GetWindowSize(int & x, int & y)
@@ -143,9 +172,19 @@ void Core::BearBones::GetCamera(std::shared_ptr<Objects::Camera> & camera)
 	camera = m_camera;
 }
 
+void Core::BearBones::SetGravity(glm::vec3 gravity)
+{
+	m_physicsEngine->SetGravity(gravity);
+}
+
 void Core::BearBones::RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity)
 {
 	m_collisionDetector->RegisterEntityForCollision(entity);
+}
+
+void Core::BearBones::RegisterRigidBodyForPhysics(std::shared_ptr<Objects::RigidBody> rb)
+{
+	m_physicsEngine->RegisterRidigBodyForPhysics(rb);
 }
 
 void Core::BearBones::SetCollisionCallback(fc callback)
@@ -265,39 +304,4 @@ void APIENTRY Core::BearBones::StaticMessageCallback(GLenum source, GLenum type,
 		break;
 	}
 	cout << endl;
-}
-
-void Core::BearBones::GeneratePrimitives()
-{
-	// Cube
-	std::vector<glm::vec3> cubePositions =
-	{
-		glm::vec3(-1.0f, -1.0f, 1.0f),
-		glm::vec3(1.0f, -1.0f, 1.0f),
-		glm::vec3(1.0f, 1.0f, 1.0f),
-		glm::vec3(-1.0f, 1.0f, 1.0f),
-		glm::vec3(-1.0f, -1.0f, -1.0f),
-		glm::vec3(1.0f, -1.0f, -1.0f),
-		glm::vec3(1.0f, 1.0f, -1.0f),
-		glm::vec3(-1.0f, 1.0f, -1.0f)
-	};
-	std::vector<int> cubeElements =
-	{
-		0, 1, 2,
-		2, 3, 0,
-		1, 5, 6,
-		6, 2, 1,
-		7, 6, 5,
-		5, 4, 7,
-		4, 0, 3,
-		3, 7, 4,
-		4, 5, 1,
-		1, 0, 4,
-		3, 2, 6,
-		6, 7, 3,
-	};
-
-	GLuint cubeId = m_loader->LoadPrimitive(cubePositions, cubeElements);
-	m_primitiveIds->insert({ Util::BB_CUBE, cubeId });
-
 }

@@ -16,6 +16,8 @@
 #include "../Shaders/ShaderBase.h"
 #include "../Shaders/StaticShader.h"
 #include "../Shaders/BoundingBoxShader.h"
+#include "../Shaders/PrimitiveShader.h"
+#include "../Shaders/TerrainShader.h"
 #include "../Objects/Camera.h"
 #include "../Util/MathUtil.h"
 #include "../Util/Types.h"
@@ -45,13 +47,14 @@ namespace Rendering
 			 * @param[in] y The height of the screen.
 			 */
 		void SetDimensions(int x, int y);
-		void SetPrimitiveIds(std::shared_ptr<std::map<Util::BB_Primitives, GLuint>> primitives);
 			/**
 			 * Renders a world onto the screen using a particular camera as reference.
 			 * @param[in] A pointer to the world to draw.
 			 * @param[in] A pointer to the camera to use.
 			 */
 		void RenderWorld(std::shared_ptr<Objects::World> world, std::shared_ptr<Objects::Camera> camera);
+
+		void RenderDebugObject(std::shared_ptr<Objects::Entity> entity);
 
 	private:
 			/**
@@ -64,7 +67,8 @@ namespace Rendering
 			 */
 		void RenderOBJModel(std::shared_ptr<Objects::ObjModel> model);
 
-		void RenderEntityAABB();
+		void RenderPrimitive(std::shared_ptr<Objects::PrimitiveModel> model);
+		void RenderTerrain(std::shared_ptr<Objects::Terrain> terrain);
 
 			/**
 			 * Creates the projection matrix for rendering.
@@ -89,8 +93,9 @@ namespace Rendering
 		glm::mat4x4 m_projectionMatrix;
 		std::shared_ptr<Shaders::ShaderBase> m_staticShader;
 		std::shared_ptr<Shaders::ShaderBase> m_boundingBoxShader;
-		std::shared_ptr<std::map<Util::BB_Primitives, GLuint>> m_primitives;
-		const float FOV = 70.0f;
+		std::shared_ptr<Shaders::ShaderBase> m_primitiveShader;
+		std::shared_ptr<Shaders::ShaderBase> m_terrainShader;
+		const float FOV = 45.0f;
 		const float NEAR_PLANE = 0.1f;
 		const float FAR_PLANE = 1000.0f;
 	};
