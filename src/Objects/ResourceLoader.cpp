@@ -193,7 +193,7 @@ std::shared_ptr<Objects::RigidBody> Objects::ResourceLoader::CreateRigidBody(std
 	entity->SetPosition(position);
 	entity->SetRotation(rotation);
 	entity->SetScale(scale);
-	entity->CreateBoundingBox(Util::BB_BV_AABB);
+	entity->CreateBoundingBox(Util::BB_BV_OBB);
 	return entity;
 }
 
