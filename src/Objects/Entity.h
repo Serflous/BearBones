@@ -8,6 +8,7 @@
 #include "ModelBase.h"
 #include "../Collision/BoundingVolume.h"
 #include "../Collision/AABB.h"
+#include "../Collision/OBB.h"
 
 namespace Objects
 {

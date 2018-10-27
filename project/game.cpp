@@ -2,6 +2,7 @@
 #include <Collision/CollisionDetector.h>
 #include <Collision/BoundingSphere.h>
 #include <Collision/AABB.h>
+#include <Collision/OBB.h>
 
 std::shared_ptr<Objects::StaticEntity> rockEnt1, rockEnt2;
 
@@ -21,7 +22,11 @@ void CalculateFrameRate()
 
 void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2, glm::vec3 direction)
 {
-	std::cout << "Collision Detected!" << std::endl;
+	std::shared_ptr<Collision::BoundingVolume> vol1 = entity1->GetBoundingVolume();
+	std::shared_ptr<Collision::BoundingVolume> vol2 = entity2->GetBoundingVolume();
+	Collision::OBB box1 = *(std::dynamic_pointer_cast<Collision::OBB>(vol1));
+	Collision::OBB box2 = *(std::dynamic_pointer_cast<Collision::OBB>(vol2));
+	std::cout << "Collision detected!" << std::endl;
 }
 
 void updateCallback(int dx)
@@ -124,8 +129,9 @@ int main(int argc, char ** argv)
 	world->AddStaticEntity(entity);*/
 	std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/rock.png");
 	std::shared_ptr<Objects::ObjModel> model = loader->LoadOBJModel("res/rock.obj", tex);
+	std::shared_ptr<Objects::PrimitiveModel> primCube = loader->CreateCubePrimitive(glm::vec3(0.827, 0.827, 0.827));
 	std::shared_ptr<Objects::PrimitiveModel> primSphere = loader->CreateSpherePrimitive(glm::vec3(0.827, 0.827, 0.827));
-	rockEnt1 = loader->CreateStaticEntity(model, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	rockEnt1 = loader->CreateStaticEntity(model, glm::vec3(0, 0, 0), glm::vec3(0, 0, 45), glm::vec3(1, 1, 1));
 	rockEnt2 = loader->CreateStaticEntity(model, glm::vec3(10, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 
 	//bb->SetGravity(-0.0000001f);

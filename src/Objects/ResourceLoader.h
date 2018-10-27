@@ -61,7 +61,7 @@ namespace Objects
 			 * @sa Objects::StaticEntity
 			 * @return A pointer to the newly created entity.
 			 */
-		std::shared_ptr<StaticEntity> CreateStaticEntity(std::shared_ptr<ObjModel> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+		std::shared_ptr<StaticEntity> CreateStaticEntity(std::shared_ptr<ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
 		std::shared_ptr<PrimitiveModel> CreateCubePrimitive(glm::vec3 colour);
 		std::shared_ptr<PrimitiveModel> CreateSpherePrimitive(glm::vec3 colour);

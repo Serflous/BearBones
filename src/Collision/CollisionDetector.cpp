@@ -27,6 +27,13 @@ void Collision::CollisionDetector::TestForCollisions(fc callback)
 					callback(ent1, ent2, glm::vec3(0));
 				}
 			}
+			if (dynamic_cast<Collision::OBB*>(volume1.get()) != nullptr && dynamic_cast<Collision::OBB*>(volume2.get()) != nullptr)
+			{
+				if (std::dynamic_pointer_cast<Collision::OBB>(volume1)->IsCollidingWith(*(std::dynamic_pointer_cast<Collision::OBB>(volume2))))
+				{
+					callback(ent1, ent2, glm::vec3(0));
+				}
+			}
 		}
 	}
 }

@@ -83,14 +83,14 @@ std::shared_ptr<Objects::ObjModel> Objects::ResourceLoader::LoadOBJModel(std::st
 	return model;
 }
 
-std::shared_ptr<Objects::StaticEntity> Objects::ResourceLoader::CreateStaticEntity(std::shared_ptr<Objects::ObjModel> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+std::shared_ptr<Objects::StaticEntity> Objects::ResourceLoader::CreateStaticEntity(std::shared_ptr<Objects::ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
 	std::shared_ptr<Objects::StaticEntity> entity = std::make_shared<Objects::StaticEntity>();
 	entity->SetModel(model);
 	entity->SetPosition(position);
 	entity->SetRotation(rotation);
 	entity->SetScale(scale);
-	entity->CreateBoundingBox(Util::BB_BV_AABB);
+	entity->CreateBoundingBox(Util::BB_BV_OBB);
 	return entity;
 }
 

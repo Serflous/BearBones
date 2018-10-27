@@ -12,6 +12,7 @@ namespace Util
 	enum BB_BoundingVolume
 	{
 		BB_BV_AABB,
-		BB_BV_SPHERE
+		BB_BV_SPHERE,
+		BB_BV_OBB
 	};
 }
