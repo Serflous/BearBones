@@ -55,6 +55,11 @@ void Objects::World::AddTerrain(std::shared_ptr<Objects::Terrain> terrain)
 	m_terrains->push_back(terrain);
 }
 
+void Objects::World::AddNPC(std::shared_ptr<NPC> npc)
+{
+	m_npcs->push_back(npc);
+}
+
 std::shared_ptr<std::vector<std::shared_ptr<Objects::Texture>>> Objects::World::GetTextures()
 {
 	return m_textures;

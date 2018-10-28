@@ -1,5 +1,6 @@
 #pragma once
-#include "StateMachine.h"
+#include "AI/StateMachine.h"
+#include "Entity.h"
 #include <iostream>
 
 struct NPCData : public EventData
@@ -10,11 +11,11 @@ struct NPCData : public EventData
 	float AnnoyedCo;
 };
 
-class NPC : public StateMachine
+class NPC : public StateMachine 
 {
 public:
 	NPC() : StateMachine(ST_MAX_STATES) {}
-
+	
 	void Walking();
 	void Halt();
 private:

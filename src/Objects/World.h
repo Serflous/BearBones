@@ -9,6 +9,7 @@
 #include "Entity.h"
 #include "StaticEntity.h"
 #include "RigidBody.h"
+#include "NPC.h"
 #include "Terrain.h"
 
 namespace Objects
@@ -48,7 +49,7 @@ namespace Objects
 
 		void AddRigidBody(std::shared_ptr<Objects::RigidBody> entity);
 		void AddTerrain(std::shared_ptr<Objects::Terrain> terrain);
-
+		void AddNPC(std::shared_ptr<NPC> npc);
 			/**
 			 * Gets the textures currently loaded.
 			 * @return A vector of pointers to textures currently in the world
@@ -76,6 +77,7 @@ namespace Objects
 		std::shared_ptr<std::vector<std::shared_ptr<StaticEntity>>> m_staticEntities;
 		std::shared_ptr<std::vector<std::shared_ptr<RigidBody>>> m_rigidBodies;
 		std::shared_ptr<std::vector<std::shared_ptr<Objects::Terrain>>> m_terrains;
+		std::shared_ptr<std::vector<std::shared_ptr<NPC>>> m_npcs;
 	};
 
 }

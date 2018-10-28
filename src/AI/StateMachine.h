@@ -1,6 +1,7 @@
 #ifndef _STATE_MACHINE_H
 #define _STATE_MACHINE_H
 #include <stdio.h>
+#include "Objects/Entity.h"
 
 class EventData
 {
@@ -11,7 +12,7 @@ public:
 struct StateStruct;
 
 // base class for state machines
-class StateMachine
+class StateMachine : public Objects::Entity
 {
 public:
 	StateMachine(unsigned char maxStates);

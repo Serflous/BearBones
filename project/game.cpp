@@ -5,6 +5,7 @@
 #include <Collision/OBB.h>
 
 std::shared_ptr<Objects::StaticEntity> rockEnt1, rockEnt2;
+std::shared_ptr<NPC> testNPC1, testNPC2;
 
 void CalculateFrameRate()
 {
