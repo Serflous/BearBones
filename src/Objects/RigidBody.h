@@ -18,10 +18,13 @@ namespace Objects
 		virtual void UpdateBoundingBox();
 
 		void SetMass(double mass);
+		void SetCenterOfGravity(glm::vec3 cog);
 		void SetVelocity(glm::vec3 velocity);
 
 		double GetMass();
+		glm::vec3 GetCenterOfGravity();
 		glm::vec3 GetVelocity();
+		glm::vec3 GetMomentum();
 
 		void Integrate(double dt);
 		void ApplyGravity(glm::vec3 gravity, double dt);
@@ -29,6 +32,7 @@ namespace Objects
 		
 	private:
 		double m_mass;
+		glm::vec3 m_cog;
 		glm::vec3 m_velocity;
 
 	};

@@ -4,7 +4,7 @@
 #include <Collision/AABB.h>
 #include <Collision/OBB.h>
 
-std::shared_ptr<Objects::RigidBody> rockEnt1, rockEnt2;
+std::shared_ptr<Objects::RigidBody> rockEnt1, rockEnt2, rockEnt3, rockEnt4, rockEnt5;
 
 void CalculateFrameRate()
 {
@@ -98,7 +98,15 @@ void updateCallback(int dx)
 	}
 	if (im->GetKeyState('r') == Input::KS_KEY_PRESSED)
 	{
-		rockEnt1->ApplyForce(glm::vec3(10, 0, 0), dx);
+		bb->RegisterRigidBodyForPhysics(rockEnt1);
+		bb->RegisterRigidBodyForPhysics(rockEnt2);
+		bb->RegisterRigidBodyForPhysics(rockEnt3);
+		bb->RegisterRigidBodyForPhysics(rockEnt4);
+		bb->RegisterRigidBodyForPhysics(rockEnt5);
+	}
+	if (im->GetKeyState('f') == Input::KS_KEY_PRESSED)
+	{
+		rockEnt4->ApplyForce(glm::vec3(2500, 0, -5000), 16);
 	}
 }
 
@@ -130,30 +138,55 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/rock.png");
 	std::shared_ptr<Objects::ObjModel> model = loader->LoadOBJModel("res/rock.obj", tex);
 	std::shared_ptr<Objects::PrimitiveModel> primCube = loader->CreateCubePrimitive(glm::vec3(0.827, 0.827, 0.827));
-	std::shared_ptr<Objects::PrimitiveModel> primSphere = loader->CreateSpherePrimitive(glm::vec3(0.827, 0.827, 0.827));
-	rockEnt1 = loader->CreateRigidBody(primSphere, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	rockEnt2 = loader->CreateRigidBody(primSphere, glm::vec3(10, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::PrimitiveModel> primSphere1 = loader->CreateSpherePrimitive(glm::vec3(1, 0, 0));//glm::vec3(0.827, 0.827, 0.827));
+	std::shared_ptr<Objects::PrimitiveModel> primSphere2 = loader->CreateSpherePrimitive(glm::vec3(0, 1, 0));
+	std::shared_ptr<Objects::PrimitiveModel> primSphere3 = loader->CreateSpherePrimitive(glm::vec3(0, 0, 1));
+	std::shared_ptr<Objects::PrimitiveModel> primSphere4 = loader->CreateSpherePrimitive(glm::vec3(1, 0, 1));
+	std::shared_ptr<Objects::PrimitiveModel> primSphere5 = loader->CreateSpherePrimitive(glm::vec3(1, 1, 0));
+	rockEnt1 = loader->CreateRigidBody(primSphere1, glm::vec3(0, 50, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	rockEnt2 = loader->CreateRigidBody(primSphere2, glm::vec3(10, 50, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	rockEnt3 = loader->CreateRigidBody(primSphere3, glm::vec3(10, 50, 10), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	rockEnt4 = loader->CreateRigidBody(primSphere4, glm::vec3(10, 50, 20), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	rockEnt5 = loader->CreateRigidBody(primSphere5, glm::vec3(20, 50, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 
 	rockEnt1->SetMass(1);
+	rockEnt2->SetMass(2);
+	rockEnt3->SetMass(3);
+	rockEnt4->SetMass(1);
+	rockEnt5->SetMass(1);
+	rockEnt1->ApplyForce(glm::vec3(190, 0, 0), 16);
+	rockEnt2->ApplyForce(glm::vec3(0, 0, 210), 16);
+	rockEnt3->ApplyForce(glm::vec3(30, 0, 0), 16);
+	rockEnt4->ApplyForce(glm::vec3(0, 0, -200), 16);
 
 	//bb->SetGravity(-0.0000001f);
 	bb->SetGravity(glm::vec3(0, -9.8, 0));
 	
 	std::shared_ptr<Objects::TerrainTextureCollection> terrainTextures = loader->LoadTerrainTextures("res/Grass_Terrain.png", "res/Dirt_Terrain.png", "res/Rock_Terrain.png", "res/RockIce_Terrain.png");
 	std::shared_ptr<Objects::Terrain> terrain = loader->LoadTerrain("res/heightFlat256.png", 256, glm::vec3(10, 1, 10), terrainTextures);
-	terrain->SetPosition(glm::vec3(-127, 0, -127));
+	terrain->SetPosition(glm::vec3(0, 0, 0));
 
 	world->AddTexture(tex);
 	world->AddObjModel(model);
-	world->AddPrimitiveModel(primSphere);
+	world->AddPrimitiveModel(primSphere1);
+	world->AddPrimitiveModel(primSphere2);
+	world->AddPrimitiveModel(primSphere3);
+	world->AddPrimitiveModel(primSphere4);
+	world->AddPrimitiveModel(primSphere5);
 	world->AddRigidBody(rockEnt1);
 	world->AddRigidBody(rockEnt2);
+	world->AddRigidBody(rockEnt3);
+	world->AddRigidBody(rockEnt4);
+	world->AddRigidBody(rockEnt5);
 	world->AddTerrain(terrain);
 
 	bb->RegisterEntityForCollision(rockEnt1);
 	bb->RegisterEntityForCollision(rockEnt2);
-	bb->RegisterRigidBodyForPhysics(rockEnt1);
-	bb->RegisterRigidBodyForPhysics(rockEnt2);
+	bb->RegisterEntityForCollision(rockEnt3);
+	bb->RegisterEntityForCollision(rockEnt4);
+	bb->RegisterEntityForCollision(rockEnt5);
+	//bb->RegisterRigidBodyForPhysics(rockEnt1);
+	//bb->RegisterRigidBodyForPhysics(rockEnt2);
 
 	// Set the update callback and begin the main loop
 	bb->SetUpdateCallback(updateCallback);

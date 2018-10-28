@@ -194,6 +194,35 @@ std::shared_ptr<Objects::RigidBody> Objects::ResourceLoader::CreateRigidBody(std
 	entity->SetRotation(rotation);
 	entity->SetScale(scale);
 	entity->CreateBoundingBox(Util::BB_BV_OBB);
+	std::shared_ptr<Collision::BoundingVolume> bb = entity->GetBoundingVolume();
+	std::shared_ptr<Collision::OBB> obb = std::dynamic_pointer_cast<Collision::OBB>(bb);
+	float minX, minY, minZ, maxX, maxY, maxZ;
+	minX = minY = minZ = std::numeric_limits<float>::max();
+	maxX = maxY = maxZ = std::numeric_limits<float>::min();
+	std::vector<glm::vec3>::iterator iter;
+	std::vector<glm::vec3> verts = model->GetVerticies();
+	for (iter = verts.begin(); iter != verts.end(); iter++)
+	{
+		glm::vec3 vert = (*iter);
+		if (vert.x < minX)
+			minX = vert.x;
+		if (vert.y < minY)
+			minY = vert.y;
+		if (vert.z < minZ)
+			minZ = vert.z;
+		if (vert.x > maxX)
+			maxX = vert.x;
+		if (vert.y > maxY)
+			maxY = vert.y;
+		if (vert.z > maxZ)
+			maxZ = vert.z;
+	}
+	entity->SetCenterOfGravity(glm::vec3
+	(
+		(minX + maxX) / 2.0,
+		(minY + maxY) / 2.0,
+		(minZ + maxZ) / 2.0
+	));
 	return entity;
 }
 

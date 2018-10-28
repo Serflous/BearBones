@@ -10,7 +10,7 @@ void Collision::CollisionDetector::RegisterEntityForCollision(std::shared_ptr<Ob
 	m_registeredEntities.push_back(entity);
 }
 
-void Collision::CollisionDetector::TestForCollisions(fc callback)
+void Collision::CollisionDetector::TestForCollisions(fc callback, float dt)
 {
 	for (int i = 0; i < m_registeredEntities.size() - 1; i++)
 	{
@@ -35,8 +35,8 @@ void Collision::CollisionDetector::TestForCollisions(fc callback)
 					glm::vec3 cp2 = ent2->GetPosition();
 					glm::vec3 directionToOther = cp2 - cp1;
 					glm::vec3 directionToMe = cp1 - cp2;
-					glm::vec3 support1 = GetSupport(ent1->GetModel()->GetVerticies(), directionToOther);
-					glm::vec3 support2 = GetSupport(ent2->GetModel()->GetVerticies(), directionToMe);
+					glm::vec3 support1 = GetSupport(ent1->GetModel()->GetVerticies(), glm::normalize(directionToOther));
+					glm::vec3 support2 = GetSupport(ent2->GetModel()->GetVerticies(), glm::normalize(directionToMe));
 					glm::vec3 supportWorld1 = SupportToWorldSpace(support1, cp1, ent1->GetRotation(), ent1->GetScale());
 					glm::vec3 supportWorld2 = SupportToWorldSpace(support2, cp2, ent2->GetRotation(), ent2->GetScale());
 
@@ -45,12 +45,17 @@ void Collision::CollisionDetector::TestForCollisions(fc callback)
 					double totalDistance = sqrt(pow((cp2.x - cp1.x), 2) + pow((cp2.y - cp1.y), 2) + pow((cp2.z - cp1.z), 2));
 					if ((r1 + r2) >= totalDistance)
 					{
+						float penetration = (r1 + r2) - totalDistance;
+
+						m_physicsEngine->EntityCollisionHandler(ent1, ent2, support1, penetration, dt);
 						callback(ent1, ent2, support1);
 					}
 				}
 			}
 		}
+		TestEntityAgainstTerrain(m_registeredEntities[i], dt);
 	}
+	TestEntityAgainstTerrain(m_registeredEntities.back(), dt);
 }
 
 void Collision::CollisionDetector::SetPhysicsEngine(std::shared_ptr<Physics::PhysicsEngine> engine)
@@ -90,4 +95,19 @@ glm::vec3 Collision::CollisionDetector::SupportToWorldSpace(glm::vec3 support, g
 	r = glm::rotate(r, rotation.z, glm::vec3(0, 0, 1));
 	glm::mat4x4 s = glm::scale(glm::mat4x4(1.0f), scale);
 	return t * r * s * glm::vec4(support.x, support.y, support.z, 1);
+}
+
+void Collision::CollisionDetector::TestEntityAgainstTerrain(std::shared_ptr<Objects::Entity> entity, float dt)
+{
+	glm::vec3 terrainSupport = GetSupport(entity->GetModel()->GetVerticies(), glm::vec3(0, -1, 0));
+	terrainSupport = SupportToWorldSpace(terrainSupport, entity->GetPosition(), entity->GetRotation(), entity->GetScale());
+	if (m_world->GetTerrains()->size() > 0)
+	{
+		float height = m_world->GetTerrains()->at(0)->GetRelativeHeight(entity->GetPosition().x, entity->GetPosition().z);
+		if (terrainSupport.y <= height)
+		{
+			float penetration = height - terrainSupport.y;
+			m_physicsEngine->EntityCollideTerrain(entity, penetration, height, dt);
+		}
+	}
 }

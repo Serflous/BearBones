@@ -129,6 +129,11 @@ void Objects::RigidBody::SetMass(double mass)
 	m_mass = mass;
 }
 
+void Objects::RigidBody::SetCenterOfGravity(glm::vec3 cog)
+{
+	m_cog = cog;
+}
+
 void Objects::RigidBody::SetVelocity(glm::vec3 velocity)
 {
 	m_velocity = velocity;
@@ -139,9 +144,19 @@ double Objects::RigidBody::GetMass()
 	return m_mass;
 }
 
+glm::vec3 Objects::RigidBody::GetCenterOfGravity()
+{
+	return m_cog;
+}
+
 glm::vec3 Objects::RigidBody::GetVelocity()
 {
 	return m_velocity;
+}
+
+glm::vec3 Objects::RigidBody::GetMomentum()
+{
+	return m_velocity * (float)m_mass;
 }
 
 void Objects::RigidBody::Integrate(double dt)

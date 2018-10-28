@@ -123,5 +123,5 @@ float Objects::Terrain::GetRelativeHeight(float x, float z)
 
 bool Objects::Terrain::InBounds(int x, int z)
 {
-	return z * m_size + x <= m_size * m_size;
+	return (x >= 0 && z >= 0) && (z * m_size + x <= m_size * m_size);
 }

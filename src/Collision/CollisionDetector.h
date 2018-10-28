@@ -27,7 +27,7 @@ namespace Collision
 		CollisionDetector();
 
 		void RegisterEntityForCollision(std::shared_ptr<Objects::Entity> entity);
-		void TestForCollisions(fc Callback);
+		void TestForCollisions(fc Callback, float dt);
 
 		void SetPhysicsEngine(std::shared_ptr<Physics::PhysicsEngine> engine);
 		void SetWorld(std::shared_ptr<Objects::World> world);
@@ -35,6 +35,7 @@ namespace Collision
 	private:
 		glm::vec3 GetSupport(std::vector <glm::vec3> verts, glm::vec3 d);
 		glm::vec3 SupportToWorldSpace(glm::vec3 support, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+		void TestEntityAgainstTerrain(std::shared_ptr<Objects::Entity> entity, float dt);
 	private:
 		std::shared_ptr<Physics::PhysicsEngine> m_physicsEngine;
 		std::shared_ptr<Objects::World> m_world;
