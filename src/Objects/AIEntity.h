@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Entity.h"
+#include "GLM/glm.hpp"
+#include <math.h>
 
 namespace Objects
 {
@@ -27,14 +29,22 @@ namespace Objects
 		 */
 		bool IncrementMovement(float deltaTime);
 
+		float GetWaitTime();
+
+		void ChangeEmotionalState(glm::vec2 change);
+
+		std::string GetEmotionalStateAsString();
+
 		/**
 		 * Creates the bounding box of the AI.
 		 */
 		void CreateBoundingBox();
 
 	private:
-		float m_movementSpeed = 0.001f;
-		glm::vec3 destination;
+		float m_movementSpeed = 5.0f; //the speed of the ai - 1 means 1 unit per second
+		float m_waitTime = 2.0f; //the number of seconds the ai waits before moving to a new waypoint in secondss
+		glm::vec3 m_destination; //the current destination the AI is headed to
+		glm::vec2 m_emotionalState; //the current state of emotion of the AI - represented by plutchik's wheel of emotions
 	};
 
 }
