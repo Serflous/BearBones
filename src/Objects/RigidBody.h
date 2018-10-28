@@ -20,20 +20,24 @@ namespace Objects
 		void SetMass(double mass);
 		void SetCenterOfGravity(glm::vec3 cog);
 		void SetVelocity(glm::vec3 velocity);
+		void SetRotationalVelocity(glm::vec3 rotation);
 
 		double GetMass();
 		glm::vec3 GetCenterOfGravity();
 		glm::vec3 GetVelocity();
 		glm::vec3 GetMomentum();
+		glm::vec3 GetRotationalVelocity();
 
 		void Integrate(double dt);
 		void ApplyGravity(glm::vec3 gravity, double dt);
 		void ApplyForce(glm::vec3 force, double dt);
+		void ApplyTorque(glm::vec3 torque, double dt);
 		
 	private:
 		double m_mass;
 		glm::vec3 m_cog;
 		glm::vec3 m_velocity;
+		glm::vec3 m_rotationalVelocity;
 
 	};
 }

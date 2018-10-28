@@ -4,12 +4,16 @@ Objects::RigidBody::RigidBody()
 {
 	m_mass = 0;
 	m_velocity = glm::vec3(0, 0, 0);
+	m_cog = glm::vec3(0, 0, 0);
+	m_rotationalVelocity = glm::vec3(0, 0, 0);
 }
 
 Objects::RigidBody::RigidBody(const RigidBody & other)
 {
 	m_mass = other.m_mass;
 	m_velocity = other.m_velocity;
+	m_cog = other.m_cog;
+	m_rotationalVelocity = other.m_rotationalVelocity;
 }
 
 Objects::RigidBody::~RigidBody()
@@ -139,6 +143,11 @@ void Objects::RigidBody::SetVelocity(glm::vec3 velocity)
 	m_velocity = velocity;
 }
 
+void Objects::RigidBody::SetRotationalVelocity(glm::vec3 rotation)
+{
+	m_rotationalVelocity = rotation;
+}
+
 double Objects::RigidBody::GetMass()
 {
 	return m_mass;
@@ -159,13 +168,21 @@ glm::vec3 Objects::RigidBody::GetMomentum()
 	return m_velocity * (float)m_mass;
 }
 
+glm::vec3 Objects::RigidBody::GetRotationalVelocity()
+{
+	return m_rotationalVelocity;
+}
+
 void Objects::RigidBody::Integrate(double dt)
 {
 	glm::vec3 position = GetPosition();
+	glm::vec3 rotation = GetRotation();
 
 	position += m_velocity * (float)(dt / 1000.0f);
+	rotation += m_rotationalVelocity * (float)(dt / 1000.0f);
 
 	SetPosition(position);
+	SetRotation(rotation);
 	UpdateBoundingBox();
 }
 
@@ -177,4 +194,9 @@ void Objects::RigidBody::ApplyGravity(glm::vec3 gravity, double dt)
 void Objects::RigidBody::ApplyForce(glm::vec3 force, double dt)
 {
 	m_velocity += (force / (float)m_mass) * (float)(dt / 1000.0f);
+}
+
+void Objects::RigidBody::ApplyTorque(glm::vec3 torque, double dt)
+{
+	
 }
