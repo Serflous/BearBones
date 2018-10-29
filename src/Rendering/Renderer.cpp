@@ -21,15 +21,14 @@ void Rendering::Renderer::Init()
 	m_staticShader = std::make_shared<Shaders::StaticShader>();
 	m_boundingBoxShader = std::make_shared<Shaders::BoundingBoxShader>();
 	m_primitiveShader = std::make_shared<Shaders::PrimitiveShader>();
+	m_terrainShader = std::make_shared<Shaders::TerrainShader>();
+	m_guiShader = std::make_shared<Shaders::GUIShader>();
 
 	LoadShader("res/Shaders/staticShader.vert", "res/Shaders/staticShader.frag", m_staticShader);
 	LoadShader("res/Shaders/boundingBoxShader.vert", "res/Shaders/boundingBoxShader.frag", m_boundingBoxShader);
 	LoadShader("res/Shaders/primitiveShader.vert", "res/Shaders/primitiveShader.frag", m_primitiveShader);
-	m_terrainShader = std::make_shared<Shaders::TerrainShader>();
-
-	LoadShader("res/Shaders/staticShader.vert", "res/Shaders/staticShader.frag", m_staticShader);
-	LoadShader("res/Shaders/boundingBoxShader.vert", "res/Shaders/boundingBoxShader.frag", m_boundingBoxShader);
 	LoadShader("res/Shaders/terrainShader.vert", "res/Shaders/terrainShader.frag", m_terrainShader);
+	LoadShader("res/Shaders/guiShader.vert", "res/Shaders/guiShader.frag", m_guiShader);
 
 	m_staticShader->Start();
 	std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadProjectionMatrix(m_projectionMatrix);
@@ -149,6 +148,17 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 		m_staticShader->Stop();
 	}
 
+	std::shared_ptr<Objects::GUI> guiTexs = world->GetGUI();
+	if (guiTexs != nullptr)
+	{
+		std::vector<std::shared_ptr<Objects::GUITexture>> guiTextures = guiTexs->GetTextures();
+		std::vector<std::shared_ptr<Objects::GUITexture>>::iterator guiIter;
+		for (guiIter = guiTextures.begin(); guiIter != guiTextures.end(); guiIter++)
+		{
+			RenderTexture((*guiIter)->GetTexture(), (*guiIter)->GetPosition(), (*guiIter)->GetSize());
+		}
+	}
+
 }
 
 void Rendering::Renderer::PrepareRender()
@@ -201,6 +211,19 @@ void Rendering::Renderer::RenderTerrain(std::shared_ptr<Objects::Terrain> terrai
 	glBindVertexArray(0);
 }
 
+void Rendering::Renderer::RenderTexture(std::shared_ptr<Objects::Texture> texture, glm::vec2 position, glm::vec2 scale)
+{
+	m_guiShader->Start();
+	std::dynamic_pointer_cast<Shaders::GUIShader>(m_guiShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix(glm::vec3(position.x, position.y, 0), glm::vec3(0, 0, 0), glm::vec3(scale.x, scale.y, 1)));
+	glBindVertexArray(m_guiVaoId);
+	glEnableVertexAttribArray(0);
+	glActiveTexture(GL_TEXTURE0);
+	texture->Bind();
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glDisableVertexAttribArray(0);
+	glBindVertexArray(0);
+}
+
 void Rendering::Renderer::RenderPrimitive(std::shared_ptr<Objects::PrimitiveModel> model)
 {
 	glBindVertexArray(model->GetVAOID());
@@ -215,6 +238,11 @@ void Rendering::Renderer::RenderPrimitive(std::shared_ptr<Objects::PrimitiveMode
 void Rendering::Renderer::RenderDebugObject(std::shared_ptr<Objects::Entity> entity)
 {
 	glutSolidSphere(1, 10, 10);
+}
+
+void Rendering::Renderer::SetGUIVaoId(int gui)
+{
+	m_guiVaoId = gui;
 }
 
 void Rendering::Renderer::CreateProjectionMatrix()

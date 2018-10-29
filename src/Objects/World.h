@@ -12,6 +12,7 @@
 #include "NPC.h"
 #include "Terrain.h"
 #include "AIEntity.h"
+#include "GUI.h"
 
 namespace Objects
 {
@@ -50,6 +51,7 @@ namespace Objects
 
 		void AddRigidBody(std::shared_ptr<Objects::RigidBody> entity);
 		void AddTerrain(std::shared_ptr<Objects::Terrain> terrain);
+		void SetGUI(std::shared_ptr<Objects::GUI> gui);
 		void Objects::World::AddDebugObject(std::shared_ptr<Objects::Entity> model);
 		void AddNPC(std::shared_ptr<NPC> npc);
 			/**
@@ -74,6 +76,8 @@ namespace Objects
 
 		std::shared_ptr<std::vector<std::shared_ptr<Objects::Entity>>> Objects::World::GetDebugObjects();
 
+		std::shared_ptr<Objects::GUI> GetGUI();
+
 		void Objects::World::Update();
 
 	private:
@@ -85,6 +89,7 @@ namespace Objects
 		std::shared_ptr<std::vector<std::shared_ptr<Objects::Terrain>>> m_terrains;
 		std::shared_ptr<std::vector<std::shared_ptr<Entity>>> m_debugObjects;
 		std::shared_ptr<std::vector<std::shared_ptr<NPC>>> m_npcs;
+		std::shared_ptr<Objects::GUI> m_gui;
 	};
 
 }

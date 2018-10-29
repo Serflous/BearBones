@@ -7,6 +7,9 @@
 std::vector<std::shared_ptr<Objects::RigidBody>> entities;// rockEnt1, rockEnt2, rockEnt3, rockEnt4, rockEnt5;
 std::shared_ptr<Objects::StaticEntity> rockEnt1, rockEnt2;
 std::shared_ptr<NPC> testNPC1, testNPC2;
+std::shared_ptr<Objects::GUI> gui;
+
+bool quitting = false;
 
 void CalculateFrameRate()
 {
@@ -54,7 +57,17 @@ void updateCallback(int dx)
 	// On x -> Quit the game.
 	if (im->GetKeyState('x') == Input::KS_KEY_PRESSED)
 	{
-		bb->Quit();
+		if (!quitting)
+		{
+			quitting = true;
+			std::shared_ptr<Objects::World> world;
+			bb->GetWorld(world);
+			world->SetGUI(gui);
+		}
+		else
+		{
+			bb->Quit();
+		}
 	}
 	// On t -> Print camera location
 	if (im->GetKeyState('t') == Input::KS_KEY_PRESSED)
@@ -143,6 +156,7 @@ int main(int argc, char ** argv)
 	world->AddObjModel(model);
 	world->AddStaticEntity(entity);*/
 	std::shared_ptr<Objects::Texture> tex = loader->LoadTexture("res/rock.png");
+	std::shared_ptr<Objects::Texture> texSplash = loader->LoadTexture("res/SplashScreen.png");
 	std::shared_ptr<Objects::ObjModel> model = loader->LoadOBJModel("res/rock.obj", tex);
 	std::shared_ptr<Objects::PrimitiveModel> primCube = loader->CreateCubePrimitive(glm::vec3(0.827, 0.827, 0.827));
 	std::shared_ptr<Objects::PrimitiveModel> primSphere1 = loader->CreateSpherePrimitive(glm::vec3(1, 0, 0));//glm::vec3(0.827, 0.827, 0.827));
@@ -155,6 +169,13 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::PrimitiveModel> primCube3 = loader->CreateCubePrimitive(glm::vec3(0, 0, 1));
 	std::shared_ptr<Objects::PrimitiveModel> primCube4 = loader->CreateCubePrimitive(glm::vec3(1, 0, 1));
 	std::shared_ptr<Objects::PrimitiveModel> primCube5 = loader->CreateCubePrimitive(glm::vec3(1, 1, 0));
+
+	std::shared_ptr<Objects::GUITexture> splashGUITexture = std::make_shared<Objects::GUITexture>();
+	splashGUITexture->SetTextue(texSplash);
+	splashGUITexture->SetPosition(glm::vec2(0.01f, 0.01f));
+	splashGUITexture->SetSize(glm::vec2(0.98f, 0.98f));
+	gui = std::make_shared<Objects::GUI>();
+	gui->AddTexture(splashGUITexture);
 
 	for (int i = 0; i < 100; i++)
 	{
@@ -207,6 +228,7 @@ int main(int argc, char ** argv)
 	world->AddPrimitiveModel(primCube3);
 	world->AddPrimitiveModel(primCube4);
 	world->AddPrimitiveModel(primCube5);
+	//world->AddGUI(texSplash);
 
 	/*world->AddRigidBody(rockEnt1);
 	world->AddRigidBody(rockEnt2);

@@ -18,6 +18,7 @@
 #include "../Shaders/BoundingBoxShader.h"
 #include "../Shaders/PrimitiveShader.h"
 #include "../Shaders/TerrainShader.h"
+#include "../Shaders/GUIShader.h"
 #include "../Objects/Camera.h"
 #include "../Util/MathUtil.h"
 #include "../Util/Types.h"
@@ -55,6 +56,7 @@ namespace Rendering
 		void RenderWorld(std::shared_ptr<Objects::World> world, std::shared_ptr<Objects::Camera> camera);
 
 		void RenderDebugObject(std::shared_ptr<Objects::Entity> entity);
+		void SetGUIVaoId(int gui);
 
 	private:
 			/**
@@ -69,6 +71,7 @@ namespace Rendering
 
 		void RenderPrimitive(std::shared_ptr<Objects::PrimitiveModel> model);
 		void RenderTerrain(std::shared_ptr<Objects::Terrain> terrain);
+		void RenderTexture(std::shared_ptr<Objects::Texture> texture, glm::vec2 position, glm::vec2 scale);
 
 			/**
 			 * Creates the projection matrix for rendering.
@@ -90,11 +93,13 @@ namespace Rendering
 		int LoadShaderFile(std::string filename, int type);
 
 		int m_x, m_y;
+		int m_guiVaoId;
 		glm::mat4x4 m_projectionMatrix;
 		std::shared_ptr<Shaders::ShaderBase> m_staticShader;
 		std::shared_ptr<Shaders::ShaderBase> m_boundingBoxShader;
 		std::shared_ptr<Shaders::ShaderBase> m_primitiveShader;
 		std::shared_ptr<Shaders::ShaderBase> m_terrainShader;
+		std::shared_ptr<Shaders::ShaderBase> m_guiShader;
 		const float FOV = 45.0f;
 		const float NEAR_PLANE = 0.1f;
 		const float FAR_PLANE = 1000.0f;

@@ -2,12 +2,12 @@
 
 Objects::ResourceLoader::ResourceLoader()
 {
-
+	m_guiQuad = 0;
 }
 
 Objects::ResourceLoader::ResourceLoader(const ResourceLoader & other)
 {
-
+	m_guiQuad = other.m_guiQuad;
 }
 
 Objects::ResourceLoader::~ResourceLoader()
@@ -257,6 +257,18 @@ int Objects::ResourceLoader::LoadToVAO(std::vector<glm::vec3> positions, std::ve
 	glBindVertexArray(0);
 	return vaoId;
 }
+int Objects::ResourceLoader::LoadToVAO(std::vector<glm::vec2> positions)
+{
+	GLuint vaoId = 0;
+	glGenVertexArrays(1, &vaoId);
+	glBindVertexArray(vaoId);
+
+	AddDataToVAO(0, 2, positions);
+
+	glBindVertexArray(0);
+	return vaoId;
+}
+
 
 void Objects::ResourceLoader::AddDataToVAO(int attribList, int coordSize, std::vector<glm::vec2> data)
 {
@@ -354,4 +366,20 @@ std::shared_ptr<Objects::Terrain> Objects::ResourceLoader::LoadTerrain(std::stri
 	terrain->SetVaoID(vaoId);
 
 	return terrain;
+}
+
+GLuint Objects::ResourceLoader::GetGUIQuad()
+{
+	if (m_guiQuad <= 0)
+	{
+		std::vector<glm::vec2> positions =
+		{
+			glm::vec2(1, 1),
+			glm::vec2(-1, 1),
+			glm::vec2(1, -1),
+			glm::vec2(-1, -1)
+		};
+		m_guiQuad = LoadToVAO(positions);
+	}
+	return m_guiQuad;
 }

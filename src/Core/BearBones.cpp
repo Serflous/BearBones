@@ -72,6 +72,7 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 	m_camera = std::make_shared<Objects::Camera>();
 	m_collisionDetector = std::make_unique<Collision::CollisionDetector>();
 	m_physicsEngine = std::make_shared<Physics::PhysicsEngine>();
+	m_renderer->SetGUIVaoId(m_loader->GetGUIQuad());
 
 	m_waypoints = std::make_shared<std::vector<std::shared_ptr<Objects::Waypoint>>>();
 

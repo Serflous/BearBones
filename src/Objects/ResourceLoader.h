@@ -71,6 +71,8 @@ namespace Objects
 		std::shared_ptr<Objects::TerrainTextureCollection> LoadTerrainTextures(std::string baseTexture, std::string rTexture, std::string gTexture, std::string bTexture);
 		std::shared_ptr<Objects::Terrain> LoadTerrain(std::string filename, int mapSize, glm::vec3 scale, std::shared_ptr<TerrainTextureCollection> collection);
 
+		GLuint GetGUIQuad();
+
 	private:
 			/**
 			 * Uploads all the model information to the GPU for OpengGL to use.
@@ -82,6 +84,7 @@ namespace Objects
 			 */
 		int LoadToVAO(std::vector<glm::vec3> positions, std::vector<glm::vec2> textureCoords, std::vector<glm::vec3> normals, std::vector<int> indicies);
 		int LoadToVAO(std::vector<glm::vec3> positions, std::vector<int> indicies);
+		int LoadToVAO(std::vector<glm::vec2> positions);
 			/**
 			 * Adds vec2 data to a VBO and adds that to the VAO.
 			 * @param[in] attribList The attribute list number to upload the data to.
@@ -101,6 +104,9 @@ namespace Objects
 		void AddIndiciesToVAO(std::vector<int> indicies);
 
 		GLuint LoadPrimitive(std::vector<glm::vec3> positions, std::vector<int> indicies);
+
+	private:
+		GLuint m_guiQuad;
 	};
 
 }
