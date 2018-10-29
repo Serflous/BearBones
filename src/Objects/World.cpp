@@ -62,6 +62,11 @@ void Objects::World::AddDebugObject(std::shared_ptr<Objects::Entity> model)
 	m_debugObjects->push_back(model);
 }
 
+void Objects::World::AddNPC(std::shared_ptr<NPC> npc)
+{
+	m_npcs->push_back(npc);
+}
+
 std::shared_ptr<std::vector<std::shared_ptr<Objects::Texture>>> Objects::World::GetTextures()
 {
 	return m_textures;

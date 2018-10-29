@@ -5,6 +5,8 @@
 #include <Collision/OBB.h>
 
 std::vector<std::shared_ptr<Objects::RigidBody>> entities;// rockEnt1, rockEnt2, rockEnt3, rockEnt4, rockEnt5;
+std::shared_ptr<Objects::StaticEntity> rockEnt1, rockEnt2;
+std::shared_ptr<NPC> testNPC1, testNPC2;
 
 void CalculateFrameRate()
 {
