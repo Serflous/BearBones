@@ -22,7 +22,7 @@ void CalculateFrameRate()
 
 void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2, glm::vec3 direction)
 {
-	//std::cout << "Collision detected at point: X-(" << direction.x << ") Y-(" << direction.y << ") Z-(" << direction.z << ")" << std::endl;
+	std::cout << "Collision detected at point: X-(" << direction.x << ") Y-(" << direction.y << ") Z-(" << direction.z << ")" << std::endl;
 }
 
 void updateCallback(int dx)
@@ -31,7 +31,7 @@ void updateCallback(int dx)
 	int currentMouseY = 0;
 	int winX = 0;
 	int winY = 0;
-	CalculateFrameRate();
+	//CalculateFrameRate();
 	// Get the managers.
 	Core::BearBones * bb = Core::BearBones::GetInstance();
 	Input::InputManager * im = Input::InputManager::GetInstance();
@@ -154,7 +154,6 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::PrimitiveModel> primCube4 = loader->CreateCubePrimitive(glm::vec3(1, 0, 1));
 	std::shared_ptr<Objects::PrimitiveModel> primCube5 = loader->CreateCubePrimitive(glm::vec3(1, 1, 0));
 
-
 	for (int i = 0; i < 100; i++)
 	{
 		std::shared_ptr<Objects::RigidBody> ent = loader->CreateRigidBody(primSphere1, glm::vec3(50, 50 + (i * 10), 50), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
@@ -189,7 +188,7 @@ int main(int argc, char ** argv)
 
 	//bb->SetGravity(-0.0000001f);
 	bb->SetGravity(glm::vec3(0, -9.8, 0));
-	
+		
 	std::shared_ptr<Objects::TerrainTextureCollection> terrainTextures = loader->LoadTerrainTextures("res/Grass_Terrain.png", "res/Dirt_Terrain.png", "res/Rock_Terrain.png", "res/RockIce_Terrain.png");
 	std::shared_ptr<Objects::Terrain> terrain = loader->LoadTerrain("res/heightFlat256.png", 256, glm::vec3(10, 1, 10), terrainTextures);
 	terrain->SetPosition(glm::vec3(0, 0, 0));

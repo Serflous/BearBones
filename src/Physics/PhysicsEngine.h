@@ -24,8 +24,8 @@ namespace Physics
 	private:
 		std::vector<std::shared_ptr<Objects::RigidBody>> m_pObjects;
 		glm::vec3 m_gravity;
-		const double GROUND_FRICTION = 0.95;
-		const double IMPACT_ABSORPTION = 0.5f;
+		const double GROUND_FRICTION = 0.97;
+		const double IMPACT_ABSORPTION = 0.8f;
 		const double COEFFICIENT_OF_RESTITUTION = 0.5f;
 	};
 
