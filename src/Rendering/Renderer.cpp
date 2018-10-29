@@ -128,7 +128,6 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 		RenderTerrain(*terrainIter);
 		m_terrainShader->Stop();
 	}
-
 	for (staticEntityIter = staticEntities->begin(); staticEntityIter != staticEntities->end(); staticEntityIter++)
 	{
 		/*Collision::AABB bb = (*staticEntityIter)->GetBoundingBox();
@@ -137,6 +136,17 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 		std::dynamic_pointer_cast<Shaders::BoundingBoxShader>(m_boundingBoxShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*staticEntityIter)->GetPosition(), (*staticEntityIter)->GetRotation(), scale));
 		RenderEntityAABB();
 		m_boundingBoxShader->Stop();*/
+	}
+
+	std::shared_ptr<std::vector<std::shared_ptr<Objects::Entity>>> debugObjects = world->GetDebugObjects();
+	std::vector<std::shared_ptr<Objects::Entity>>::iterator debugObjectIter;
+	for (debugObjectIter = debugObjects->begin(); debugObjectIter != debugObjects->end(); debugObjectIter++)
+	{
+		m_staticShader->Start();
+		//std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*debugObjectIter)->GetPosition(), (*debugObjectIter)->GetRotation(), (*debugObjectIter)->GetScale()));
+		std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*debugObjectIter)->GetPosition(), (*debugObjectIter)->GetRotation(), (*debugObjectIter)->GetScale()));
+		RenderDebugObject((*debugObjectIter));
+		m_staticShader->Stop();
 	}
 
 }
@@ -200,6 +210,11 @@ void Rendering::Renderer::RenderPrimitive(std::shared_ptr<Objects::PrimitiveMode
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glDisableVertexAttribArray(0);
 	glBindVertexArray(0);
+}
+
+void Rendering::Renderer::RenderDebugObject(std::shared_ptr<Objects::Entity> entity)
+{
+	glutSolidSphere(1, 10, 10);
 }
 
 void Rendering::Renderer::CreateProjectionMatrix()

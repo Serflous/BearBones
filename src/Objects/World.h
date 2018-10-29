@@ -10,6 +10,7 @@
 #include "StaticEntity.h"
 #include "RigidBody.h"
 #include "Terrain.h"
+#include "AIEntity.h"
 
 namespace Objects
 {
@@ -48,7 +49,7 @@ namespace Objects
 
 		void AddRigidBody(std::shared_ptr<Objects::RigidBody> entity);
 		void AddTerrain(std::shared_ptr<Objects::Terrain> terrain);
-
+		void Objects::World::AddDebugObject(std::shared_ptr<Objects::Entity> model);
 			/**
 			 * Gets the textures currently loaded.
 			 * @return A vector of pointers to textures currently in the world
@@ -69,6 +70,10 @@ namespace Objects
 		std::shared_ptr<std::vector<std::shared_ptr<RigidBody>>> GetRigidBodies();
 		std::shared_ptr<std::vector<std::shared_ptr<Objects::Terrain>>> GetTerrains();
 
+		std::shared_ptr<std::vector<std::shared_ptr<Objects::Entity>>> Objects::World::GetDebugObjects();
+
+		void Objects::World::Update();
+
 	private:
 		std::shared_ptr<std::vector<std::shared_ptr<Texture>>> m_textures;
 		std::shared_ptr<std::vector<std::shared_ptr<ObjModel>>> m_objModels;
@@ -76,6 +81,8 @@ namespace Objects
 		std::shared_ptr<std::vector<std::shared_ptr<StaticEntity>>> m_staticEntities;
 		std::shared_ptr<std::vector<std::shared_ptr<RigidBody>>> m_rigidBodies;
 		std::shared_ptr<std::vector<std::shared_ptr<Objects::Terrain>>> m_terrains;
+		std::shared_ptr<std::vector<std::shared_ptr<Entity>>> m_debugObjects;
+
 	};
 
 }

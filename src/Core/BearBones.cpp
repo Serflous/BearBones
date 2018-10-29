@@ -73,10 +73,31 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 	m_collisionDetector = std::make_unique<Collision::CollisionDetector>();
 	m_physicsEngine = std::make_shared<Physics::PhysicsEngine>();
 
+	m_waypoints = std::make_shared<std::vector<std::shared_ptr<Objects::Waypoint>>>();
+
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(0.0f, 0.0f, 0.0f))));
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(0.0f, 0.0f, 20.0f))));
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(0.0f, 20, 0.0f))));
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(20.0f, 0.0f, 0.0f))));
+
+	m_waypoints->at(0)->AddConnectedWaypoint(m_waypoints->at(1));
+	m_waypoints->at(1)->AddConnectedWaypoint(m_waypoints->at(2));
+	m_waypoints->at(2)->AddConnectedWaypoint(m_waypoints->at(3));
+	m_waypoints->at(3)->AddConnectedWaypoint(m_waypoints->at(0));
+
+	m_ai = std::make_shared<Objects::AIEntity>();
+
+	m_world->AddDebugObject(m_ai);
+
 	m_collisionDetector->SetWorld(m_world);
 	m_collisionDetector->SetPhysicsEngine(m_physicsEngine);
-	return 0;
 
+	m_ai->SetPosition(glm::vec3(0, 0, 0));
+
+	m_currentWaypoint = m_waypoints->at(0);
+	m_ai->SetDestination(m_currentWaypoint->GetPosition());
+
+	return 0;
 }
 
 void Core::BearBones::BeginMainGameLoop()
@@ -89,6 +110,7 @@ void Core::BearBones::DrawCallback()
 {
 	m_renderer->RenderWorld(m_world, m_camera);
 	glutSwapBuffers();
+	m_world->Update();
 }
 
 void Core::BearBones::ReshapeCallback(int x, int y)
@@ -104,13 +126,32 @@ void Core::BearBones::Update(int dx)
 	int currentTime = glutGet(GLUT_ELAPSED_TIME);
 	int deltaTime = currentTime - dx;
 
-	m_collisionDetector->TestForCollisions(m_collisionCallback, deltaTime);
+	m_collisionDetector->TestForCollisions(m_collisionCallback, dx);
 	m_physicsEngine->Simulate(deltaTime);
-
 	m_updateCallback(deltaTime);
 	glutWarpPointer(m_winX / 2, m_winY / 2);
 
 	glutTimerFunc(16, StaticUpdateCallback, currentTime);
+
+	if (waiting) 
+	{
+		waitTime += ((float)deltaTime/1000);
+		if (waitTime > m_ai->GetWaitTime()) {
+			waiting = false;
+			waitTime = 0;
+		}
+	}
+	else {
+		bool reachedDestination = m_ai->IncrementMovement(deltaTime);
+
+		//pick a new waypoint. maybe dont move for a certain amount of deltaTime..
+		if (reachedDestination)
+		{
+			waiting = true;
+			m_currentWaypoint = m_currentWaypoint->GetNextWaypoint();
+			m_ai->SetDestination(m_currentWaypoint->GetPosition());
+		}
+	}
 }
 
 void Core::BearBones::GetWindowSize(int & x, int & y)
@@ -142,6 +183,11 @@ void Core::BearBones::GetWorld(std::shared_ptr<Objects::World> & world)
 void Core::BearBones::GetCamera(std::shared_ptr<Objects::Camera> & camera)
 {
 	camera = m_camera;
+}
+
+void Core::BearBones::GetAI(std::shared_ptr<Objects::AIEntity> & ai)
+{
+	ai = m_ai;
 }
 
 void Core::BearBones::SetGravity(glm::vec3 gravity)

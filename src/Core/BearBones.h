@@ -14,6 +14,7 @@
 #include "../Rendering/Renderer.h"
 #include "../Objects/Camera.h"
 #include "../Util/Types.h"
+#include "../Objects/Waypoint.h"
 #include "../Collision/CollisionDetector.h"
 #include "../Physics/PhysicsEngine.h"
 
@@ -101,6 +102,8 @@ namespace Core
 		void RegisterRigidBodyForPhysics(std::shared_ptr<Objects::RigidBody> rb);
 		void SetCollisionCallback(fc callback);
 
+		void GetAI(std::shared_ptr<Objects::AIEntity> & ai);
+
 		static void StaticDrawCallback();
 		static void StaticReshapeCallback(int x, int y);
 		static void StaticKeyboardCallback(unsigned char key, int x, int y);
@@ -129,6 +132,11 @@ namespace Core
 		std::shared_ptr<Objects::Camera> m_camera;
 		std::unique_ptr<Collision::CollisionDetector> m_collisionDetector;
 		std::shared_ptr<Physics::PhysicsEngine> m_physicsEngine;
+		std::shared_ptr<Objects::AIEntity> m_ai;	
+		std::shared_ptr<std::vector<std::shared_ptr<Objects::Waypoint>>> m_waypoints;
+		std::shared_ptr<Objects::Waypoint> m_currentWaypoint;
+		float waitTime = 0.0f;
+		bool waiting = false;
 	};
 
 

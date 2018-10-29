@@ -8,6 +8,7 @@ Objects::World::World()
 	m_staticEntities = std::make_shared<std::vector<std::shared_ptr<StaticEntity>>>();
 	m_rigidBodies = std::make_shared<std::vector<std::shared_ptr<Objects::RigidBody>>>();
 	m_terrains = std::make_shared<std::vector<std::shared_ptr<Objects::Terrain>>>();
+	m_debugObjects = std::make_shared<std::vector<std::shared_ptr<Entity>>>();
 }
 
 Objects::World::World(const World & other)
@@ -18,6 +19,7 @@ Objects::World::World(const World & other)
 	m_staticEntities = other.m_staticEntities;
 	m_rigidBodies = other.m_rigidBodies;
 	m_terrains = other.m_terrains;
+	m_debugObjects = other.m_debugObjects;
 }
 
 Objects::World::~World()
@@ -55,6 +57,11 @@ void Objects::World::AddTerrain(std::shared_ptr<Objects::Terrain> terrain)
 	m_terrains->push_back(terrain);
 }
 
+void Objects::World::AddDebugObject(std::shared_ptr<Objects::Entity> model)
+{
+	m_debugObjects->push_back(model);
+}
+
 std::shared_ptr<std::vector<std::shared_ptr<Objects::Texture>>> Objects::World::GetTextures()
 {
 	return m_textures;
@@ -83,4 +90,14 @@ std::shared_ptr<std::vector<std::shared_ptr<Objects::RigidBody>>> Objects::World
 std::shared_ptr<std::vector<std::shared_ptr<Objects::Terrain>>> Objects::World::GetTerrains()
 {
 	return m_terrains;
+}
+
+std::shared_ptr<std::vector<std::shared_ptr<Objects::Entity>>> Objects::World::GetDebugObjects()
+{
+	return m_debugObjects;
+}
+
+void Objects::World::Update()
+{
+
 }

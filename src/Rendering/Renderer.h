@@ -54,6 +54,8 @@ namespace Rendering
 			 */
 		void RenderWorld(std::shared_ptr<Objects::World> world, std::shared_ptr<Objects::Camera> camera);
 
+		void RenderDebugObject(std::shared_ptr<Objects::Entity> entity);
+
 	private:
 			/**
 			 * Prepares OepnGL for a new render frame.
