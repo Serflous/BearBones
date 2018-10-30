@@ -4,6 +4,9 @@
 #include <Collision/AABB.h>
 #include <Collision/OBB.h>
 bool quitting = false;
+std::shared_ptr<Objects::AIEntity> m_ai;
+std::shared_ptr<std::vector<std::shared_ptr<Objects::Waypoint>>> m_waypoints;
+std::shared_ptr<Objects::Waypoint> m_currentWaypoint;
 
 void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2, glm::vec3 direction)
 {
@@ -65,6 +68,13 @@ void updateCallback(int dx)
 	if (im->GetKeyState('d') == Input::KS_KEY_PRESSED || im->GetKeyState('d') == Input::KS_KEY_REPEAT)
 	{
 		camera->Strafe(Objects::RIGHT, dx);
+	}
+	bool reachedDestination = m_ai->IncrementMovement(dx);
+	if (reachedDestination)
+	{
+		//waiting = true;
+		m_currentWaypoint = m_currentWaypoint->GetNextWaypoint();
+		m_ai->SetDestination(m_currentWaypoint->GetPosition());
 	}
 }
 
@@ -324,6 +334,27 @@ int main(int argc, char ** argv)
 	bb->RegisterEntityForCollision(ent_Wing_Table);
 	bb->RegisterEntityForCollision(ent_Wing_Table_Ground);
 	bb->RegisterEntityForCollision(ent_Ground);
+
+	m_waypoints = std::make_shared<std::vector<std::shared_ptr<Objects::Waypoint>>>();
+
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(45, 3, 130))));
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(15, 13, 130))));
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(15, 13, 150))));
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(45, 3, 150))));
+
+	m_waypoints->at(0)->AddConnectedWaypoint(m_waypoints->at(1));
+	m_waypoints->at(1)->AddConnectedWaypoint(m_waypoints->at(2));
+	m_waypoints->at(2)->AddConnectedWaypoint(m_waypoints->at(3));
+	m_waypoints->at(3)->AddConnectedWaypoint(m_waypoints->at(0));
+
+	m_ai = std::make_shared<Objects::AIEntity>();
+
+	world->AddDebugObject(m_ai);
+
+	m_ai->SetPosition(glm::vec3(30, 5, 140));
+
+	m_currentWaypoint = m_waypoints->at(0);
+	m_ai->SetDestination(m_currentWaypoint->GetPosition());
 
 	// Set callbacks
 	bb->SetUpdateCallback(updateCallback);
