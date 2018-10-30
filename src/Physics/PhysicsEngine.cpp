@@ -30,8 +30,6 @@ void Physics::PhysicsEngine::EntityCollideTerrain(std::shared_ptr<Objects::Entit
 		velocity *= GROUND_FRICTION;
 		(*iter)->SetPosition(pos);
 		(*iter)->SetVelocity(velocity);
-		
-
 	}
 }
 

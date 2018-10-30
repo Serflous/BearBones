@@ -177,7 +177,7 @@ int main(int argc, char ** argv)
 
 	float xOffset = 9;
 
-	std::shared_ptr<Objects::StaticEntity> ent_Painting = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 8.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1), AffordanceMapPainting);
+	std::shared_ptr<Objects::StaticEntity> ent_Painting = loader->CreateAffordanceEntity(obj_Chair, glm::vec3(30 + xOffset, 8.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1), AffordanceMapPainting);
 
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair1 = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 1.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair2 = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 1.3, 137.4), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));

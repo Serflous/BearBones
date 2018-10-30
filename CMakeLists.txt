@@ -9,6 +9,7 @@ set(CMAKE_SUPPRESS_REGENERATION true)
 
 include_directories (${PATH_TO_DEPS}/include)
 
+add_subdirectory("${CMAKE_SOURCE_DIR}/src/Affordance")
 add_subdirectory("${CMAKE_SOURCE_DIR}/src/AI")
 add_subdirectory("${CMAKE_SOURCE_DIR}/src/Collision")
 add_subdirectory("${CMAKE_SOURCE_DIR}/src/Core")

@@ -132,6 +132,7 @@ void Objects::StaticEntity::UpdateBoundingBox()
 		std::dynamic_pointer_cast<Collision::OBB>(m_boundingVolume)->SetCenterPoint(centerPoint);
 	}
 }
+
 void Objects::StaticEntity::SetAffordances(std::string key, double value)
 {
 	m_affordances[key] = value;

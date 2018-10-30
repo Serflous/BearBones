@@ -49,6 +49,11 @@ void Objects::World::AddStaticEntity(std::shared_ptr<Objects::StaticEntity> enti
 	m_staticEntities->push_back(entity);
 }
 
+void Objects::World::AddAffordanceEntity(std::shared_ptr<Objects::AffordanceEntity> entity)
+{
+	m_affordanceEntities->push_back(entity);
+}
+
 void Objects::World::AddRigidBody(std::shared_ptr<Objects::RigidBody> entity)
 {
 	m_rigidBodies->push_back(entity);
@@ -102,6 +107,11 @@ std::shared_ptr<std::vector<std::shared_ptr<Objects::RigidBody>>> Objects::World
 std::shared_ptr<std::vector<std::shared_ptr<Objects::Terrain>>> Objects::World::GetTerrains()
 {
 	return m_terrains;
+}
+
+std::shared_ptr<std::vector<std::shared_ptr<Objects::AffordanceEntity>>> Objects::World::GetAffordanceEntities()
+{
+	return m_affordanceEntities;
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<Objects::Entity>>> Objects::World::GetDebugObjects()

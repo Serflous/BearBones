@@ -91,6 +91,7 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 	m_world->AddDebugObject(m_ai);
 
 	m_collisionDetector->SetWorld(m_world);
+	//m_affordanceEngine->SetWorld(m_world);
 	m_collisionDetector->SetPhysicsEngine(m_physicsEngine);
 
 	m_ai->SetPosition(glm::vec3(0, 0, 0));

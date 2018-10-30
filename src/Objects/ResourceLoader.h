@@ -18,6 +18,7 @@
 #include "PrimitiveModel.h"
 #include "Entity.h"
 #include "StaticEntity.h"
+#include "AffordanceEntity.h"
 #include "RigidBody.h"
 #include "Terrain.h"
 #include "TerrainTextureCollection.h"
@@ -66,6 +67,8 @@ namespace Objects
 		std::shared_ptr<Objects::StaticEntity> CreateStaticEntity(std::shared_ptr<Objects::ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale, std::string key, double value);
 
 		std::shared_ptr<Objects::StaticEntity> CreateStaticEntity(std::shared_ptr<Objects::ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale, std::map<std::string, double> map);
+
+		std::shared_ptr<Objects::AffordanceEntity> CreateAffordanceEntity(std::shared_ptr<Objects::ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale, std::map<std::string, double> map);
 
 		std::shared_ptr<PrimitiveModel> CreateCubePrimitive(glm::vec3 colour);
 		std::shared_ptr<PrimitiveModel> CreateSpherePrimitive(glm::vec3 colour);
