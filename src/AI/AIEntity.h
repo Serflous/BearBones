@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entity.h"
+#include "../Objects/Entity.h"
 #include "GLM/glm.hpp"
 #include <math.h>
 
@@ -38,7 +38,8 @@ namespace Objects
 		/**
 		 * Creates the bounding box of the AI.
 		 */
-		void CreateBoundingBox();
+		virtual void CreateBoundingBox(Util::BB_BoundingVolume type);
+		virtual void UpdateBoundingBox();
 
 	private:
 		float m_movementSpeed = 5.0f; //the speed of the ai - 1 means 1 unit per second

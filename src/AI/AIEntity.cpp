@@ -79,99 +79,8 @@ std::string Objects::AIEntity::GetEmotionalStateAsString()
 
 	float pi8 = M_PI / 8;
 
-	if (degree < pi8 && degree >= -pi8) {
-
-		//Apprehension
-		if (intensity < 1) {
-			return "Neutral";
-		}
-		else if (intensity < 2) {
-			return "Apprehension";
-		}
-		else if (intensity < 3) {
-			return "Fear";
-		}
-		else {
-			return "Terror";
-		}
-	}
-	else if (degree < -pi8 && degree >= -pi8 * 3) {
-		//Distraction
-		if (intensity < 1) {
-			return "Neutral";
-		}
-		else if (intensity < 2) {
-			return "Distraction";
-		}
-		else if (intensity < 3) {
-			return "Surprise";
-		}
-		else {
-			return "Amazement";
-		}
-	}
-	else if (degree < -pi8 * 3 && degree >= -pi8 * 5) {
-		//Pensiveness
-		if (intensity < 1) {
-			return "Neutral";
-		}
-		else if (intensity < 2) {
-			return "Pensiveness";
-		}
-		else if (intensity < 3) {
-			return "Sadness";
-		}
-		else {
-			return "Grief";
-		}
-	}
-	else if (degree < -pi8 * 5 && degree >= -pi8 * 7) {
-		//Boredom
-		if (intensity < 1) {
-			return "Neutral";
-		}
-		else if (intensity < 2) {
-			return "Boredom";
-		}
-		else if (intensity < 3) {
-			return "Disgust";
-		}
-		else {
-			return "Loathing";
-		}
-	}
-	else if (degree < pi8 * 9 && degree >= pi8 * 7) {
-		//Annoyance
-		if (intensity < 1) {
-			return "Neutral";
-		}
-		else if (intensity < 2) {
-			return "Annoyance";
-		}
-		else if (intensity < 3) {
-			return "Anger";
-		}
-		else {
-			return "Rage";
-		}
-	}
-	else if (degree < pi8 * 7 && degree >= pi8 * 5) {
-		//Interest
-		if (intensity < 1) {
-			return "Neutral";
-		}
-		else if (intensity < 2) {
-			return "Interest";
-		}
-		else if (intensity < 3) {
-			return "Anticipation";
-		}
-		else {
-			return "Viligance";
-		}
-	}
-	else if (degree < pi8 * 5 && degree >= pi8 * 3) {
-		//Serenity
+	if (degree < pi8 * 5 && degree >= pi8 * 3) {
+		// Joy
 		if (intensity < 1) {
 			return "Neutral";
 		}
@@ -186,7 +95,7 @@ std::string Objects::AIEntity::GetEmotionalStateAsString()
 		}
 	}
 	else if (degree < pi8 * 3 && degree >= pi8) {
-		//Acceptance
+		// Trust
 		if (intensity < 1) {
 			return "Neutral";
 		}
@@ -200,18 +109,97 @@ std::string Objects::AIEntity::GetEmotionalStateAsString()
 			return "Admiration";
 		}
 	}
+	else if (degree < pi8 && degree >= -pi8) {
 
-	//apprehension range == range to -range
-	//distraction range == -range to -(range * 3)
-	//pensiveness range == -(range * 3) to -(range * 5)
-	//boredon range ==
-	//annoyance range ==
-	//interest range == 
-	//serenity range == 
-	//acceptance range ==
-
-	//print on screen
-	return "Angry";
+		// Fear
+		if (intensity < 1) {
+			return "Neutral";
+		}
+		else if (intensity < 2) {
+			return "Apprehension";
+		}
+		else if (intensity < 3) {
+			return "Fear";
+		}
+		else {
+			return "Terror";
+		}
+	}
+	else if (degree < -pi8 && degree >= -pi8 * 3) {
+		// Surprise
+		if (intensity < 1) {
+			return "Neutral";
+		}
+		else if (intensity < 2) {
+			return "Distraction";
+		}
+		else if (intensity < 3) {
+			return "Surprise";
+		}
+		else {
+			return "Amazement";
+		}
+	}
+	else if (degree < -pi8 * 3 && degree >= -pi8 * 5) {
+		// Sadness
+		if (intensity < 1) {
+			return "Neutral";
+		}
+		else if (intensity < 2) {
+			return "Pensiveness";
+		}
+		else if (intensity < 3) {
+			return "Sadness";
+		}
+		else {
+			return "Grief";
+		}
+	}
+	else if (degree < -pi8 * 5 && degree >= -pi8 * 7) {
+		// Disgust
+		if (intensity < 1) {
+			return "Neutral";
+		}
+		else if (intensity < 2) {
+			return "Boredom";
+		}
+		else if (intensity < 3) {
+			return "Disgust";
+		}
+		else {
+			return "Loathing";
+		}
+	}
+	else if ((degree < pi8 * 9 && degree >= pi8 * 7) || degree < -pi8 * 7 && degree >= -pi8 * 9) {
+		// Anger
+		if (intensity < 1) {
+			return "Neutral";
+		}
+		else if (intensity < 2) {
+			return "Annoyance";
+		}
+		else if (intensity < 3) {
+			return "Anger";
+		}
+		else {
+			return "Rage";
+		}
+	}
+	else if (degree < pi8 * 7 && degree >= pi8 * 5) {
+		// Anticipation
+		if (intensity < 1) {
+			return "Neutral";
+		}
+		else if (intensity < 2) {
+			return "Interest";
+		}
+		else if (intensity < 3) {
+			return "Anticipation";
+		}
+		else {
+			return "Vigilance";
+		}
+	}
 }
 
 float Objects::AIEntity::GetWaitTime() 
@@ -219,7 +207,12 @@ float Objects::AIEntity::GetWaitTime()
 	return m_waitTime;
 }
 
-void Objects::AIEntity::CreateBoundingBox()
+void Objects::AIEntity::CreateBoundingBox(Util::BB_BoundingVolume type)
 {
-	// Don't draw a bounding box for now
+
+}
+
+void Objects::AIEntity::UpdateBoundingBox()
+{
+
 }
