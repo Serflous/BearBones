@@ -66,6 +66,18 @@ void updateCallback(int dx)
 	{
 		camera->Strafe(Objects::RIGHT, dx);
 	}
+	if (im->GetKeyState('q') == Input::KS_KEY_PRESSED || im->GetKeyState('q') == Input::KS_KEY_REPEAT)
+	{
+		glm::vec3 pos = camera->GetPosition();
+		pos.y += 0.036 * dx;
+		camera->SetPosition(pos);
+	}
+	if (im->GetKeyState('e') == Input::KS_KEY_PRESSED || im->GetKeyState('e') == Input::KS_KEY_REPEAT)
+	{
+		glm::vec3 pos = camera->GetPosition();
+		pos.y -= 0.036 * dx;
+		camera->SetPosition(pos);
+	}
 }
 
 int main(int argc, char ** argv)
@@ -83,7 +95,7 @@ int main(int argc, char ** argv)
 	bb->GetCamera(camera);
 	// Set the camera position
 	//camera->SetPosition(-132.0f, 0.0f, 167.0f);
-	camera->SetPosition(0, 3, 0);
+	camera->SetPosition(43, 3, 140);
 
 	// Add resources here
 	// -Textures
@@ -121,7 +133,7 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::Texture> tex_Ground = loader->LoadTexture("res/Ground/Ground_Baked.png");
 
 	// -Models
-	std::shared_ptr<Objects::ObjModel> obj_Chair = loader->LoadOBJModel("res/Chair/Chair.mtl.obj", tex_Chair_Bake);
+	std::shared_ptr<Objects::ObjModel> obj_Chair = loader->LoadOBJModel("res/Chair/Chair.obj", tex_Chair_Bake);
 	std::shared_ptr<Objects::ObjModel> obj_Centre_Table = loader->LoadOBJModel("res/Centre Table/Centre_Table.obj", tex_Centre_Table);
 	std::shared_ptr<Objects::ObjModel> obj_Lecturn = loader->LoadOBJModel("res/Lecturn/Lecturn.mtl.obj", tex_Lecturn);
 	std::shared_ptr<Objects::ObjModel> obj_Level01 = loader->LoadOBJModel("res/Level 01/Level01.obj", tex_Level01);
@@ -151,12 +163,18 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::ObjModel> obj_Room18 = loader->LoadOBJModel("res/Room 18/Room18.obj", tex_Room18);
 	std::shared_ptr<Objects::ObjModel> obj_Screen = loader->LoadOBJModel("res/Screen/Screen.obj", tex_Screen);
 	std::shared_ptr<Objects::ObjModel> obj_Wing_Table = loader->LoadOBJModel("res/Wing Table/Wing_Table.obj", tex_Wing_Table);
-	std::shared_ptr<Objects::ObjModel> obj_Wing_Table_Ground = loader->LoadOBJModel("res/Wing Table Ground/Wing_Table_Ground.mtl.obj", tex_Wing_Table_Ground);
+	std::shared_ptr<Objects::ObjModel> obj_Wing_Table_Ground = loader->LoadOBJModel("res/Wing Table Ground/Wing_Table_Ground.obj", tex_Wing_Table_Ground);
 	std::shared_ptr<Objects::ObjModel> obj_Ground = loader->LoadOBJModel("res/Ground/Ground.obj", tex_Ground);
 
 	// Entity
 	std::shared_ptr<Objects::StaticEntity> ent_Chair = loader->CreateStaticEntity(obj_Chair, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table1 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table2 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(27.5, 1, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table3 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(25, 2, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table4 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(22.5, 3, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table5 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(20, 4, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table6 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(17.5, 5, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table7 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(14.5, 6, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Lecturn = loader->CreateStaticEntity(obj_Lecturn, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Level01 = loader->CreateStaticEntity(obj_Level01, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Level02 = loader->CreateStaticEntity(obj_Level02, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
@@ -183,9 +201,11 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::StaticEntity> ent_Room15 = loader->CreateStaticEntity(obj_Room15, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Room16 = loader->CreateStaticEntity(obj_Room16, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Room17 = loader->CreateStaticEntity(obj_Room17, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room18 = loader->CreateStaticEntity(obj_Room18, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Screen = loader->CreateStaticEntity(obj_Screen, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Wing_Table = loader->CreateStaticEntity(obj_Wing_Table, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Wing_Table_Ground = loader->CreateStaticEntity(obj_Wing_Table_Ground, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Wing_Table_Ground1 = loader->CreateStaticEntity(obj_Wing_Table_Ground, glm::vec3(40, 1.5, 154), glm::vec3(0, 20, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Wing_Table_Ground2 = loader->CreateStaticEntity(obj_Wing_Table_Ground, glm::vec3(40, 1.5, 126), glm::vec3(0, -20, 0), glm::vec3(1, 1, 1));
 
 	// Terrain
 	std::shared_ptr<Objects::TerrainTextureCollection> terrainTextures = loader->LoadTerrainTextures("res/carpet.png", "res/Dirt_Terrain.png", "res/Rock_Terrain.png", "res/RockIce_Terrain.png");
@@ -260,7 +280,13 @@ int main(int argc, char ** argv)
 	world->AddObjModel(obj_Ground);
 
 	world->AddStaticEntity(ent_Chair);
-	world->AddStaticEntity(ent_Centre_Table);
+	world->AddStaticEntity(ent_Centre_Table1);
+	world->AddStaticEntity(ent_Centre_Table2);
+	world->AddStaticEntity(ent_Centre_Table3);
+	world->AddStaticEntity(ent_Centre_Table4);
+	world->AddStaticEntity(ent_Centre_Table5);
+	world->AddStaticEntity(ent_Centre_Table6);
+	world->AddStaticEntity(ent_Centre_Table7);
 	world->AddStaticEntity(ent_Lecturn);
 	world->AddStaticEntity(ent_Level01);
 	world->AddStaticEntity(ent_Level02);
@@ -286,15 +312,17 @@ int main(int argc, char ** argv)
 	world->AddStaticEntity(ent_Room15);
 	world->AddStaticEntity(ent_Room16);
 	world->AddStaticEntity(ent_Room17);
+	world->AddStaticEntity(ent_Room18);
 	world->AddStaticEntity(ent_Screen);
 	world->AddStaticEntity(ent_Wing_Table);
-	world->AddStaticEntity(ent_Wing_Table_Ground);
+	world->AddStaticEntity(ent_Wing_Table_Ground1);
+	world->AddStaticEntity(ent_Wing_Table_Ground2);
 	world->AddStaticEntity(ent_Ground);
 
 	world->AddTerrain(terrain);
 
 	bb->RegisterEntityForCollision(ent_Chair);
-	bb->RegisterEntityForCollision(ent_Centre_Table);
+	bb->RegisterEntityForCollision(ent_Centre_Table1);
 	bb->RegisterEntityForCollision(ent_Lecturn);
 	bb->RegisterEntityForCollision(ent_Level01);
 	bb->RegisterEntityForCollision(ent_Level02);
@@ -322,7 +350,8 @@ int main(int argc, char ** argv)
 	bb->RegisterEntityForCollision(ent_Room17);
 	bb->RegisterEntityForCollision(ent_Screen);
 	bb->RegisterEntityForCollision(ent_Wing_Table);
-	bb->RegisterEntityForCollision(ent_Wing_Table_Ground);
+	bb->RegisterEntityForCollision(ent_Wing_Table_Ground1);
+	bb->RegisterEntityForCollision(ent_Wing_Table_Ground2);
 	bb->RegisterEntityForCollision(ent_Ground);
 
 	// Set callbacks
