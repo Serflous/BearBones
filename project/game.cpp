@@ -77,6 +77,10 @@ void updateCallback(int dx)
 		glm::vec3 pos = camera->GetPosition();
 		pos.y -= 0.036 * dx;
 		camera->SetPosition(pos);
+	}	
+	if (im->GetKeyState('g') == Input::KS_KEY_PRESSED || im->GetKeyState('e') == Input::KS_KEY_REPEAT)
+	{
+		
 	}
 
 }
