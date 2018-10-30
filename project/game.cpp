@@ -119,6 +119,7 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::Texture> tex_Wing_Table = loader->LoadTexture("res/Wing Table/Wing_Table_Bake.png");
 	std::shared_ptr<Objects::Texture> tex_Wing_Table_Ground = loader->LoadTexture("res/Wing Table Ground/Wing_Table_Ground_Bake.png");
 	std::shared_ptr<Objects::Texture> tex_Ground = loader->LoadTexture("res/Ground/Ground_Baked.png");
+	std::shared_ptr<Objects::Texture> tex_Painting = loader->LoadTexture("res/Painting/painting.png");
 
 	// -Models
 	std::shared_ptr<Objects::ObjModel> obj_Chair = loader->LoadOBJModel("res/Chair/Chair.mtl.obj", tex_Chair_Bake);
@@ -153,6 +154,7 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::ObjModel> obj_Wing_Table = loader->LoadOBJModel("res/Wing Table/Wing_Table.obj", tex_Wing_Table);
 	std::shared_ptr<Objects::ObjModel> obj_Wing_Table_Ground = loader->LoadOBJModel("res/Wing Table Ground/Wing_Table_Ground.mtl.obj", tex_Wing_Table_Ground);
 	std::shared_ptr<Objects::ObjModel> obj_Ground = loader->LoadOBJModel("res/Ground/Ground.obj", tex_Ground);
+	std::shared_ptr<Objects::ObjModel> obj_Painting = loader->LoadOBJModel("res/Painting/objPainting.obj", tex_Ground);
 
 	// Entity
 	std::shared_ptr<Objects::StaticEntity> ent_Chair = loader->CreateStaticEntity(obj_Chair, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
@@ -186,6 +188,7 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::StaticEntity> ent_Screen = loader->CreateStaticEntity(obj_Screen, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Wing_Table = loader->CreateStaticEntity(obj_Wing_Table, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Wing_Table_Ground = loader->CreateStaticEntity(obj_Wing_Table_Ground, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Painting = loader->CreateStaticEntity(obj_Painting, glm::vec3(50, 0, 133), glm::vec3(0, 120, 0), glm::vec3(1, 1, 1));
 
 	// Terrain
 	std::shared_ptr<Objects::TerrainTextureCollection> terrainTextures = loader->LoadTerrainTextures("res/carpet.png", "res/Dirt_Terrain.png", "res/Rock_Terrain.png", "res/RockIce_Terrain.png");
@@ -225,6 +228,7 @@ int main(int argc, char ** argv)
 	world->AddTexture(tex_Wing_Table);
 	world->AddTexture(tex_Wing_Table_Ground);
 	world->AddTexture(tex_Ground);
+	world->AddTexture(tex_Painting);
 
 	world->AddObjModel(obj_Chair);
 	world->AddObjModel(obj_Centre_Table);
@@ -258,6 +262,7 @@ int main(int argc, char ** argv)
 	world->AddObjModel(obj_Wing_Table);
 	world->AddObjModel(obj_Wing_Table_Ground);
 	world->AddObjModel(obj_Ground);
+	world->AddObjModel(obj_Painting);
 
 	world->AddStaticEntity(ent_Chair);
 	world->AddStaticEntity(ent_Centre_Table);
@@ -290,40 +295,41 @@ int main(int argc, char ** argv)
 	world->AddStaticEntity(ent_Wing_Table);
 	world->AddStaticEntity(ent_Wing_Table_Ground);
 	world->AddStaticEntity(ent_Ground);
+	world->AddStaticEntity(ent_Painting);
 
 	world->AddTerrain(terrain);
 
 	bb->RegisterEntityForCollision(ent_Chair);
 	bb->RegisterEntityForCollision(ent_Centre_Table);
-	bb->RegisterEntityForCollision(ent_Lecturn);
-	bb->RegisterEntityForCollision(ent_Level01);
-	bb->RegisterEntityForCollision(ent_Level02);
-	bb->RegisterEntityForCollision(ent_Level03);
-	bb->RegisterEntityForCollision(ent_Level04);
-	bb->RegisterEntityForCollision(ent_Level05);
-	bb->RegisterEntityForCollision(ent_Level06);
-	bb->RegisterEntityForCollision(ent_Level07);
-	bb->RegisterEntityForCollision(ent_Room01);
-	bb->RegisterEntityForCollision(ent_Room02);
-	bb->RegisterEntityForCollision(ent_Room03);
-	bb->RegisterEntityForCollision(ent_Room04);
-	bb->RegisterEntityForCollision(ent_Room05);
-	bb->RegisterEntityForCollision(ent_Room06);
-	bb->RegisterEntityForCollision(ent_Room07);
-	bb->RegisterEntityForCollision(ent_Room08);
-	bb->RegisterEntityForCollision(ent_Room09);
-	bb->RegisterEntityForCollision(ent_Room10);
-	bb->RegisterEntityForCollision(ent_Room11);
-	bb->RegisterEntityForCollision(ent_Room12);
-	bb->RegisterEntityForCollision(ent_Room13);
-	bb->RegisterEntityForCollision(ent_Room14);
-	bb->RegisterEntityForCollision(ent_Room15);
-	bb->RegisterEntityForCollision(ent_Room16);
-	bb->RegisterEntityForCollision(ent_Room17);
-	bb->RegisterEntityForCollision(ent_Screen);
-	bb->RegisterEntityForCollision(ent_Wing_Table);
-	bb->RegisterEntityForCollision(ent_Wing_Table_Ground);
-	bb->RegisterEntityForCollision(ent_Ground);
+	//bb->RegisterEntityForCollision(ent_Lecturn);
+	//bb->RegisterEntityForCollision(ent_Level01);
+	//bb->RegisterEntityForCollision(ent_Level02);
+	//bb->RegisterEntityForCollision(ent_Level03);
+	//bb->RegisterEntityForCollision(ent_Level04);
+	//bb->RegisterEntityForCollision(ent_Level05);
+	//bb->RegisterEntityForCollision(ent_Level06);
+	//bb->RegisterEntityForCollision(ent_Level07);
+	//bb->RegisterEntityForCollision(ent_Room01);
+	//bb->RegisterEntityForCollision(ent_Room02);
+	//bb->RegisterEntityForCollision(ent_Room03);
+	//bb->RegisterEntityForCollision(ent_Room04);
+	//bb->RegisterEntityForCollision(ent_Room05);
+	//bb->RegisterEntityForCollision(ent_Room06);
+	//bb->RegisterEntityForCollision(ent_Room07);
+	//bb->RegisterEntityForCollision(ent_Room08);
+	//bb->RegisterEntityForCollision(ent_Room09);
+	//bb->RegisterEntityForCollision(ent_Room10);
+	//bb->RegisterEntityForCollision(ent_Room11);
+	//bb->RegisterEntityForCollision(ent_Room12);
+	//bb->RegisterEntityForCollision(ent_Room13);
+	//bb->RegisterEntityForCollision(ent_Room14);
+	//bb->RegisterEntityForCollision(ent_Room15);
+	//bb->RegisterEntityForCollision(ent_Room16);
+	//bb->RegisterEntityForCollision(ent_Room17);
+	//bb->RegisterEntityForCollision(ent_Screen);
+	//bb->RegisterEntityForCollision(ent_Wing_Table);
+	//bb->RegisterEntityForCollision(ent_Wing_Table_Ground);
+	//bb->RegisterEntityForCollision(ent_Ground);
 
 	// Set callbacks
 	bb->SetUpdateCallback(updateCallback);
