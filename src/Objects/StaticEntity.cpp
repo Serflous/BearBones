@@ -2,7 +2,7 @@
 
 Objects::StaticEntity::StaticEntity() : Entity()
 {
-	
+
 }
 
 Objects::StaticEntity::StaticEntity(const StaticEntity & other) : Entity(other)
@@ -19,6 +19,8 @@ Objects::StaticEntity::~StaticEntity()
 {
 
 }
+
+
 
 void Objects::StaticEntity::CreateBoundingBox(Util::BB_BoundingVolume volume)
 {
@@ -131,4 +133,14 @@ void Objects::StaticEntity::UpdateBoundingBox()
 		glm::vec3 centerPoint = GetPosition();
 		std::dynamic_pointer_cast<Collision::OBB>(m_boundingVolume)->SetCenterPoint(centerPoint);
 	}
+}
+
+void Objects::StaticEntity::setAffordances(std::string key, double value)
+{
+	m_affordances[key] = value;
+}
+
+std::map<std::string, double> Objects::StaticEntity::getAffordances()
+{
+	return m_affordances;
 }
