@@ -3,6 +3,7 @@
 #include <Collision/BoundingSphere.h>
 #include <Collision/AABB.h>
 #include <Collision/OBB.h>
+#include <iostream>
 
 std::vector<std::shared_ptr<Objects::RigidBody>> entities;// rockEnt1, rockEnt2, rockEnt3, rockEnt4, rockEnt5;
 std::shared_ptr<Objects::StaticEntity> rockEnt1, rockEnt2;
@@ -41,6 +42,7 @@ void updateCallback(int dx)
 	Core::BearBones * bb = Core::BearBones::GetInstance();
 	Input::InputManager * im = Input::InputManager::GetInstance();
 	std::shared_ptr<Objects::Camera> camera;
+	std::shared_ptr<Objects::AIEntity> ai;
 
 	// Get the window size and mouse positions
 	bb->GetWindowSize(winX, winY);
@@ -50,6 +52,8 @@ void updateCallback(int dx)
 	int deltaY = currentMouseY - (winY / 2);
 
 	bb->GetCamera(camera);
+
+	bb->GetAI(ai);
 
 	// Rotate the camera.
 	camera->Rotate(deltaX, deltaY, dx);
@@ -127,6 +131,54 @@ void updateCallback(int dx)
 	if (im->GetKeyState('f') == Input::KS_KEY_PRESSED)
 	{
 		//rockEnt4->ApplyForce(glm::vec3(2500, 0, -5000), 16);
+	}
+	// Increase Joy Emotion
+	if (im->GetKeyState('1') == Input::KS_KEY_PRESSED)
+	{
+		ai->ChangeEmotionalState(glm::vec2(0.0, 1.0));
+		std::cout << ai->GetEmotionalStateAsString() << "\n";
+	}
+	// Increase Trust Emotion
+	if (im->GetKeyState('2') == Input::KS_KEY_PRESSED)
+	{
+		ai->ChangeEmotionalState(glm::vec2(1.0, 1.0));
+		std::cout << ai->GetEmotionalStateAsString() << "\n";
+	}
+	// Increase Fear Emotion
+	if (im->GetKeyState('3') == Input::KS_KEY_PRESSED)
+	{
+		ai->ChangeEmotionalState(glm::vec2(1.0, 0.0));
+		std::cout << ai->GetEmotionalStateAsString() << "\n";
+	}
+	// Increase Surprise Emotion
+	if (im->GetKeyState('4') == Input::KS_KEY_PRESSED)
+	{
+		ai->ChangeEmotionalState(glm::vec2(1.0, -1.0));
+		std::cout << ai->GetEmotionalStateAsString() << "\n";
+	}
+	// Increase Sadness Emotion
+	if (im->GetKeyState('5') == Input::KS_KEY_PRESSED)
+	{
+		ai->ChangeEmotionalState(glm::vec2(0.0, -1.0));
+		std::cout << ai->GetEmotionalStateAsString() << "\n";
+	}
+	// Increase Disgust Emotion
+	if (im->GetKeyState('6') == Input::KS_KEY_PRESSED)
+	{
+		ai->ChangeEmotionalState(glm::vec2(-1.0, -1.0));
+		std::cout << ai->GetEmotionalStateAsString() << "\n";
+	}
+	// Increase Anger Emotion
+	if (im->GetKeyState('7') == Input::KS_KEY_PRESSED)
+	{
+		ai->ChangeEmotionalState(glm::vec2(-1.0, 0.0));
+		std::cout << ai->GetEmotionalStateAsString() << "\n";
+	}
+	// Increase Anticipation Emotion
+	if (im->GetKeyState('8') == Input::KS_KEY_PRESSED)
+	{
+		ai->ChangeEmotionalState(glm::vec2(-1.0, 1.0));
+		std::cout << ai->GetEmotionalStateAsString() << "\n";
 	}
 }
 
