@@ -36,7 +36,7 @@ std::shared_ptr<Objects::ObjModel> Objects::ResourceLoader::LoadOBJModel(std::st
 	}
 
 	Assimp::Importer importer;
-	const aiScene * scene = importer.ReadFile(filename, aiProcess_FlipUVs);
+	const aiScene * scene = importer.ReadFile(filename, aiProcess_FlipUVs | aiProcess_Triangulate);
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
 		throw std::invalid_argument("Model load error: " + filename);

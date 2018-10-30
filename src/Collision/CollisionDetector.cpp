@@ -53,9 +53,9 @@ void Collision::CollisionDetector::TestForCollisions(fc callback, float dt)
 				}
 			}
 		}
-		TestEntityAgainstTerrain(m_registeredEntities[i], dt);
+		//TestEntityAgainstTerrain(m_registeredEntities[i], dt);
 	}
-	TestEntityAgainstTerrain(m_registeredEntities.back(), dt);
+	//TestEntityAgainstTerrain(m_registeredEntities.back(), dt);
 }
 
 void Collision::CollisionDetector::SetPhysicsEngine(std::shared_ptr<Physics::PhysicsEngine> engine)

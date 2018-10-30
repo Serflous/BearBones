@@ -201,9 +201,9 @@ void Rendering::Renderer::RenderTerrain(std::shared_ptr<Objects::Terrain> terrai
 	terrain->GetTerrainTextureCollection()->GetTextureAt(1)->Bind();
 	glActiveTexture(GL_TEXTURE3);
 	terrain->GetTerrainTextureCollection()->GetTextureAt(2)->Bind();
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glDrawElements(GL_TRIANGLES, terrain->GetVertexCount(), GL_UNSIGNED_INT, 0);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
