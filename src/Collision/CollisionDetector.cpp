@@ -18,6 +18,10 @@ void Collision::CollisionDetector::TestForCollisions(fc callback, float dt)
 		{
 			std::shared_ptr<Objects::Entity> ent1 = m_registeredEntities[i];
 			std::shared_ptr<Objects::Entity> ent2 = m_registeredEntities[j];
+			if (std::dynamic_pointer_cast<Objects::StaticEntity>(ent1) != nullptr && std::dynamic_pointer_cast<Objects::StaticEntity>(ent2) != nullptr)
+			{
+				continue;
+			}
 			std::shared_ptr<Collision::BoundingVolume> volume1 = ent1->GetBoundingVolume();
 			std::shared_ptr<Collision::BoundingVolume> volume2 = ent2->GetBoundingVolume();
 			if (dynamic_cast<Collision::AABB*>(volume1.get()) != nullptr && dynamic_cast<Collision::AABB*>(volume2.get()) != nullptr)

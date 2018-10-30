@@ -83,7 +83,7 @@ int main(int argc, char ** argv)
 	bb->GetCamera(camera);
 	// Set the camera position
 	//camera->SetPosition(-132.0f, 0.0f, 167.0f);
-	camera->SetPosition(0, 1, 0);
+	camera->SetPosition(0, 3, 0);
 
 	// Add resources here
 	// -Textures
@@ -118,6 +118,7 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::Texture> tex_Screen = loader->LoadTexture("res/Screen/Screen_Bake.png");
 	std::shared_ptr<Objects::Texture> tex_Wing_Table = loader->LoadTexture("res/Wing Table/Wing_Table_Bake.png");
 	std::shared_ptr<Objects::Texture> tex_Wing_Table_Ground = loader->LoadTexture("res/Wing Table Ground/Wing_Table_Ground_Bake.png");
+	std::shared_ptr<Objects::Texture> tex_Ground = loader->LoadTexture("res/Ground/Ground_Baked.png");
 
 	// -Models
 	std::shared_ptr<Objects::ObjModel> obj_Chair = loader->LoadOBJModel("res/Chair/Chair.mtl.obj", tex_Chair_Bake);
@@ -151,41 +152,43 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::ObjModel> obj_Screen = loader->LoadOBJModel("res/Screen/Screen.obj", tex_Screen);
 	std::shared_ptr<Objects::ObjModel> obj_Wing_Table = loader->LoadOBJModel("res/Wing Table/Wing_Table.obj", tex_Wing_Table);
 	std::shared_ptr<Objects::ObjModel> obj_Wing_Table_Ground = loader->LoadOBJModel("res/Wing Table Ground/Wing_Table_Ground.mtl.obj", tex_Wing_Table_Ground);
+	std::shared_ptr<Objects::ObjModel> obj_Ground = loader->LoadOBJModel("res/Ground/Ground.obj", tex_Ground);
 
 	// Entity
-	std::shared_ptr<Objects::StaticEntity> ent_Chair = loader->CreateStaticEntity(obj_Chair, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(30, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Lecturn = loader->CreateStaticEntity(obj_Lecturn, glm::vec3(60, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Level01 = loader->CreateStaticEntity(obj_Level01, glm::vec3(90, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Level02 = loader->CreateStaticEntity(obj_Level02, glm::vec3(120, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Level03 = loader->CreateStaticEntity(obj_Level03, glm::vec3(150, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Level04 = loader->CreateStaticEntity(obj_Level04, glm::vec3(180, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Level05 = loader->CreateStaticEntity(obj_Level05, glm::vec3(210, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Level06 = loader->CreateStaticEntity(obj_Level06, glm::vec3(240, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Level07 = loader->CreateStaticEntity(obj_Level07, glm::vec3(270, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room01 = loader->CreateStaticEntity(obj_Room01, glm::vec3(300, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room02 = loader->CreateStaticEntity(obj_Room02, glm::vec3(330, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room03 = loader->CreateStaticEntity(obj_Room03, glm::vec3(360, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room04 = loader->CreateStaticEntity(obj_Room04, glm::vec3(390, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room05 = loader->CreateStaticEntity(obj_Room05, glm::vec3(420, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room06 = loader->CreateStaticEntity(obj_Room06, glm::vec3(450, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room07 = loader->CreateStaticEntity(obj_Room07, glm::vec3(480, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room08 = loader->CreateStaticEntity(obj_Room08, glm::vec3(510, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room09 = loader->CreateStaticEntity(obj_Room09, glm::vec3(540, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room10 = loader->CreateStaticEntity(obj_Room10, glm::vec3(570, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room11 = loader->CreateStaticEntity(obj_Room11, glm::vec3(600, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room12 = loader->CreateStaticEntity(obj_Room12, glm::vec3(630, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room13 = loader->CreateStaticEntity(obj_Room13, glm::vec3(660, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room14 = loader->CreateStaticEntity(obj_Room14, glm::vec3(690, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room15 = loader->CreateStaticEntity(obj_Room15, glm::vec3(720, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room16 = loader->CreateStaticEntity(obj_Room16, glm::vec3(750, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Room17 = loader->CreateStaticEntity(obj_Room17, glm::vec3(780, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Screen = loader->CreateStaticEntity(obj_Screen, glm::vec3(810, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Wing_Table = loader->CreateStaticEntity(obj_Wing_Table, glm::vec3(840, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	std::shared_ptr<Objects::StaticEntity> ent_Wing_Table_Ground = loader->CreateStaticEntity(obj_Wing_Table_Ground, glm::vec3(880, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Chair = loader->CreateStaticEntity(obj_Chair, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Lecturn = loader->CreateStaticEntity(obj_Lecturn, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Level01 = loader->CreateStaticEntity(obj_Level01, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Level02 = loader->CreateStaticEntity(obj_Level02, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Level03 = loader->CreateStaticEntity(obj_Level03, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Level04 = loader->CreateStaticEntity(obj_Level04, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Level05 = loader->CreateStaticEntity(obj_Level05, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Level06 = loader->CreateStaticEntity(obj_Level06, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Level07 = loader->CreateStaticEntity(obj_Level07, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Ground = loader->CreateStaticEntity(obj_Ground, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room01 = loader->CreateStaticEntity(obj_Room01, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room02 = loader->CreateStaticEntity(obj_Room02, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room03 = loader->CreateStaticEntity(obj_Room03, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room04 = loader->CreateStaticEntity(obj_Room04, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room05 = loader->CreateStaticEntity(obj_Room05, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room06 = loader->CreateStaticEntity(obj_Room06, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room07 = loader->CreateStaticEntity(obj_Room07, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room08 = loader->CreateStaticEntity(obj_Room08, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room09 = loader->CreateStaticEntity(obj_Room09, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room10 = loader->CreateStaticEntity(obj_Room10, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room11 = loader->CreateStaticEntity(obj_Room11, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room12 = loader->CreateStaticEntity(obj_Room12, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room13 = loader->CreateStaticEntity(obj_Room13, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room14 = loader->CreateStaticEntity(obj_Room14, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room15 = loader->CreateStaticEntity(obj_Room15, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room16 = loader->CreateStaticEntity(obj_Room16, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Room17 = loader->CreateStaticEntity(obj_Room17, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Screen = loader->CreateStaticEntity(obj_Screen, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Wing_Table = loader->CreateStaticEntity(obj_Wing_Table, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Wing_Table_Ground = loader->CreateStaticEntity(obj_Wing_Table_Ground, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 
 	// Terrain
-	std::shared_ptr<Objects::TerrainTextureCollection> terrainTextures = loader->LoadTerrainTextures("res/Grass_Terrain.png", "res/Dirt_Terrain.png", "res/Rock_Terrain.png", "res/RockIce_Terrain.png");
+	std::shared_ptr<Objects::TerrainTextureCollection> terrainTextures = loader->LoadTerrainTextures("res/carpet.png", "res/Dirt_Terrain.png", "res/Rock_Terrain.png", "res/RockIce_Terrain.png");
 	std::shared_ptr<Objects::Terrain> terrain = loader->LoadTerrain("res/heightFlat256.png", 256, glm::vec3(1, 1, 1), terrainTextures);
 	terrain->SetPosition(glm::vec3(0, 0, 0));
 
@@ -221,6 +224,7 @@ int main(int argc, char ** argv)
 	world->AddTexture(tex_Screen);
 	world->AddTexture(tex_Wing_Table);
 	world->AddTexture(tex_Wing_Table_Ground);
+	world->AddTexture(tex_Ground);
 
 	world->AddObjModel(obj_Chair);
 	world->AddObjModel(obj_Centre_Table);
@@ -253,6 +257,7 @@ int main(int argc, char ** argv)
 	world->AddObjModel(obj_Screen);
 	world->AddObjModel(obj_Wing_Table);
 	world->AddObjModel(obj_Wing_Table_Ground);
+	world->AddObjModel(obj_Ground);
 
 	world->AddStaticEntity(ent_Chair);
 	world->AddStaticEntity(ent_Centre_Table);
@@ -284,6 +289,7 @@ int main(int argc, char ** argv)
 	world->AddStaticEntity(ent_Screen);
 	world->AddStaticEntity(ent_Wing_Table);
 	world->AddStaticEntity(ent_Wing_Table_Ground);
+	world->AddStaticEntity(ent_Ground);
 
 	world->AddTerrain(terrain);
 
@@ -317,6 +323,7 @@ int main(int argc, char ** argv)
 	bb->RegisterEntityForCollision(ent_Screen);
 	bb->RegisterEntityForCollision(ent_Wing_Table);
 	bb->RegisterEntityForCollision(ent_Wing_Table_Ground);
+	bb->RegisterEntityForCollision(ent_Ground);
 
 	// Set callbacks
 	bb->SetUpdateCallback(updateCallback);
