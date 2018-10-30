@@ -76,10 +76,10 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 
 	m_waypoints = std::make_shared<std::vector<std::shared_ptr<Objects::Waypoint>>>();
 
-	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(0.0f, 0.0f, 0.0f))));
-	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(0.0f, 0.0f, 20.0f))));
-	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(0.0f, 20, 0.0f))));
-	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(20.0f, 0.0f, 0.0f))));
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(45, 3, 130))));
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(15, 13, 130))));
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(15, 13, 150))));
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(45, 3, 150))));
 
 	m_waypoints->at(0)->AddConnectedWaypoint(m_waypoints->at(1));
 	m_waypoints->at(1)->AddConnectedWaypoint(m_waypoints->at(2));
@@ -93,7 +93,7 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 	m_collisionDetector->SetWorld(m_world);
 	m_collisionDetector->SetPhysicsEngine(m_physicsEngine);
 
-	m_ai->SetPosition(glm::vec3(0, 0, 0));
+	m_ai->SetPosition(glm::vec3(30, 5, 140));
 
 	m_currentWaypoint = m_waypoints->at(0);
 	m_ai->SetDestination(m_currentWaypoint->GetPosition());
