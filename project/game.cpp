@@ -169,14 +169,50 @@ int main(int argc, char ** argv)
 
 	// Entity
 
+	float xOffset = 9;
 
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair1 = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 1.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair2 = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 1.3, 137.4), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair3 = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 1.3, 140.6), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair4 = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 1.3, 143.8), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table1 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair5 = loader->CreateStaticEntity(obj_Chair, glm::vec3(27.5 + xOffset, 2.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair6 = loader->CreateStaticEntity(obj_Chair, glm::vec3(27.5 + xOffset, 2.3, 137.4), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair7 = loader->CreateStaticEntity(obj_Chair, glm::vec3(27.5 + xOffset, 2.3, 140.6), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair8 = loader->CreateStaticEntity(obj_Chair, glm::vec3(27.5 + xOffset, 2.3, 143.8), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table2 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(27.5, 1, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair9 = loader->CreateStaticEntity(obj_Chair, glm::vec3(25 + xOffset, 3.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair10 = loader->CreateStaticEntity(obj_Chair, glm::vec3(25 + xOffset, 3.3, 137.4), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair11 = loader->CreateStaticEntity(obj_Chair, glm::vec3(25 + xOffset, 3.3, 140.6), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair12 = loader->CreateStaticEntity(obj_Chair, glm::vec3(25 + xOffset, 3.3, 143.8), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table3 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(25, 2, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair13 = loader->CreateStaticEntity(obj_Chair, glm::vec3(22.5 + xOffset, 4.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair14 = loader->CreateStaticEntity(obj_Chair, glm::vec3(22.5 + xOffset, 4.3, 137.4), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair15 = loader->CreateStaticEntity(obj_Chair, glm::vec3(22.5 + xOffset, 4.3, 140.6), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair16 = loader->CreateStaticEntity(obj_Chair, glm::vec3(22.5 + xOffset, 4.3, 143.8), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table4 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(22.5, 3, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair17 = loader->CreateStaticEntity(obj_Chair, glm::vec3(20 + xOffset, 5.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair18 = loader->CreateStaticEntity(obj_Chair, glm::vec3(20 + xOffset, 5.3, 137.4), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair19 = loader->CreateStaticEntity(obj_Chair, glm::vec3(20 + xOffset, 5.3, 140.6), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair20 = loader->CreateStaticEntity(obj_Chair, glm::vec3(20 + xOffset, 5.3, 143.8), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table5 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(20, 4, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair21 = loader->CreateStaticEntity(obj_Chair, glm::vec3(17.5 + xOffset, 6.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair22 = loader->CreateStaticEntity(obj_Chair, glm::vec3(17.5 + xOffset, 6.3, 137.4), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair23 = loader->CreateStaticEntity(obj_Chair, glm::vec3(17.5 + xOffset, 6.3, 140.6), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair24 = loader->CreateStaticEntity(obj_Chair, glm::vec3(17.5 + xOffset, 6.3, 143.8), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table6 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(17.5, 5, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair25 = loader->CreateStaticEntity(obj_Chair, glm::vec3(14.5 + xOffset, 7.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair26 = loader->CreateStaticEntity(obj_Chair, glm::vec3(14.5 + xOffset, 7.3, 137.4), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair27 = loader->CreateStaticEntity(obj_Chair, glm::vec3(14.5 + xOffset, 7.3, 140.6), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair28 = loader->CreateStaticEntity(obj_Chair, glm::vec3(14.5 + xOffset, 7.3, 143.8), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table7 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(14.5, 6, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+
 	std::shared_ptr<Objects::StaticEntity> ent_Lecturn = loader->CreateStaticEntity(obj_Lecturn, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Level01 = loader->CreateStaticEntity(obj_Level01, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Level02 = loader->CreateStaticEntity(obj_Level02, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
@@ -400,6 +436,35 @@ int main(int argc, char ** argv)
 	world->AddStaticEntity(ent_Chair40);
 	world->AddStaticEntity(ent_Chair41);
 	world->AddStaticEntity(ent_Chair42);
+
+	world->AddStaticEntity(ent_Centre_Chair1);
+	world->AddStaticEntity(ent_Centre_Chair2);
+	world->AddStaticEntity(ent_Centre_Chair3);
+	world->AddStaticEntity(ent_Centre_Chair4);
+	world->AddStaticEntity(ent_Centre_Chair5);
+	world->AddStaticEntity(ent_Centre_Chair6);
+	world->AddStaticEntity(ent_Centre_Chair7);
+	world->AddStaticEntity(ent_Centre_Chair8);
+	world->AddStaticEntity(ent_Centre_Chair9);
+	world->AddStaticEntity(ent_Centre_Chair10);
+	world->AddStaticEntity(ent_Centre_Chair11);
+	world->AddStaticEntity(ent_Centre_Chair12);
+	world->AddStaticEntity(ent_Centre_Chair13);
+	world->AddStaticEntity(ent_Centre_Chair14);
+	world->AddStaticEntity(ent_Centre_Chair15);
+	world->AddStaticEntity(ent_Centre_Chair16);
+	world->AddStaticEntity(ent_Centre_Chair17);
+	world->AddStaticEntity(ent_Centre_Chair18);
+	world->AddStaticEntity(ent_Centre_Chair19);
+	world->AddStaticEntity(ent_Centre_Chair20);
+	world->AddStaticEntity(ent_Centre_Chair21);
+	world->AddStaticEntity(ent_Centre_Chair22);
+	world->AddStaticEntity(ent_Centre_Chair23);
+	world->AddStaticEntity(ent_Centre_Chair24);
+	world->AddStaticEntity(ent_Centre_Chair25);
+	world->AddStaticEntity(ent_Centre_Chair26);
+	world->AddStaticEntity(ent_Centre_Chair27);
+	world->AddStaticEntity(ent_Centre_Chair28);
 
 	world->AddStaticEntity(ent_Centre_Table1);
 	world->AddStaticEntity(ent_Centre_Table2);
