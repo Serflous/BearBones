@@ -213,6 +213,7 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair28 = loader->CreateStaticEntity(obj_Chair, glm::vec3(14.5 + xOffset, 7.3, 143.8), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table7 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(14.5, 6, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 
+
 	std::shared_ptr<Objects::StaticEntity> ent_Lecturn = loader->CreateStaticEntity(obj_Lecturn, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Level01 = loader->CreateStaticEntity(obj_Level01, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Level02 = loader->CreateStaticEntity(obj_Level02, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
