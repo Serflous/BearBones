@@ -83,6 +83,10 @@ void updateCallback(int dx)
 
 int main(int argc, char ** argv)
 {
+	std::map<std::string, double> AffordanceMapPainting;
+	AffordanceMapPainting["Upright"] = 1.00;
+	AffordanceMapPainting["KnockedOver"] = 1.00;
+	AffordanceMapPainting["ArtisticValue"] = 1.00;
 	// Initialize Bear Bones
 	Core::BearBones * bb = Core::BearBones::GetInstance();
 	bb->InitializeWindow(&argc, argv, 1280, 720);
@@ -167,9 +171,9 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::ObjModel> obj_Wing_Table_Ground = loader->LoadOBJModel("res/Wing Table Ground/Wing_Table_Ground.obj", tex_Wing_Table_Ground);
 	std::shared_ptr<Objects::ObjModel> obj_Ground = loader->LoadOBJModel("res/Ground/Ground.obj", tex_Ground);
 
-	// Entity
-
 	float xOffset = 9;
+
+	std::shared_ptr<Objects::StaticEntity> ent_Painting = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 8.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1), AffordanceMapPainting);
 
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair1 = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 1.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair2 = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 1.3, 137.4), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
@@ -213,7 +217,6 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair28 = loader->CreateStaticEntity(obj_Chair, glm::vec3(14.5 + xOffset, 7.3, 143.8), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Table7 = loader->CreateStaticEntity(obj_Centre_Table, glm::vec3(14.5, 6, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 
-
 	std::shared_ptr<Objects::StaticEntity> ent_Lecturn = loader->CreateStaticEntity(obj_Lecturn, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Level01 = loader->CreateStaticEntity(obj_Level01, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Level02 = loader->CreateStaticEntity(obj_Level02, glm::vec3(30, 0, 140), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
@@ -246,6 +249,9 @@ int main(int argc, char ** argv)
 	float offsetx1 = 0.5;
 	float offsetx2 = 0.9;
 	float offsetx3 = 1.5;
+	float offsetx4 = 1.5;
+	float offsetx5 = -0.9;
+	float offsetx6 = -0.2;
 
 	std::shared_ptr<Objects::StaticEntity> ent_Chair = loader->CreateStaticEntity(obj_Chair, glm::vec3(41.3, 1.3, 156.5), glm::vec3(0, 210, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Chair2 = loader->CreateStaticEntity(obj_Chair, glm::vec3(40.3, 1.3, 153.6), glm::vec3(0, 210, 0), glm::vec3(1, 1, 1));
@@ -282,9 +288,6 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::StaticEntity> ent_Chair21 = loader->CreateStaticEntity(obj_Chair, glm::vec3(24.6 - offsetx3, 7.8, 151.5), glm::vec3(0, 210, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Wing_Table12 = loader->CreateStaticEntity(obj_Wing_Table, glm::vec3(24.6, 8, 154), glm::vec3(0, 22, 0), glm::vec3(1, 1, 1));
 
-	float offsetx4 = 1.5;
-	float offsetx5 = -0.9;
-	float offsetx6 = -0.2;
 
 	std::shared_ptr<Objects::StaticEntity> ent_Chair22 = loader->CreateStaticEntity(obj_Chair, glm::vec3(41 - offsetx4, 1.3, 126 + 2.5), glm::vec3(0, 150, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Chair23 = loader->CreateStaticEntity(obj_Chair, glm::vec3(41 + offsetx5, 1.3, 126 - 0.4), glm::vec3(0, 150, 0), glm::vec3(1, 1, 1));
@@ -321,7 +324,6 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::StaticEntity> ent_Chair42 = loader->CreateStaticEntity(obj_Chair, glm::vec3(24.6 + offsetx6, 7.8, 126 - 2.5), glm::vec3(0, 150, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Wing_Table6 = loader->CreateStaticEntity(obj_Wing_Table, glm::vec3(24.6, 8, 126), glm::vec3(0, -22, 0), glm::vec3(1, 1, 1));
 	
-
 	// Terrain
 	std::shared_ptr<Objects::TerrainTextureCollection> terrainTextures = loader->LoadTerrainTextures("res/carpet.png", "res/Dirt_Terrain.png", "res/Rock_Terrain.png", "res/RockIce_Terrain.png");
 	std::shared_ptr<Objects::Terrain> terrain = loader->LoadTerrain("res/heightFlat256.png", 256, glm::vec3(1, 1, 1), terrainTextures);
@@ -515,6 +517,7 @@ int main(int argc, char ** argv)
 	world->AddStaticEntity(ent_Wing_Table12);
 	world->AddStaticEntity(ent_Wing_Table_Ground1);
 	world->AddStaticEntity(ent_Wing_Table_Ground2);
+	world->AddStaticEntity(ent_Painting);
 	world->AddStaticEntity(ent_Ground);
 
 	world->AddTerrain(terrain);

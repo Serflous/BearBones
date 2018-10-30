@@ -63,6 +63,10 @@ namespace Objects
 			 */
 		std::shared_ptr<StaticEntity> CreateStaticEntity(std::shared_ptr<ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
+		std::shared_ptr<Objects::StaticEntity> CreateStaticEntity(std::shared_ptr<Objects::ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale, std::string key, double value);
+
+		std::shared_ptr<Objects::StaticEntity> CreateStaticEntity(std::shared_ptr<Objects::ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale, std::map<std::string, double> map);
+
 		std::shared_ptr<PrimitiveModel> CreateCubePrimitive(glm::vec3 colour);
 		std::shared_ptr<PrimitiveModel> CreateSpherePrimitive(glm::vec3 colour);
 

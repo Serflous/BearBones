@@ -3,8 +3,10 @@
 #include <GLM/gtc/matrix_transform.hpp>
 #include <GLM/vec4.hpp>
 
+#include <map>
 #include "Entity.h"
 #include <memory>
+#include <string>
 #include <iostream>
 
 #include <GLM/gtc/quaternion.hpp>
@@ -30,7 +32,15 @@ namespace Objects
 		void CreateBoundingBox(Util::BB_BoundingVolume type);
 		void UpdateBoundingBox();
 
+
+		void SetAffordances(std::string key, double value);
+		void SetAffordanceMap(std::map<std::string, double> map);
+		std::map<std::string, double> GetAffordances();
+
+
 	private:
+
+		std::map<std::string, double> m_affordances;
 	};
 
 }

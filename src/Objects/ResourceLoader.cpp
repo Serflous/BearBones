@@ -94,6 +94,30 @@ std::shared_ptr<Objects::StaticEntity> Objects::ResourceLoader::CreateStaticEnti
 	return entity;
 }
 
+std::shared_ptr<Objects::StaticEntity> Objects::ResourceLoader::CreateStaticEntity(std::shared_ptr<Objects::ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale, std::string key, double value)
+{
+	std::shared_ptr<Objects::StaticEntity> entity = std::make_shared<Objects::StaticEntity>();
+	entity->SetModel(model);
+	entity->SetPosition(position);
+	entity->SetRotation(rotation);
+	entity->SetScale(scale);
+	entity->CreateBoundingBox(Util::BB_BV_OBB);
+	entity->SetAffordances(key, value);
+	return entity;
+}
+
+std::shared_ptr<Objects::StaticEntity> Objects::ResourceLoader::CreateStaticEntity(std::shared_ptr<Objects::ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale, std::map<std::string, double> map)
+{
+	std::shared_ptr<Objects::StaticEntity> entity = std::make_shared<Objects::StaticEntity>();
+	entity->SetModel(model);
+	entity->SetPosition(position);
+	entity->SetRotation(rotation);
+	entity->SetScale(scale);
+	entity->CreateBoundingBox(Util::BB_BV_OBB);
+	entity->SetAffordanceMap(map);
+	return entity;
+}
+
 std::shared_ptr<Objects::PrimitiveModel> Objects::ResourceLoader::CreateCubePrimitive(glm::vec3 colour)
 {
 	// Cube
