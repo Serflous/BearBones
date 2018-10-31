@@ -136,10 +136,10 @@ namespace Core
 		std::shared_ptr<AffordanceEngine> m_affordanceEngine;
 		std::shared_ptr<Physics::PhysicsEngine> m_physicsEngine;
 		std::shared_ptr<Objects::AIEntity> m_ai;	
-		std::shared_ptr<std::vector<std::shared_ptr<Objects::Waypoint>>> m_waypoints;
+		/*std::shared_ptr<std::vector<std::shared_ptr<Objects::Waypoint>>> m_waypoints;
 		std::shared_ptr<Objects::Waypoint> m_currentWaypoint;
 		float waitTime = 0.0f;
-		bool waiting = false;
+		bool waiting = false;*/
 	};
 
 

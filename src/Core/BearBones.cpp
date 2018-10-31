@@ -75,7 +75,7 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 	m_affordanceEngine = std::make_shared<AffordanceEngine>();
 	m_renderer->SetGUIVaoId(m_loader->GetGUIQuad());
 
-	m_waypoints = std::make_shared<std::vector<std::shared_ptr<Objects::Waypoint>>>();
+	/*m_waypoints = std::make_shared<std::vector<std::shared_ptr<Objects::Waypoint>>>();
 
 	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(0.0f, 0.0f, 0.0f))));
 	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(0.0f, 0.0f, 20.0f))));
@@ -89,16 +89,16 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 
 	m_ai = std::make_shared<Objects::AIEntity>();
 
-	m_world->AddDebugObject(m_ai);
+	m_world->AddDebugObject(m_ai);*/
 
 	m_collisionDetector->SetWorld(m_world);
 	m_affordanceEngine->SetWorld(m_world);
 	m_collisionDetector->SetPhysicsEngine(m_physicsEngine);
 
-	m_ai->SetPosition(glm::vec3(0, 0, 0));
+	/*m_ai->SetPosition(glm::vec3(0, 0, 0));
 
 	m_currentWaypoint = m_waypoints->at(0);
-	m_ai->SetDestination(m_currentWaypoint->GetPosition());
+	m_ai->SetDestination(m_currentWaypoint->GetPosition());*/
 
 	return 0;
 }
@@ -136,25 +136,25 @@ void Core::BearBones::Update(int dx)
 
 	glutTimerFunc(16, StaticUpdateCallback, currentTime);
 
-	if (waiting) 
-	{
-		waitTime += ((float)deltaTime/1000);
-		if (waitTime > m_ai->GetWaitTime()) {
-			waiting = false;
-			waitTime = 0;
-		}
-	}
-	else {
-		bool reachedDestination = m_ai->IncrementMovement(deltaTime);
+	//if (waiting) 
+	//{
+	//	waitTime += ((float)deltaTime/1000);
+	//	if (waitTime > m_ai->GetWaitTime()) {
+	//		waiting = false;
+	//		waitTime = 0;
+	//	}
+	//}
+	//else {
+	//	bool reachedDestination = m_ai->IncrementMovement(deltaTime);
 
-		//pick a new waypoint. maybe dont move for a certain amount of deltaTime..
-		if (reachedDestination)
-		{
-			waiting = true;
-			m_currentWaypoint = m_currentWaypoint->GetNextWaypoint();
-			m_ai->SetDestination(m_currentWaypoint->GetPosition());
-		}
-	}
+	//	//pick a new waypoint. maybe dont move for a certain amount of deltaTime..
+	//	if (reachedDestination)
+	//	{
+	//		waiting = true;
+	//		m_currentWaypoint = m_currentWaypoint->GetNextWaypoint();
+	//		m_ai->SetDestination(m_currentWaypoint->GetPosition());
+	//	}
+	//}
 }
 
 void Core::BearBones::GetWindowSize(int & x, int & y)
