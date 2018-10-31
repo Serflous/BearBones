@@ -80,7 +80,6 @@ namespace Objects
 		void SetAffordanceMap(std::map<std::string, double> map);
 		std::map<std::string, double> GetAffordances();
 
-		double GetAffordance(std::string key);
 		
 		
 	protected:

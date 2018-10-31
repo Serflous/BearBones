@@ -147,3 +147,8 @@ std::map<std::string, double> Objects::StaticEntity::GetAffordances()
 {
 	return m_affordances;
 }
+
+double Objects::StaticEntity::GetAffordance(std::string key)
+{
+	return m_affordances[key];
+}

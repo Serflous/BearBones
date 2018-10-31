@@ -20,13 +20,26 @@ std::shared_ptr<Objects::RigidBody> rigidCircle;
 
 void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2, glm::vec3 direction)
 {
-	if (std::dynamic_pointer_cast<Objects::AIEntity>(entity1) != nullptr)
+	std::shared_ptr<Objects::AIEntity> aiEntity;
+	std::shared_ptr<Objects::StaticEntity> staticEntity;
+	if ((std::dynamic_pointer_cast<Objects::AIEntity>(entity1) != nullptr || std::dynamic_pointer_cast<Objects::StaticEntity>(entity2) != nullptr))
 	{
-		entity1->SetAffordances("Rage", 0.3);
-		std::cout << "Changed Affordance Rage";
+		aiEntity = std::dynamic_pointer_cast<Objects::AIEntity>(entity1);
+		staticEntity = std::dynamic_pointer_cast<Objects::StaticEntity>(entity2);
+	}
+	if ((std::dynamic_pointer_cast<Objects::StaticEntity>(entity1) != nullptr || std::dynamic_pointer_cast<Objects::AIEntity>(entity2) != nullptr))
+	{
+		aiEntity = std::dynamic_pointer_cast<Objects::AIEntity>(entity2);
+		staticEntity = std::dynamic_pointer_cast<Objects::StaticEntity>(entity1);
+	}
+
+	if (aiEntity != nullptr && staticEntity != nullptr && staticEntity->GetAffordance("Painful") > 0.5f)
+	{
+		aiEntity->ChangeEmotionalState(glm::vec2(-1.0, 0.0));
+		circlePrim->SetColour(glm::vec3(1, 0, 0));
 	}
 	
-	std::cout << "Collision detected at point: X-(" << direction.x << ") Y-(" << direction.y << ") Z-(" << direction.z << ")" << std::endl;
+	//std::cout << "Collision detected at point: X-(" << direction.x << ") Y-(" << direction.y << ") Z-(" << direction.z << ")" << std::endl;
 }
 
 void updateCallback(int dx)
@@ -67,7 +80,10 @@ void updateCallback(int dx)
 		glm::vec3 position = camera->GetPosition();
 		std::cout << "Camera Position: x-" << position.x << " y-" << position.y << " z-" << position.z << std::endl;
 		std::cout << "Camera Rotation: x-" << camera->GetPitch() << " y-" << camera->GetYaw() << " z-" << camera->GetRoll() << std::endl;
-		bb->RegisterRigidBodyForPhysics(rigidCircle);
+		for (int i = 0; i < entities.size(); i++)
+		{
+			bb->RegisterRigidBodyForPhysics(entities[i]);
+		}
 		std::cout << "Entity Emotion: " << m_ai->GetEmotionalStateAsString() << std::endl;
 	}
 	// On w -> Walk forward.
@@ -142,7 +158,6 @@ void updateCallback(int dx)
 	{
 		ai->ChangeEmotionalState(glm::vec2(0.0, -1.0));
 		std::cout << ai->GetEmotionalStateAsString() << "\n";
-		circlePrim->SetColour(glm::vec3(1, 0, 0));
 	}
 	// Increase Disgust Emotion
 	if (im->GetKeyState('6') == Input::KS_KEY_PRESSED)
@@ -170,6 +185,7 @@ int main(int argc, char ** argv)
 	AffordanceMapPainting["Upright"] = 1.00;
 	AffordanceMapPainting["KnockedOver"] = 1.00;
 	AffordanceMapPainting["ArtisticValue"] = 1.00;
+	AffordanceMapPainting["Painful"] = 0.8f;
 	// Initialize Bear Bones
 	Core::BearBones * bb = Core::BearBones::GetInstance();
 	bb->InitializeWindow(&argc, argv, 1280, 720);
@@ -257,7 +273,7 @@ int main(int argc, char ** argv)
 
 	float xOffset = 9;
 
-	std::shared_ptr<Objects::StaticEntity> ent_Painting = loader->CreateAffordanceEntity(obj_Chair, glm::vec3(30 + xOffset +2, 1.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1), AffordanceMapPainting);
+	std::shared_ptr<Objects::StaticEntity> ent_Painting = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset +6.5, 1.7, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1), AffordanceMapPainting);
 
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair1 = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 1.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair2 = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 1.3, 137.4), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
@@ -414,8 +430,17 @@ int main(int argc, char ** argv)
 	terrain->SetPosition(glm::vec3(0, 0, 0));
 
 	circlePrim = loader->CreateSpherePrimitive(glm::vec3(0, 0, 0));
-	rigidCircle = loader->CreateRigidBody(circlePrim, glm::vec3(41.3, 50, 156.5), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
-	rigidCircle->SetMass(1);
+	std::shared_ptr<Objects::PrimitiveModel> modelCircle = loader->CreateSpherePrimitive(glm::vec3(1, 1, 1));
+	for (int z = 0; z < 2; z++)
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				entities.push_back(loader->CreateRigidBody(modelCircle, glm::vec3(10 + (i * 10) + (z * 1), 50 + (z * 10), 10 + (j * 10)), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+			}
+		}
+	}
 
 	// Load into the engine
 	world->AddTexture(tex_Chair_Bake);
@@ -610,9 +635,17 @@ int main(int argc, char ** argv)
 
 	world->AddTerrain(terrain);
 
-	world->AddRigidBody(rigidCircle);
+	//world->AddRigidBody(rigidCircle);
 
-	bb->RegisterEntityForCollision(ent_Chair);
+	for (int i = 0; i < entities.size(); i++)
+	{
+		world->AddRigidBody(entities[i]);
+		entities[i]->SetMass(((double)rand() / (RAND_MAX)) + 2);
+		entities[i]->ApplyForce(glm::vec3(((double)rand() / (RAND_MAX)) + 1, 0, ((double)rand() / (RAND_MAX)) + 1), 16);
+		bb->RegisterEntityForCollision(entities[i]);
+	}
+
+	//bb->RegisterEntityForCollision(ent_Chair);
 	/*bb->RegisterEntityForCollision(ent_Centre_Table1);
 	bb->RegisterEntityForCollision(ent_Lecturn);
 	bb->RegisterEntityForCollision(ent_Level01);
@@ -645,6 +678,8 @@ int main(int argc, char ** argv)
 	bb->RegisterEntityForCollision(ent_Wing_Table_Ground2);
 	bb->RegisterEntityForCollision(ent_Ground);*/
 
+	bb->RegisterEntityForCollision(ent_Painting);
+
 	m_waypoints = std::make_shared<std::vector<std::shared_ptr<Objects::Waypoint>>>();
 
 	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(45, 3, 130))));
@@ -663,11 +698,13 @@ int main(int argc, char ** argv)
 
 	m_ai->SetPosition(glm::vec3(30, 5, 140));
 	m_ai->SetModel(circlePrim);
+	m_ai->CreateBoundingBox(Util::BB_BV_OBB);
 
 	m_currentWaypoint = m_waypoints->at(0);
 	m_ai->SetDestination(m_currentWaypoint->GetPosition());
 
-	bb->RegisterEntityForCollision(rigidCircle);
+	//bb->RegisterEntityForCollision(rigidCircle);
+	bb->RegisterEntityForCollision(m_ai);
 
 	// Set callbacks
 	bb->SetUpdateCallback(updateCallback);

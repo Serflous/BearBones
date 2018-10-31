@@ -79,8 +79,3 @@ std::map<std::string, double> Objects::Entity::GetAffordances()
 {
 	return m_affordances;
 }
-
-double Objects::Entity::GetAffordance(std::string key)
-{
-	return m_affordances.at(key);
-}

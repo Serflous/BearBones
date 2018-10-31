@@ -36,6 +36,7 @@ namespace Objects
 		void SetAffordances(std::string key, double value);
 		void SetAffordanceMap(std::map<std::string, double> map);
 		std::map<std::string, double> GetAffordances();
+		double GetAffordance(std::string key);
 
 
 	private:

@@ -3,6 +3,8 @@
 #include "../Objects/Entity.h"
 #include "GLM/glm.hpp"
 #include <math.h>
+#include <GLM/gtc/matrix_transform.hpp>
+#include <GLM/vec4.hpp>
 
 namespace Objects
 {
