@@ -11,12 +11,14 @@ std::shared_ptr<NPC> testNPC1, testNPC2;
 std::shared_ptr<Objects::GUI> gui;
 bool quitting = false;
 
-std::shared_ptr<Objects::AIEntity> m_ai;
+std::shared_ptr<Objects::AIEntity> m_ai, m_otherAi;
 std::shared_ptr<std::vector<std::shared_ptr<Objects::Waypoint>>> m_waypoints;
-std::shared_ptr<Objects::Waypoint> m_currentWaypoint;
+std::shared_ptr<Objects::Waypoint> m_currentWaypoint, otherCurrentWaypoint;
 
-std::shared_ptr<Objects::PrimitiveModel> circlePrim;
+std::shared_ptr<Objects::PrimitiveModel> circlePrim, otherCirlcePrim;
 std::shared_ptr<Objects::RigidBody> rigidCircle;
+std::shared_ptr<Objects::StaticEntity> ent_Painting;
+std::shared_ptr<Objects::StaticEntity> ent_StubbyChair;
 
 void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2, glm::vec3 direction)
 {
@@ -32,11 +34,39 @@ void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr
 		aiEntity = std::dynamic_pointer_cast<Objects::AIEntity>(entity2);
 		staticEntity = std::dynamic_pointer_cast<Objects::StaticEntity>(entity1);
 	}
+	if ((std::dynamic_pointer_cast<Objects::AIEntity>(entity1) != nullptr && std::dynamic_pointer_cast<Objects::AIEntity>(entity2) != nullptr))
+	{
+		m_ai->ChangeEmotionalState(glm::vec2(1.0, -1.0));
+		circlePrim->SetColour(glm::vec3(0, 1, 1));
+		m_otherAi->ChangeEmotionalState(glm::vec2(-1.0, 1.0));
+		otherCirlcePrim->SetColour(glm::vec3(1, 0.647, 0));
+	}
 
 	if (aiEntity != nullptr && staticEntity != nullptr && staticEntity->GetAffordance("Painful") > 0.5f)
 	{
-		aiEntity->ChangeEmotionalState(glm::vec2(-1.0, 0.0));
-		circlePrim->SetColour(glm::vec3(1, 0, 0));
+		if (aiEntity.get() == m_ai.get())
+		{
+			aiEntity->ChangeEmotionalState(glm::vec2(-1.0, 0.0));
+			circlePrim->SetColour(glm::vec3(1, 0, 0));
+		}
+		if (aiEntity.get() == m_otherAi.get())
+		{
+			aiEntity->ChangeEmotionalState(glm::vec2(0.0, -1.0));
+			otherCirlcePrim->SetColour(glm::vec3(0.933, 0.866, 0.51));
+		}
+	}
+	if (aiEntity != nullptr && staticEntity != nullptr && staticEntity->GetAffordance("ArtisticValue") > 0.5f)
+	{
+		if (aiEntity.get() == m_ai.get())
+		{
+			aiEntity->ChangeEmotionalState(glm::vec2(0.0, 1.0));
+			circlePrim->SetColour(glm::vec3(1, 1, 0));
+		}
+		if (aiEntity.get() == m_otherAi.get())
+		{
+			aiEntity->ChangeEmotionalState(glm::vec2(1.0, 0.0));
+			otherCirlcePrim->SetColour(glm::vec3(0, 1, 0));
+		}
 	}
 	
 	//std::cout << "Collision detected at point: X-(" << direction.x << ") Y-(" << direction.y << ") Z-(" << direction.z << ")" << std::endl;
@@ -72,7 +102,17 @@ void updateCallback(int dx)
 	// On x -> Quit the game.
 	if (im->GetKeyState('x') == Input::KS_KEY_PRESSED)
 	{
-
+		if (!quitting)
+		{
+			quitting = true;
+			std::shared_ptr<Objects::World> world;
+			bb->GetWorld(world);
+			world->SetGUI(gui);
+		}
+		else
+		{
+			bb->Quit();
+		}
 	}
 	// On t -> Print camera location
 	if (im->GetKeyState('t') == Input::KS_KEY_PRESSED)
@@ -123,11 +163,17 @@ void updateCallback(int dx)
 		
 	}
 	bool reachedDestination = m_ai->IncrementMovement(dx);
+	bool otherReachedDestination = m_otherAi->IncrementMovement(dx);
 	if (reachedDestination)
 	{
 		//waiting = true;
 		m_currentWaypoint = m_currentWaypoint->GetNextWaypoint();
 		m_ai->SetDestination(m_currentWaypoint->GetPosition());
+	}
+	if (otherReachedDestination)
+	{
+		otherCurrentWaypoint = otherCurrentWaypoint->GetNextWaypoint();
+		m_otherAi->SetDestination(otherCurrentWaypoint->GetPosition());
 	}
 	// Increase Joy Emotion
 	if (im->GetKeyState('1') == Input::KS_KEY_PRESSED)
@@ -181,11 +227,12 @@ void updateCallback(int dx)
 
 int main(int argc, char ** argv)
 {
-	std::map<std::string, double> AffordanceMapPainting;
+	std::map<std::string, double> AffordanceMapStubbyChair, AffordanceMapPainting;
+	AffordanceMapStubbyChair["Painful"] = 0.8f;
 	AffordanceMapPainting["Upright"] = 1.00;
 	AffordanceMapPainting["KnockedOver"] = 1.00;
 	AffordanceMapPainting["ArtisticValue"] = 1.00;
-	AffordanceMapPainting["Painful"] = 0.8f;
+	
 	// Initialize Bear Bones
 	Core::BearBones * bb = Core::BearBones::GetInstance();
 	bb->InitializeWindow(&argc, argv, 1280, 720);
@@ -273,7 +320,8 @@ int main(int argc, char ** argv)
 
 	float xOffset = 9;
 
-	std::shared_ptr<Objects::StaticEntity> ent_Painting = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset +6.5, 1.7, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1), AffordanceMapPainting);
+	ent_StubbyChair = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset +6.5, 1.7, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1), AffordanceMapStubbyChair);
+	ent_Painting = loader->CreateStaticEntity(obj_Chair, glm::vec3(16, 11, 149), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), AffordanceMapPainting);
 
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair1 = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 1.3, 133.2), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
 	std::shared_ptr<Objects::StaticEntity> ent_Centre_Chair2 = loader->CreateStaticEntity(obj_Chair, glm::vec3(30 + xOffset, 1.3, 137.4), glm::vec3(0, 180, 0), glm::vec3(1, 1, 1));
@@ -430,6 +478,7 @@ int main(int argc, char ** argv)
 	terrain->SetPosition(glm::vec3(0, 0, 0));
 
 	circlePrim = loader->CreateSpherePrimitive(glm::vec3(0, 0, 0));
+	otherCirlcePrim = loader->CreateCubePrimitive(glm::vec3(0, 0, 0));
 	std::shared_ptr<Objects::PrimitiveModel> modelCircle = loader->CreateSpherePrimitive(glm::vec3(1, 1, 1));
 	for (int z = 0; z < 2; z++)
 	{
@@ -441,6 +490,14 @@ int main(int argc, char ** argv)
 			}
 		}
 	}
+
+	std::shared_ptr<Objects::GUITexture> splashGUITexture = std::make_shared<Objects::GUITexture>();
+	std::shared_ptr<Objects::Texture> texSplash = loader->LoadTexture("res/SplashScreen.png");
+	splashGUITexture->SetTextue(texSplash);
+	splashGUITexture->SetPosition(glm::vec2(0.01f, 0.01f));
+	splashGUITexture->SetSize(glm::vec2(0.98f, 0.98f));
+	gui = std::make_shared<Objects::GUI>();
+	gui->AddTexture(splashGUITexture);
 
 	// Load into the engine
 	world->AddTexture(tex_Chair_Bake);
@@ -631,6 +688,8 @@ int main(int argc, char ** argv)
 	world->AddStaticEntity(ent_Wing_Table_Ground1);
 	world->AddStaticEntity(ent_Wing_Table_Ground2);
 	world->AddStaticEntity(ent_Painting);
+	world->AddStaticEntity(ent_StubbyChair);
+
 	world->AddStaticEntity(ent_Ground);
 
 	world->AddTerrain(terrain);
@@ -679,6 +738,7 @@ int main(int argc, char ** argv)
 	bb->RegisterEntityForCollision(ent_Ground);*/
 
 	bb->RegisterEntityForCollision(ent_Painting);
+	bb->RegisterEntityForCollision(ent_StubbyChair);
 
 	m_waypoints = std::make_shared<std::vector<std::shared_ptr<Objects::Waypoint>>>();
 
@@ -693,18 +753,26 @@ int main(int argc, char ** argv)
 	m_waypoints->at(3)->AddConnectedWaypoint(m_waypoints->at(0));
 
 	m_ai = std::make_shared<Objects::AIEntity>();
+	m_otherAi = std::make_shared<Objects::AIEntity>();
 
 	world->AddDebugObject(m_ai);
+	world->AddDebugObject(m_otherAi);
 
 	m_ai->SetPosition(glm::vec3(30, 5, 140));
 	m_ai->SetModel(circlePrim);
 	m_ai->CreateBoundingBox(Util::BB_BV_OBB);
+	m_otherAi->SetPosition(glm::vec3(30, 5, 160));
+	m_otherAi->SetModel(otherCirlcePrim);
+	m_otherAi->CreateBoundingBox(Util::BB_BV_OBB);
 
 	m_currentWaypoint = m_waypoints->at(0);
+	otherCurrentWaypoint = m_waypoints->at(1);
 	m_ai->SetDestination(m_currentWaypoint->GetPosition());
+	m_otherAi->SetDestination(otherCurrentWaypoint->GetPosition());
 
 	//bb->RegisterEntityForCollision(rigidCircle);
 	bb->RegisterEntityForCollision(m_ai);
+	bb->RegisterEntityForCollision(m_otherAi);
 
 	// Set callbacks
 	bb->SetUpdateCallback(updateCallback);
