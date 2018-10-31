@@ -140,7 +140,7 @@ std::string Objects::AIEntity::GetEmotionalStateAsString()
 			return "Loathing";
 		}
 	}
-	else if (degree < pi8 * 9 && degree >= pi8 * 7) {
+	else if ((degree < pi8 * 9 && degree >= pi8 * 7) || (degree < -pi8 * 7 && degree >= -pi8 * 9)) {
 		//Annoyance
 		if (intensity < 1) {
 			return "Neutral";
@@ -200,18 +200,6 @@ std::string Objects::AIEntity::GetEmotionalStateAsString()
 			return "Admiration";
 		}
 	}
-
-	//apprehension range == range to -range
-	//distraction range == -range to -(range * 3)
-	//pensiveness range == -(range * 3) to -(range * 5)
-	//boredon range ==
-	//annoyance range ==
-	//interest range == 
-	//serenity range == 
-	//acceptance range ==
-
-	//print on screen
-	return "Angry";
 }
 
 float Objects::AIEntity::GetWaitTime() 
