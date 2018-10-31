@@ -16,8 +16,8 @@ void AffordanceEngine::SetWorld(std::shared_ptr<Objects::World> world)
 	m_world = world;
 }
 
-Objects::AffordanceEntity AffordanceEngine::ChangeAffordance(Objects::AffordanceEntity entity1)
+void AffordanceEngine::ChangeAffordance(std::shared_ptr<Objects::Entity> entity1)
 {
-	entity1.SetAffordances("Rage", 0.5);
-	return entity1;
+	entity1->SetAffordances("Rage", 0.5);
 }
+

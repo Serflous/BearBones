@@ -7,6 +7,12 @@ bool quitting = false;
 
 void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2, glm::vec3 direction)
 {
+	if (std::dynamic_pointer_cast<Objects::AIEntity>(entity1) != nullptr)
+	{
+		entity1->SetAffordances("Rage", 0.3);
+		std::cout << "Changed Affordance Rage";
+	}
+	
 	std::cout << "Collision detected at point: X-(" << direction.x << ") Y-(" << direction.y << ") Z-(" << direction.z << ")" << std::endl;
 }
 

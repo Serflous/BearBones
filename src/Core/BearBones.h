@@ -132,7 +132,7 @@ namespace Core
 		std::shared_ptr<Objects::World> m_world;
 		std::shared_ptr<Objects::Camera> m_camera;
 		std::unique_ptr<Collision::CollisionDetector> m_collisionDetector;
-		std::unique_ptr<AffordanceEngine> m_affordanceEngine;
+		std::shared_ptr<AffordanceEngine> m_affordanceEngine;
 		std::shared_ptr<Physics::PhysicsEngine> m_physicsEngine;
 		std::shared_ptr<Objects::AIEntity> m_ai;	
 		std::shared_ptr<std::vector<std::shared_ptr<Objects::Waypoint>>> m_waypoints;

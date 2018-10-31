@@ -64,3 +64,23 @@ std::shared_ptr<Collision::BoundingVolume> Objects::Entity::GetBoundingVolume()
 {
 	return m_boundingVolume;
 }
+
+void Objects::Entity::SetAffordances(std::string key, double value)
+{
+	m_affordances[key] = value;
+}
+
+void Objects::Entity::SetAffordanceMap(std::map<std::string, double> map)
+{
+	m_affordances = map;
+}
+
+std::map<std::string, double> Objects::Entity::GetAffordances()
+{
+	return m_affordances;
+}
+
+double Objects::Entity::GetAffordance(std::string key)
+{
+	return m_affordances.at(key);
+}
