@@ -5,6 +5,12 @@
 #include <Collision/OBB.h>
 bool quitting = false;
 
+std::shared_ptr<Objects::AIEntity> m_ai;
+std::shared_ptr<std::vector<std::shared_ptr<Objects::Waypoint>>> m_waypoints;
+std::shared_ptr<Objects::Waypoint> m_currentWaypoint;
+
+std::shared_ptr<Objects::RigidBody> rigidCircle;
+
 void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2, glm::vec3 direction)
 {
 	std::cout << "Collision detected at point: X-(" << direction.x << ") Y-(" << direction.y << ") Z-(" << direction.z << ")" << std::endl;
@@ -45,6 +51,8 @@ void updateCallback(int dx)
 		glm::vec3 position = camera->GetPosition();
 		std::cout << "Camera Position: x-" << position.x << " y-" << position.y << " z-" << position.z << std::endl;
 		std::cout << "Camera Rotation: x-" << camera->GetPitch() << " y-" << camera->GetYaw() << " z-" << camera->GetRoll() << std::endl;
+		bb->RegisterRigidBodyForPhysics(rigidCircle);
+		std::cout << "Entity Emotion: " << m_ai->GetEmotionalStateAsString() << std::endl;
 	}
 	// On w -> Walk forward.
 	if (im->GetKeyState('w') == Input::KS_KEY_PRESSED || im->GetKeyState('w') == Input::KS_KEY_REPEAT)
@@ -78,6 +86,13 @@ void updateCallback(int dx)
 		pos.y -= 0.036 * dx;
 		camera->SetPosition(pos);
 	}
+	bool reachedDestination = m_ai->IncrementMovement(dx);
+	if (reachedDestination)
+	{
+		//waiting = true;
+		m_currentWaypoint = m_currentWaypoint->GetNextWaypoint();
+		m_ai->SetDestination(m_currentWaypoint->GetPosition());
+	}
 
 }
 
@@ -97,6 +112,7 @@ int main(int argc, char ** argv)
 	// Set the camera position
 	//camera->SetPosition(-132.0f, 0.0f, 167.0f);
 	camera->SetPosition(43, 3, 140);
+	bb->SetGravity(glm::vec3(0, -9.8, 0));
 
 	// Add resources here
 	// -Textures
@@ -327,6 +343,10 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::Terrain> terrain = loader->LoadTerrain("res/heightFlat256.png", 256, glm::vec3(1, 1, 1), terrainTextures);
 	terrain->SetPosition(glm::vec3(0, 0, 0));
 
+	std::shared_ptr<Objects::PrimitiveModel> circlePrim = loader->CreateSpherePrimitive(glm::vec3(0, 0, 0));
+	rigidCircle = loader->CreateRigidBody(circlePrim, glm::vec3(41.3, 50, 156.5), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	rigidCircle->SetMass(1);
+
 	// Load into the engine
 	world->AddTexture(tex_Chair_Bake);
 	world->AddTexture(tex_Centre_Table);
@@ -519,8 +539,10 @@ int main(int argc, char ** argv)
 
 	world->AddTerrain(terrain);
 
+	world->AddRigidBody(rigidCircle);
+
 	bb->RegisterEntityForCollision(ent_Chair);
-	bb->RegisterEntityForCollision(ent_Centre_Table1);
+	/*bb->RegisterEntityForCollision(ent_Centre_Table1);
 	bb->RegisterEntityForCollision(ent_Lecturn);
 	bb->RegisterEntityForCollision(ent_Level01);
 	bb->RegisterEntityForCollision(ent_Level02);
@@ -550,7 +572,30 @@ int main(int argc, char ** argv)
 	bb->RegisterEntityForCollision(ent_Wing_Table);
 	bb->RegisterEntityForCollision(ent_Wing_Table_Ground1);
 	bb->RegisterEntityForCollision(ent_Wing_Table_Ground2);
-	bb->RegisterEntityForCollision(ent_Ground);
+	bb->RegisterEntityForCollision(ent_Ground);*/
+
+	m_waypoints = std::make_shared<std::vector<std::shared_ptr<Objects::Waypoint>>>();
+
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(45, 3, 130))));
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(15, 13, 130))));
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(15, 13, 150))));
+	m_waypoints->push_back(std::make_shared<Objects::Waypoint>(Objects::Waypoint(glm::vec3(45, 3, 150))));
+
+	m_waypoints->at(0)->AddConnectedWaypoint(m_waypoints->at(1));
+	m_waypoints->at(1)->AddConnectedWaypoint(m_waypoints->at(2));
+	m_waypoints->at(2)->AddConnectedWaypoint(m_waypoints->at(3));
+	m_waypoints->at(3)->AddConnectedWaypoint(m_waypoints->at(0));
+
+	m_ai = std::make_shared<Objects::AIEntity>();
+
+	world->AddDebugObject(m_ai);
+
+	m_ai->SetPosition(glm::vec3(30, 5, 140));
+
+	m_currentWaypoint = m_waypoints->at(0);
+	m_ai->SetDestination(m_currentWaypoint->GetPosition());
+
+	bb->RegisterEntityForCollision(rigidCircle);
 
 	// Set callbacks
 	bb->SetUpdateCallback(updateCallback);
