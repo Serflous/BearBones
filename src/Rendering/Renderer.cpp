@@ -141,11 +141,11 @@ void Rendering::Renderer::RenderWorld(std::shared_ptr<Objects::World> world, std
 	std::vector<std::shared_ptr<Objects::Entity>>::iterator debugObjectIter;
 	for (debugObjectIter = debugObjects->begin(); debugObjectIter != debugObjects->end(); debugObjectIter++)
 	{
-		m_staticShader->Start();
+		m_primitiveShader->Start();
 		//std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*debugObjectIter)->GetPosition(), (*debugObjectIter)->GetRotation(), (*debugObjectIter)->GetScale()));
 		std::dynamic_pointer_cast<Shaders::StaticShader>(m_staticShader)->LoadTransformationMatrix(Util::MathUtil::GetTransformationMatrix((*debugObjectIter)->GetPosition(), (*debugObjectIter)->GetRotation(), (*debugObjectIter)->GetScale()));
 		RenderDebugObject((*debugObjectIter));
-		m_staticShader->Stop();
+		m_primitiveShader->Stop();
 	}
 
 	std::shared_ptr<Objects::GUI> guiTexs = world->GetGUI();
@@ -237,7 +237,17 @@ void Rendering::Renderer::RenderPrimitive(std::shared_ptr<Objects::PrimitiveMode
 
 void Rendering::Renderer::RenderDebugObject(std::shared_ptr<Objects::Entity> entity)
 {
-	glutSolidSphere(1, 10, 10);
+	std::shared_ptr<Objects::ModelBase> model = entity->GetModel();
+	if (model != nullptr)
+	{
+
+		std::dynamic_pointer_cast<Shaders::PrimitiveShader>(m_primitiveShader)->LoadColour(std::dynamic_pointer_cast<Objects::PrimitiveModel>((entity)->GetModel())->GetColour());
+		RenderPrimitive(std::dynamic_pointer_cast<Objects::PrimitiveModel>(model));
+	}
+	else
+	{
+		glutSolidSphere(1, 10, 10);
+	}
 }
 
 void Rendering::Renderer::SetGUIVaoId(int gui)

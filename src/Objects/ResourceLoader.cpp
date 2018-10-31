@@ -383,14 +383,3 @@ GLuint Objects::ResourceLoader::GetGUIQuad()
 	}
 	return m_guiQuad;
 }
-
-std::shared_ptr<Objects::AIEntity> Objects::ResourceLoader::CreateAIEntity(std::shared_ptr<Objects::ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
-{
-	std::shared_ptr<Objects::AIEntity> entity = std::make_shared<Objects::AIEntity>();
-	entity->SetModel(model);
-	entity->SetPosition(position);
-	entity->SetRotation(rotation);
-	entity->SetScale(scale);
-	entity->CreateBoundingBox(Util::BB_BV_OBB);
-	return entity;
-}

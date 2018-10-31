@@ -15,6 +15,7 @@ std::shared_ptr<Objects::AIEntity> m_ai;
 std::shared_ptr<std::vector<std::shared_ptr<Objects::Waypoint>>> m_waypoints;
 std::shared_ptr<Objects::Waypoint> m_currentWaypoint;
 
+std::shared_ptr<Objects::PrimitiveModel> circlePrim;
 std::shared_ptr<Objects::RigidBody> rigidCircle;
 
 void collisionCallback(std::shared_ptr<Objects::Entity> entity1, std::shared_ptr<Objects::Entity> entity2, glm::vec3 direction)
@@ -131,6 +132,7 @@ void updateCallback(int dx)
 	{
 		ai->ChangeEmotionalState(glm::vec2(0.0, -1.0));
 		std::cout << ai->GetEmotionalStateAsString() << "\n";
+		circlePrim->SetColour(glm::vec3(1, 0, 0));
 	}
 	// Increase Disgust Emotion
 	if (im->GetKeyState('6') == Input::KS_KEY_PRESSED)
@@ -399,7 +401,7 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::Terrain> terrain = loader->LoadTerrain("res/heightFlat256.png", 256, glm::vec3(1, 1, 1), terrainTextures);
 	terrain->SetPosition(glm::vec3(0, 0, 0));
 
-	std::shared_ptr<Objects::PrimitiveModel> circlePrim = loader->CreateSpherePrimitive(glm::vec3(0, 0, 0));
+	circlePrim = loader->CreateSpherePrimitive(glm::vec3(0, 0, 0));
 	rigidCircle = loader->CreateRigidBody(circlePrim, glm::vec3(41.3, 50, 156.5), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
 	rigidCircle->SetMass(1);
 
@@ -647,6 +649,7 @@ int main(int argc, char ** argv)
 	world->AddDebugObject(m_ai);
 
 	m_ai->SetPosition(glm::vec3(30, 5, 140));
+	m_ai->SetModel(circlePrim);
 
 	m_currentWaypoint = m_waypoints->at(0);
 	m_ai->SetDestination(m_currentWaypoint->GetPosition());

@@ -11,7 +11,7 @@
 #include "RigidBody.h"
 #include "NPC.h"
 #include "Terrain.h"
-#include "AIEntity.h"
+#include "../AI/AIEntity.h"
 #include "GUI.h"
 
 namespace Objects

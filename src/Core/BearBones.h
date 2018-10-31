@@ -17,6 +17,7 @@
 #include "../Objects/Waypoint.h"
 #include "../Collision/CollisionDetector.h"
 #include "../Physics/PhysicsEngine.h"
+#include "../AI/AIEntity.h"
 
 namespace Core
 {
