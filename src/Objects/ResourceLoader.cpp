@@ -36,7 +36,7 @@ std::shared_ptr<Objects::ObjModel> Objects::ResourceLoader::LoadOBJModel(std::st
 	}
 
 	Assimp::Importer importer;
-	const aiScene * scene = importer.ReadFile(filename, aiProcess_FlipUVs);
+	const aiScene * scene = importer.ReadFile(filename, aiProcess_FlipUVs | aiProcess_Triangulate);
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
 		throw std::invalid_argument("Model load error: " + filename);
@@ -382,4 +382,15 @@ GLuint Objects::ResourceLoader::GetGUIQuad()
 		m_guiQuad = LoadToVAO(positions);
 	}
 	return m_guiQuad;
+}
+
+std::shared_ptr<Objects::AIEntity> Objects::ResourceLoader::CreateAIEntity(std::shared_ptr<Objects::ModelBase> model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+{
+	std::shared_ptr<Objects::AIEntity> entity = std::make_shared<Objects::AIEntity>();
+	entity->SetModel(model);
+	entity->SetPosition(position);
+	entity->SetRotation(rotation);
+	entity->SetScale(scale);
+	entity->CreateBoundingBox(Util::BB_BV_OBB);
+	return entity;
 }
