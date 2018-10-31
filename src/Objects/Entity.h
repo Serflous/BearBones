@@ -9,6 +9,8 @@
 #include "../Collision/BoundingVolume.h"
 #include "../Collision/AABB.h"
 #include "../Collision/OBB.h"
+#include <stdio.h>
+#include <map>
 
 namespace Objects
 {
@@ -74,12 +76,20 @@ namespace Objects
 		virtual void UpdateBoundingBox() = 0;
 		
 		std::shared_ptr<Collision::BoundingVolume> GetBoundingVolume();
+		void SetAffordances(std::string key, double value);
+		void SetAffordanceMap(std::map<std::string, double> map);
+		std::map<std::string, double> GetAffordances();
 
+		double GetAffordance(std::string key);
+		
+		
 	protected:
 		std::shared_ptr<Collision::BoundingVolume> m_boundingVolume;
 		Util::BB_BoundingVolume m_volumeType;
 
+
 	private:
+		std::map<std::string, double> m_affordances;
 		std::shared_ptr<Objects::ModelBase> m_model;
 		glm::vec3 m_position;
 		glm::vec3 m_rotation;

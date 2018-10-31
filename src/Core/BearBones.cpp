@@ -72,6 +72,7 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 	m_camera = std::make_shared<Objects::Camera>();
 	m_collisionDetector = std::make_unique<Collision::CollisionDetector>();
 	m_physicsEngine = std::make_shared<Physics::PhysicsEngine>();
+	m_affordanceEngine = std::make_shared<AffordanceEngine>();
 	m_renderer->SetGUIVaoId(m_loader->GetGUIQuad());
 
 	m_waypoints = std::make_shared<std::vector<std::shared_ptr<Objects::Waypoint>>>();
@@ -91,6 +92,7 @@ int Core::BearBones::InitializeWindow(int * argc, char ** argv, int winX, int wi
 	m_world->AddDebugObject(m_ai);
 
 	m_collisionDetector->SetWorld(m_world);
+	m_affordanceEngine->SetWorld(m_world);
 	m_collisionDetector->SetPhysicsEngine(m_physicsEngine);
 
 	m_ai->SetPosition(glm::vec3(0, 0, 0));

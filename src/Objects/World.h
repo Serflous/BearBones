@@ -8,6 +8,7 @@
 #include "PrimitiveModel.h"
 #include "Entity.h"
 #include "StaticEntity.h"
+#include "AffordanceEntity.h"
 #include "RigidBody.h"
 #include "NPC.h"
 #include "Terrain.h"
@@ -49,6 +50,8 @@ namespace Objects
 			 */
 		void AddStaticEntity(std::shared_ptr<StaticEntity> entity);
 
+		void AddAffordanceEntity(std::shared_ptr<Objects::AffordanceEntity> entity);
+
 		void AddRigidBody(std::shared_ptr<Objects::RigidBody> entity);
 		void AddTerrain(std::shared_ptr<Objects::Terrain> terrain);
 		void SetGUI(std::shared_ptr<Objects::GUI> gui);
@@ -70,12 +73,10 @@ namespace Objects
 			 * @return A vector of pointers to static entities currently in the world.
 			 */
 		std::shared_ptr<std::vector<std::shared_ptr<StaticEntity>>> GetStaticEntities();
-
 		std::shared_ptr<std::vector<std::shared_ptr<RigidBody>>> GetRigidBodies();
 		std::shared_ptr<std::vector<std::shared_ptr<Objects::Terrain>>> GetTerrains();
-
+		std::shared_ptr<std::vector<std::shared_ptr<Objects::AffordanceEntity>>> GetAffordanceEntities();
 		std::shared_ptr<std::vector<std::shared_ptr<Objects::Entity>>> Objects::World::GetDebugObjects();
-
 		std::shared_ptr<Objects::GUI> GetGUI();
 
 		void Objects::World::Update();
@@ -88,6 +89,7 @@ namespace Objects
 		std::shared_ptr<std::vector<std::shared_ptr<RigidBody>>> m_rigidBodies;
 		std::shared_ptr<std::vector<std::shared_ptr<Objects::Terrain>>> m_terrains;
 		std::shared_ptr<std::vector<std::shared_ptr<Entity>>> m_debugObjects;
+		std::shared_ptr<std::vector<std::shared_ptr<AffordanceEntity>>> m_affordanceEntities;
 		std::shared_ptr<std::vector<std::shared_ptr<NPC>>> m_npcs;
 		std::shared_ptr<Objects::GUI> m_gui;
 	};
