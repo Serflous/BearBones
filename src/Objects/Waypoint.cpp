@@ -12,13 +12,11 @@ Objects::Waypoint::~Waypoint()
 
 }
 
-// Set the destination for the AI to move to
 void Objects::Waypoint::SetParent(std::shared_ptr<Objects::Waypoint> parent)
 {
 	m_parent = parent;
 }
 
-// Move the AI towards its destination based on its current speed
 void Objects::Waypoint::AddConnectedWaypoint(std::shared_ptr<Objects::Waypoint> waypoint)
 {
 	m_connectedWaypoints->push_back(waypoint);

@@ -1,7 +1,6 @@
 #define _USE_MATH_DEFINES
 
 #include "AIEntity.h"
-//#include "GLM/glm.hpp"
 
 Objects::AIEntity::AIEntity() : Entity()
 {
@@ -13,13 +12,11 @@ Objects::AIEntity::~AIEntity()
 
 }
 
-// Set the destination for the AI to move to
 void Objects::AIEntity::SetDestination(glm::vec3 destination)
 {
 	m_destination = destination;
 }
 
-// Move the AI towards its destination based on its current speed
 bool Objects::AIEntity::IncrementMovement(float deltaTime)
 {
 	glm::vec3 currentPosition = GetPosition();
@@ -32,7 +29,6 @@ bool Objects::AIEntity::IncrementMovement(float deltaTime)
 
 	glm::vec3 movementVector = glm::normalize(directionVector) * m_movementSpeed * ((float)deltaTime / 1000);
 	currentPosition += movementVector;
-	//SetPosition(currentPosition);
 
 	UpdateBoundingBox();
 	// Return true if we have reached the destination. 
@@ -48,7 +44,7 @@ bool Objects::AIEntity::IncrementMovement(float deltaTime)
 }
 
 void Objects::AIEntity::ChangeEmotionalState(glm::vec2 change) {
-	//do something here to change vector
+	// Change emotional state vector
 	m_emotionalState += change;
 	if (m_emotionalState.x > 4)
 	{
@@ -70,7 +66,7 @@ void Objects::AIEntity::ChangeEmotionalState(glm::vec2 change) {
 
 std::string Objects::AIEntity::GetEmotionalStateAsString() 
 {
-	//get wheel degrees and emotional intensity
+	// Get wheel degrees and emotional intensity
 	float intensity = glm::length(m_emotionalState);
 	float degree = glm::atan(m_emotionalState.y, m_emotionalState.x);
 
@@ -80,8 +76,8 @@ std::string Objects::AIEntity::GetEmotionalStateAsString()
 
 	float pi8 = M_PI / 8;
 
+	// Joy
 	if (degree < pi8 * 5 && degree >= pi8 * 3) {
-		// Joy
 		if (intensity < 1) {
 			return "Neutral";
 		}
@@ -95,8 +91,8 @@ std::string Objects::AIEntity::GetEmotionalStateAsString()
 			return "Ecstasy";
 		}
 	}
+	// Trust
 	else if (degree < pi8 * 3 && degree >= pi8) {
-		// Trust
 		if (intensity < 1) {
 			return "Neutral";
 		}
@@ -110,9 +106,8 @@ std::string Objects::AIEntity::GetEmotionalStateAsString()
 			return "Admiration";
 		}
 	}
+	// Fear
 	else if (degree < pi8 && degree >= -pi8) {
-
-		// Fear
 		if (intensity < 1) {
 			return "Neutral";
 		}
@@ -126,8 +121,8 @@ std::string Objects::AIEntity::GetEmotionalStateAsString()
 			return "Terror";
 		}
 	}
+	// Surprise
 	else if (degree < -pi8 && degree >= -pi8 * 3) {
-		// Surprise
 		if (intensity < 1) {
 			return "Neutral";
 		}
@@ -141,8 +136,8 @@ std::string Objects::AIEntity::GetEmotionalStateAsString()
 			return "Amazement";
 		}
 	}
+	// Sadness
 	else if (degree < -pi8 * 3 && degree >= -pi8 * 5) {
-		// Sadness
 		if (intensity < 1) {
 			return "Neutral";
 		}
@@ -156,8 +151,8 @@ std::string Objects::AIEntity::GetEmotionalStateAsString()
 			return "Grief";
 		}
 	}
+	// Disgust
 	else if (degree < -pi8 * 5 && degree >= -pi8 * 7) {
-		// Disgust
 		if (intensity < 1) {
 			return "Neutral";
 		}
@@ -171,8 +166,8 @@ std::string Objects::AIEntity::GetEmotionalStateAsString()
 			return "Loathing";
 		}
 	}
+	// Anger
 	else if ((degree < pi8 * 9 && degree >= pi8 * 7) || degree < -pi8 * 7 && degree >= -pi8 * 9) {
-		// Anger
 		if (intensity < 1) {
 			return "Neutral";
 		}
@@ -186,8 +181,8 @@ std::string Objects::AIEntity::GetEmotionalStateAsString()
 			return "Rage";
 		}
 	}
+	// Anticipation
 	else if (degree < pi8 * 7 && degree >= pi8 * 5) {
-		// Anticipation
 		if (intensity < 1) {
 			return "Neutral";
 		}
@@ -247,7 +242,6 @@ void Objects::AIEntity::CreateBoundingBox(Util::BB_BoundingVolume volume)
 			if (vert.z > maxZ)
 				maxZ = vert.z;
 		}
-		//glm::vec3 centerPoint = GetPosition();
 		glm::vec3 centerPoint = glm::vec3
 		(
 			(minX + maxX) / 2.0,
@@ -258,12 +252,6 @@ void Objects::AIEntity::CreateBoundingBox(Util::BB_BoundingVolume volume)
 		centerPoint.y += t[3][1];
 		centerPoint.z += t[3][2];
 		glm::mat4x4 rotationMatrix = r;
-		/*glm::vec3 halfWidths = glm::vec3
-		(
-		glm::max(glm::abs(centerPoint.x - minX), glm::abs(centerPoint.x - maxX)),
-		glm::max(glm::abs(centerPoint.y - minY), glm::abs(centerPoint.y - maxY)),
-		glm::max(glm::abs(centerPoint.z - minZ), glm::abs(centerPoint.z - maxZ))
-		);*/
 		glm::vec3 halfWidths = glm::vec3
 		(
 			(glm::abs(minX) + glm::abs(maxX)) / 2.0,
