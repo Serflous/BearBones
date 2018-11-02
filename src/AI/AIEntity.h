@@ -49,8 +49,8 @@ namespace Objects
 		float GetWaitTime();
 
 		/**
-		 * Creates the bounding box of the AI.
-		 * @param[in] type The type of bounding box to create for the AI.
+		 * Creates a bounding box for the AI.
+		 * @param type The type of bounding box to use.
 		 */
 		virtual void CreateBoundingBox(Util::BB_BoundingVolume type);
 

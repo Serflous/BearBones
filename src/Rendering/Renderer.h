@@ -50,12 +50,20 @@ namespace Rendering
 		void SetDimensions(int x, int y);
 			/**
 			 * Renders a world onto the screen using a particular camera as reference.
-			 * @param[in] A pointer to the world to draw.
-			 * @param[in] A pointer to the camera to use.
+			 * @param[in] world A pointer to the world to draw.
+			 * @param[in] camera A pointer to the camera to use.
 			 */
 		void RenderWorld(std::shared_ptr<Objects::World> world, std::shared_ptr<Objects::Camera> camera);
 
+			/**
+			 * Renders a debug object onto the screen.
+			 * @param[in] entity A pointer to the entity to draw.
+			 */
 		void RenderDebugObject(std::shared_ptr<Objects::Entity> entity);
+			/**
+			 * 
+			 * @param[in] gui
+			 */
 		void SetGUIVaoId(int gui);
 
 	private:
@@ -65,12 +73,26 @@ namespace Rendering
 		void PrepareRender();
 			/**
 			 * Renders an OBJ model.
-			 * @param[in] A pointer to an OBJ model
+			 * @param[in] model A pointer to an OBJ model.
 			 */
 		void RenderOBJModel(std::shared_ptr<Objects::ObjModel> model);
 
+			/**
+			 * Renders an primitive model.
+			 * @param[in] model A pointer to a primitive model.
+			 */
 		void RenderPrimitive(std::shared_ptr<Objects::PrimitiveModel> model);
+			/**
+			 * Renders the terrain.
+			 * @param[in] terrain A pointer to the terrain.
+			 */
 		void RenderTerrain(std::shared_ptr<Objects::Terrain> terrain);
+			/**
+			 * Renders a texture.
+			 * @param[in] texture A pointer to a texture.
+			 * @param[in] position Where the texture will be placed.
+			 * @param[in] scale Scaling to apply to the texture.
+			 */
 		void RenderTexture(std::shared_ptr<Objects::Texture> texture, glm::vec2 position, glm::vec2 scale);
 
 			/**

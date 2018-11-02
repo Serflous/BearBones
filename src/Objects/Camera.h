@@ -70,6 +70,12 @@ namespace Objects
 			 * @param[in] z The z position to set the camera to.
 			 */
 		void SetPosition(float x, float y, float z);
+			/**
+			 * Sets the rotation of the camera.
+			 * @param[in] x The x rotation to apply to the camera.
+			 * @param[in] y The y rotation to apply to the camera.
+			 * @param[in] z The z rotation to apply to the camera.
+			 */
 		void SetRotation(glm::vec3 rotation);
 			/**
 			 * Makes the camera walk in a certain direction. Can be FORWARD or BACKWARD.

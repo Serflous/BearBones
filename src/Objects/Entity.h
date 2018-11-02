@@ -73,11 +73,30 @@ namespace Objects
 			 * Pure virtual function. Creates the bounding box. As each type of entity will have its own type of the bounding box.
 			 */
 		virtual void CreateBoundingBox(Util::BB_BoundingVolume type) = 0;
+			/**
+			 * Pure virtual function. Updates the bounding box.
+			 */
 		virtual void UpdateBoundingBox() = 0;
 		
+			/**
+			 * Gets the entity's bounding volume.
+			 * @return The entity's bounding volume.
+			 */
 		std::shared_ptr<Collision::BoundingVolume> GetBoundingVolume();
+			/**
+			 * Sets the affordances for the entity.
+			 * @param[in] key
+			 * @param[in] value
+			 */
 		void SetAffordances(std::string key, double value);
+			/**
+			 * Sets the affordance map for the entity.
+			 * @param map
+			 */
 		void SetAffordanceMap(std::map<std::string, double> map);
+			/**
+			 * Gets the affordances of the entity.
+			 */
 		std::map<std::string, double> GetAffordances();
 
 		

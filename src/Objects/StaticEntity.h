@@ -28,14 +28,35 @@ namespace Objects
 		~StaticEntity();
 			/**
 			 * Creates a bounding box for the StaticEntity. Static entities use AABB.
+			 * @param type The type of bounding box to use.
 			 */
 		void CreateBoundingBox(Util::BB_BoundingVolume type);
+			/**
+			 * Updates the bounding box of the StaticEntity.
+			 */
 		void UpdateBoundingBox();
 
-
+			/**
+			 * Sets the affordances of the StaticEntity.
+			 * @param[in] key
+			 * @param[in] value
+			 */
 		void SetAffordances(std::string key, double value);
+			/**
+			 * Sets the affordance map of the StaticEntity.
+			 * @param[in] map
+			 */
 		void SetAffordanceMap(std::map<std::string, double> map);
+			/**
+			 * Gets the affordances of the StaticEntity.
+			 * @return The affordances of the StaticEntity.
+			 */
 		std::map<std::string, double> GetAffordances();
+			/**
+			 * Sets the affordance of the StaticEntity.
+			 * @param[in] key
+			 * @return
+			 */
 		double GetAffordance(std::string key);
 
 

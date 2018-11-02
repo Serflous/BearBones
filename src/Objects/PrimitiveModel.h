@@ -4,7 +4,11 @@
 
 namespace Objects
 {
-
+	/**
+	 * A simple geometric model.
+	 * @author
+	 * @version 0.1
+	 */
 	class PrimitiveModel : public ModelBase
 	{
 	public:
@@ -12,7 +16,15 @@ namespace Objects
 		PrimitiveModel(const PrimitiveModel & other);
 		~PrimitiveModel();
 
+		/**
+		 * Sets the colour of the model.
+		 * @param[in] The colour to change the model to.
+		 */
 		void SetColour(glm::vec3 colour);
+		/**
+		 * Gets the colour of the model.
+		 * @return The colour of the model.
+		 */
 		glm::vec3 GetColour();
 
 	private:

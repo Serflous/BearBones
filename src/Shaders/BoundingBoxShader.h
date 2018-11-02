@@ -4,6 +4,11 @@
 
 namespace Shaders
 {
+	/**
+	 * 
+	 * @author 
+	 * @version 0.1
+	 */
 	class BoundingBoxShader : public ShaderBase
 	{
 	public:

@@ -3,6 +3,11 @@
 
 namespace Objects
 {
+	/**
+	 * An entity that is affected by physics
+	 * @author
+	 * @version 0.1
+	 */
 	class PhysicsEntity : public Entity
 	{
 	public:
@@ -19,11 +24,18 @@ namespace Objects
 
 		}
 
+		/**
+		 *
+		 */
 		void CreateBoundingBox()
 		{
 
 		}
 
+		/**
+		 * 
+		 * @param[in] delta
+		 */
 		void Integreate(float delta)
 		{
 			m_position += m_velocity * delta;

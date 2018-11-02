@@ -18,13 +18,13 @@ namespace Objects
 		
 		/**
 		 * Sets the parent waypoint of a child waypoint.
-		 * @param[in] parent The waypoint to be assigned as the parent.
+		 * @param[out] parent Pointer to the waypoint to be assigned as the parent.
 		 */
 		void SetParent(std::shared_ptr<Objects::Waypoint> parent);
 
 		/**
 		 * Connects two waypoints to one another to create a path between them.
-		 * @param[in] waypoint The waypoint to connect to.
+		 * @param[out] waypoint Pointer to the waypoint to connect to.
 		 */
 		void Objects::Waypoint::AddConnectedWaypoint(std::shared_ptr<Objects::Waypoint> waypoint);
 
