@@ -7,7 +7,11 @@
 
 namespace Physics
 {
-
+		/**
+		 * Class that contains the physics engine.
+		 * @author 
+		 * @version 0.1
+		 */
 	class PhysicsEngine
 	{
 	public:

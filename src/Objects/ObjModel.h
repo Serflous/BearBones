@@ -36,7 +36,6 @@ namespace Objects
 			 */
 		void SetTexture(std::shared_ptr<Texture> tex);
 			/**
-			/**
 			 * Sets the UVs of the model.
 			 * @param[in] uvs A vector containing every uv map in the model.
 			 */

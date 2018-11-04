@@ -72,7 +72,7 @@ namespace Shaders
 			/**
 			 * Binds an atribute list to a label/name.
 			 * @param[in] attrib The number of the attribute list.
-			 * @param[in] The name to bind it to.
+			 * @param[in] name The name to bind it to.
 			 */
 		void BindAttrib(int attrib, const char * name);
 			/**

@@ -32,63 +32,63 @@ namespace Objects
 
 			/**
 			 * Adds a texture to the world.
-			 * @param[in] A pointer to the texture.
+			 * @param[in] texture A pointer to the texture.
 			 * @sa Objects::Texture
 			 */
 		void AddTexture(std::shared_ptr<Texture> texture);
 			/**
 			 * Adds an ObjModel to the world.
-			 * @param[in] A pointer to the ObjModel.
+			 * @param[in] model A pointer to the ObjModel.
 			 * @sa Objects::ObjModel
 			 */
 		void AddObjModel(std::shared_ptr<ObjModel> model);
 			/**
 			 * Adds a geometric shape to the world.
-			 * @param[in] A pointer to the PrimitiveModel.
+			 * @param[in] model A pointer to the PrimitiveModel.
 			 * @sa Objects::PrimitiveModel
 			 */
 		void AddPrimitiveModel(std::shared_ptr<PrimitiveModel> model);
 			/**
 			 * Adds a static entity to the world.
-			 * @param[in] A pointer to the static entity.
+			 * @param[in] entity A pointer to the static entity.
 			 * @sa Objects::StaticEntity
 			 */
 		void AddStaticEntity(std::shared_ptr<StaticEntity> entity);
 
 			/**
 			 * Adds an entity with affordance to the world.
-			 * @param[in] A pointer to the static entity.
+			 * @param[in] entity A pointer to the static entity.
 			 * @sa Objects::AffordanceEntity
 			 */
 		void AddAffordanceEntity(std::shared_ptr<Objects::AffordanceEntity> entity);
 
 			/**
 			 * Adds a rigid body to the world.
-			 * @param[in] A pointer to the rigid body.
+			 * @param[in] entity A pointer to the rigid body.
 			 * @sa Objects::RigidBody
 			 */
 		void AddRigidBody(std::shared_ptr<Objects::RigidBody> entity);
 			/**
 			 * Adds terrain to the world.
-			 * @param[in] A pointer to the terrain.
+			 * @param[in] terrain A pointer to the terrain.
 			 * @sa Objects::Terrain
 			 */
 		void AddTerrain(std::shared_ptr<Objects::Terrain> terrain);
 			/**
 			 * Set the GUI to the window.
-			 * @param[in] A pointer to the GUI.
+			 * @param[in] gui A pointer to the GUI.
 			 * @sa Objects::GUI
 			 */
 		void SetGUI(std::shared_ptr<Objects::GUI> gui);
 			/**
 			 * Adds a debug object to the world.
-			 * @param[in] A pointer to an entity.
+			 * @param[in] model A pointer to an entity.
 			 * @sa Objects::Entity
 			 */
 		void Objects::World::AddDebugObject(std::shared_ptr<Objects::Entity> model);
 			/**
 			 * Adds an NPC to the window.
-			 * @param[in] A pointer to the NPC.
+			 * @param[in] npc A pointer to the NPC.
 			 * @sa NPC
 			 */
 		void AddNPC(std::shared_ptr<NPC> npc);
@@ -138,9 +138,9 @@ namespace Objects
 			 */
 		std::shared_ptr<Objects::GUI> GetGUI();
 
-		/**
-		 * Updates the world's current state.
-		 */
+			/**
+			 * Updates the world's current state.
+			 */
 		void Objects::World::Update();
 
 	private:
