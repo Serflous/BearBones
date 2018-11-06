@@ -16,28 +16,28 @@ namespace Objects
 		Waypoint(glm::vec3 position);
 		~Waypoint();
 		
-		/**
-		 * Sets the parent waypoint of a child waypoint.
-		 * @param[out] parent Pointer to the waypoint to be assigned as the parent.
-		 */
+			/**
+			 * Sets the parent waypoint of a child waypoint.
+			 * @param[out] parent Pointer to the waypoint to be assigned as the parent.
+			 */
 		void SetParent(std::shared_ptr<Objects::Waypoint> parent);
 
-		/**
-		 * Connects two waypoints to one another to create a path between them.
-		 * @param[out] waypoint Pointer to the waypoint to connect to.
-		 */
+			/**
+			 * Connects two waypoints to one another to create a path between them.
+			 * @param[out] waypoint Pointer to the waypoint to connect to.
+			 */
 		void Objects::Waypoint::AddConnectedWaypoint(std::shared_ptr<Objects::Waypoint> waypoint);
 
-		/**
-		 * Gets the position of a waypoint.
-		 * @return The position of a waypoint.
-		 */
+			/**
+			 * Gets the position of a waypoint.
+			 * @return The position of a waypoint.
+			 */
 		glm::vec3 Objects::Waypoint::GetPosition();
 
-		/**
-		 * Gets the next waypoint for the AI to move to.
-		 * @return The next waypoint the AI needs to go to.
-		 */
+			/**
+			 * Gets the next waypoint for the AI to move to.
+			 * @return The next waypoint the AI needs to go to.
+			 */
 		std::shared_ptr<Objects::Waypoint> Objects::Waypoint::GetNextWaypoint();
 
 	private:

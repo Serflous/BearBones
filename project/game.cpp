@@ -115,6 +115,7 @@ void updateCallback(int dx)
 		}
 	}
 	// On t -> Print camera location
+	// Also register spheres for physics, allowing them to fall and collide
 	if (im->GetKeyState('t') == Input::KS_KEY_PRESSED)
 	{
 		glm::vec3 position = camera->GetPosition();
@@ -146,21 +147,19 @@ void updateCallback(int dx)
 	{
 		camera->Strafe(Objects::RIGHT, dx);
 	}
+	// On q -> Fly higher
 	if (im->GetKeyState('q') == Input::KS_KEY_PRESSED || im->GetKeyState('q') == Input::KS_KEY_REPEAT)
 	{
 		glm::vec3 pos = camera->GetPosition();
 		pos.y += 0.036 * dx;
 		camera->SetPosition(pos);
 	}
+	// On e -> Fly lower
 	if (im->GetKeyState('e') == Input::KS_KEY_PRESSED || im->GetKeyState('e') == Input::KS_KEY_REPEAT)
 	{
 		glm::vec3 pos = camera->GetPosition();
 		pos.y -= 0.036 * dx;
 		camera->SetPosition(pos);
-	}	
-	if (im->GetKeyState('g') == Input::KS_KEY_PRESSED || im->GetKeyState('e') == Input::KS_KEY_REPEAT)
-	{
-		
 	}
 	bool reachedDestination = m_ai->IncrementMovement(dx);
 	bool otherReachedDestination = m_otherAi->IncrementMovement(dx);
@@ -477,6 +476,7 @@ int main(int argc, char ** argv)
 	std::shared_ptr<Objects::Terrain> terrain = loader->LoadTerrain("res/heightFlat256.png", 256, glm::vec3(1, 1, 1), terrainTextures);
 	terrain->SetPosition(glm::vec3(0, 0, 0));
 
+	// Create rigid body spheres
 	circlePrim = loader->CreateSpherePrimitive(glm::vec3(0, 0, 0));
 	otherCirlcePrim = loader->CreateCubePrimitive(glm::vec3(0, 0, 0));
 	std::shared_ptr<Objects::PrimitiveModel> modelCircle = loader->CreateSpherePrimitive(glm::vec3(1, 1, 1));
@@ -491,6 +491,7 @@ int main(int argc, char ** argv)
 		}
 	}
 
+	// Create splash screen
 	std::shared_ptr<Objects::GUITexture> splashGUITexture = std::make_shared<Objects::GUITexture>();
 	std::shared_ptr<Objects::Texture> texSplash = loader->LoadTexture("res/SplashScreen.png");
 	splashGUITexture->SetTextue(texSplash);

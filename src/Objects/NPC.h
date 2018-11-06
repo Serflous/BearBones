@@ -11,45 +11,45 @@ struct NPCData : public EventData
 	float AnnoyedCo;
 };
 
-/**
- * An automated NPC.
- * @author Mathew Causby
- * @version 0.1
- */
+	/**
+	 * An automated NPC.
+	 * @author Mason Tolman
+	 * @version 0.1
+	 */
 class NPC : public StateMachine 
 {
 public:
 	NPC() : StateMachine(ST_MAX_STATES) {}
 	
-	/**
-	 * Tells the NPC to move.
-	 */
+		/**
+		 * Tells the NPC to move.
+		 */
 	void Walking();
-	/**
-	 * Tells the NPC to stop.
-	 */
+		/**
+		 * Tells the NPC to stop.
+		 */
 	void Halt();
 private:
 
-	/**
-	 * Creates an event that indicates the NPC is idle.
-	 * @param[out] pData Pointer to the event data.
-	 */
+		/**
+		 * Creates an event that indicates the NPC is idle.
+		 * @param[out] pData Pointer to the event data.
+		 */
 	void ST_Idle(EventData*);
-	/**
-	 * Creates an event that indicates the NPC has stopped acting.
-	 * @param[out] pData Pointer to the event data.
-	 */
+		/**
+		 * Creates an event that indicates the NPC has stopped acting.
+		 * @param[out] pData Pointer to the event data.
+		 */
 	void ST_Stop(EventData*);
-	/**
-	 * Creates an event that indicates the NPC has started acting.
-	 * @param[out] pData Pointer to the NPC data.
-	 */
+		/**
+		 * Creates an event that indicates the NPC has started acting.
+		 * @param[out] pData Pointer to the NPC data.
+		 */
 	void ST_Start(NPCData*);
-	/**
-	 * Creates an event that indicates the NPC has collided with something.
-	 * @param[out] pData Pointer to the NPC data.
-	 */
+		/**
+		 * Creates an event that indicates the NPC has collided with something.
+		 * @param[out] pData Pointer to the NPC data.
+		 */
 	void ST_Collision(NPCData*);
 
 	// state map to define state function order

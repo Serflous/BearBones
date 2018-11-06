@@ -68,7 +68,7 @@ namespace Rendering
 
 	private:
 			/**
-			 * Prepares OepnGL for a new render frame.
+			 * Prepares OpenGL for a new render frame.
 			 */
 		void PrepareRender();
 			/**

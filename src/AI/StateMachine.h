@@ -11,11 +11,11 @@ public:
 
 struct StateStruct;
 
-/**
- * Base class for state machines.
- * @author Mathew Causby
- * @version 0.1
- */
+	/**
+	 * Base class for state machines.
+	 * @author Mason Tolman
+	 * @version 0.1
+	 */
 class StateMachine : public Objects::Entity
 {
 public:
@@ -25,18 +25,18 @@ protected:
 	enum { EVENT_IGNORED = 0xFE, CANNOT_HAPPEN };
 	unsigned char currentState;
 
-	/**
-	 * Generates an external event.
-	 * @param[in] newState The new state to transition to.
-	 * @param[out] pData Pointer to external event data.
-	 */
+		/**
+		 * Generates an external event.
+		 * @param[in] newState The new state to transition to.
+		 * @param[out] pData Pointer to external event data.
+		 */
 	void ExternalEvent(unsigned char, EventData* = NULL);
 
-	/**
-	 * Generates an internal event.
-	 * @param[in] newState The new state to transition to.
-	 * @param[out] pData Pointer to internal event data.
-	 */
+		/**
+		 * Generates an internal event.
+		 * @param[in] newState The new state to transition to.
+		 * @param[out] pData Pointer to internal event data.
+		 */
 	void InternalEvent(unsigned char, EventData* = NULL);
 	virtual const StateStruct* GetStateMap() = 0;
 private:
@@ -44,9 +44,9 @@ private:
 	bool _eventGenerated;
 	EventData* _pEventData;
 
-	/**
-	 * The state engine executes the states within the state machine.
-	 */
+		/**
+		 * The state engine executes the states within the state machine.
+		 */
 	void StateEngine(void);
 };
 

@@ -19,44 +19,44 @@ namespace Objects
 		AIEntity();
 		~AIEntity();
 
-		/**
-		 * Sets the destination that the AI must go to.
-		 * @oaram[in] dest The location of the destination
-		 */
+			/**
+			 * Sets the destination that the AI must go to.
+			 * @oaram[in] dest The location of the destination
+			 */
 		void SetDestination(glm::vec3 dest);
 
-		/**
-		 * Moves the AI towards its destination based on its current speed.
-		 * @return True if destination has been reached, otherwise return false until then.
-		 */
+			/**
+			 * Moves the AI towards its destination based on its current speed.
+			 * @return True if destination has been reached, otherwise return false until then.
+			 */
 		bool IncrementMovement(float deltaTime);
-		/**
-		 * Changes the emotional state vector of the AI.
-		 * @param[in] change The vector to change the emotional state vector.
-		 */
+			/**
+			 * Changes the emotional state vector of the AI.
+			 * @param[in] change The vector to change the emotional state vector.
+			 */
 		void ChangeEmotionalState(glm::vec2 change);
 
-		/**
-		 * Takes the current emotional state of the AI to print its overall emotional state to the console.
-		 * @return String stating the AI's current emotional state.
-		 */
+			/**
+			 * Takes the current emotional state of the AI to print its overall emotional state to the console.
+			 * @return String stating the AI's current emotional state.
+			 */
 		std::string GetEmotionalStateAsString();
 
-		/**
-		 * Gets the time the AI has to wait for.
-		 * @return Amount of time for the AI to wait.
-		 */
+			/**
+			 * Gets the time the AI has to wait for.
+			 * @return Amount of time for the AI to wait.
+			 */
 		float GetWaitTime();
 
-		/**
-		 * Creates a bounding box for the AI.
-		 * @param[in] type The type of bounding box to use.
-		 */
+			/**
+			 * Creates a bounding box for the AI.
+			 * @param[in] type The type of bounding box to use.
+			 */
 		virtual void CreateBoundingBox(Util::BB_BoundingVolume type);
 
-		/**
-		 * Updates the AI's bounding box position.
-		 */
+			/**
+			 * Updates the AI's bounding box position.
+			 */
 		virtual void UpdateBoundingBox();
 
 	private:

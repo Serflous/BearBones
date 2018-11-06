@@ -19,27 +19,27 @@ namespace Objects
 		TerrainTextureCollection(const TerrainTextureCollection & other);
 		~TerrainTextureCollection();
 
-		/**
-		 * Sets the grayscale texture.
-		 * @param[out] Pointer to the grayscale texture.
-		 */
+			/**
+			 * Sets the base texture.
+			 * @param[out] Pointer to the grayscale texture.
+			 */
 		void SetBaseTexture(std::shared_ptr<Texture> texture);
-		/**
-		 * Sets the coloured texture.
-		 * @param[out] Pointer to the coloured texture.
-		 */
+			/**
+			 * Sets the coloured texture.
+			 * @param[out] Pointer to the coloured texture.
+			 */
 		void SetTexture(int idx, std::shared_ptr<Texture> texture);
 
-		/**
-		 * Gets the grayscale texture.
-		 * @return The grayscale texture.
-		 */
+			/**
+			 * Gets the base texture.
+			 * @return The grayscale texture.
+			 */
 		std::shared_ptr<Texture> GetBaseTexture();
-		/**
-		 * 
-		 * @param[in] idx
-		 * @return
-		 */
+			/**
+			 * Gets a texture at a specified index. Will be 0(red), 1(green), or 2(blue).
+			 * @param[in] idx The index to get
+			 * @return
+			 */
 		std::shared_ptr<Texture> GetTextureAt(int idx);
 
 	private:
