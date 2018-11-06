@@ -8,8 +8,8 @@ namespace Objects
 {
 
 		/**
-		 * 
-		 * @author 
+		 * The terrain upon which serves as the ground for the world.
+		 * @author Mathew Causby
 		 * @version 0.1
 		 */
 	class Terrain
@@ -20,8 +20,8 @@ namespace Objects
 		~Terrain();
 
 		/**
-		 * 
-		 * @param[in] vaoID
+		 * Sets the ID number of the VAO.
+		 * @param[in] vaoID The ID number to set for the VAO.
 		 */
 		void SetVaoID(int vaoId);
 		/**
@@ -56,8 +56,8 @@ namespace Objects
 		void SetTerrainTextureCollection(std::shared_ptr<TerrainTextureCollection> collection);
 
 		/**
-		 *
-		 * @return
+		 * Gets the ID number of the VAO.
+		 * @return The ID number of the VAO.
 		 */
 		int GetVaoID();
 		/**

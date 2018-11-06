@@ -5,7 +5,7 @@ namespace Objects
 {
 	/**
 	 * An entity that is affected by physics
-	 * @author
+	 * @author Mathew Causby
 	 * @version 0.1
 	 */
 	class PhysicsEntity : public Entity
@@ -25,7 +25,7 @@ namespace Objects
 		}
 
 		/**
-		 *
+		 * Creates a bounding box for the entity.
 		 */
 		void CreateBoundingBox()
 		{
@@ -34,7 +34,7 @@ namespace Objects
 
 		/**
 		 * 
-		 * @param[in] delta
+		 * @param[in] delta The delta time, provided in the update.
 		 */
 		void Integreate(float delta)
 		{

@@ -61,8 +61,8 @@ namespace Rendering
 			 */
 		void RenderDebugObject(std::shared_ptr<Objects::Entity> entity);
 			/**
-			 * 
-			 * @param[in] gui
+			 * Sets the ID number of the GUI's VAO.
+			 * @param[in] gui The ID number of the VAO to set the GUI to.
 			 */
 		void SetGUIVaoId(int gui);
 

@@ -5,8 +5,9 @@
 namespace Shaders
 {
 	/**
-	 * 
-	 * @author 
+	 * Implementation of ShaderBase defining a shader for bounding boxes.
+	 * Also uploads the projection, transformation, and view matricies to the shader to create the MVP transformation.
+	 * @author Mathew Causby
 	 * @version 0.1
 	 */
 	class BoundingBoxShader : public ShaderBase

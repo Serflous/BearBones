@@ -13,7 +13,7 @@ struct StateStruct;
 
 /**
  * Base class for state machines.
- * @author 
+ * @author Mathew Causby
  * @version 0.1
  */
 class StateMachine : public Objects::Entity
@@ -27,15 +27,15 @@ protected:
 
 	/**
 	 * Generates an external event.
-	 * @param newState The new state to transition to.
-	 * @param pData
+	 * @param[in] newState The new state to transition to.
+	 * @param[out] pData Pointer to external event data.
 	 */
 	void ExternalEvent(unsigned char, EventData* = NULL);
 
 	/**
 	 * Generates an internal event.
-	 * @param newState The new state to transition to.
-	 * @param pData
+	 * @param[in] newState The new state to transition to.
+	 * @param[out] pData Pointer to internal event data.
 	 */
 	void InternalEvent(unsigned char, EventData* = NULL);
 	virtual const StateStruct* GetStateMap() = 0;

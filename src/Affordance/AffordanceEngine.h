@@ -5,7 +5,7 @@
 
 /**
  * The engine that handles any affordances that occur.
- * @author
+ * @author Mathew Causby
  * @version 0.1
  */
 class AffordanceEngine

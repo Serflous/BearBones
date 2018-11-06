@@ -88,7 +88,7 @@ namespace Core
 
 			/**
 			 * Sets the update callback to call every frame.
-			 * @param callback A function pointer for the callback.
+			 * @param[in] callback A function pointer for the callback.
 			 */
 		void SetUpdateCallback(f callback);
 
@@ -213,8 +213,8 @@ namespace Core
 			 * @param[in] id The identification number of the message.
 			 * @param[in] severity The severity of the message.
 			 * @param[in] length The length of the message.
-			 * @param message The contents of the message.
-			 * @param userParam
+			 * @param[out] message Pointer to the contents of the message.
+			 * @param[out] userParam Pointer to the user parameters.
 			 */
 		static void APIENTRY StaticMessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 

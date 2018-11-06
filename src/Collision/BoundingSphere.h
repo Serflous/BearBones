@@ -11,7 +11,7 @@ namespace Collision
 	class AABB;
 	/**
 	 * An Bounding Sphere.
-	 * @author
+	 * @author Mathew Causby
 	 * @version 0.1
 	 */
 	class BoundingSphere : public BoundingVolume

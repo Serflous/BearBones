@@ -34,17 +34,17 @@ namespace Objects
 		void SetModel(std::shared_ptr<Objects::ModelBase> model);
 			/**
 			 * Sets the position of the entity.
-			 * @param[in] position The position of the entity
+			 * @param[in] position The position to set the entity to.
 			 */
 		void SetPosition(glm::vec3 position);
 			/**
 			 * Sets the rotation of the entity.
-			 * @param[in] rotation The rotation of the entity.
+			 * @param[in] rotation The rotation to apply to the entity.
 			 */
 		void SetRotation(glm::vec3 rotation);
 			/**
 			 * Sets the scale of the entity.
-			 * @param[in] scale The scale of the entity.
+			 * @param[in] scale The scale to apply to the entity.
 			 */
 		void SetScale(glm::vec3 scale);
 
@@ -91,7 +91,7 @@ namespace Objects
 		void SetAffordances(std::string key, double value);
 			/**
 			 * Sets the affordance map for the entity.
-			 * @param map
+			 * @param[in] map
 			 */
 		void SetAffordanceMap(std::map<std::string, double> map);
 			/**

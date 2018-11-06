@@ -9,7 +9,7 @@ namespace Objects
 {
 	/**
 	 * A texture to be used in the GUI.
-	 * @author
+	 * @author Mathew Causby
 	 * @version 0.1
 	 */
 	class GUITexture

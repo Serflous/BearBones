@@ -28,7 +28,7 @@ namespace Objects
 
 		/**
 		 * Contains all the methods required for loading resources into the game.
-		 * @author Mathew Causby.
+		 * @author Mathew Causby
 		 * @version 0.1
 		 */
 	class ResourceLoader
@@ -103,14 +103,14 @@ namespace Objects
 
 			/**
 			 * Creates a simple geometric cube.
-			 * @param colour The colour of the cube.
+			 * @param[in] colour The colour of the cube.
 			 * @sa PrimitiveModel
 			 * @return A pointer to the cube.
 			 */
 		std::shared_ptr<PrimitiveModel> CreateCubePrimitive(glm::vec3 colour);
 			/**
 			 * Creates a simple geometric sphere.
-			 * @param colour The colour of the sphere.
+			 * @param[in] colour The colour of the sphere.
 			 * @sa PrimitiveModel
 			 * @return A pointer to the sphere.
 			 */
@@ -190,7 +190,7 @@ namespace Objects
 		void AddDataToVAO(int attribList, int coordSize, std::vector<glm::vec3> data);
 			/**
 			 * Adds the model elements to a VBO and adds that to the VAO.
-			 * @param indicies A vector containing al the indicies.
+			 * @param[in] indicies A vector containing al the indicies.
 			 */
 		void AddIndiciesToVAO(std::vector<int> indicies);
 

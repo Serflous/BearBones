@@ -8,7 +8,7 @@ namespace Objects
 {
 	/**
 	 * 
-	 * @author
+	 * @author Mathew Causby
 	 * @version 0.1
 	 */
 	class ModelBase
@@ -19,8 +19,8 @@ namespace Objects
 		virtual ~ModelBase();
 
 		/**
-		 * 
-		 * @param[in] vaoId The ID number of the model.
+		 * Sets the ID number of the VAO.
+		 * @param[in] vaoId The ID number to set for the VAO.
 		 */
 		void SetVAOID(int vaoId);
 		/**
@@ -35,8 +35,8 @@ namespace Objects
 		void SetVerticies(std::vector<glm::vec3> verts);
 
 		/**
-		 *
-		 * @return The ID number of the model.
+		 * Gets the ID number of the VAO.
+		 * @return The ID number of the VAO.
 		 */
 		int GetVAOID();
 		/**

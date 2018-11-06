@@ -9,7 +9,7 @@ namespace Physics
 {
 		/**
 		 * Class that contains the physics engine.
-		 * @author 
+		 * @author Mathew Causby
 		 * @version 0.1
 		 */
 	class PhysicsEngine
@@ -30,10 +30,10 @@ namespace Physics
 
 		/**
 		 * Called when an entity collides with the terrain.
-		 * @param[in] entity
+		 * @param[in] entity The entity that is colliding with the terrain.
 		 * @param[in] penetration
-		 * @param[in] height
-		 * @param[in] dt Value represeting deltaTime
+		 * @param[in] height The height at which the terrain is elevated.
+		 * @param[in] dt The delta time, provided in the update.
 		 */
 		void EntityCollideTerrain(std::shared_ptr<Objects::Entity> entity, float penetration, float height, float dt);
 		/**
@@ -42,7 +42,7 @@ namespace Physics
 		 * @param[in] ent2 The latter entity that is colliding.
 		 * @param[in] cp The coordinates of where the collision took place.
 		 * @param[in] penetration
-		 * @param[in] dt Value representing deltaTime
+		 * @param[in] dt The delta time, provided in the update.
 		 */
 		void EntityCollisionHandler(std::shared_ptr<Objects::Entity> ent1, std::shared_ptr<Objects::Entity> ent2, glm::vec3 cp, float penetration, float dt);
 
@@ -53,7 +53,7 @@ namespace Physics
 		void RegisterRidigBodyForPhysics(std::shared_ptr<Objects::RigidBody> object);
 		/**
 		 *
-		 * @param[in] delta Value representing deltaTime.
+		 * @param[in] delta The delta time, provided in the update.
 		 */
 		void Simulate(float delta);
 	private:

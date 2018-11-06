@@ -6,7 +6,7 @@ namespace Objects
 {
 	/**
 	 * A simple geometric model.
-	 * @author
+	 * @author Mathew Causby
 	 * @version 0.1
 	 */
 	class PrimitiveModel : public ModelBase

@@ -9,7 +9,7 @@ namespace Objects
 {
 	/**
 	 * An entity that can be affected by physics.
-	 * @author
+	 * @author Mason Tolman
 	 * version 0.1
 	 */
 	class RigidBody : public Entity
@@ -21,7 +21,7 @@ namespace Objects
 
 		/**
 		 * Creates a Bounding Box for the rigid body.
-		 * @param type The type of bounding box to use.
+		 * @param[in] type The type of bounding box to use.
 		 */
 		virtual void CreateBoundingBox(Util::BB_BoundingVolume type);
 		/**
@@ -31,7 +31,7 @@ namespace Objects
 
 		/**
 		 * Sets the mass of the rigid body.
-		 * @param mass The mass to assign to the rigid body.
+		 * @param[in] mass The mass to assign to the rigid body.
 		 */
 		void SetMass(double mass);
 		/**
@@ -78,25 +78,25 @@ namespace Objects
 
 		/**
 		 *
-		 * @param[in] dt Value representing deltaTime.
+		 * @param[in] dt The delta time, provided in the update.
 		 */
 		void Integrate(double dt);
 		/**
 		 * Applies gravity to the rigid body.
 		 * @param[in] gravity The gravity to apply to the rigid body.
-		 * @param[in] dt Value representing deltaTime.
+		 * @param[in] dt The delta time, provided in the update.
 		 */
 		void ApplyGravity(glm::vec3 gravity, double dt);
 		/**
 		 * Applies force to the rigid body.
 		 * @param[in] force The force to apply to the rigid body.
-		 * @param[in] dt Value representing deltaTime.
+		 * @param[in] dt The delta time, provided in the update.
 		 */
 		void ApplyForce(glm::vec3 force, double dt);
 		/**
 		 * Applies torque to the rigid body.
 		 * @param[in] torque The torque to apply to the rigid body.
-		 * @param[in] dt Value representing deltaTime.
+		 * @param[in] dt The delta time, provided in the update.
 		 */
 		void ApplyTorque(glm::vec3 torque, double dt);
 		

@@ -35,7 +35,7 @@ namespace Collision
 		/**
 		 * Tests to see if any collisions are occurring.
 		 * @param[in] Callback
-		 * @param[in] dt
+		 * @param[in] dt The delta time, provided in the update.
 		 */
 		void TestForCollisions(fc Callback, float dt);
 
@@ -72,7 +72,7 @@ namespace Collision
 		/**
 		 * Tests an entity against the terrain.
 		 * @param[in] entity The entity.
-		 * @param[in] dt Variable representing deltaTime.
+		 * @param[in] dt The delta time, provided in the update.
 		 */
 		void TestEntityAgainstTerrain(std::shared_ptr<Objects::Entity> entity, float dt);
 	private:

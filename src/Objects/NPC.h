@@ -13,7 +13,7 @@ struct NPCData : public EventData
 
 /**
  * An automated NPC.
- * @author
+ * @author Mathew Causby
  * @version 0.1
  */
 class NPC : public StateMachine 
@@ -32,23 +32,23 @@ public:
 private:
 
 	/**
-	 * Creates an event that the NPC is idle.
-	 * @param[out] pData Pointer to the event.
+	 * Creates an event that indicates the NPC is idle.
+	 * @param[out] pData Pointer to the event data.
 	 */
 	void ST_Idle(EventData*);
 	/**
-	 * Creates an event that the NPC is has stopped acting.
-	 * @param[out] pData Pointer to the event.
+	 * Creates an event that indicates the NPC has stopped acting.
+	 * @param[out] pData Pointer to the event data.
 	 */
 	void ST_Stop(EventData*);
 	/**
-	 * Creates an event that the NPC has started acting.
-	 * @param[out] pData Pointer to the NPC.
+	 * Creates an event that indicates the NPC has started acting.
+	 * @param[out] pData Pointer to the NPC data.
 	 */
 	void ST_Start(NPCData*);
 	/**
-	 * Creates an event that the NPC has collided.
-	 * @param[out] pData Pointer to the event.
+	 * Creates an event that indicates the NPC has collided with something.
+	 * @param[out] pData Pointer to the NPC data.
 	 */
 	void ST_Collision(NPCData*);
 

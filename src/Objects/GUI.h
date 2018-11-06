@@ -7,8 +7,8 @@
 namespace Objects
 {
 	/**
-	 * The GUI of the program
-	 * @author
+	 * The GUI of the program.
+	 * @author Mathew Causby
 	 * @version 0.1
 	 */
 	class GUI

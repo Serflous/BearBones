@@ -8,8 +8,8 @@
 namespace Objects
 {
 		/**
-		 * 
-		 * @author 
+		 * Contains all the texture files to be used for the terrain.
+		 * @author Mathew Causby
 		 * @version 0.1
 		 */
 	class TerrainTextureCollection
@@ -37,6 +37,7 @@ namespace Objects
 		std::shared_ptr<Texture> GetBaseTexture();
 		/**
 		 * 
+		 * @param[in] idx
 		 * @return
 		 */
 		std::shared_ptr<Texture> GetTextureAt(int idx);

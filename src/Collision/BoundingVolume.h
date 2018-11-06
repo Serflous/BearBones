@@ -4,7 +4,7 @@ namespace Collision
 {
 	/**
 	 * An Bounding Box's bounding volume.
-	 * @author
+	 * @author Mathew Causby
 	 * @version 0.1
 	 */
 	class BoundingVolume

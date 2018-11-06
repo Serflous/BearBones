@@ -50,7 +50,7 @@ namespace Objects
 
 		/**
 		 * Creates a bounding box for the AI.
-		 * @param type The type of bounding box to use.
+		 * @param[in] type The type of bounding box to use.
 		 */
 		virtual void CreateBoundingBox(Util::BB_BoundingVolume type);
 

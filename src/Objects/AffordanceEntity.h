@@ -4,7 +4,7 @@ namespace Objects
 {
 	/**
 	 * An affordance of an entity.
-	 * @author
+	 * @author Mathew Causby
 	 * @version 0.1
 	 */
 	class AffordanceEntity : public StaticEntity

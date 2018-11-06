@@ -10,7 +10,7 @@ namespace Collision
 	class BoundingSphere;
 	/**
 	 * An Axis-Aligned Bounding Box.
-	 * @author
+	 * @author Mathew Causby
 	 * @version 0.1
 	 */
 	class AABB : public BoundingVolume
@@ -21,25 +21,25 @@ namespace Collision
 		~AABB();
 
 		/**
-		 * Set the minimum values for the Bounding Box.
+		 * Sets the minimum values for the Bounding Box.
 		 * @param[in] minBounds The minimum values to set for the Bounding Box.
 		 */
 		void SetMinBounds(glm::vec3 minBounds);
 
 		/**
-		 * Set the maximum values for the Bounding Box.
+		 * Sets the maximum values for the Bounding Box.
 		 * @param[in] maxBounds The maximum values to set for the Bounding Box.
 		 */
 		void SetMaxBounds(glm::vec3 maxBounds);
 
 		/**
-		 * Get the minimum values for the Bounding Box.
+		 * Gets the minimum values for the Bounding Box.
 		 * @return The minimum values for the Bounding Box.
 		 */
 		glm::vec3 GetMinBounds();
 
 		/**
-		 * Get the maximum values for the Bounding Box.
+		 * Gets the maximum values for the Bounding Box.
 		 * @return The maximum values for the Bounding Box.
 		 */
 		glm::vec3 GetMaxBounds();

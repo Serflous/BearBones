@@ -42,7 +42,7 @@ namespace Shaders
 		void LoadViewMatrix(glm::mat4x4 viewMatrix);
 			/**
 			 * Loads the colour into the shader.
-			 * @param colour The colour to load.
+			 * @param[in] colour The colour to load.
 			 */
 		void LoadColour(glm::vec3 colour);
 
